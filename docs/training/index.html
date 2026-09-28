@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0d1117">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="研修資料">
+  <title>研修資料</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <script>
+    (function () {
+      var theme = window.localStorage.getItem('study-notes:theme');
+      if (/^[1-5]$/.test(theme || '')) {
+        document.documentElement.dataset.theme = theme;
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <link rel="stylesheet" href="../styles.css?v=20260821-fixed-sidebar-controls">
+</head>
+<body>
+  <div id="app">読み込み中...</div>
+  <script>
+    window.$docsify = {
+      homepage: 'README.md',
+      loadSidebar: false,
+      maxLevel: 4,
+      subMaxLevel: 3,
+      name: '研修資料',
+      auto2top: true,
+      markdown: { breaks: true }
+    };
+  </script>
+  <script>
+    window.READER_TOOLS_CONFIG = {
+      homepageFile: 'README.md',
+      backupPageFile: 'README.md',
+      showBackupLink: false,
+      articleMasterFile: '../_article-master.json',
+      noteIndexFile: '../_note-index.json',
+      pathPrefix: 'training'
+    };
+  </script>
+  <script src="../unique-heading-ids.js?v=20260819-training-tools"></script>
+  <script src="../obsidian-wikilinks.js?v=20260820-training-local-routes"></script>
+  <script src="../reader-tools.js?v=20260821-fixed-sidebar-controls"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+</body>
+</html>
