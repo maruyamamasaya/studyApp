@@ -26,23 +26,23 @@ updated: 2026-09-28
 | 候補 | Markdown / Frontmatter | 静的配信 | 学習 UI | 主な懸念 | 判定 |
 | --- | --- | --- | --- | --- | --- |
 | Docsify 継続 | 実行時 parser。build validation は自作 | build 不要 | 現行資産を再利用しやすい | schema、broken link、full-text search を公開前に検出しにくい。CDN/runtime 依存が残る | legacy のみ |
-| Vite + React | parser、route、index を自由設計 | GitHub Pages 対応 | SPA に最適 | content pipeline と静的 article route をほぼ自作。JS なしでは本文が出にくい | 次点 |
+| Vite + React | parser、route、index を自由設計 | 静的出力を Sites へ配信可能 | SPA に最適 | content pipeline と静的 article route をほぼ自作。JS なしでは本文が出にくい | 次点 |
 | Next.js static export | route ごとの HTML を生成可能 | `output: 'export'` | React で実装可 | static export で server feature が使えず、今回には framework complexity が大きい | 不採用 |
-| Astro static | content collection、schema validation、静的 route | 既定が静的、Pages 用公式 Action | 必要部分だけ client script / island | 新 build toolchain と migration 作業が必要 | 採用 |
+| Astro static | content collection、schema validation、静的 route | 既定が静的、Sites へ静的出力を配信可能 | 必要部分だけ client script / island | 新 build toolchain と migration 作業が必要 | 採用 |
 
 採用案は Astro + TypeScript の静的生成である。記事本文、metadata、内部 link は build 時に処理し、学習 controls、検索 dialog、timer、backup は小さな client-side TypeScript module とする。初期実装では UI framework を必須にせず、複雑性が実証された場合だけ React 等の island を追加する。
 
 この選択の根拠:
 
 - Astro content collections は local Markdown の loader と schema validation を持ち、build-time collection から静的 route を生成できる。
-- GitHub Pages へ公式 Action で静的 output を配信できる。
+- 静的 output を OpenAI Sites へ配信できる。
 - content 本文を静的 HTML にしつつ、localStorage に依存する部分だけを client で動かせる。
 - app 固有 schema を Markdown に混ぜず、generated index を my-wiki 等へ公開できる。
 
 公式資料:
 
 - [Astro Content Collections](https://docs.astro.build/en/guides/content-collections/)
-- [Astro GitHub Pages deployment](https://docs.astro.build/en/guides/deploy/github/)
+- [Astro static output](https://docs.astro.build/en/guides/configuring-astro/#output)
 - [Vite static deployment](https://vite.dev/guide/static-deploy)
 - [Next.js static exports](https://nextjs.org/docs/app/guides/static-exports)
 - [Docsify](https://docsify.js.org/)
@@ -147,7 +147,7 @@ exit gate:
 
 root site / training site を directory 偶然ではなく、metadata または明示 collection rule で構成する。training 公開範囲は legacy と同等であることを fixture で確認する。
 
-exit gate: representative browsers で direct load、refresh、back / forward、base path `/studyApp/`、日本語 content、mobile layout を確認。
+exit gate: representative browsers で direct load、refresh、back / forward、Sites のルート URL、日本語 content、mobile layout を確認。
 
 ## Phase 4: Learning state adapter
 
@@ -245,7 +245,7 @@ rollback は公開先を legacy に戻すだけで成立させる。新 site は
 
 ## 既知の未決事項
 
-- 新 site の最終公開 URL / custom domain と GitHub Pages repository base path。
+- 新 site の最終公開 URL / custom domain と公開範囲。
 - root content の本物のアクセス制御要否。現行 password gate は認証ではない。
 - 外部 Obsidian vault の正本 location と、新 repository への同期方向。
 - my-wiki / SecondBrain が要求する index schema と取り込み方式。

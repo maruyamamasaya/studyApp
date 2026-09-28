@@ -28,13 +28,14 @@ updated: 2026-09-28
 - ノート同期手順は [`docs/md更新用コマンド.md`](docs/md更新用コマンド.md) にあり、外部ディレクトリから Markdown を `docs/` に rsync して索引を再生成する。
 - Git 履歴では記事同期が `Sync notes` コミットとして継続している。
 - デプロイ先を明記した CI/CD 設定はリポジトリにない。`docs/.nojekyll` と静的構成は GitHub Pages と整合するが、実際の公開設定はリポジトリだけでは確認できない。
+- 新しい公開先は OpenAI Sites とし、`.openai/hosting.json` に Sites の設定、`dist/` に公開対象を置く。新サイトは非公開で開始し、旧 GitHub Pages は cutover 条件を満たすまで rollback 用に維持する。
 
 ## 既知の制約・未解決事項
 
 - `docs/password-gate.js` のパスワードは配信される JavaScript に平文で含まれる。これは閲覧 UI の抑止にすぎず、機密情報を保護する認証ではない。
 - npm/package manifest、lint、typecheck、バンドル、依存関係固定、CI は存在しない。Docsify は実行時に jsDelivr CDN から読み込むため、オフラインでは完全に動作しない。
 - ブラウザー UI 全体、Wiki リンク変換、reader tools、索引生成に対する自動テストは限定的または存在しない。
-- 外部ノートの正本の場所・バックアップ方針、GitHub Pages の設定、対象ブラウザー、公開 URL、運用責任者はリポジトリから確認できない。
+- 外部ノートの正本の場所・バックアップ方針、対象ブラウザー、最終公開 URL / custom domain、運用責任者はリポジトリから確認できない。
 - `docs/臨時フォルダ/`、`docs/保管用・未リンク/` や名前に「無題のファイル」を含む記事は整理候補に見えるが、独立した価値と外部正本が不明なため廃止候補とは確定していない。
 
 ## 現在の優先事項・次のアクション候補

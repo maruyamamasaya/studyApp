@@ -1,6 +1,6 @@
 ---
 status: active
-updated: 2026-09-15
+updated: 2026-09-28
 ---
 
 # アーキテクチャ
@@ -78,6 +78,8 @@ docs/**/*.md ── build_note_index.py ──► _note-index.json
 - リポジトリにはサーバー、コンテナ、IaC、workflow がない。
 - Docsify 4 の JavaScript と Vue テーマ CSS を jsDelivr CDN から取得する。
 - `.nojekyll` がある。GitHub Pages での静的公開を示唆するが、ホスティング設定は確認不能。
+- 新サイトの配信設定は `.openai/hosting.json`、公開対象は `dist/` とする。初期版は再構築状況を示す単一の静的ページで、OpenAI Sites へ非公開配信する。
+- 旧 Docsify 配信物は `docs/` に維持し、新サイトの受入条件が揃うまでは置き換えない。
 - API 定義、DB migration、環境変数設定はない。
 
 ## テスト境界

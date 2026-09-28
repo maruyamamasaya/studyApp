@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#07111f">
+    <meta name="color-scheme" content="dark">
+    <meta name="description" content="学習ノートを長く使える知識基盤へ再構築する Study App">
+    <title>Study App</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%2307111f'/%3E%3Cpath d='M16 16h25a7 7 0 0 1 7 7v25H23a7 7 0 0 1-7-7V16Z' fill='%2318d1b1'/%3E%3Cpath d='M23 16v25a7 7 0 0 0 7 7' fill='none' stroke='%2307111f' stroke-width='4'/%3E%3Cpath d='M29 25h12M29 32h12' stroke='%2307111f' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+    <style>
+      :root {
+        --ink: #f2f7fb;
+        --muted: #9eb0c2;
+        --line: rgba(150, 183, 211, 0.2);
+        --panel: rgba(11, 28, 47, 0.78);
+        --accent: #18d1b1;
+        --accent-soft: rgba(24, 209, 177, 0.13);
+        --blue: #63a8ff;
+        font-family: Inter, "Noto Sans JP", "Yu Gothic UI", system-ui, sans-serif;
+        color: var(--ink);
+        background: #07111f;
+      }
+      * { box-sizing: border-box; }
+      html { min-width: 320px; background: #07111f; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: radial-gradient(circle at 88% 12%, rgba(37, 111, 157, 0.23), transparent 30rem), linear-gradient(135deg, #07111f 0%, #081827 55%, #07111f 100%);
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.13;
+        background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+        background-size: 48px 48px;
+        mask-image: linear-gradient(to bottom, black, transparent 72%);
+      }
+      a { color: inherit; }
+      .shell { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+      header { display: flex; align-items: center; justify-content: space-between; min-height: 84px; border-bottom: 1px solid var(--line); }
+      .brand { display: inline-flex; align-items: center; gap: 12px; font-weight: 760; letter-spacing: -0.02em; }
+      .brand-mark { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 11px; color: #04120f; background: var(--accent); box-shadow: 0 0 28px rgba(24, 209, 177, 0.25); }
+      .brand-mark svg { width: 21px; height: 21px; }
+      .phase { color: var(--muted); font-size: 0.875rem; }
+      main { padding: clamp(70px, 10vw, 126px) 0 64px; }
+      .eyebrow { color: var(--accent); font-size: 0.82rem; font-weight: 750; letter-spacing: 0.15em; text-transform: uppercase; }
+      h1 { max-width: 1080px; margin: 20px 0 26px; font-size: clamp(2.65rem, 7.2vw, 6.4rem); line-height: 0.98; letter-spacing: -0.065em; text-wrap: balance; }
+      h1 span { display: inline-block; color: var(--accent); font-size: 0.93em; letter-spacing: -0.085em; white-space: nowrap; }
+      .lead { max-width: 690px; margin: 0; color: var(--muted); font-size: clamp(1.05rem, 2vw, 1.25rem); line-height: 1.85; }
+      .status-grid { display: grid; grid-template-columns: 1.35fr 0.85fr; gap: 18px; margin-top: clamp(58px, 8vw, 90px); }
+      .panel { padding: clamp(24px, 4vw, 38px); border: 1px solid var(--line); border-radius: 22px; background: var(--panel); box-shadow: 0 20px 70px rgba(0, 0, 0, 0.22); backdrop-filter: blur(18px); }
+      .panel-label { margin: 0 0 20px; color: var(--muted); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+      h2 { margin: 0; font-size: clamp(1.35rem, 3vw, 2rem); letter-spacing: -0.035em; }
+      .panel p { color: var(--muted); line-height: 1.75; }
+      .progress-track { height: 7px; margin: 30px 0 18px; overflow: hidden; border-radius: 99px; background: rgba(255,255,255,0.07); }
+      .progress-track span { display: block; width: 14%; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--accent), var(--blue)); }
+      .progress-meta { display: flex; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 0.88rem; }
+      .next-list { display: grid; gap: 14px; margin: 24px 0 0; padding: 0; list-style: none; }
+      .next-list li { display: flex; align-items: flex-start; gap: 12px; color: #dbe7f0; line-height: 1.55; }
+      .step { flex: 0 0 auto; display: grid; place-items: center; width: 26px; height: 26px; border: 1px solid rgba(24, 209, 177, 0.35); border-radius: 8px; color: var(--accent); background: var(--accent-soft); font-size: 0.75rem; font-weight: 800; }
+      footer { display: flex; justify-content: space-between; gap: 20px; padding: 28px 0 42px; color: var(--muted); border-top: 1px solid var(--line); font-size: 0.82rem; }
+      footer a { text-underline-offset: 4px; }
+      @media (max-width: 760px) {
+        .shell { width: min(100% - 28px, 1120px); }
+        header { min-height: 72px; }
+        .phase { display: none; }
+        main { padding-top: 64px; }
+        h1 span { font-size: 0.78em; }
+        .status-grid { grid-template-columns: 1fr; }
+        footer { flex-direction: column; }
+      }
+      @media (prefers-reduced-motion: no-preference) {
+        .panel { animation: rise 650ms ease both; }
+        .panel + .panel { animation-delay: 100ms; }
+        @keyframes rise { from { opacity: 0; transform: translateY(12px); } }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header>
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 4h10.5A3.5 3.5 0 0 1 19 7.5V20H8.5A3.5 3.5 0 0 1 5 16.5V4Z" stroke="currentColor" stroke-width="2"/><path d="M9 4v12.5A3.5 3.5 0 0 0 12.5 20M12 9h4M12 13h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+          Study App
+        </div>
+        <div class="phase">REBUILD / PHASE 1</div>
+      </header>
+      <main>
+        <div class="eyebrow">A durable home for learning</div>
+        <h1>学習ノートを、<br><span>あとから使える知識へ。</span></h1>
+        <p class="lead">Markdown を正本に、読む・振り返る・育てるための学習基盤を再構築しています。ノートの資産と学習履歴を守りながら、新しい閲覧体験へ段階的に移行します。</p>
+        <section class="status-grid" aria-label="開発状況">
+          <article class="panel">
+            <p class="panel-label">Current milestone</p>
+            <h2>設計を終え、最初の実装へ</h2>
+            <p>現行機能の棚卸し、データモデル、移行手順、静的サイト構成の選定が完了しました。次は代表ノートを使い、記事表示とリンク解決の土台を作ります。</p>
+            <div class="progress-track" aria-label="全7フェーズ中、フェーズ1を進行中"><span></span></div>
+            <div class="progress-meta"><span>Phase 1 / 7</span><span>Vertical slice</span></div>
+          </article>
+          <article class="panel">
+            <p class="panel-label">Up next</p>
+            <h2>次に作るもの</h2>
+            <ol class="next-list">
+              <li><span class="step">1</span><span>記事メタデータの検証</span></li>
+              <li><span class="step">2</span><span>静的な記事ページ</span></li>
+              <li><span class="step">3</span><span>Wiki Link と見出しの互換性</span></li>
+            </ol>
+          </article>
+        </section>
+      </main>
+      <footer>
+        <span>Study App · OpenAI Sites</span>
+        <a href="https://github.com/maruyamamasaya/studyApp" rel="noreferrer">Source on GitHub</a>
+      </footer>
+    </div>
+  </body>
+</html>
