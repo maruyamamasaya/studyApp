@@ -4,9 +4,11 @@ Git 管理された Markdown を正本とし、Study Web、Obsidian、Wiki、将
 
 ## 現在の状態
 
-Scratch & Build の Phase 0（現行調査、データモデル、移行計画、技術選定）まで完了しています。新実装は Astro + TypeScript の静的生成を予定しています。
+Scratch & Build の Phase 1 として、代表記事7件を Astro + TypeScript で静的生成し、一覧・研修一覧・個別記事を閲覧できる縦切り実装まで完了しています。
 
-既存 `maruyamamasaya/study` の学習 Markdown は、初期 bootstrap には含めていません。legacy UUID と学習状態の移行方法を実装・検証してから、別フェーズで安全に取り込みます。
+既存 `maruyamamasaya/study` の全記事と学習状態はまだ移行していません。Phase 1 では5件だけ本文をコピーし、対応関係を `migration/phase1-samples.json` に記録しています。
+
+記事の追加方法と公開手順は [CONTENT_AUTHORING.md](CONTENT_AUTHORING.md) を参照してください。
 
 ## 設計資料
 

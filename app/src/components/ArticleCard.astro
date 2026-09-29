@@ -1,0 +1,19 @@
+---
+interface Props {
+  article: {
+    id: string;
+    title: string | null;
+    type: string;
+    tags: string[];
+    created: string;
+  };
+}
+
+const { article } = Astro.props;
+---
+
+<a class="article-card" href={`/articles/${article.id}/`}>
+  <div class="card-meta"><span>{article.type}</span><time>{article.created.slice(0, 10)}</time></div>
+  <h2>{article.title ?? '未設定'}</h2>
+  {article.tags.length > 0 && <ul class="tags" aria-label="タグ">{article.tags.map((tag) => <li>{tag}</li>)}</ul>}
+</a>

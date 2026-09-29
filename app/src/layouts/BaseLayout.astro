@@ -1,0 +1,44 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = 'Study App', description = 'Markdown を正本にした学習ノート' } = Astro.props;
+const pageTitle = title === 'Study App' ? title : `${title} | Study App`;
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#07111f" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="shell header-inner">
+        <a class="brand" href="/" aria-label="Study App ホーム">
+          <span class="brand-mark" aria-hidden="true">S</span>
+          <span>Study App</span>
+        </a>
+        <nav aria-label="メインナビゲーション">
+          <a href="/">記事一覧</a>
+          <a href="/training/">研修資料</a>
+        </nav>
+      </div>
+    </header>
+    <main class="shell">
+      <slot />
+    </main>
+    <footer class="shell site-footer">
+      <span>Phase 1 · 少数記事で検証中</span>
+      <a href="https://github.com/maruyamamasaya/studyApp" rel="noreferrer">GitHub</a>
+    </footer>
+  </body>
+</html>

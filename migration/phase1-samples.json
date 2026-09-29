@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "legacyCommit": "c072fe8b247477aa932a228cdd78b0bdeb3c9d95",
+  "createdFallback": "2026-09-29 12:14:58",
+  "createdFallbackReason": "Phase 1 の浅い取得では各記事の最初の追加時刻を検証できないため、移行時刻を使用した。全件移行前に Git 履歴から再検証する。",
+  "entries": [
+    {
+      "legacyId": "39c9ffff-2a67-4792-a5b8-bdce3525d5f8",
+      "legacyPath": "training/README.md",
+      "id": "20260929-121458",
+      "path": "notes/training/20260929-121458.md",
+      "copyMode": "body-exact-frontmatter-added"
+    },
+    {
+      "legacyId": "3d130a4a-9973-42c1-a9a2-ac4774e5da10",
+      "legacyPath": "🌟AWS基礎について.md",
+      "id": "20260929-121459",
+      "path": "notes/study/20260929-121459.md",
+      "copyMode": "body-exact-frontmatter-added"
+    },
+    {
+      "legacyId": "f2932531-d98b-4afd-b71d-1af47f7ea180",
+      "legacyPath": "記事：基礎編/基礎AWS/🌟AWS基礎について.md",
+      "id": "20260929-121500",
+      "path": "notes/study/20260929-121500.md",
+      "copyMode": "body-exact-frontmatter-added"
+    },
+    {
+      "legacyId": "bbf40f8a-6d39-4e73-8684-b005b1c5d14f",
+      "legacyPath": "移管用/Obsidianが最高のメモ/フォルダ管理/Markdown記法のサンプル集.md",
+      "id": "20260929-121501",
+      "path": "notes/study/20260929-121501.md",
+      "copyMode": "body-exact-frontmatter-added"
+    },
+    {
+      "legacyId": "31c038f7-530c-44d3-b3b7-b5ebc9a3535d",
+      "legacyPath": "試験勉強系/応用情報技術者/数値計算の誤差.md",
+      "id": "20260929-121502",
+      "path": "notes/study/20260929-121502.md",
+      "copyMode": "body-exact-frontmatter-added"
+    },
+    {
+      "legacyId": null,
+      "legacyPath": null,
+      "id": "20260929-121503",
+      "path": "notes/study/20260929-121503.md",
+      "copyMode": "phase1-fixture"
+    },
+    {
+      "legacyId": null,
+      "legacyPath": null,
+      "id": "20260929-121504",
+      "path": "notes/study/20260929-121504.md",
+      "copyMode": "phase1-fixture"
+    }
+  ]
+}

@@ -1,13 +1,13 @@
 ---
 status: active
-updated: 2026-09-28
+updated: 2026-09-29
 ---
 
 # アーキテクチャ
 
 ## 全体像
 
-ビルド済みアプリを配信する構成ではなく、`docs/` の静的ファイルをブラウザーへ配信し、Docsify が実行時に Markdown を取得・描画する構成である。
+旧サイトは `docs/` の静的ファイルを Docsify が実行時に描画する。新 Study App は `content/notes/` を正本に、Astro が build 時に検証・HTML 化し、`dist/` を OpenAI Sites で配信する。Phase 1 では両者を並行維持する。
 
 ```text
 外部ノート（リポジトリ外、詳細不明）
@@ -21,7 +21,31 @@ docs/**/*.md ── build_note_index.py ──► _note-index.json
                    ├─ jsDelivr から Docsify を取得
                    ├─ Markdown と JSON を fetch
                    └─ ブラウザーで描画・閲覧状態を localStorage に保存
+
+content/notes/**/*.md
+  │ Frontmatter / ID / path validator
+  ├─► generated/article-master.json / link-index.json / search-index.json
+  └─► Astro static build ──► dist/
+                                │
+                                └─► OpenAI Sites（一覧 / training / articles/:id）
 ```
+
+## 新 Study App（Phase 1）
+
+| 場所 | 責務 |
+| --- | --- |
+| `content/notes/**/*.md` | 新アプリの記事正本。filename stem と Frontmatter ID を一致させる |
+| `app/src/content.config.ts` | Astro content collection の Frontmatter schema と表示用正規化 |
+| `app/src/domain/article.mjs` | parser、ID / path invariant、tags / aliases、link index の純粋 domain |
+| `scripts/build-content-index.mjs` | build 前検証と `generated/` の再生成 |
+| `app/src/markdown/` | Wiki Link の build-time 解決と raw HTML のコード表示化 |
+| `app/src/pages/` | ホーム、研修一覧、ID 固定の個別記事 route |
+| `migration/phase1-samples.json` | 5件の legacy 記事と新 ID の対応、2件の Phase 1 fixture |
+| `dist/` | Astro の静的生成結果。OpenAI Sites の公開対象 |
+
+Wiki Link は exact path、title、alias、filename の順で候補を評価する。同順位で複数候補が残る場合はリンクを生成せず「リンク曖昧」、候補がなければ「リンク未解決」と表示する。標準 Markdown link は通常の link node として優先して保持する。
+
+Markdown の raw HTML node は rehype 段階で `code.raw-html-example` に変換する。記事本文から `script`、event handler 付き要素などを実行可能な DOM として出力しない。
 
 ## 主要コンポーネント
 
@@ -63,11 +87,21 @@ docs/**/*.md ── build_note_index.py ──► _note-index.json
 
 ## 表示データフロー
 
+### 旧 Docsify
+
 1. ブラウザーが対象の `index.html` と共有資産を取得する。
 2. Docsify とプラグインが初期化される。
 3. ルートに対応する Markdown を Docsify が取得する。
 4. unique-heading プラグインが重複見出しを処理し、Wiki link プラグインが `_note-index.json` を使ってリンクを解決する。
 5. Docsify が HTML を描画し、reader tools がナビゲーションと localStorage 上の状態を接続する。
+
+### 新 Study App
+
+1. `npm run content:build` が `content/notes/**/*.md` を列挙し、Frontmatter、ID、filename、path を検証する。
+2. 正規化した記事から `generated/` の article master、link index、search index を作る。
+3. Astro content collection が同じ Frontmatter schema を検証し、Markdown を HTML 化する。
+4. Wiki Link は link index から build 時に解決し、生 HTML はコード表示へ変換する。
+5. Astro がホーム、研修一覧、記事 ID route を `dist/` に書き出し、Sites はその静的資産を配信する。
 
 ## コンテンツ同期・生成
 
@@ -78,13 +112,13 @@ docs/**/*.md ── build_note_index.py ──► _note-index.json
 - リポジトリにはサーバー、コンテナ、IaC、workflow がない。
 - Docsify 4 の JavaScript と Vue テーマ CSS を jsDelivr CDN から取得する。
 - `.nojekyll` がある。GitHub Pages での静的公開を示唆するが、ホスティング設定は確認不能。
-- 新サイトの配信設定は `.openai/hosting.json`、公開対象は `dist/` とする。初期版は再構築状況を示す単一の静的ページで、OpenAI Sites へ非公開配信する。
+- 新サイトの配信設定は `.openai/hosting.json`、公開対象は `dist/` とする。Phase 1 は一覧・研修一覧・代表記事7件を OpenAI Sites へ既存の非公開範囲で配信する。
 - 旧 Docsify 配信物は `docs/` に維持し、新サイトの受入条件が揃うまでは置き換えない。
 - API 定義、DB migration、環境変数設定はない。
 
 ## テスト境界
 
-`tests/password-gate.test.js` と `tests/unique-heading-ids.test.js` は Node の `assert`、`fs`、`vm` を使う単体スクリプトである。package script や共通 test runner はない。Python 生成器は実行結果の差分確認が主な検証方法である。
+旧 Docsify の `tests/password-gate.test.js` と `tests/unique-heading-ids.test.js` は従来どおり Node の単体スクリプトとして維持する。新 Study App は Node test runner で domain と生成 HTML を検証し、`npm run check` が test → content / Astro build → output test を順に実行する。Python 生成器は旧 `docs/` の検証用として残す。
 
 ## 関連資料
 

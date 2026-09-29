@@ -1,0 +1,110 @@
+{
+  "version": 2,
+  "articles": [
+    {
+      "id": "20260929-121459",
+      "path": "notes/study/20260929-121459.md",
+      "title": "🌟AWS基礎について",
+      "type": "study",
+      "tags": [
+        "AWS",
+        "index"
+      ],
+      "aliases": [
+        "AWS基礎（旧ルート）"
+      ],
+      "created": "2026-09-29 12:14:59",
+      "legacyId": "3d130a4a-9973-42c1-a9a2-ac4774e5da10",
+      "legacyPath": "🌟AWS基礎について.md"
+    },
+    {
+      "id": "20260929-121500",
+      "path": "notes/study/20260929-121500.md",
+      "title": "🌟AWS基礎について",
+      "type": "study",
+      "tags": [
+        "AWS",
+        "index"
+      ],
+      "aliases": [
+        "AWS基礎（基礎編）"
+      ],
+      "created": "2026-09-29 12:15:00",
+      "legacyId": "f2932531-d98b-4afd-b71d-1af47f7ea180",
+      "legacyPath": "記事：基礎編/基礎AWS/🌟AWS基礎について.md"
+    },
+    {
+      "id": "20260929-121501",
+      "path": "notes/study/20260929-121501.md",
+      "title": "Markdown記法のサンプル集",
+      "type": "study",
+      "tags": [
+        "markdown",
+        "task"
+      ],
+      "aliases": [
+        "Markdown サンプル"
+      ],
+      "created": "2026-09-29 12:15:01",
+      "legacyId": "bbf40f8a-6d39-4e73-8684-b005b1c5d14f",
+      "legacyPath": "移管用/Obsidianが最高のメモ/フォルダ管理/Markdown記法のサンプル集.md"
+    },
+    {
+      "id": "20260929-121502",
+      "path": "notes/study/20260929-121502.md",
+      "title": "数値計算の誤差",
+      "type": "study",
+      "tags": [
+        "応用情報",
+        "計算"
+      ],
+      "aliases": [
+        "計算誤差"
+      ],
+      "created": "2026-09-29 12:15:02",
+      "legacyId": "31c038f7-530c-44d3-b3b7-b5ebc9a3535d",
+      "legacyPath": "試験勉強系/応用情報技術者/数値計算の誤差.md"
+    },
+    {
+      "id": "20260929-121503",
+      "path": "notes/study/20260929-121503.md",
+      "title": "リンク動作確認",
+      "type": "wiki",
+      "tags": [
+        "phase1",
+        "link"
+      ],
+      "aliases": [
+        "リンク確認"
+      ],
+      "created": "2026-09-29 12:15:03"
+    },
+    {
+      "id": "20260929-121504",
+      "path": "notes/study/20260929-121504.md",
+      "title": "コードと HTML の安全確認",
+      "type": "wiki",
+      "tags": [
+        "phase1",
+        "security"
+      ],
+      "aliases": [],
+      "created": "2026-09-29 12:15:04"
+    },
+    {
+      "id": "20260929-121458",
+      "path": "notes/training/20260929-121458.md",
+      "title": "README",
+      "type": "wiki",
+      "tags": [
+        "training"
+      ],
+      "aliases": [
+        "研修資料"
+      ],
+      "created": "2026-09-29 12:14:58",
+      "legacyId": "39c9ffff-2a67-4792-a5b8-bdce3525d5f8",
+      "legacyPath": "training/README.md"
+    }
+  ]
+}

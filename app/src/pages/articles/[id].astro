@@ -1,0 +1,34 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('notes');
+  return articles.map((entry) => ({ params: { id: entry.data.id }, props: { entry } }));
+}
+
+interface Props { entry: CollectionEntry<'notes'> }
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+const title = entry.data.title ?? '未設定';
+---
+
+<BaseLayout title={title} description={`${title} — Study App の学習ノート`}>
+  <div class="article-layout">
+    <article>
+      <header class="article-header">
+        <a class="back-link" href="/">記事一覧に戻る</a>
+        <div class="card-meta"><span>{entry.data.type}</span><time>{entry.data.created}</time></div>
+        <h1>{title}</h1>
+        {entry.data.tags.length > 0 && <ul class="tags" aria-label="タグ">{entry.data.tags.map((tag) => <li>{tag}</li>)}</ul>}
+      </header>
+      <div class="prose"><Content /></div>
+    </article>
+    {headings.length > 0 && (
+      <aside class="toc" aria-label="目次">
+        <strong>目次</strong>
+        <ol>{headings.filter((heading) => heading.depth <= 3).map((heading) => <li class={`depth-${heading.depth}`}><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol>
+      </aside>
+    )}
+  </div>
+</BaseLayout>
