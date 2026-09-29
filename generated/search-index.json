@@ -12,7 +12,7 @@
     "type": "study",
     "created": "2026-09-29 12:14:59",
     "path": "notes/study/20260929-121459.md",
-    "text": "監視・ジョブ系 study/docs/記事：基礎編/基礎AWS/Amazon CloudWatch ユーザー・権限・アクセス study/docs/記事：基礎編/基礎AWS/IAM（Identity and Access Management） ドメインやDNS・証明書 study/docs/記事：基礎編/基礎AWS/Route 53 study/docs/記事：基礎編/基礎AWS/AWS Certificate Manager（ACM） 会員管理・認証 study/docs/記事：基礎編/基礎AWS/Amazon Cognito とは？ 仮想サーバー study/docs/記事：基礎編/基礎AWS/Amazon EC2（Elastic Compute Cloud） 初心者向けアプリ制作 study/docs/記事：基礎編/基礎AWS/Elastic Beanstalkとは？ study/docs/記事：基礎編/基礎AWS/Amazon RDS（Relational Database Service）とは？ study/docs/記事：基礎編/基礎AWS/Amazon S3（Simple Storage Service） study/docs/記事：基礎編/基礎AWS/Amazon CloudFront study/docs/記事：基礎編/基礎AWS/AWS Lambdaとは？ study/docs/記事：基礎編/基礎AWS/Amazon API Gateway とは？ データベース study/docs/記事：基礎編/基礎AWS/Amazon RDS（Relational Database Service）とは？ 記事：基礎編/基礎AWS/DynamoDBとは？ DynamoDBとは？ study/docs/記事：基礎編/基礎AWS/Amazon Auroraとは？ study/docs/記事：基礎編/基礎AWS/AWSにおけるAZ とは？ study/docs/記事：基礎編/基礎AWS/AWSリージョン（Region） study/docs/記事：基礎編/基礎AWS/AWSのAIサービス全体像 → study/docs/記事：基礎編/基礎AWS/Amazon Bedrockとは？ →→ study/docs/記事：基礎編/基礎AWS/生成AIを作るためのサービス"
+    "text": "監視・ジョブ系 docs/記事：基礎編/基礎AWS/20260929 133348 ユーザー・権限・アクセス study/docs/記事：基礎編/基礎AWS/IAM（Identity and Access Management） ドメインやDNS・証明書 study/docs/記事：基礎編/基礎AWS/Route 53 study/docs/記事：基礎編/基礎AWS/AWS Certificate Manager（ACM） 会員管理・認証 study/docs/記事：基礎編/基礎AWS/Amazon Cognito とは？ 仮想サーバー study/docs/記事：基礎編/基礎AWS/Amazon EC2（Elastic Compute Cloud） 初心者向けアプリ制作 study/docs/記事：基礎編/基礎AWS/Elastic Beanstalkとは？ study/docs/記事：基礎編/基礎AWS/Amazon RDS（Relational Database Service）とは？ study/docs/記事：基礎編/基礎AWS/Amazon S3（Simple Storage Service） study/docs/記事：基礎編/基礎AWS/Amazon CloudFront study/docs/記事：基礎編/基礎AWS/AWS Lambdaとは？ study/docs/記事：基礎編/基礎AWS/Amazon API Gateway とは？ データベース study/docs/記事：基礎編/基礎AWS/Amazon RDS（Relational Database Service）とは？ 記事：基礎編/基礎AWS/DynamoDBとは？ DynamoDBとは？ study/docs/記事：基礎編/基礎AWS/Amazon Auroraとは？ study/docs/記事：基礎編/基礎AWS/AWSにおけるAZ とは？ study/docs/記事：基礎編/基礎AWS/AWSリージョン（Region） study/docs/記事：基礎編/基礎AWS/AWSのAIサービス全体像 → study/docs/記事：基礎編/基礎AWS/Amazon Bedrockとは？ →→ study/docs/記事：基礎編/基礎AWS/生成AIを作るためのサービス"
   },
   {
     "id": "20260929-121500",
@@ -27,7 +27,7 @@
     "type": "study",
     "created": "2026-09-29 12:15:00",
     "path": "notes/study/20260929-121500.md",
-    "text": "監視・ジョブ系 記事：基礎編/基礎AWS/Amazon CloudWatch ユーザー・権限・アクセス 記事：基礎編/基礎AWS/IAM（Identity and Access Management） ドメインやDNS・証明書 記事：基礎編/基礎AWS/Route 53 記事：基礎編/基礎AWS/AWS Certificate Manager（ACM） 会員管理・認証 記事：基礎編/基礎AWS/Amazon Cognito とは？ 仮想サーバー 記事：基礎編/基礎AWS/Amazon EC2（Elastic Compute Cloud） 初心者向けアプリ制作 記事：基礎編/基礎AWS/Elastic Beanstalkとは？ 記事：基礎編/基礎AWS/AWS Amplifyとは？ 記事：基礎編/基礎AWS/Amazon S3（Simple Storage Service） 記事：基礎編/基礎AWS/Amazon CloudFront 記事：基礎編/基礎AWS/AWS Lambdaとは？ 記事：基礎編/基礎AWS/Amazon API Gateway とは？ データベース 記事：基礎編/基礎AWS/Amazon RDS（Relational Database Service）とは？ 記事：基礎編/基礎AWS/DynamoDBとは？ DynamoDBとは？ 記事：基礎編/基礎AWS/Amazon Auroraとは？ メール配信 記事：基礎編/基礎AWS/Amazon SES（Simple Email Service） → 記事：基礎編/基礎AWS/メール配信の仕組み 補足: 用語解説/Sandbox（サンドボックス） 障害時の対策・対応 記事：基礎編/基礎AWS/冗長化 → 記事：基礎編/基礎AWS/フェイルオーバーとは？ 記事：基礎編/基礎AWS/高可用性・HA バックアップ 記事：基礎編/基礎AWS/フェイルバック →障害時に予備環境へ切り替えたあと、元の環境が復旧したら元へ戻すこと リージョンと 記事：基礎編/基礎AWS/AZ 記事：基礎編/基礎AWS/Multi AZ 記事：基礎編/基礎AWS/AWSにおけるAZ とは？ 記事：基礎編/基礎AWS/AWSリージョン（Region） 記事：基礎編/基礎AWS/Amazon VPCとは？ 記事：基礎編/基礎AWS/AWSのAIサービス全体像 → 記事：基礎編/基礎AWS/Amazon Bedrockとは？ →→ 記事：基礎編/基礎AWS/生成AIを作るためのサービス"
+    "text": "監視・ジョブ系 docs/記事：基礎編/基礎AWS/20260929 133348 ユーザー・権限・アクセス 記事：基礎編/基礎AWS/IAM（Identity and Access Management） ドメインやDNS・証明書 記事：基礎編/基礎AWS/Route 53 記事：基礎編/基礎AWS/AWS Certificate Manager（ACM） 会員管理・認証 記事：基礎編/基礎AWS/Amazon Cognito とは？ 仮想サーバー 記事：基礎編/基礎AWS/Amazon EC2（Elastic Compute Cloud） 初心者向けアプリ制作 記事：基礎編/基礎AWS/Elastic Beanstalkとは？ 記事：基礎編/基礎AWS/AWS Amplifyとは？ 記事：基礎編/基礎AWS/Amazon S3（Simple Storage Service） 記事：基礎編/基礎AWS/Amazon CloudFront 記事：基礎編/基礎AWS/AWS Lambdaとは？ 記事：基礎編/基礎AWS/Amazon API Gateway とは？ データベース 記事：基礎編/基礎AWS/Amazon RDS（Relational Database Service）とは？ 記事：基礎編/基礎AWS/DynamoDBとは？ DynamoDBとは？ 記事：基礎編/基礎AWS/Amazon Auroraとは？ メール配信 記事：基礎編/基礎AWS/Amazon SES（Simple Email Service） → 記事：基礎編/基礎AWS/メール配信の仕組み 補足: 用語解説/Sandbox（サンドボックス） 障害時の対策・対応 記事：基礎編/基礎AWS/冗長化 → 記事：基礎編/基礎AWS/フェイルオーバーとは？ 記事：基礎編/基礎AWS/高可用性・HA バックアップ 記事：基礎編/基礎AWS/フェイルバック →障害時に予備環境へ切り替えたあと、元の環境が復旧したら元へ戻すこと リージョンと 記事：基礎編/基礎AWS/AZ 記事：基礎編/基礎AWS/Multi AZ 記事：基礎編/基礎AWS/AWSにおけるAZ とは？ 記事：基礎編/基礎AWS/AWSリージョン（Region） 記事：基礎編/基礎AWS/Amazon VPCとは？ 記事：基礎編/基礎AWS/AWSのAIサービス全体像 → 記事：基礎編/基礎AWS/Amazon Bedrockとは？ →→ 記事：基礎編/基礎AWS/生成AIを作るためのサービス"
   },
   {
     "id": "20260929-121501",
@@ -60,6 +60,56 @@
     "text": "1. 桁落ち ほぼ同じ大きさの数同士を引き算したとき、有効数字が大きく失われる現象。 例 元の値には多くの有効数字があっても、差を取ることで有効数字が少なくなる。 覚え方 桁落ち = 近い値どうしの引き算で桁が消える 2. 情報落ち 非常に大きな数と非常に小さな数を足したとき、小さい方の値が計算結果に反映されなくなる現象。 例 コンピュータで扱える有効桁数に限界があるため、小さい値が無視されることがある。 覚え方 情報落ち = 大きい数 + 小さい数で、小さい方が消える 3. 丸め誤差 有限の桁数で数値を表すために、四捨五入や切捨てなどを行うことで発生する誤差。 例 本来の値との差が丸め誤差。 例：2進数 10進数の 0.1 などは、2進数では有限桁で正確に表せない。 そのためコンピュータ内部では近似値として保持される。 丸め誤差 = 表現できる桁数に丸めることで発生 4. 打切り誤差 本来は無限回続ける計算を、途中で打ち切ることで発生する誤差。 例 円周率を、 と無限に続く値として扱えないため、 など途中で計算を打ち切る。 また、無限級数を有限回で終了する場合などにも発生する。 本来は無限に続くが、 で計算を終了すると、その分の誤差が生じる。 打切り誤差 = 計算を途中でやめることで発生 4つの違い 誤差 発生する場面 覚え方 桁落ち 近い値同士の引き算 桁が消える 情報落ち 大きい数と小さい数の加算 小さい値が消える 丸め誤差 有限桁で表現する 数値を丸める 打切り誤差 無限計算を途中で終了 計算を打ち切る 試験での見分け方 一言で覚える 特に重要な対比 この2つは特に混同しやすいので、セットで覚えるとよい。"
   },
   {
+    "id": "20260929-133348",
+    "title": null,
+    "tags": [],
+    "aliases": [],
+    "type": "study",
+    "created": "2026-09-29 13:33:49",
+    "path": "notes/study/docs/記事：基礎編/基礎AWS/20260929-133348.md",
+    "text": ""
+  },
+  {
+    "id": "20260928-141048",
+    "title": "タイトルを表示したい",
+    "tags": [],
+    "aliases": [],
+    "type": "wiki",
+    "created": "2026-09-28 14:10:48",
+    "path": "notes/wiki/anken001/20260928-141048.md",
+    "text": ""
+  },
+  {
+    "id": "20260928-141416",
+    "title": null,
+    "tags": [],
+    "aliases": [],
+    "type": "wiki",
+    "created": "2026-09-28 14:14:16",
+    "path": "notes/wiki/anken001/20260928-141416.md",
+    "text": ""
+  },
+  {
+    "id": "20260928-142231",
+    "title": null,
+    "tags": [],
+    "aliases": [],
+    "type": "wiki",
+    "created": "2026-09-28 14:22:31",
+    "path": "notes/wiki/anken001/20260928-142231.md",
+    "text": "いけてるね"
+  },
+  {
+    "id": "20260928-142529",
+    "title": null,
+    "tags": [],
+    "aliases": [],
+    "type": "wiki",
+    "created": "2026-09-28 14:25:29",
+    "path": "notes/wiki/anken001/20260928-142529.md",
+    "text": ""
+  },
+  {
     "id": "20260929-121503",
     "title": "リンク動作確認",
     "tags": [
@@ -71,8 +121,8 @@
     ],
     "type": "wiki",
     "created": "2026-09-29 12:15:03",
-    "path": "notes/study/20260929-121503.md",
-    "text": "Wiki Link 別名から開く: 計算誤差 数値計算の記事 見出しを指定して開く: 数値計算の誤差 特に重要な対比 桁落ちと情報落ちの対比 同名タイトルは自動決定しない: 🌟AWS基礎について 存在しない記事は別の記事へ結び付けない: まだ移行していない記事 標準 Markdown リンク 研修資料の一覧 /training/ は標準 Markdown リンクの例です。 数値計算の記事（標準相対リンク） ./20260929 121502.md 特に重要な対比 対象の見出し この見出しは Wiki Link の見出し指定を確認するためにあります。"
+    "path": "notes/wiki/phase1/20260929-121503.md",
+    "text": "Wiki Link 別名から開く: 計算誤差 数値計算の記事 見出しを指定して開く: 数値計算の誤差 特に重要な対比 桁落ちと情報落ちの対比 同名タイトルは自動決定しない: 🌟AWS基礎について 存在しない記事は別の記事へ結び付けない: まだ移行していない記事 標準 Markdown リンク 研修資料の一覧 /training/ は標準 Markdown リンクの例です。 数値計算の記事（標準相対リンク） ../../study/20260929 121502.md 特に重要な対比 対象の見出し この見出しは Wiki Link の見出し指定を確認するためにあります。"
   },
   {
     "id": "20260929-121504",
@@ -84,7 +134,7 @@
     "aliases": [],
     "type": "wiki",
     "created": "2026-09-29 12:15:04",
-    "path": "notes/study/20260929-121504.md",
+    "path": "notes/wiki/phase1/20260929-121504.md",
     "text": "コードフェンス 次の HTML は説明用コードで、ボタンとして実行されません。 生 HTML 次の記述も文字列として表示され、スクリプトは実行されません。 <script window. unsafeArticleExecuted = true;</script <img src=\"x\" onerror=\"window. unsafeArticleExecuted = true\" インラインコード <strong コードとして表示</strong"
   },
   {
@@ -98,7 +148,7 @@
     ],
     "type": "wiki",
     "created": "2026-09-29 12:14:58",
-    "path": "notes/training/20260929-121458.md",
+    "path": "notes/wiki/training/20260929-121458.md",
     "text": "研修資料 VMwareについて VMware脱却について トレイニー向け説明 ネットワーク関連 OSI参照モデル ― 画像をAからBへ送るとき通信はどうなる？ 家庭・社内ネットワークから理解するIPアドレス・NAT・DNS DNS・IPアドレス・ポート番号の仕組み OS（Linux）・データベース Linux基礎 インフラでよく使う範囲 データベース基礎編：データ管理の仕組み セキュリティ セキュリティ（研修用） フロントエンド実装イメージ シェアモビリティサービスのシステム構成・データ設計 レシピアプリ拡張の実装イメージ無題のファイル 研修用サーバー構築手順 AlmaLinux VM Webサーバー構築・検証メモ AlmaLinux WEBサーバー2号機 構築手順"
   }
 ]

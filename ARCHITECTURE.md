@@ -10,7 +10,17 @@ updated: 2026-09-29
 旧サイトは `docs/` の静的ファイルを Docsify が実行時に描画する。新 Study App は `content/notes/` を正本に、Astro が build 時に検証・HTML 化し、`dist/` を OpenAI Sites で配信する。Phase 1 では両者を並行維持する。
 
 ```text
-外部ノート（リポジトリ外、詳細不明）
+Obsidian Vault / study・wiki（authoring source）
+  │ scripts/sync-obsidian-content.mjs（検証付き、一方向同期）
+  ▼
+content/notes/**/*.md（Git / build 上の正本）
+  │ Frontmatter / ID / path validator
+  ├─► generated/article-master.json / link-index.json / search-index.json
+  └─► Astro static build ──► dist/
+                                │
+                                └─► OpenAI Sites（一覧 / training / articles/:id）
+
+旧外部ノート同期
   │ rsync（手動同期手順）
   ▼
 docs/**/*.md ── build_note_index.py ──► _note-index.json
@@ -22,12 +32,6 @@ docs/**/*.md ── build_note_index.py ──► _note-index.json
                    ├─ Markdown と JSON を fetch
                    └─ ブラウザーで描画・閲覧状態を localStorage に保存
 
-content/notes/**/*.md
-  │ Frontmatter / ID / path validator
-  ├─► generated/article-master.json / link-index.json / search-index.json
-  └─► Astro static build ──► dist/
-                                │
-                                └─► OpenAI Sites（一覧 / training / articles/:id）
 ```
 
 ## 新 Study App（Phase 1）
@@ -35,11 +39,15 @@ content/notes/**/*.md
 | 場所 | 責務 |
 | --- | --- |
 | `content/notes/**/*.md` | 新アプリの記事正本。filename stem と Frontmatter ID を一致させる |
+| `scripts/sync-obsidian-content.mjs` | Vault の `study/` / `wiki/` を検証し、同期管理外ファイルを上書きせず `content/notes/` へ反映する |
+| `generated/obsidian-sync-manifest.json` | 同期元相対 path、同期先、ID、内容 hash。安全な更新と明示 prune の境界 |
 | `app/src/content.config.ts` | Astro content collection の Frontmatter schema と表示用正規化 |
 | `app/src/domain/article.mjs` | parser、ID / path invariant、tags / aliases、link index の純粋 domain |
 | `scripts/build-content-index.mjs` | build 前検証と `generated/` の再生成 |
 | `app/src/markdown/` | Wiki Link の build-time 解決と raw HTML のコード表示化 |
 | `app/src/pages/` | ホーム、研修一覧、ID 固定の個別記事 route |
+| `app/src/layouts/BaseLayout.astro` | 共通ヘッダー、5テーマの選択・初期適用・localStorage 保存 |
+| `app/src/styles/global.css` | Standard / Wiki / Living Aurora / Blue Cosmos / Pulse Neon のデザイントークンとレスポンシブ表示 |
 | `migration/phase1-samples.json` | 5件の legacy 記事と新 ID の対応、2件の Phase 1 fixture |
 | `dist/` | Astro の静的生成結果。OpenAI Sites の公開対象 |
 
@@ -101,9 +109,12 @@ Markdown の raw HTML node は rehype 段階で `code.raw-html-example` に変�
 2. 正規化した記事から `generated/` の article master、link index、search index を作る。
 3. Astro content collection が同じ Frontmatter schema を検証し、Markdown を HTML 化する。
 4. Wiki Link は link index から build 時に解決し、生 HTML はコード表示へ変換する。
-5. Astro がホーム、研修一覧、記事 ID route を `dist/` に書き出し、Sites はその静的資産を配信する。
+5. Astro がホーム、研修一覧、記事 ID route を `dist/` に書き出す。ブラウザーでは保存済みテーマを描画前に適用し、テーマ選択を localStorage に保存する。
+6. Sites は生成済みの静的資産を配信する。
 
 ## コンテンツ同期・生成
+
+新 Study App の authoring source は `C:\Users\m-maruyama\Development\Document organization` の Obsidian Vault で、対象は `study/**/*.md` と `wiki/**/*.md` に限定する。同期は Vault → `content/notes/` の一方向で、空ファイルは下書きとして保持・除外し、同期管理外の既存ファイルは上書きしない。削除は自動伝播せず、manifest の hash と一致する同期済みファイルに対する明示 `--prune` のみ許可する。Templater が folder ごとの `type`、ID filename、引用符付き `created` を発行する。
 
 手動同期の記録された流れは `git pull --rebase`、外部ディレクトリから `docs/` への Markdown の rsync、差分確認、`python3 build_note_index.py`、commit/push である。生成スクリプトはホームページを Wiki リンク名前解決の対象から除外するが、記事マスターには含める。
 

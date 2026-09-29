@@ -2,18 +2,18 @@
 
 ## 配置場所とファイル名
 
-新しい記事の正本は `content/notes/**/*.md` に置く。旧 Docsify 用の `docs/` には置かない。
+新しい記事は Obsidian Vault の次の2フォルダで作成する。同期後の `content/notes/**/*.md` が Study App の Git 管理・ビルド上の正本となり、通常は直接編集しない。旧 Docsify 用の `docs/` にも置かない。
 
-通常の記事:
+学習記事:
 
 ```text
-content/notes/study/20260929-142430.md
+C:\Users\m-maruyama\Development\Document organization\study\20260929-142430.md
 ```
 
-研修一覧にも表示する記事:
+Wiki 記事:
 
 ```text
-content/notes/training/20260929-142430.md
+C:\Users\m-maruyama\Development\Document organization\wiki\20260929-142430.md
 ```
 
 filename stem と `frontmatter.id` は必ず一致させる。ID は Asia/Tokyo の作成時刻を `YYYYMMDD-HHmmss` で表す。同じ秒の ID が既にある場合は未使用の秒まで進める。既存 ID は変更しない。
@@ -29,6 +29,7 @@ tags:
   - security
   - zero-trust
 created: "2026-09-29 14:24:30"
+updated:
 aliases:
   - Zero Trust
 ---
@@ -40,14 +41,22 @@ aliases:
 - `type` の初期値は `study` または `wiki`。未知の値は Phase 1 では warning として扱う。
 - `tags` は必須の配列で、空なら `[]` とする。前後空白、空要素、重複は生成時に除去される。
 - `aliases` は任意の配列。前後空白、空要素、重複、title と同じ値は除去される。
-- `created` は Asia/Tokyo のローカル時刻。YAML parser に日時型へ変換されないよう引用符で囲む。
+- `created` は Asia/Tokyo のローカル時刻。テンプレートでは YAML parser の差を避けるため引用符で囲む。既存の引用符なし YAML 日時も同じ表示値として受理する。
+- `updated` は Obsidian テンプレート互換の任意項目。空欄でも閲覧でき、現時点では記事 ID や並び順に使わない。
 
 ## 追加から公開まで
 
-1. 記事を `content/notes/study/` または `content/notes/training/` に追加する。
-2. Phase 1 の間は `migration/phase1-samples.json` に同じ ID と path を追加する。新規記事は `legacyId` / `legacyPath` を `null`、`copyMode` を `new` とする。
-3. `npm run check` を実行する。Frontmatter、ID、静的 route、Wiki Link、HTML 安全化まで検証される。
-4. `git diff --check` と生成された `generated/` / `dist/` の差分を確認する。
-5. OpenAI Sites の既存プロジェクトへ Site workflow で source と `dist/` を保存・反映する。
+1. Obsidian で `study/` または `wiki/` の直下・配下に新規 Markdown を作る。Templater が対応テンプレートを適用し、Asia/Tokyo の ID を filename と Frontmatter に設定する。
+2. Study App の repository root で次を実行する。
 
-Phase 1 の build は意図しない全件移行を防ぐため、記事数を5〜10件に制限している。この上限を外すのは Phase 2 の ID inventory と migration manifest 検証後とする。
+   ```powershell
+   npm run vault:prepare -- "C:\Users\m-maruyama\Development\Document organization"
+   ```
+
+   このコマンドは Vault の `study/**/*.md` と `wiki/**/*.md` を `content/notes/` へ同期し、Frontmatter、ID、重複、静的 route、Wiki Link、HTML 安全化を検証して `dist/` を生成する。0バイトのファイルは下書きとして警告し、削除しない。
+3. `git diff --check` と `git diff` で、同期記事、`generated/`、`dist/` の差分を確認する。
+4. 変更を commit / push し、OpenAI Sites の既存プロジェクト `appgprj_6aba0a652f848191850dc665b7023bc0` へ `dist/` を反映する。
+
+検証だけを行う場合は `npm run vault:check -- "<Vault path>"`、同期だけなら `npm run vault:sync -- "<Vault path>"` を使う。同期元から消えた記事は誤削除防止のため自動削除せず `STALE` と表示し、明示的な `--prune` 指定時だけ過去の同期 manifest と照合して削除する。
+
+公開済みの静的サイト上のファイル選択 UI から Vault を直接更新・再デプロイすることはできない。ブラウザーは任意のローカルフォルダへ常時アクセスできず、Sites への永続反映には認証された build/deploy 処理が必要なため、現段階の「アップロード」に相当する操作は上記ローカルコマンドとする。

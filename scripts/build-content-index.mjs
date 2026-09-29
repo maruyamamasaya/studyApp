@@ -18,7 +18,7 @@ async function walk(directory) {
 }
 
 const files = (await walk(notesRoot)).sort((a, b) => a.localeCompare(b, 'ja'));
-if (files.length < 5 || files.length > 10) throw new Error(`Phase 1 の記事数は 5〜10 件です（現在 ${files.length} 件）`);
+if (files.length === 0) throw new Error('content/notes に記事がありません');
 
 const warnings = [];
 const articles = [];
@@ -35,11 +35,6 @@ for (const absolute of files) {
 validateArticleSet(articles);
 
 const migration = JSON.parse(await fs.readFile(migrationPath, 'utf8'));
-const migrationIds = new Set(migration.entries.map((entry) => entry.id));
-for (const article of articles) {
-  if (!migrationIds.has(article.id)) throw new Error(`${article.path}: migration/phase1-samples.json に対応関係がありません`);
-}
-
 const linkIndex = buildLinkIndex(articles);
 const migrationById = new Map(migration.entries.map((entry) => [entry.id, entry]));
 const articleMaster = articles.map(({ displayTitle, internalLabel, filename, ...article }) => ({

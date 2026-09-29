@@ -109,6 +109,8 @@ test:
 
 exit gate: sample collection が build され、Obsidian と生成 HTML の両方で内容を確認できる。
 
+Phase 1 完了後の少数記事運用として、外部 Obsidian Vault の `study/` / `wiki/` から `content/notes/` への検証付き一方向同期を導入する。代表記事7件を Vault に初期配置し、Vault 既存・新規記事を含む12件で同期・静的生成を確認する。これは legacy 343記事の一括移行、ID 推定、学習状態移行を開始するものではない。
+
 ## Phase 2: ID inventory と index generator
 
 まだ全 Markdown を rename しない状態で migration manifest を先に生成する。

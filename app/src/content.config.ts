@@ -3,6 +3,12 @@ import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
 const normalizeList = (values: string[]) => [...new Set(values.map((value) => value.trim()).filter(Boolean))];
+const localDateTime = z.preprocess(
+  (value) => value instanceof Date && !Number.isNaN(value.valueOf())
+    ? value.toISOString().slice(0, 19).replace('T', ' ')
+    : value,
+  z.string().regex(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/u)
+);
 
 const notes = defineCollection({
   loader: glob({
@@ -18,7 +24,8 @@ const notes = defineCollection({
     }),
     type: z.string().trim().min(1),
     tags: z.array(z.string()).transform(normalizeList),
-    created: z.string().regex(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/u),
+    created: localDateTime,
+    updated: z.union([localDateTime, z.null()]).optional(),
     aliases: z.array(z.string()).optional().default([]).transform(normalizeList)
   }).transform((data) => ({
     ...data,

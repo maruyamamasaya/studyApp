@@ -50,6 +50,7 @@ aliases:
 | `type` | string enum | 必須。初期値は `study` / `wiki`。未知 type は build error ではなく warning として拡張を許可する案を Phase 1 でテスト |
 | `tags` | string[] | 必須、空配列可。trim、空要素除外、重複除去。表示文字列の case は維持 |
 | `created` | local datetime string | 必須。`YYYY-MM-DD HH:mm:ss`、Asia/Tokyo として解釈 |
+| `updated` | local datetime string / null | optional。Obsidian template 互換として受理するが、identity・並び順・学習状態には使わない |
 | `aliases` | string[] | optional。trim、空要素と title 重複を除外 |
 
 `created` は「この knowledge record が作られた時刻」と定義する。legacy note は Git で確認できる最初の追加時刻を使い、確認できない場合は移行時刻を使って migration report に記録する。記事本文の執筆日を推測しない。

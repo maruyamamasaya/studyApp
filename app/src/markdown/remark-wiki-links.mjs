@@ -24,10 +24,32 @@ function loadIndex() {
   }
 }
 
-function resolveTarget(index, rawTarget) {
+function contentPathFor(filePath) {
+  const normalizedFilePath = String(filePath ?? '').replaceAll('\\', '/');
+  const marker = '/content/';
+  const markerIndex = normalizedFilePath.lastIndexOf(marker);
+  return markerIndex < 0 ? null : normalizedFilePath.slice(markerIndex + marker.length);
+}
+
+function resolveTarget(index, rawTarget, filePath) {
   const [target, ...headingParts] = rawTarget.split('#');
   const heading = headingParts.join('#').trim();
   const normalized = target.trim().replace(/\.md$/iu, '').replaceAll('\\', '/').normalize('NFC');
+  const contentPath = contentPathFor(filePath);
+  const explicitPaths = [normalized];
+  if (/^(study|wiki)\//u.test(normalized)) explicitPaths.push(`notes/${normalized}`);
+  if (contentPath) explicitPaths.push(path.posix.normalize(path.posix.join(path.posix.dirname(contentPath), normalized)));
+  for (const explicitPath of [...new Set(explicitPaths)]) {
+    const pathCandidates = (index[explicitPath] ?? []).filter((candidate) => candidate.matchedBy === 'path');
+    if (pathCandidates.length === 1) return { status: 'resolved', href: `/articles/${pathCandidates[0].id}/${heading ? `#${slugHeading(heading)}` : ''}` };
+    if (pathCandidates.length > 1) return { status: 'ambiguous', candidates: pathCandidates };
+  }
+  const basename = path.posix.basename(normalized);
+  if (/^\d{8}-\d{6}$/u.test(basename)) {
+    const idFilenameCandidates = (index[basename] ?? []).filter((candidate) => candidate.matchedBy === 'filename');
+    if (idFilenameCandidates.length === 1) return { status: 'resolved', href: `/articles/${idFilenameCandidates[0].id}/${heading ? `#${slugHeading(heading)}` : ''}` };
+    if (idFilenameCandidates.length > 1) return { status: 'ambiguous', candidates: idFilenameCandidates };
+  }
   const candidates = index[normalized] ?? [];
   if (!candidates.length) return { status: 'unresolved' };
   const bestRank = Math.min(...candidates.map((candidate) => rank[candidate.matchedBy] ?? 99));
@@ -40,11 +62,8 @@ function rewriteStandardMarkdownLink(node, filePath, index) {
   if (typeof node.url !== 'string' || !/\.md(?:#.*)?$/iu.test(node.url)) return;
   const [rawPath, ...headingParts] = node.url.split('#');
   if (/^[a-z]+:/iu.test(rawPath)) return;
-  const normalizedFilePath = String(filePath ?? '').replaceAll('\\', '/');
-  const marker = '/content/';
-  const markerIndex = normalizedFilePath.lastIndexOf(marker);
-  if (markerIndex < 0) return;
-  const contentPath = normalizedFilePath.slice(markerIndex + marker.length);
+  const contentPath = contentPathFor(filePath);
+  if (!contentPath) return;
   const resolvedPath = path.posix.normalize(path.posix.join(path.posix.dirname(contentPath), rawPath)).replace(/\.md$/iu, '').normalize('NFC');
   const candidates = (index[resolvedPath] ?? []).filter((candidate) => candidate.matchedBy === 'path');
   if (candidates.length !== 1) return;
@@ -66,7 +85,7 @@ export function remarkWikiLinks() {
       for (const match of matches) {
         if (match.index > cursor) replacement.push({ type: 'text', value: node.value.slice(cursor, match.index) });
         const label = (match[2] ?? match[1].split('#').at(-1)).trim();
-        const resolved = resolveTarget(linkIndex, match[1]);
+        const resolved = resolveTarget(linkIndex, match[1], file.path);
         if (resolved.status === 'resolved') {
           replacement.push({ type: 'link', url: resolved.href, title: null, children: [{ type: 'text', value: label }] });
         } else {

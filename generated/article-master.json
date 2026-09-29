@@ -66,8 +66,53 @@
       "legacyPath": "試験勉強系/応用情報技術者/数値計算の誤差.md"
     },
     {
+      "id": "20260929-133348",
+      "path": "notes/study/docs/記事：基礎編/基礎AWS/20260929-133348.md",
+      "title": null,
+      "type": "study",
+      "tags": [],
+      "aliases": [],
+      "created": "2026-09-29 13:33:49"
+    },
+    {
+      "id": "20260928-141048",
+      "path": "notes/wiki/anken001/20260928-141048.md",
+      "title": "タイトルを表示したい",
+      "type": "wiki",
+      "tags": [],
+      "aliases": [],
+      "created": "2026-09-28 14:10:48"
+    },
+    {
+      "id": "20260928-141416",
+      "path": "notes/wiki/anken001/20260928-141416.md",
+      "title": null,
+      "type": "wiki",
+      "tags": [],
+      "aliases": [],
+      "created": "2026-09-28 14:14:16"
+    },
+    {
+      "id": "20260928-142231",
+      "path": "notes/wiki/anken001/20260928-142231.md",
+      "title": null,
+      "type": "wiki",
+      "tags": [],
+      "aliases": [],
+      "created": "2026-09-28 14:22:31"
+    },
+    {
+      "id": "20260928-142529",
+      "path": "notes/wiki/anken001/20260928-142529.md",
+      "title": null,
+      "type": "wiki",
+      "tags": [],
+      "aliases": [],
+      "created": "2026-09-28 14:25:29"
+    },
+    {
       "id": "20260929-121503",
-      "path": "notes/study/20260929-121503.md",
+      "path": "notes/wiki/phase1/20260929-121503.md",
       "title": "リンク動作確認",
       "type": "wiki",
       "tags": [
@@ -81,7 +126,7 @@
     },
     {
       "id": "20260929-121504",
-      "path": "notes/study/20260929-121504.md",
+      "path": "notes/wiki/phase1/20260929-121504.md",
       "title": "コードと HTML の安全確認",
       "type": "wiki",
       "tags": [
@@ -93,7 +138,7 @@
     },
     {
       "id": "20260929-121458",
-      "path": "notes/training/20260929-121458.md",
+      "path": "notes/wiki/training/20260929-121458.md",
       "title": "README",
       "type": "wiki",
       "tags": [

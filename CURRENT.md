@@ -29,16 +29,19 @@ updated: 2026-09-29
 - Git 履歴では記事同期が `Sync notes` コミットとして継続している。
 - デプロイ先を明記した CI/CD 設定はリポジトリにない。`docs/.nojekyll` と静的構成は GitHub Pages と整合するが、実際の公開設定はリポジトリだけでは確認できない。
 - 新しい公開先は OpenAI Sites とし、`.openai/hosting.json` に Sites の設定、`dist/` に公開対象を置く。新サイトは非公開で開始し、旧 GitHub Pages は cutover 条件を満たすまで rollback 用に維持する。
-- Phase 1 の vertical slice を実装済み。`content/notes/` の代表記事7件から、Astro がホーム、研修一覧、ID 固定の個別記事 route を `dist/` に静的生成する。
+- Phase 1 の vertical slice を実装済み。`content/notes/` の代表記事と Obsidian 同期記事12件から、Astro がホーム、研修一覧、ID 固定の個別記事 route を `dist/` に静的生成する。
 - Frontmatter、ID / filename 一致、ID 重複、path 正規化を build 前に検証し、article master v2、link index、search index を `generated/` に出力する。
 - Wiki Link は title / alias / filename / explicit path の候補を保持し、同名や未解決を自動で別記事へ結び付けない。教材中の生 HTML はコード表示へ変換する。
+- 新 Study App は Standard、Wiki、Living Aurora、Blue Cosmos、Pulse Neon の5テーマを持ち、選択をブラウザーに保存する。
+- 外部 Obsidian Vault `Document organization` の `study/` / `wiki/` を authoring source とし、`npm run vault:prepare -- "<Vault path>"` が検証付きで `content/notes/` と `dist/` を更新する。Git / build 上の正本は引き続き `content/notes/**/*.md` とする。
+- Phase 1 の代表記事7件を Vault に初期配置し、Vault 既存 Wiki 4件、新規 Study 1件と合わせて同期済み。空の `study/無題のファイル.md` は削除せず下書きとして除外する。
 
 ## 既知の制約・未解決事項
 
 - `docs/password-gate.js` のパスワードは配信される JavaScript に平文で含まれる。これは閲覧 UI の抑止にすぎず、機密情報を保護する認証ではない。
 - npm/package manifest、lint、typecheck、バンドル、依存関係固定、CI は存在しない。Docsify は実行時に jsDelivr CDN から読み込むため、オフラインでは完全に動作しない。
 - ブラウザー UI 全体、Wiki リンク変換、reader tools、索引生成に対する自動テストは限定的または存在しない。
-- 外部ノートの正本の場所・バックアップ方針、対象ブラウザー、最終公開 URL / custom domain、運用責任者はリポジトリから確認できない。
+- 外部 Vault のバックアップ方針、対象ブラウザー、最終 custom domain、運用責任者は未確定。
 - `docs/臨時フォルダ/`、`docs/保管用・未リンク/` や名前に「無題のファイル」を含む記事は整理候補に見えるが、独立した価値と外部正本が不明なため廃止候補とは確定していない。
 
 ## 現在の優先事項・次のアクション候補
@@ -48,7 +51,7 @@ updated: 2026-09-29
 1. legacy article master 全件の read-only baseline と、一度だけ ID を割り当てる migration manifest を作る。
 2. 全343記事の rename / Frontmatter 追加は、legacy UUID 対応 manifest と generator の冪等性を確認するまで実施しない。
 3. unresolved / ambiguous Wiki Link report を生成し、同名候補を人が解決する。
-4. cutover 前に公開 URL、本物のアクセス制御要否、Obsidian 正本 location を確定する。
+4. cutover 前に custom domain、本物のアクセス制御要否、Vault と Git の障害時復旧手順を確定する。
 
 ## 詳細への入口
 
