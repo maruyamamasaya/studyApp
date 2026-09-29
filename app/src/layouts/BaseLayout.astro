@@ -1,6 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import LearningDataTools from '../components/LearningDataTools.astro';
+import PageTreeItems from '../components/PageTreeItems.astro';
+import { buildNavigationTree } from '../domain/navigation-tree.mjs';
 import '../styles/global.css';
 
 interface Props {
@@ -13,35 +15,12 @@ const pageTitle = title === 'Study App' ? title : `${title} | Study App`;
 const currentPath = Astro.url.pathname;
 const articles = (await getCollection('notes')).sort((a, b) => a.id.localeCompare(b.id, 'ja'));
 const studyArticleIds = articles.filter((entry) => entry.data.type === 'study').map((entry) => entry.data.id);
-const navigationItems: Array<
-  | { kind: 'folder'; key: string; label: string; depth: number }
-  | { kind: 'article'; key: string; label: string; depth: number; href: string }
-> = [];
-const seenFolders = new Set<string>();
 const rootLabels: Record<string, string> = { study: '学習ノート', wiki: 'Wiki' };
-
-for (const entry of articles) {
-  const segments = entry.id.split('/');
-  const folders = segments.slice(0, -1);
-  folders.forEach((folder, index) => {
-    const key = folders.slice(0, index + 1).join('/');
-    if (seenFolders.has(key)) return;
-    seenFolders.add(key);
-    navigationItems.push({
-      kind: 'folder',
-      key,
-      label: index === 0 ? (rootLabels[folder] ?? folder) : folder,
-      depth: index
-    });
-  });
-  navigationItems.push({
-    kind: 'article',
-    key: entry.data.id,
-    label: entry.data.title ?? '未設定',
-    depth: folders.length,
-    href: `/articles/${entry.data.id}/`
-  });
-}
+const navigationTree = buildNavigationTree(articles.map((entry) => ({
+  collectionId: entry.id,
+  articleId: entry.data.id,
+  title: entry.data.title
+})), currentPath, rootLabels);
 ---
 
 <!doctype html>
@@ -99,17 +78,7 @@ for (const entry of articles) {
             <details class="page-tree" open>
               <summary>ページツリー</summary>
               <nav aria-label="記事の階層">
-              <ul>
-                {navigationItems.map((item) => (
-                  <li class={`tree-${item.kind}`} style={`--tree-depth: ${item.depth}`}>
-                    {item.kind === 'folder' ? (
-                      <span><span aria-hidden="true">⌄</span>{item.label}</span>
-                    ) : (
-                      <a class:list={{ active: currentPath === item.href }} href={item.href}>{item.label}</a>
-                    )}
-                  </li>
-                ))}
-              </ul>
+                <PageTreeItems nodes={navigationTree} />
               </nav>
             </details>
             <LearningDataTools studyArticleIds={studyArticleIds} />
@@ -135,6 +104,28 @@ for (const entry of articles) {
         };
         syncDrawer(mobileSidebar.matches);
         mobileSidebar.addEventListener('change', (event) => syncDrawer(event.matches));
+
+        const treeStorageKey = 'study-app:page-tree-open';
+        const treeFolders = [...document.querySelectorAll('[data-tree-folder]')];
+        try {
+          const saved = localStorage.getItem(treeStorageKey);
+          if (saved !== null) {
+            const openFolders = new Set(JSON.parse(saved));
+            treeFolders.forEach((folder) => {
+              if (folder instanceof HTMLDetailsElement) {
+                folder.open = folder.dataset.activeBranch === 'true' || openFolders.has(folder.dataset.treeFolder);
+              }
+            });
+          }
+          treeFolders.forEach((folder) => folder.addEventListener('toggle', () => {
+            const openFolders = treeFolders
+              .filter((candidate) => candidate instanceof HTMLDetailsElement && candidate.open)
+              .map((candidate) => candidate.dataset.treeFolder);
+            localStorage.setItem(treeStorageKey, JSON.stringify(openFolders));
+          }));
+        } catch {
+          // The server-rendered open state remains usable when storage is unavailable.
+        }
 
         const picker = document.querySelector('[data-theme-picker]');
         if (!(picker instanceof HTMLSelectElement)) return;

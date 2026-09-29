@@ -58,9 +58,21 @@ test('ホームは説明文を置かず、1列の記事一覧と階層ナビゲ�
   assert.match(html, /<details class="sidebar-drawer" open>/u);
   assert.match(html, /<details class="page-tree" open>/u);
   assert.match(html, /<summary>ページツリー<\/summary>/u);
+  assert.match(html, /data-tree-folder="wiki\/anken001"/u);
+  assert.match(html, /study-app:page-tree-open/u);
   assert.match(html, /matchMedia\('\(max-width: 640px\)'\)/u);
   assert.match(html, /anken001/u);
   assert.match(html, /class="article-grid"/u);
+});
+
+test('ホームでタイトル・タグ・本文検索と記事種別フィルターを提供する', async () => {
+  const html = await fs.readFile(new URL('../dist/index.html', import.meta.url), 'utf8');
+  assert.match(html, /data-article-explorer/u);
+  assert.match(html, /placeholder="タイトル・タグ・本文を検索"/u);
+  assert.match(html, /data-article-type-filter="study"/u);
+  assert.match(html, /data-article-type-filter="wiki"/u);
+  assert.match(html, /data-article-search="[^"]*丸め誤差/u);
+  assert.match(html, /該当する記事がありません。/u);
 });
 
 test('Wiki 記事だけコンパクトなタイトル用クラスを出力する', async () => {
@@ -68,6 +80,15 @@ test('Wiki 記事だけコンパクトなタイトル用クラスを出力する
   const studyHtml = await page('20260929-121502');
   assert.match(wikiHtml, /class="article-header article-header--wiki"/u);
   assert.doesNotMatch(studyHtml, /article-header--wiki/u);
+});
+
+test('現在の記事を階層で強調し、目次を開閉できる', async () => {
+  const html = await page('20260929-121502');
+  assert.match(html, /aria-current="page"/u);
+  assert.match(html, /data-active-branch="true"/u);
+  assert.match(html, /<details class="toc" open data-article-toc>/u);
+  assert.match(html, /<summary>目次<\/summary>/u);
+  assert.match(html, /matchMedia\('\(max-width: 860px\)'\)/u);
 });
 
 test('記事単位の学習状態とバックアップ導線を出力する', async () => {

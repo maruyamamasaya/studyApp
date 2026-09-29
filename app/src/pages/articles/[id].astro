@@ -27,10 +27,26 @@ const title = entry.data.title ?? '未設定';
       <div class="prose"><Content /></div>
     </article>
     {headings.length > 0 && (
-      <aside class="toc" aria-label="目次">
-        <strong>目次</strong>
-        <ol>{headings.filter((heading) => heading.depth <= 3).map((heading) => <li class={`depth-${heading.depth}`}><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol>
-      </aside>
+      <details class="toc" open data-article-toc>
+        <summary>目次</summary>
+        <nav aria-label="目次">
+          <ol>{headings.filter((heading) => heading.depth <= 3).map((heading) => <li class={`depth-${heading.depth}`}><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol>
+        </nav>
+      </details>
     )}
   </div>
 </BaseLayout>
+
+<script is:inline>
+  (() => {
+    const toc = document.querySelector('[data-article-toc]');
+    if (!(toc instanceof HTMLDetailsElement)) return;
+    const mobileArticle = window.matchMedia('(max-width: 860px)');
+    const syncToc = () => { toc.open = !mobileArticle.matches; };
+    syncToc();
+    mobileArticle.addEventListener('change', syncToc);
+    toc.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+      if (mobileArticle.matches) toc.open = false;
+    }));
+  })();
+</script>

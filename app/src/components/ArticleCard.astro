@@ -7,12 +7,19 @@ interface Props {
     tags: string[];
     created: string;
   };
+  searchText?: string;
 }
 
-const { article } = Astro.props;
+const { article, searchText = '' } = Astro.props;
 ---
 
-<a class="article-card" href={`/articles/${article.id}/`}>
+<a
+  class="article-card"
+  href={`/articles/${article.id}/`}
+  data-article-item
+  data-article-type={article.type}
+  data-article-search={searchText}
+>
   <span class="article-card__type">{article.type}</span>
   <h2>{article.title ?? '未設定'}</h2>
   {article.tags.length > 0 && <span class="article-card__tags">{article.tags.join(' · ')}</span>}

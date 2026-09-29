@@ -41,6 +41,8 @@ Obsidian Vault（唯一の正本）
 - Vault記事の厳密同期、OpenAI Sitesでの閲覧。
 - `vault:check`、`vault:sync`、`vault:prepare`。
 - 新ID単位の学習状態version 2。読了、学習時間、最終閲覧日時、`study`記事集計、JSONバックアップ／復元。
+- title、tag、本文の検索と、`type: study` / `type: wiki`の一覧filter。
+- 開閉状態を保存する階層ページツリー、現在位置の強調、レスポンシブな開閉式記事目次。
 
 ## 次の段階
 
@@ -51,12 +53,12 @@ Obsidian Vault（唯一の正本）
 - 旧記事を参考にした場合は、新記事本文または記録に出典となる旧pathを明示する。
 - 同名記事や曖昧Wiki Linkは人が判断し、自動で結び付けない。
 
-### 2. Reader機能
+### 2. Reader機能の拡張
 
-- title、tag、本文検索。
-- navigationと目次の改善。
-- mobile / desktop、code copy、attachment表示。
-- `type: study` / `type: wiki` のfilterと集計。
+- 実装済みのtitle、tag、本文検索とtype filterを維持する。
+- 実装済みの階層navigationと開閉式目次を維持する。
+- mobile / desktop、code copy、attachment表示を改善する。
+- `type: study` / `type: wiki` の追加集計。
 
 ### 3. 学習状態の拡張
 
