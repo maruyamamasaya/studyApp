@@ -44,10 +44,13 @@ docs/**/*.md ── build_note_index.py ──► _note-index.json
 | `generated/obsidian-sync-manifest.json` | 同期元相対 path、同期先、ID、内容 hash。安全な更新と明示 prune の境界 |
 | `app/src/content.config.ts` | Astro content collection の Frontmatter schema と表示用正規化 |
 | `app/src/domain/article.mjs` | parser、ID / path invariant、tags / aliases、link index の純粋 domain |
+| `app/src/domain/study-progress.mjs` | 学習状態version 2の検証、記事ID単位のlocalStorage repository、集計、backup merge |
 | `scripts/build-content-index.mjs` | build 前検証と `generated/` の再生成 |
 | `app/src/markdown/` | Wiki Link の build-time 解決と raw HTML のコード表示化 |
 | `app/src/pages/` | ホーム、研修一覧、ID 固定の個別記事 route |
 | `app/src/layouts/BaseLayout.astro` | 共通ヘッダー、記事 path から生成する階層サイドバー、5テーマの選択・初期適用・localStorage 保存 |
+| `app/src/components/StudyProgressPanel.astro` | 記事の読了操作、アクティブ閲覧時間の計測、最終閲覧日時の保存 |
+| `app/src/components/LearningDataTools.astro` | `study`記事の読了数・合計時間と、version 2 backupの保存／復元 |
 | `app/src/styles/global.css` | Standard / Wiki / Living Aurora / Blue Cosmos / Pulse Neon のデザイントークンとレスポンシブ表示 |
 | `migration/phase1-samples.json` | Phase 1で使った履歴fixture。現行同期・buildには使用しない |
 | `dist/` | Astro の静的生成結果。OpenAI Sites の公開対象 |
@@ -111,7 +114,8 @@ Markdown の raw HTML node は rehype 段階で `code.raw-html-example` に変�
 3. Astro content collection が同じ Frontmatter schema を検証し、Markdown を HTML 化する。
 4. Wiki Link は link index から build 時に解決し、生 HTML はコード表示へ変換する。
 5. Astro がホーム、研修一覧、記事 ID route を `dist/` に書き出す。ブラウザーでは保存済みテーマを描画前に適用し、テーマ選択を localStorage に保存する。
-6. Sites は生成済みの静的資産を配信する。
+6. 記事 route は新IDをkeyに学習状態を読み、画面がactiveかつ未読了の間だけ学習時間を加算する。サイドバーは`study`記事だけを読了率の分母にする。
+7. Sites は生成済みの静的資産を配信する。
 
 ## コンテンツ同期・生成
 

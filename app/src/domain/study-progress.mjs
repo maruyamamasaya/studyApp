@@ -48,7 +48,9 @@ function newerTimestamp(left, right) {
 export function mergeProgress(currentValue, importedValue) {
   const current = normalizeProgress(currentValue);
   const imported = normalizeProgress(importedValue);
-  const importedCompletionIsNewer = Date.parse(imported.completedUpdatedAt ?? '') > Date.parse(current.completedUpdatedAt ?? '');
+  const currentCompletionTime = current.completedUpdatedAt ? Date.parse(current.completedUpdatedAt) : Number.NEGATIVE_INFINITY;
+  const importedCompletionTime = imported.completedUpdatedAt ? Date.parse(imported.completedUpdatedAt) : Number.NEGATIVE_INFINITY;
+  const importedCompletionIsNewer = importedCompletionTime > currentCompletionTime;
   const completionHasTimestamp = current.completedUpdatedAt || imported.completedUpdatedAt;
   return {
     version: PROGRESS_VERSION,

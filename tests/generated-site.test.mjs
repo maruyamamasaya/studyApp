@@ -69,3 +69,14 @@ test('Wiki 記事だけコンパクトなタイトル用クラスを出力する
   assert.match(wikiHtml, /class="article-header article-header--wiki"/u);
   assert.doesNotMatch(studyHtml, /article-header--wiki/u);
 });
+
+test('記事単位の学習状態とバックアップ導線を出力する', async () => {
+  const articleHtml = await page('20260929-121502');
+  const homeHtml = await fs.readFile(new URL('../dist/index.html', import.meta.url), 'utf8');
+  assert.match(articleHtml, /data-study-progress/u);
+  assert.match(articleHtml, /data-article-id="20260929-121502"/u);
+  assert.match(articleHtml, /data-progress-completion/u);
+  assert.match(homeHtml, /data-learning-tools/u);
+  assert.match(homeHtml, /data-learning-export/u);
+  assert.match(homeHtml, /data-learning-import/u);
+});

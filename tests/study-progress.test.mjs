@@ -40,6 +40,7 @@ test('バックアップを検証し、大きい学習時間と新しい読了�
   assert.deepEqual(mergeProgress(current, imported), { ...imported, learningSeconds: 120 });
   const backup = createBackup({ '20260929-121500': imported }, '2026-09-29T06:00:00.000Z');
   assert.deepEqual(parseBackup(JSON.stringify(backup)), backup);
+  assert.equal(mergeProgress(createDefaultProgress(), imported).completed, true);
 });
 
 test('study 記事IDだけで読了数と合計時間を集計する', () => {

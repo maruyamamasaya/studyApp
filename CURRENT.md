@@ -34,6 +34,7 @@ updated: 2026-09-29
 - Frontmatter、ID / filename 一致、ID 重複、path 正規化を build 前に検証し、article master v2、link index、search index を `generated/` に出力する。
 - Wiki Link は title / alias / filename / explicit path の候補を保持し、同名や未解決を自動で別記事へ結び付けない。教材中の生 HTML はコード表示へ変換する。
 - 新 Study App は Standard、Wiki、Living Aurora、Blue Cosmos、Pulse Neon の5テーマを持ち、選択をブラウザーに保存する。
+- 新ID単位の学習状態version 2を実装済み。読了、アクティブ閲覧中の学習時間、最終閲覧日時をlocalStorageへ保存し、`study`記事の集計とJSONバックアップ／復元を提供する。旧学習状態は自動移行しない。
 - 外部 Obsidian Vault `Document organization` の `study/` / `wiki/` を記事の唯一の正本とし、`npm run vault:prepare -- "<Vault path>"` が検証付きで公開ミラー `content/notes/` と `dist/` を更新する。`content/notes/` は直接編集しない。
 - 初期記事をVaultへ配置後、Obsidian上の追加・更新・削除を正本として同期している。現在は10件。
 
@@ -51,7 +52,7 @@ updated: 2026-09-29
 
 1. 必要な記事をObsidianで新しく作り直す。
 2. unresolved / ambiguous Wiki Linkを人が解決する。
-3. 検索、filter、attachment、学習状態version 2を新ID向けに実装する。
+3. 検索、filter、attachment、checklistを新ID向けに実装する。
 4. Vault自体のprivate Git / backupと、Sites自動公開を整備する。
 
 ## 詳細への入口

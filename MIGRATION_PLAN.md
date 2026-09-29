@@ -40,6 +40,7 @@ Obsidian Vault（唯一の正本）
 - ObsidianのStudy / Wiki templateとExplorer Titles。
 - Vault記事の厳密同期、OpenAI Sitesでの閲覧。
 - `vault:check`、`vault:sync`、`vault:prepare`。
+- 新ID単位の学習状態version 2。読了、学習時間、最終閲覧日時、`study`記事集計、JSONバックアップ／復元。
 
 ## 次の段階
 
@@ -57,10 +58,10 @@ Obsidian Vault（唯一の正本）
 - mobile / desktop、code copy、attachment表示。
 - `type: study` / `type: wiki` のfilterと集計。
 
-### 3. 新しい学習状態
+### 3. 学習状態の拡張
 
-- 新IDだけを対象にStudyProgressRepositoryを実装する。
-- completed、学習時間、checklist、backup version 2を新規設計する。
+- 実装済みのStudyProgressRepositoryとbackup version 2を維持する。
+- checklistを新ID向けに実装する。
 - 旧localStorageとbackup version 1は自動移行しない。必要ならread-only exportとして別途扱う。
 
 ### 4. 運用自動化
