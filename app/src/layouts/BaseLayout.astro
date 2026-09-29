@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import LearningDataTools from '../components/LearningDataTools.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -11,6 +12,7 @@ const { title = 'Study App', description = 'Obsidian Vault を正本にした学
 const pageTitle = title === 'Study App' ? title : `${title} | Study App`;
 const currentPath = Astro.url.pathname;
 const articles = (await getCollection('notes')).sort((a, b) => a.id.localeCompare(b.id, 'ja'));
+const studyArticleIds = articles.filter((entry) => entry.data.type === 'study').map((entry) => entry.data.id);
 const navigationItems: Array<
   | { kind: 'folder'; key: string; label: string; depth: number }
   | { kind: 'article'; key: string; label: string; depth: number; href: string }
@@ -94,8 +96,9 @@ for (const entry of articles) {
               <a class:list={{ active: currentPath === '/' }} href="/">すべての記事</a>
               <a class:list={{ active: currentPath === '/training/' }} href="/training/">研修資料</a>
             </nav>
-            <nav class="page-tree" aria-label="記事の階層">
-              <p class="sidebar-heading">ページツリー</p>
+            <details class="page-tree" open>
+              <summary>ページツリー</summary>
+              <nav aria-label="記事の階層">
               <ul>
                 {navigationItems.map((item) => (
                   <li class={`tree-${item.kind}`} style={`--tree-depth: ${item.depth}`}>
@@ -107,7 +110,9 @@ for (const entry of articles) {
                   </li>
                 ))}
               </ul>
-            </nav>
+              </nav>
+            </details>
+            <LearningDataTools studyArticleIds={studyArticleIds} />
           </div>
         </details>
       </aside>
@@ -123,6 +128,14 @@ for (const entry of articles) {
     </div>
     <script is:inline>
       (() => {
+        const drawer = document.querySelector('.sidebar-drawer');
+        const mobileSidebar = window.matchMedia('(max-width: 640px)');
+        const syncDrawer = (mobile) => {
+          if (drawer instanceof HTMLDetailsElement) drawer.open = !mobile;
+        };
+        syncDrawer(mobileSidebar.matches);
+        mobileSidebar.addEventListener('change', (event) => syncDrawer(event.matches));
+
         const picker = document.querySelector('[data-theme-picker]');
         if (!(picker instanceof HTMLSelectElement)) return;
 

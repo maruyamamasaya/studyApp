@@ -55,7 +55,17 @@ test('ホームは説明文を置かず、1列の記事一覧と階層ナビゲ�
   const html = await fs.readFile(new URL('../dist/index.html', import.meta.url), 'utf8');
   assert.doesNotMatch(html, /Markdown knowledge base/u);
   assert.doesNotMatch(html, /Obsidian Vault を正本として同期した記事/u);
-  assert.match(html, /class="page-tree"/u);
+  assert.match(html, /<details class="sidebar-drawer" open>/u);
+  assert.match(html, /<details class="page-tree" open>/u);
+  assert.match(html, /<summary>ページツリー<\/summary>/u);
+  assert.match(html, /matchMedia\('\(max-width: 640px\)'\)/u);
   assert.match(html, /anken001/u);
   assert.match(html, /class="article-grid"/u);
+});
+
+test('Wiki 記事だけコンパクトなタイトル用クラスを出力する', async () => {
+  const wikiHtml = await page('20260929-121504');
+  const studyHtml = await page('20260929-121502');
+  assert.match(wikiHtml, /class="article-header article-header--wiki"/u);
+  assert.doesNotMatch(studyHtml, /article-header--wiki/u);
 });

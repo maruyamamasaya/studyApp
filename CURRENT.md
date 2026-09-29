@@ -30,6 +30,7 @@ updated: 2026-09-29
 - デプロイ先を明記した CI/CD 設定はリポジトリにない。`docs/.nojekyll` と静的構成は GitHub Pages と整合するが、実際の公開設定はリポジトリだけでは確認できない。
 - 新しい公開先は OpenAI Sites とし、`.openai/hosting.json` に Sites の設定、`dist/` に公開対象を置く。新サイトは非公開で開始し、旧 GitHub Pages は cutover 条件を満たすまで rollback 用に維持する。
 - `content/notes/` の Obsidian 同期記事10件から、Astro がホーム、研修一覧、ID 固定の個別記事 route を `dist/` に静的生成する。
+- 新 Study App は説明文を置かないコンパクトな1列一覧と、記事 path の階層を示す Wiki 風サイドバーを全ページで表示する。
 - Frontmatter、ID / filename 一致、ID 重複、path 正規化を build 前に検証し、article master v2、link index、search index を `generated/` に出力する。
 - Wiki Link は title / alias / filename / explicit path の候補を保持し、同名や未解決を自動で別記事へ結び付けない。教材中の生 HTML はコード表示へ変換する。
 - 新 Study App は Standard、Wiki、Living Aurora、Blue Cosmos、Pulse Neon の5テーマを持ち、選択をブラウザーに保存する。

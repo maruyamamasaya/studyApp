@@ -9,7 +9,7 @@
     "vault:prepare": "node scripts/prepare-obsidian-content.mjs",
     "content:build": "node scripts/build-content-index.mjs",
     "build": "npm run content:build && astro build --force",
-    "test": "node --test tests/content-model.test.mjs tests/obsidian-sync.test.mjs",
+    "test": "node --test tests/content-model.test.mjs tests/obsidian-sync.test.mjs tests/study-progress.test.mjs",
     "test:output": "node --test tests/generated-site.test.mjs",
     "check": "npm run test && npm run build && npm run test:output"
   },

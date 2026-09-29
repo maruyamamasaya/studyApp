@@ -1,0 +1,82 @@
+---
+interface Props { studyArticleIds: string[] }
+const { studyArticleIds } = Astro.props;
+---
+
+<details class="learning-tools" data-learning-tools data-study-ids={JSON.stringify(studyArticleIds)}>
+  <summary>学習データ</summary>
+  <div class="learning-tools__body">
+    <p class="learning-tools__summary"><strong data-learning-summary>0/{studyArticleIds.length}</strong><span data-learning-total>0秒</span></p>
+    <div class="learning-tools__actions">
+      <button type="button" data-learning-export>保存</button>
+      <label>復元<input type="file" accept="application/json,.json" data-learning-import /></label>
+    </div>
+    <p class="learning-tools__status" data-learning-status aria-live="polite"></p>
+  </div>
+</details>
+
+<script>
+  import { createBackup, formatLearningTime, LocalStudyProgressRepository, summarizeStudyProgress } from '../domain/study-progress.mjs';
+
+  const tools = document.querySelector('[data-learning-tools]');
+  if (tools instanceof HTMLElement && !tools.dataset.ready) {
+    tools.dataset.ready = 'true';
+    const summaryLabel = tools.querySelector('[data-learning-summary]');
+    const totalLabel = tools.querySelector('[data-learning-total]');
+    const status = tools.querySelector('[data-learning-status]');
+    const exportButton = tools.querySelector('[data-learning-export]');
+    const importInput = tools.querySelector('[data-learning-import]');
+    const studyArticleIds = JSON.parse(tools.dataset.studyIds || '[]');
+    let repository;
+
+    const announce = (message) => { if (status) status.textContent = message; };
+    const refresh = async () => {
+      if (!repository) return;
+      const records = await repository.list();
+      const summary = summarizeStudyProgress(studyArticleIds, records);
+      if (summaryLabel) summaryLabel.textContent = `${summary.completedCount}/${summary.totalCount}`;
+      if (totalLabel) totalLabel.textContent = formatLearningTime(summary.learningSeconds);
+    };
+
+    try {
+      repository = new LocalStudyProgressRepository(window.localStorage);
+      refresh();
+    } catch (error) {
+      console.warn('[Study progress] 学習データを利用できません', error);
+      announce('このブラウザーでは利用できません');
+    }
+
+    exportButton?.addEventListener('click', async () => {
+      try {
+        const backup = createBackup(await repository.list());
+        const blob = new Blob([`${JSON.stringify(backup, null, 2)}\n`], { type: 'application/json' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = `study-app-backup-${new Date().toISOString().replaceAll(':', '-').slice(0, 19)}.json`;
+        link.click();
+        URL.revokeObjectURL(link.href);
+        announce('バックアップを保存しました');
+      } catch (error) {
+        console.warn('[Study progress] バックアップを保存できません', error);
+        announce('保存できませんでした');
+      }
+    });
+
+    importInput?.addEventListener('change', async () => {
+      const file = importInput instanceof HTMLInputElement ? importInput.files?.[0] : null;
+      if (!file || !repository) return;
+      try {
+        const count = await repository.importBackup(await file.text());
+        await refresh();
+        window.dispatchEvent(new CustomEvent('study-progress:imported'));
+        announce(`${count}件の学習データを復元しました`);
+      } catch (error) {
+        console.warn('[Study progress] バックアップを復元できません', error);
+        announce('対応するバックアップを読み込めませんでした');
+      } finally {
+        importInput.value = '';
+      }
+    });
+    window.addEventListener('study-progress:updated', refresh);
+  }
+</script>

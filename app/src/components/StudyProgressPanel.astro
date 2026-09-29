@@ -1,0 +1,100 @@
+---
+interface Props {
+  articleId: string;
+  articleType: string;
+}
+
+const { articleId, articleType } = Astro.props;
+---
+
+<section class="study-progress" data-study-progress data-article-id={articleId} data-article-type={articleType} aria-label="この記事の学習状態">
+  <button type="button" class="study-progress__completion" data-progress-completion aria-pressed="false">○ 未読了</button>
+  <span class="study-progress__time">学習 <strong data-progress-time>0秒</strong></span>
+  <span class="visually-hidden" data-progress-status aria-live="polite"></span>
+</section>
+
+<script>
+  import { formatLearningTime, LocalStudyProgressRepository } from '../domain/study-progress.mjs';
+
+  const panel = document.querySelector('[data-study-progress]');
+  if (panel instanceof HTMLElement && !panel.dataset.ready) {
+    panel.dataset.ready = 'true';
+    const articleId = panel.dataset.articleId;
+    const completionButton = panel.querySelector('[data-progress-completion]');
+    const timeLabel = panel.querySelector('[data-progress-time]');
+    const status = panel.querySelector('[data-progress-status]');
+    let repository;
+    let progress;
+    let activeStartedAt = null;
+
+    const announce = (message) => {
+      if (status) status.textContent = message;
+    };
+    const render = () => {
+      if (!(completionButton instanceof HTMLButtonElement) || !timeLabel || !progress) return;
+      completionButton.classList.toggle('is-completed', progress.completed);
+      completionButton.setAttribute('aria-pressed', String(progress.completed));
+      completionButton.textContent = progress.completed ? '✓ 読了' : '○ 未読了';
+      timeLabel.textContent = formatLearningTime(progress.learningSeconds);
+    };
+    const broadcast = () => window.dispatchEvent(new CustomEvent('study-progress:updated', { detail: { articleId } }));
+    const save = async () => {
+      progress = await repository.save(articleId, progress);
+      render();
+      broadcast();
+    };
+    const flush = async () => {
+      if (!progress || progress.completed || activeStartedAt === null) return;
+      const elapsedSeconds = Math.floor((Date.now() - activeStartedAt) / 1000);
+      if (elapsedSeconds > 0) {
+        progress.learningSeconds += elapsedSeconds;
+        activeStartedAt += elapsedSeconds * 1000;
+        await save();
+      }
+    };
+    const updateTimer = async () => {
+      const shouldCount = progress && !progress.completed && document.visibilityState === 'visible' && document.hasFocus();
+      if (shouldCount) {
+        activeStartedAt ??= Date.now();
+      } else {
+        await flush();
+        activeStartedAt = null;
+      }
+    };
+    const initialize = async () => {
+      try {
+        repository = new LocalStudyProgressRepository(window.localStorage);
+        progress = await repository.get(articleId);
+        progress.lastViewedAt = new Date().toISOString();
+        await save();
+        await updateTimer();
+      } catch (error) {
+        console.warn('[Study progress] 学習状態を利用できません', error);
+        panel.classList.add('is-unavailable');
+        announce('このブラウザーでは学習状態を保存できません');
+      }
+    };
+
+    completionButton?.addEventListener('click', async () => {
+      await flush();
+      activeStartedAt = null;
+      progress.completed = !progress.completed;
+      progress.completedUpdatedAt = new Date().toISOString();
+      await save();
+      announce(progress.completed ? 'この記事を読了にしました' : 'この記事を未読了に戻しました');
+      await updateTimer();
+    });
+    document.addEventListener('visibilitychange', updateTimer);
+    window.addEventListener('focus', updateTimer);
+    window.addEventListener('blur', updateTimer);
+    window.addEventListener('pagehide', flush);
+    window.addEventListener('study-progress:imported', async () => {
+      if (!repository) return;
+      progress = await repository.get(articleId);
+      render();
+      await updateTimer();
+    });
+    window.setInterval(flush, 1000);
+    initialize();
+  }
+</script>
