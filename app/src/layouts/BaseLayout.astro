@@ -88,7 +88,7 @@ for (const entry of articles) {
     <div class="app-shell">
       <aside class="sidebar">
         <details class="sidebar-drawer" open>
-          <summary>ページ</summary>
+          <summary>ページ一覧</summary>
           <div class="sidebar-content">
             <nav class="primary-nav" aria-label="メインナビゲーション">
               <a class:list={{ active: currentPath === '/' }} href="/">すべての記事</a>
@@ -123,6 +123,14 @@ for (const entry of articles) {
     </div>
     <script is:inline>
       (() => {
+        const drawer = document.querySelector('.sidebar-drawer');
+        const mobile = window.matchMedia('(max-width: 640px)');
+        if (drawer instanceof HTMLDetailsElement) {
+          // Keep desktop navigation visible, while leaving the article and its TOC in view on phones.
+          const updateDrawer = () => { drawer.open = !mobile.matches; };
+          updateDrawer();
+          mobile.addEventListener('change', updateDrawer);
+        }
         const picker = document.querySelector('[data-theme-picker]');
         if (!(picker instanceof HTMLSelectElement)) return;
 
