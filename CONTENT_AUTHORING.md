@@ -2,7 +2,7 @@
 
 ## 配置場所とファイル名
 
-新しい記事は Obsidian Vault の次の2フォルダで作成する。同期後の `content/notes/**/*.md` が Study App の Git 管理・ビルド上の正本となり、通常は直接編集しない。旧 Docsify 用の `docs/` にも置かない。
+新しい記事は Obsidian Vault の次の2フォルダで作成する。ここが記事の唯一の正本である。`content/notes/**/*.md` は Git / Sites で再現可能にする公開用ミラーであり、直接編集しない。旧 Docsify 用の `docs/` にも新規記事を置かない。
 
 学習記事:
 
@@ -53,10 +53,10 @@ aliases:
    npm run vault:prepare -- "C:\Users\m-maruyama\Development\Document organization"
    ```
 
-   このコマンドは Vault の `study/**/*.md` と `wiki/**/*.md` を `content/notes/` へ同期し、Frontmatter、ID、重複、静的 route、Wiki Link、HTML 安全化を検証して `dist/` を生成する。0バイトのファイルは下書きとして警告し、削除しない。
+   このコマンドは Vault の `study/**/*.md` と `wiki/**/*.md` を `content/notes/` へ厳密に同期し、Frontmatter、ID、重複、静的 route、Wiki Link、HTML 安全化を検証して `dist/` を生成する。0バイトのファイルは下書きとして警告し、削除しない。Vault から削除した同期済み記事は内容 hash を照合してミラーから除去し、`content/notes/` だけに存在する記事はエラーにする。
 3. `git diff --check` と `git diff` で、同期記事、`generated/`、`dist/` の差分を確認する。
 4. 変更を commit / push し、OpenAI Sites の既存プロジェクト `appgprj_6aba0a652f848191850dc665b7023bc0` へ `dist/` を反映する。
 
-検証だけを行う場合は `npm run vault:check -- "<Vault path>"`、同期だけなら `npm run vault:sync -- "<Vault path>"` を使う。同期元から消えた記事は誤削除防止のため自動削除せず `STALE` と表示し、明示的な `--prune` 指定時だけ過去の同期 manifest と照合して削除する。
+検証だけを行う場合は `npm run vault:check -- "<Vault path>"`、削除を反映せず追加・更新だけ同期する場合は `npm run vault:sync -- "<Vault path>"` を使う。通常の公開準備では正本と一致させる `vault:prepare` を使う。
 
 公開済みの静的サイト上のファイル選択 UI から Vault を直接更新・再デプロイすることはできない。ブラウザーは任意のローカルフォルダへ常時アクセスできず、Sites への永続反映には認証された build/deploy 処理が必要なため、現段階の「アップロード」に相当する操作は上記ローカルコマンドとする。

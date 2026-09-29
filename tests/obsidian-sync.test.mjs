@@ -52,3 +52,28 @@ test('同期管理外の既存ファイルを上書きしない', async (t) => {
   await fs.writeFile(destination, '既存の別内容');
   await assert.rejects(() => planObsidianSync(paths), /同期管理外の既存ファイル/u);
 });
+
+test('Vault に存在しない content/notes の記事を拒否する', async (t) => {
+  const paths = await fixture();
+  t.after(() => fs.rm(paths.root, { recursive: true, force: true }));
+  const destination = path.join(paths.repositoryRoot, 'content', 'notes', 'study', '20260929-120001.md');
+  await fs.mkdir(path.dirname(destination), { recursive: true });
+  await fs.writeFile(destination, note('20260929-120001', 'study'));
+  await assert.rejects(() => planObsidianSync(paths), /Vault の生成ミラー/u);
+});
+
+test('前回同期済みで未変更の記事だけを prune できる', async (t) => {
+  const paths = await fixture();
+  t.after(() => fs.rm(paths.root, { recursive: true, force: true }));
+  const source = path.join(paths.vaultRoot, 'study', '20260929-120000.md');
+  await fs.writeFile(source, note('20260929-120000', 'study'));
+  const firstPlan = await planObsidianSync(paths);
+  await applyObsidianSync(firstPlan);
+  const destination = path.join(paths.repositoryRoot, firstPlan.entries[0].destination);
+
+  await fs.unlink(source);
+  const prunePlan = await planObsidianSync(paths);
+  assert.equal(prunePlan.stale.length, 1);
+  await applyObsidianSync(prunePlan, { prune: true });
+  await assert.rejects(() => fs.access(destination), /ENOENT/u);
+});

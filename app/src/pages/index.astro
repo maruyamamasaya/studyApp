@@ -7,11 +7,6 @@ const articles = (await getCollection('notes')).sort((a, b) => b.data.created.lo
 ---
 
 <BaseLayout>
-  <section class="page-intro">
-    <p class="eyebrow">Markdown knowledge base</p>
-    <h1>学習ノート</h1>
-    <p>Obsidian から同期した記事と移行確認用の記事を表示しています。記事は個別 URL から直接開けます。</p>
-  </section>
   <section class="article-grid" aria-label="記事一覧">
     {articles.map((entry) => <ArticleCard article={entry.data} />)}
   </section>

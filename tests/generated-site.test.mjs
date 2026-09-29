@@ -14,19 +14,14 @@ test('ホーム、研修、全記事の静的 route を生成する', async () =
   for (const article of master.articles) await fs.access(new URL(`../dist/articles/${article.id}/index.html`, import.meta.url));
 });
 
-test('Wiki Link の別名と見出しを解決し、曖昧・未解決はリンクにしない', async () => {
+test('Wiki Link の別名と見出しを解決し、未解決を別記事へ結び付けない', async () => {
   const html = await page('20260929-121503');
   assert.match(html, /href="\/articles\/20260929-121502\/#%E7%89%B9%E3%81%AB%E9%87%8D%E8%A6%81%E3%81%AA%E5%AF%BE%E6%AF%94"/u);
   assert.match(html, /数値計算の記事<\/a>/u);
-  assert.match(html, /🌟AWS基礎について（リンク曖昧）/u);
+  assert.match(html, /href="\/articles\/20260929-121500\/">🌟AWS基礎について/u);
   assert.match(html, /まだ移行していない記事（リンク未解決）/u);
   assert.match(html, /href="\/training\/"/u);
   assert.match(html, /href="\/articles\/20260929-121502\/#%E7%89%B9%E3%81%AB%E9%87%8D%E8%A6%81%E3%81%AA%E5%AF%BE%E6%AF%94">数値計算の記事（標準相対リンク）/u);
-});
-
-test('Obsidian の ID filename 付き Wiki Link を同期先 path で解決する', async () => {
-  const html = await page('20260929-121459');
-  assert.match(html, /href="\/articles\/20260929-133348\/"/u);
 });
 
 test('HTML 例を実行可能な要素にせず、コードフェンスも保持する', async () => {
@@ -54,4 +49,13 @@ test('5種類の表示テーマを選択でき、選択を保存する', async (
   assert.match(html, /data-theme-picker/u);
   assert.match(html, /localStorage\.getItem\('study-app:theme'\)/u);
   assert.match(html, /localStorage\.setItem\('study-app:theme'/u);
+});
+
+test('ホームは説明文を置かず、1列の記事一覧と階層ナビゲーションを出力する', async () => {
+  const html = await fs.readFile(new URL('../dist/index.html', import.meta.url), 'utf8');
+  assert.doesNotMatch(html, /Markdown knowledge base/u);
+  assert.doesNotMatch(html, /Obsidian Vault を正本として同期した記事/u);
+  assert.match(html, /class="page-tree"/u);
+  assert.match(html, /anken001/u);
+  assert.match(html, /class="article-grid"/u);
 });

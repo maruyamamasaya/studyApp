@@ -12,8 +12,8 @@ try {
   const plan = await planObsidianSync({ vaultRoot });
   for (const item of plan.skipped) console.warn(`SKIP ${item.source}: ${item.reason}`);
   for (const change of plan.changes) console.log(`${change.action.toUpperCase()} ${change.source} -> ${change.destination}`);
-  for (const stale of plan.stale) console.warn(`STALE ${stale.destination}（--prune を指定した vault:sync まで保持）`);
-  await applyObsidianSync(plan);
+  for (const stale of plan.stale) console.warn(`PRUNE ${stale.destination}`);
+  await applyObsidianSync(plan, { prune: true });
 
   const npmCli = process.env.npm_execpath;
   const command = npmCli ? process.execPath : process.platform === 'win32' ? 'npm.cmd' : 'npm';

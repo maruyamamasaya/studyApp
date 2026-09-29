@@ -1,9 +1,11 @@
 ---
-status: accepted
+status: superseded
 updated: 2026-09-29
 ---
 
 # ADR-004: Obsidian authoring source は検証付きで content/notes へ一方向同期する
+
+> ADR-005 により、正本の位置と旧記事移行方針を置き換えた。同期の安全策は引き続き有効。
 
 ## Context
 

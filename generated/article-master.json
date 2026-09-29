@@ -2,22 +2,6 @@
   "version": 2,
   "articles": [
     {
-      "id": "20260929-121459",
-      "path": "notes/study/20260929-121459.md",
-      "title": "🌟AWS基礎について",
-      "type": "study",
-      "tags": [
-        "AWS",
-        "index"
-      ],
-      "aliases": [
-        "AWS基礎（旧ルート）"
-      ],
-      "created": "2026-09-29 12:14:59",
-      "legacyId": "3d130a4a-9973-42c1-a9a2-ac4774e5da10",
-      "legacyPath": "🌟AWS基礎について.md"
-    },
-    {
       "id": "20260929-121500",
       "path": "notes/study/20260929-121500.md",
       "title": "🌟AWS基礎について",
@@ -29,9 +13,7 @@
       "aliases": [
         "AWS基礎（基礎編）"
       ],
-      "created": "2026-09-29 12:15:00",
-      "legacyId": "f2932531-d98b-4afd-b71d-1af47f7ea180",
-      "legacyPath": "記事：基礎編/基礎AWS/🌟AWS基礎について.md"
+      "created": "2026-09-29 12:15:00"
     },
     {
       "id": "20260929-121501",
@@ -45,9 +27,7 @@
       "aliases": [
         "Markdown サンプル"
       ],
-      "created": "2026-09-29 12:15:01",
-      "legacyId": "bbf40f8a-6d39-4e73-8684-b005b1c5d14f",
-      "legacyPath": "移管用/Obsidianが最高のメモ/フォルダ管理/Markdown記法のサンプル集.md"
+      "created": "2026-09-29 12:15:01"
     },
     {
       "id": "20260929-121502",
@@ -61,18 +41,7 @@
       "aliases": [
         "計算誤差"
       ],
-      "created": "2026-09-29 12:15:02",
-      "legacyId": "31c038f7-530c-44d3-b3b7-b5ebc9a3535d",
-      "legacyPath": "試験勉強系/応用情報技術者/数値計算の誤差.md"
-    },
-    {
-      "id": "20260929-133348",
-      "path": "notes/study/docs/記事：基礎編/基礎AWS/20260929-133348.md",
-      "title": null,
-      "type": "study",
-      "tags": [],
-      "aliases": [],
-      "created": "2026-09-29 13:33:49"
+      "created": "2026-09-29 12:15:02"
     },
     {
       "id": "20260928-141048",
@@ -147,9 +116,7 @@
       "aliases": [
         "研修資料"
       ],
-      "created": "2026-09-29 12:14:58",
-      "legacyId": "39c9ffff-2a67-4792-a5b8-bdce3525d5f8",
-      "legacyPath": "training/README.md"
+      "created": "2026-09-29 12:14:58"
     }
   ]
 }

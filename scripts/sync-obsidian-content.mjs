@@ -50,6 +50,7 @@ export async function planObsidianSync({ vaultRoot, repositoryRoot = projectRoot
     if (error.code !== 'ENOENT') throw error;
   }
   const previousByDestination = new Map(previous.entries.map((entry) => [entry.destination, entry]));
+  const previouslyManagedDestinations = new Set(previous.entries.map((entry) => entry.destination));
 
   const changes = [];
   for (const entry of entries) {
@@ -65,6 +66,19 @@ export async function planObsidianSync({ vaultRoot, repositoryRoot = projectRoot
 
   const currentDestinations = new Set(entries.map((entry) => entry.destination));
   const stale = previous.entries.filter((entry) => !currentDestinations.has(entry.destination));
+  const mirrorRoot = path.join(repositoryRoot, 'content', 'notes');
+  let mirrorFiles = [];
+  try {
+    mirrorFiles = await walkMarkdown(mirrorRoot);
+  } catch (error) {
+    if (error.code !== 'ENOENT') throw error;
+  }
+  const unmanaged = mirrorFiles
+    .map((file) => normalizePath(path.relative(repositoryRoot, file)))
+    .filter((destination) => !currentDestinations.has(destination) && !previouslyManagedDestinations.has(destination));
+  if (unmanaged.length) {
+    throw new Error(`content/notes は Vault の生成ミラーです。同期元にない記事があります: ${unmanaged.join(', ')}`);
+  }
   return { repositoryRoot, manifestPath, entries, skipped, changes, stale };
 }
 

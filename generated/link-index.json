@@ -1,11 +1,6 @@
 {
   "🌟AWS基礎について": [
     {
-      "id": "20260929-121459",
-      "path": "notes/study/20260929-121459.md",
-      "matchedBy": "title"
-    },
-    {
       "id": "20260929-121500",
       "path": "notes/study/20260929-121500.md",
       "matchedBy": "title"
@@ -46,13 +41,6 @@
       "matchedBy": "filename"
     }
   ],
-  "20260929-121459": [
-    {
-      "id": "20260929-121459",
-      "path": "notes/study/20260929-121459.md",
-      "matchedBy": "filename"
-    }
-  ],
   "20260929-121500": [
     {
       "id": "20260929-121500",
@@ -88,24 +76,10 @@
       "matchedBy": "filename"
     }
   ],
-  "20260929-133348": [
-    {
-      "id": "20260929-133348",
-      "path": "notes/study/docs/記事：基礎編/基礎AWS/20260929-133348.md",
-      "matchedBy": "filename"
-    }
-  ],
   "AWS基礎（基礎編）": [
     {
       "id": "20260929-121500",
       "path": "notes/study/20260929-121500.md",
-      "matchedBy": "alias"
-    }
-  ],
-  "AWS基礎（旧ルート）": [
-    {
-      "id": "20260929-121459",
-      "path": "notes/study/20260929-121459.md",
       "matchedBy": "alias"
     }
   ],
@@ -121,13 +95,6 @@
       "id": "20260929-121501",
       "path": "notes/study/20260929-121501.md",
       "matchedBy": "title"
-    }
-  ],
-  "notes/study/20260929-121459": [
-    {
-      "id": "20260929-121459",
-      "path": "notes/study/20260929-121459.md",
-      "matchedBy": "path"
     }
   ],
   "notes/study/20260929-121500": [
@@ -148,13 +115,6 @@
     {
       "id": "20260929-121502",
       "path": "notes/study/20260929-121502.md",
-      "matchedBy": "path"
-    }
-  ],
-  "notes/study/docs/記事：基礎編/基礎AWS/20260929-133348": [
-    {
-      "id": "20260929-133348",
-      "path": "notes/study/docs/記事：基礎編/基礎AWS/20260929-133348.md",
       "matchedBy": "path"
     }
   ],

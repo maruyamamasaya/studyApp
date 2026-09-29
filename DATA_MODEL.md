@@ -17,7 +17,7 @@ Git で共有・再利用           端末または将来の cloud に保存
 
 ## Markdown 配置
 
-目標構成は `content/notes/**/*.md`。Obsidian vault は `content/` または `content/notes/` を開けるものとし、Web 実装固有ファイルは `app/`、生成物は `generated/` または build output に分離する。folder は整理と閲覧 scope に使えるが、identity には使わない。
+記事の正本は外部 Obsidian Vault の `study/**/*.md` と `wiki/**/*.md`。`content/notes/**/*.md` は同じ相対pathで生成する公開ミラーで、Web実装固有ファイルは `app/`、索引は `generated/`、build outputは `dist/` に分離する。folderは整理と閲覧scopeに使えるが、identityには使わない。
 
 新規 filename は `<id>.md` とする。
 
@@ -53,7 +53,7 @@ aliases:
 | `updated` | local datetime string / null | optional。Obsidian template 互換として受理するが、identity・並び順・学習状態には使わない |
 | `aliases` | string[] | optional。trim、空要素と title 重複を除外 |
 
-`created` は「この knowledge record が作られた時刻」と定義する。legacy note は Git で確認できる最初の追加時刻を使い、確認できない場合は移行時刻を使って migration report に記録する。記事本文の執筆日を推測しない。
+`created` は「この knowledge record がObsidianで新規作成された時刻」と定義する。旧記事を参考に新しく作り直す場合も、旧本文の執筆日や旧IDを推測して引き継がない。
 
 title は三つの値を分ける。
 
@@ -80,12 +80,8 @@ interface Article {
   tags: string[];
   aliases: string[];
   created: string;
-  legacyId?: string;
-  legacyPath?: string;
 }
 ```
-
-`legacyId` と `legacyPath` は migration / generated metadata だけに存在し、Markdown Frontmatter へは書かない。
 
 ## 生成物
 
@@ -103,14 +99,13 @@ interface Article {
       "type": "study",
       "tags": ["security", "zero-trust"],
       "aliases": ["Zero Trust"],
-      "created": "2026-09-28 14:24:30",
-      "legacyId": "existing-uuid"
+      "created": "2026-09-28 14:24:30"
     }
   ]
 }
 ```
 
-`displayTitle` は presentation rule なので生成物へ重複保存せず consumer が算出する。`legacyId` は移行期間のみ出力する。
+`displayTitle` は presentation rule なので生成物へ重複保存せず consumer が算出する。
 
 ### link index
 
@@ -162,7 +157,6 @@ validation rule:
 ```text
 study:v2:progress:<frontmatter.id>
 study:v2:checklist:<frontmatter.id>:<task-key>
-study:v2:migration:legacy-v1
 ```
 
 UI / domain は localStorage を直接呼ばず repository interface のみ使う。将来 Supabase 等へ adapter を追加しても Markdown schema は変えない。
@@ -201,27 +195,7 @@ localStorage の物理 key / string value を公開形式にしない。
 }
 ```
 
-version 1 は compatibility importer が受け取り、legacy UUID / path mapping を通して version 2 の in-memory model に変換してから保存する。未対応 record は件数と key を表示し、export 可能な quarantine に残す。
-
-## Legacy mapping
-
-移行 manifest は次の一対一対応を Git 管理する。
-
-```json
-{
-  "version": 1,
-  "entries": [
-    {
-      "legacyId": "uuid",
-      "legacyPath": "記事：基礎編/example.md",
-      "id": "20260928-142430",
-      "path": "notes/study/20260928-142430.md"
-    }
-  ]
-}
-```
-
-validation は legacy article master の343件が重複も欠落もなく対応すること、新 ID と新 path が一意であることを要求する。mapping は移行完了後も version 1 backup import のため保持する。
+旧backup version 1と旧localStorageは新アプリへ自動移行しない。必要な場合は旧サイトからread-only exportし、新しいversion 2の保存領域とは分離して扱う。
 
 ## Obsidian templates
 
@@ -237,7 +211,9 @@ id: <% id %>
 title:
 type: study
 tags: []
-created: <% tp.date.now("YYYY-MM-DD HH:mm:ss") %>
+created: "<% tp.date.now("YYYY-MM-DD HH:mm:ss") %>"
+updated:
+aliases: []
 ---
 
 # 概要

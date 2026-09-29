@@ -24,17 +24,17 @@ updated: 2026-09-29
 
 - 今後の開発先 GitHub リポジトリは `maruyamamasaya/studyApp`。ローカルでは新リポジトリを `origin`、従来の `maruyamamasaya/study` を参照用の `legacy` remote として保持する。新リポジトリは旧履歴を含まない bootstrap commit から開始する。
 - 新リポジトリの初期 bootstrap には既存 `docs/**/*.md` の学習ノートと、その内容から生成された `_article-master.json` / `_note-index.json` を含めない。旧履歴も持ち込まず、ID migration の検証後に別フェーズで取り込む。
-- Scratch & Build の Phase 0 調査と設計は完了。現行機能は [`CURRENT_FEATURES.md`](CURRENT_FEATURES.md)、新データモデルは [`DATA_MODEL.md`](DATA_MODEL.md)、段階移行は [`MIGRATION_PLAN.md`](MIGRATION_PLAN.md) を基準にする。新実装は Astro の静的生成を採用し、既存 Docsify は cutover まで legacy として維持する。
+- Scratch & Build の調査と初期実装は完了。現行機能は [`CURRENT_FEATURES.md`](CURRENT_FEATURES.md)、新データモデルは [`DATA_MODEL.md`](DATA_MODEL.md)、今後の作り直しは [`MIGRATION_PLAN.md`](MIGRATION_PLAN.md) を基準にする。新実装は Astro の静的生成を採用し、既存 Docsify は参照用 legacy として維持する。
 - ノート同期手順は [`docs/md更新用コマンド.md`](docs/md更新用コマンド.md) にあり、外部ディレクトリから Markdown を `docs/` に rsync して索引を再生成する。
 - Git 履歴では記事同期が `Sync notes` コミットとして継続している。
 - デプロイ先を明記した CI/CD 設定はリポジトリにない。`docs/.nojekyll` と静的構成は GitHub Pages と整合するが、実際の公開設定はリポジトリだけでは確認できない。
 - 新しい公開先は OpenAI Sites とし、`.openai/hosting.json` に Sites の設定、`dist/` に公開対象を置く。新サイトは非公開で開始し、旧 GitHub Pages は cutover 条件を満たすまで rollback 用に維持する。
-- Phase 1 の vertical slice を実装済み。`content/notes/` の代表記事と Obsidian 同期記事12件から、Astro がホーム、研修一覧、ID 固定の個別記事 route を `dist/` に静的生成する。
+- `content/notes/` の Obsidian 同期記事10件から、Astro がホーム、研修一覧、ID 固定の個別記事 route を `dist/` に静的生成する。
 - Frontmatter、ID / filename 一致、ID 重複、path 正規化を build 前に検証し、article master v2、link index、search index を `generated/` に出力する。
 - Wiki Link は title / alias / filename / explicit path の候補を保持し、同名や未解決を自動で別記事へ結び付けない。教材中の生 HTML はコード表示へ変換する。
 - 新 Study App は Standard、Wiki、Living Aurora、Blue Cosmos、Pulse Neon の5テーマを持ち、選択をブラウザーに保存する。
-- 外部 Obsidian Vault `Document organization` の `study/` / `wiki/` を authoring source とし、`npm run vault:prepare -- "<Vault path>"` が検証付きで `content/notes/` と `dist/` を更新する。Git / build 上の正本は引き続き `content/notes/**/*.md` とする。
-- Phase 1 の代表記事7件を Vault に初期配置し、Vault 既存 Wiki 4件、新規 Study 1件と合わせて同期済み。空の `study/無題のファイル.md` は削除せず下書きとして除外する。
+- 外部 Obsidian Vault `Document organization` の `study/` / `wiki/` を記事の唯一の正本とし、`npm run vault:prepare -- "<Vault path>"` が検証付きで公開ミラー `content/notes/` と `dist/` を更新する。`content/notes/` は直接編集しない。
+- 初期記事をVaultへ配置後、Obsidian上の追加・更新・削除を正本として同期している。現在は10件。
 
 ## 既知の制約・未解決事項
 
@@ -46,12 +46,12 @@ updated: 2026-09-29
 
 ## 現在の優先事項・次のアクション候補
 
-次の作業は [`MIGRATION_PLAN.md`](MIGRATION_PLAN.md) の Phase 2 である。
+既存343記事と旧学習状態の一括移行は行わない。次の作業は [`MIGRATION_PLAN.md`](MIGRATION_PLAN.md) に沿った新規作成とReader機能である。
 
-1. legacy article master 全件の read-only baseline と、一度だけ ID を割り当てる migration manifest を作る。
-2. 全343記事の rename / Frontmatter 追加は、legacy UUID 対応 manifest と generator の冪等性を確認するまで実施しない。
-3. unresolved / ambiguous Wiki Link report を生成し、同名候補を人が解決する。
-4. cutover 前に custom domain、本物のアクセス制御要否、Vault と Git の障害時復旧手順を確定する。
+1. 必要な記事をObsidianで新しく作り直す。
+2. unresolved / ambiguous Wiki Linkを人が解決する。
+3. 検索、filter、attachment、学習状態version 2を新ID向けに実装する。
+4. Vault自体のprivate Git / backupと、Sites自動公開を整備する。
 
 ## 詳細への入口
 

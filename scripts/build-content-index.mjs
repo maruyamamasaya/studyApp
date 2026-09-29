@@ -5,7 +5,6 @@ import { buildLinkIndex, normalizeArticle, normalizePath, parseFrontmatter, vali
 const root = process.cwd();
 const notesRoot = path.join(root, 'content', 'notes');
 const generatedRoot = path.join(root, 'generated');
-const migrationPath = path.join(root, 'migration', 'phase1-samples.json');
 
 async function walk(directory) {
   const entries = await fs.readdir(directory, { withFileTypes: true });
@@ -34,14 +33,8 @@ for (const absolute of files) {
 }
 validateArticleSet(articles);
 
-const migration = JSON.parse(await fs.readFile(migrationPath, 'utf8'));
 const linkIndex = buildLinkIndex(articles);
-const migrationById = new Map(migration.entries.map((entry) => [entry.id, entry]));
-const articleMaster = articles.map(({ displayTitle, internalLabel, filename, ...article }) => ({
-  ...article,
-  ...(migrationById.get(article.id)?.legacyId ? { legacyId: migrationById.get(article.id).legacyId } : {}),
-  ...(migrationById.get(article.id)?.legacyPath ? { legacyPath: migrationById.get(article.id).legacyPath } : {})
-}));
+const articleMaster = articles.map(({ displayTitle, internalLabel, filename, ...article }) => article);
 const searchIndex = articles.map((article) => ({
   id: article.id,
   title: article.title,
