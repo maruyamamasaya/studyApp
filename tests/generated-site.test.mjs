@@ -59,6 +59,7 @@ test('ホームは説明文を置かず、1列の記事一覧と階層ナビゲ�
   assert.match(html, /<details class="page-tree" open>/u);
   assert.match(html, /<summary>ページツリー<\/summary>/u);
   assert.match(html, /data-tree-folder="wiki\/anken001"/u);
+  assert.doesNotMatch(html, /<details open data-tree-folder=/u);
   assert.match(html, /study-app:page-tree-open/u);
   assert.match(html, /matchMedia\('\(max-width: 640px\)'\)/u);
   assert.match(html, /anken001/u);
@@ -86,6 +87,7 @@ test('現在の記事を階層で強調し、目次を開閉できる', async ()
   const html = await page('20260929-121502');
   assert.match(html, /aria-current="page"/u);
   assert.match(html, /data-active-branch="true"/u);
+  assert.match(html, /<details open data-tree-folder="study" data-active-branch="true">/u);
   assert.match(html, /<details class="toc" open data-article-toc>/u);
   assert.match(html, /<summary>目次<\/summary>/u);
   assert.match(html, /matchMedia\('\(max-width: 860px\)'\)/u);

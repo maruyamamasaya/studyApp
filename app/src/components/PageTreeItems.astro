@@ -30,7 +30,7 @@ const { nodes } = Astro.props;
     <li class:list={['tree-node', `tree-${node.kind}`, { 'is-active-branch': node.kind === 'folder' && node.containsActive }]}>
       {node.kind === 'folder' ? (
         <details
-          open={node.depth === 0 || node.containsActive}
+          open={node.containsActive}
           data-tree-folder={node.key}
           data-active-branch={node.containsActive ? 'true' : undefined}
         >
