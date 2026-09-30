@@ -1,13 +1,11 @@
 ---
 import { getCollection } from 'astro:content';
-import ArticleCard from '../components/ArticleCard.astro';
+import ArticleExplorer from '../components/ArticleExplorer.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const articles = (await getCollection('notes')).sort((a, b) => b.data.created.localeCompare(a.data.created));
 ---
 
 <BaseLayout>
-  <section class="article-grid" aria-label="記事一覧">
-    {articles.map((entry) => <ArticleCard article={entry.data} />)}
-  </section>
+  <ArticleExplorer articles={articles.map((entry) => entry.data)} />
 </BaseLayout>
