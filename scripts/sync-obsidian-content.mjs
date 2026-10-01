@@ -28,8 +28,8 @@ export async function planObsidianSync({ vaultRoot, repositoryRoot = projectRoot
       const destinationRelative = normalizePath(path.join('docs', sourceRelative));
       const { data } = parseFrontmatter(markdown, sourceRelative);
       const { article } = normalizeArticle(data, sourceRelative);
-      if (article.type !== sourceFolder) {
-        throw new Error(`${sourceRelative}: type は配置フォルダに合わせて ${sourceFolder} を指定してください（現在 ${article.type}）`);
+      if (!DEFAULT_SOURCE_FOLDERS.includes(article.type)) {
+        throw new Error(`${sourceRelative}: type は study または wiki を指定してください（現在 ${article.type}）`);
       }
       entries.push({
         id: article.id,

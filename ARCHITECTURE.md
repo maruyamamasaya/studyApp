@@ -17,6 +17,7 @@ GitHub Pages → DocsifyがブラウザーでMarkdownを描画
 
 - `scripts/lib/article.mjs`: YAML、Frontmatter、ID、created、重複の検証。依存はyamlのみ。
 - `scripts/sync-obsidian-content.mjs`: Vaultからdocsへの同期。`obsidian-sync-manifest.json`のhashで管理し、直接変更・管理外上書き・不正な削除pathを拒否する。空ファイルは下書きとして除外する。
+  保存フォルダと記事種別は独立し、相対パスとFrontmatterを維持する。typeはstudy/wikiを検証し、研修一覧はtypeがstudyの記事を配置場所によらず掲載する。
 - `scripts/prepare-obsidian-content.mjs`: 同期、Python索引生成、テスト、diff check。
 - `scripts/publish-obsidian.mjs`: mainとoriginを確認し、prepare成功後docsとmanifestだけをcommit/pushする。ステージ済みの無関係な変更があると停止する。force pushや自動mergeは行わない。
 - `docs/index.html`と`docs/training/index.html`: Docsifyの入口。記事URLはhash route。HTTP serverで動作する。

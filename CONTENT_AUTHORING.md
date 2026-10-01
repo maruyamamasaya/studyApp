@@ -6,6 +6,8 @@
 
 ID、filename、created、type、tagsのFrontmatterは現在のObsidianテンプレートを使います。IDを変更しないでください。
 
+保存フォルダと記事種別は別に扱います。`wiki/anken001/`などの案件フォルダにも`type: study`の学習記事を置けます。同期は元の相対パスとFrontmatterを維持し、研修一覧は配置場所ではなく`type: study`を対象にします。対応するtypeは`study`と`wiki`です。
+
 ## 一括更新
 
 `sync-and-publish.cmd`をダブルクリックします。コマンドからは次のとおりです。

@@ -35,11 +35,23 @@ test('wiki / study を相対パスを保って同期し、空の下書きを除�
   assert.equal(await fs.readFile(path.join(paths.repositoryRoot, plan.entries[0].destination), 'utf8'), plan.entries[0].markdown);
 });
 
-test('type と配置先の不一致を拒否する', async (t) => {
+test('配置フォルダと記事種別を分離し、wiki 内の study を研修一覧に含める', async (t) => {
   const paths = await fixture();
   t.after(() => fs.rm(paths.root, { recursive: true, force: true }));
   await fs.writeFile(path.join(paths.vaultRoot, 'wiki', '20260929-120000.md'), note('20260929-120000', 'study'));
-  await assert.rejects(() => planObsidianSync(paths), /type は配置フォルダに合わせて wiki/u);
+  const plan = await planObsidianSync(paths);
+  assert.equal(plan.entries[0].article.type, 'study');
+  assert.equal(plan.entries[0].destination, 'docs/wiki/20260929-120000.md');
+  await applyObsidianSync(plan);
+  assert.match(await fs.readFile(path.join(paths.repositoryRoot, 'docs/training/README.md'), 'utf8'), /wiki\/20260929-120000/u);
+  assert.equal(await fs.readFile(path.join(paths.repositoryRoot, plan.entries[0].destination), 'utf8'), note('20260929-120000', 'study'));
+});
+
+test('未対応の記事種別を拒否する', async (t) => {
+  const paths = await fixture();
+  t.after(() => fs.rm(paths.root, { recursive: true, force: true }));
+  await fs.writeFile(path.join(paths.vaultRoot, 'wiki', '20260929-120000.md'), note('20260929-120000', 'other'));
+  await assert.rejects(() => planObsidianSync(paths), /type は study または wiki/u);
 });
 
 test('同期管理外の既存ファイルを上書きしない', async (t) => {
