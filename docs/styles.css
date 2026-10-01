@@ -1371,6 +1371,41 @@ body:not(.sidebar-wide-layout).desktop-sidebar-collapsed .reader-header {
 }
 
 /* Reader layout: article information participates in document flow. */
+.wiki-tree__heading {
+  color: var(--muted);
+  font-size: 0.7rem;
+  padding: 0 0.75rem 0.75rem;
+  letter-spacing: 0.08em;
+}
+.wiki-tree__folder summary {
+  cursor: pointer;
+  padding: 0.55rem 0.65rem;
+  border-radius: 5px;
+  color: var(--text-strong);
+  font-size: 0.85rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.wiki-tree__folder summary:hover { background: var(--surface-hover); }
+.wiki-tree__children {
+  margin-left: 0.8rem;
+  padding-left: 0.4rem;
+  border-left: 1px solid var(--border);
+}
+.sidebar-nav .wiki-tree__article {
+  color: var(--text);
+  padding: 0.5rem 0.65rem;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  border-radius: 5px;
+  text-decoration: none;
+}
+.sidebar-nav .wiki-tree__article:hover,
+.sidebar-nav .wiki-tree__article[aria-current="page"] {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
 .sidebar { padding-top: 0; }
 .reader-tags {
   display: flex;

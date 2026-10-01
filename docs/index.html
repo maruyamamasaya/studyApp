@@ -7,7 +7,7 @@
   <title>Study Notes</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
-  <link rel="stylesheet" href="styles.css?v=20261001-wiki">
+  <link rel="stylesheet" href="styles.css?v=20261001-folders">
 </head>
 <body>
   <div id="app">読み込み中...</div>
@@ -17,7 +17,7 @@
     window.READER_TOOLS_CONFIG = { homepageFile: 'README.md', showBackupLink: false };
     window.$docsify = {
       homepage: 'README.md', loadSidebar: true, name: 'Study Notes',
-      auto2top: true, maxLevel: 4, subMaxLevel: 3, markdown: { breaks: true }
+      auto2top: true, maxLevel: 4, subMaxLevel: 0, markdown: { breaks: true }
     };
   </script>
   <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.7/dist/purify.min.js"></script>
@@ -25,6 +25,7 @@
   <script src="unique-heading-ids.js"></script>
   <script src="obsidian-wikilinks.js"></script>
   <script src="reader-tools.js?v=20261001-wiki"></script>
+  <script src="folder-navigation.js?v=20261001-folders"></script>
   <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
 </body>
 </html>
