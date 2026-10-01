@@ -10,3 +10,4 @@
 - ローカルブラウザーでホーム、同期記事（title表示・Frontmatter非表示）、研修ホームの表示を確認した。
 - repositoryとGit履歴の公開承認を得てpublicへ変更。Pagesをworkflow方式で設定。origin/mainはローカルHEADの祖先で分岐なし（0/7）。初回deployを実行する。
 - 旧Sitesのリモートサイトは削除していない。添付ファイル同期は未対応。
+- 初回公開: commit fad01db、Actions run 36826656659がcompleted/success。https://maruyamamasaya.github.io/studyApp/ で一覧と記事本文を実ブラウザー確認済み。
