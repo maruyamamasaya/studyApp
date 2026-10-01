@@ -3,6 +3,7 @@
 更新: 2026-10-01
 
 - 現行方式はDocsify。Obsidian Vault `Document organization`の`study/`・`wiki/`が記事の唯一の正本。
+- UIはスマホ中心の新しいreaderへ刷新。旧DocsifyテーマCSSを廃止し、900px以下ではフォルダパネル・検索/目次操作、PCでは左sidebarと中央本文を表示する。
 - `docs/`に5記事と一覧・索引を同期する。FrontmatterのIDを維持し、title・aliasでWiki Linkを解決する。
 - `npm run vault:prepare`で同期・索引生成・テスト。`sync-and-publish.cmd`または`npm run vault:publish`でその後GitHubへのcommit/pushを行う。Codex・AIは使用しない。
 - 公開先はGitHub Pages。ユーザーはサイト・repository・Git履歴の公開を承認した。repositoryをpublicへ変更し、PagesをGitHub Actions方式で設定済み。URLは https://maruyamamasaya.github.io/studyApp/ 。

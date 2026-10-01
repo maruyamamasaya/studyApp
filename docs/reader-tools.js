@@ -3,8 +3,8 @@
 
   const READER_CONFIG = window.READER_TOOLS_CONFIG || {};
   const JAPANESE_CHARACTERS_PER_MINUTE = 500;
-  const MOBILE_HEADER_BREAKPOINT = 600;
-  const SIDEBAR_LAYOUT_BREAKPOINT = 1100;
+  const MOBILE_HEADER_BREAKPOINT = 900;
+  const SIDEBAR_LAYOUT_BREAKPOINT = 901;
   const HOMEPAGE_FILE = READER_CONFIG.homepageFile || '📚 Study Notes Hub.md';
   const ARTICLE_MASTER_FILE = READER_CONFIG.articleMasterFile || '_article-master.json';
   const NOTE_INDEX_FILE = READER_CONFIG.noteIndexFile || '_note-index.json';
@@ -145,7 +145,7 @@
 
   function getCurrentTheme() {
     const storedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
-    return /^[1-5]$/.test(storedTheme || '') ? Number(storedTheme) : 1;
+    return /^[1-5]$/.test(storedTheme || '') ? Number(storedTheme) : 4;
   }
 
   function applyTheme(theme) {
@@ -507,7 +507,8 @@
   function calculateOverallProgress(articles) {
     const articleProgress = articles
       .filter(function (article) {
-        return article.path !== HOMEPAGE_FILE && article.path !== BACKUP_PAGE_FILE;
+        return article.path !== HOMEPAGE_FILE && article.path !== BACKUP_PAGE_FILE
+          && !/(^|\/)README\.md$/i.test(article.path);
       })
       .map(function (article) {
         return readArticleProgress(article.id);
@@ -559,6 +560,8 @@
     const progress = activeArticle.progress;
     const button = meta.querySelector('.reader-completion');
     const learningTime = meta.querySelector('.reader-learning-time');
+    // During route changes the library summary can replace the article controls.
+    if (!button || !learningTime) return;
     button.classList.toggle('is-completed', progress.completed);
     button.setAttribute('aria-pressed', String(progress.completed));
     button.textContent = progress.completed ? '✓ 読了' : '○ 未読了';
@@ -964,19 +967,12 @@
     const isHomepage = getCurrentNotePath() === HOMEPAGE_FILE;
     const backupLink = navigation.querySelector('.reader-backup-link');
     navigation.classList.toggle('is-homepage', isHomepage);
-    navigation.hidden = !isDesktopLayout() && isHomepage && !backupLink;
-    if (isDesktopLayout()) {
-      navigation.querySelectorAll('.reader-navigation__button').forEach(function (button) {
-        button.hidden = !button.classList.contains('reader-toc') &&
-          !button.classList.contains('reader-search') &&
-          !button.classList.contains('reader-backup-link');
-      });
-      return;
-    }
-    navigation.querySelectorAll('.reader-navigation__button:not(.reader-backup-link)')
-      .forEach(function (button) {
-        button.hidden = isHomepage;
-      });
+    navigation.hidden = false;
+    navigation.querySelectorAll('.reader-navigation__button').forEach(function (button) {
+      button.hidden = !button.classList.contains('reader-toc') &&
+        !button.classList.contains('reader-search') &&
+        !button.classList.contains('reader-backup-link');
+    });
     if (backupLink) {
       backupLink.hidden = !isHomepage;
     }

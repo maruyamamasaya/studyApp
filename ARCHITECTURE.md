@@ -24,7 +24,8 @@ GitHub Pages → DocsifyがブラウザーでMarkdownを描画
 - `docs/obsidian-wikilinks.js`: Wiki Linkのtitle・alias・filename索引からリンクを生成する。
 - `docs/folder-navigation.js`: 記事metadataのpathからVaultのフォルダ階層を組み立て、開閉状態をブラウザーに保存する。現在の記事の祖先を開き、記事を強調する。研修サイトは独立した従来navigationを維持する。
 - `docs/reader-tools.js`・`styles.css`・`unique-heading-ids.js`: 従来のテーマ、検索、学習状態、目次等の閲覧支援。
-  wikiの二列構成を維持し、検索・目次はsidebar側、学習時間は記事先頭、Vaultのtagsはタイトル下に表示する。重複したホーム操作は置かず、サイト名から一覧へ戻る。
+  学習状態・時間・チェックリスト等の保存処理を維持する。旧テーマCSSは使用しない。
+- `docs/reader-shell.js`・`styles.css`: スマホ中心の新UI。900px以下はフォルダdrawer・下部検索/目次、901px以上は左sidebar・中央本文。記事名、tags、学習時間を本文先頭にまとめ、入口はmetadataから記事カードを構築する。overlay閉鎖とinertも管理する。
 - `.github/workflows/pages.yml`: docsだけをPages artifactとして配信。秘密情報・Vault全体・保守資料をartifactへ含めない。
 
 Astro・OpenAI Sites・Codex CLIによる公開経路は現行構成にない。DocsifyとDOMPurifyはjsDelivrを使うため完全offline閲覧は未対応。添付ファイル同期は未対応。公開は閲覧制限なしの構成であり、非公開repositoryでもPagesの閲覧は非公開にならない。
