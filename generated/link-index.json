@@ -1,11 +1,4 @@
 {
-  "🌟AWS基礎について": [
-    {
-      "id": "20260929-121500",
-      "path": "notes/study/20260929-121500.md",
-      "matchedBy": "title"
-    }
-  ],
   "20260928-141048": [
     {
       "id": "20260928-141048",
@@ -41,27 +34,6 @@
       "matchedBy": "filename"
     }
   ],
-  "20260929-121500": [
-    {
-      "id": "20260929-121500",
-      "path": "notes/study/20260929-121500.md",
-      "matchedBy": "filename"
-    }
-  ],
-  "20260929-121501": [
-    {
-      "id": "20260929-121501",
-      "path": "notes/study/20260929-121501.md",
-      "matchedBy": "filename"
-    }
-  ],
-  "20260929-121502": [
-    {
-      "id": "20260929-121502",
-      "path": "notes/study/20260929-121502.md",
-      "matchedBy": "filename"
-    }
-  ],
   "20260929-121503": [
     {
       "id": "20260929-121503",
@@ -76,46 +48,11 @@
       "matchedBy": "filename"
     }
   ],
-  "AWS基礎（基礎編）": [
+  "20261001-120324": [
     {
-      "id": "20260929-121500",
-      "path": "notes/study/20260929-121500.md",
-      "matchedBy": "alias"
-    }
-  ],
-  "Markdown サンプル": [
-    {
-      "id": "20260929-121501",
-      "path": "notes/study/20260929-121501.md",
-      "matchedBy": "alias"
-    }
-  ],
-  "Markdown記法のサンプル集": [
-    {
-      "id": "20260929-121501",
-      "path": "notes/study/20260929-121501.md",
-      "matchedBy": "title"
-    }
-  ],
-  "notes/study/20260929-121500": [
-    {
-      "id": "20260929-121500",
-      "path": "notes/study/20260929-121500.md",
-      "matchedBy": "path"
-    }
-  ],
-  "notes/study/20260929-121501": [
-    {
-      "id": "20260929-121501",
-      "path": "notes/study/20260929-121501.md",
-      "matchedBy": "path"
-    }
-  ],
-  "notes/study/20260929-121502": [
-    {
-      "id": "20260929-121502",
-      "path": "notes/study/20260929-121502.md",
-      "matchedBy": "path"
+      "id": "20261001-120324",
+      "path": "notes/wiki/anken001/20261001-120324.md",
+      "matchedBy": "filename"
     }
   ],
   "notes/wiki/anken001/20260928-141048": [
@@ -143,6 +80,13 @@
     {
       "id": "20260928-142529",
       "path": "notes/wiki/anken001/20260928-142529.md",
+      "matchedBy": "path"
+    }
+  ],
+  "notes/wiki/anken001/20261001-120324": [
+    {
+      "id": "20261001-120324",
+      "path": "notes/wiki/anken001/20261001-120324.md",
       "matchedBy": "path"
     }
   ],
@@ -202,25 +146,11 @@
       "matchedBy": "title"
     }
   ],
-  "計算誤差": [
-    {
-      "id": "20260929-121502",
-      "path": "notes/study/20260929-121502.md",
-      "matchedBy": "alias"
-    }
-  ],
   "研修資料": [
     {
       "id": "20260929-121458",
       "path": "notes/wiki/training/20260929-121458.md",
       "matchedBy": "alias"
-    }
-  ],
-  "数値計算の誤差": [
-    {
-      "id": "20260929-121502",
-      "path": "notes/study/20260929-121502.md",
-      "matchedBy": "title"
     }
   ]
 }

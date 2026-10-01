@@ -6,24 +6,6 @@
   ],
   "entries": [
     {
-      "id": "20260929-121500",
-      "source": "study/20260929-121500.md",
-      "destination": "content/notes/study/20260929-121500.md",
-      "sha256": "daa6c841c013c7cb206ae452a5b073df7347647a45c9b6978f6d284e7fb6ab4c"
-    },
-    {
-      "id": "20260929-121501",
-      "source": "study/20260929-121501.md",
-      "destination": "content/notes/study/20260929-121501.md",
-      "sha256": "e7536db25c930b2a2dfbe942a12521a8e4edeb726a3d251ae729a7ddc67f9b75"
-    },
-    {
-      "id": "20260929-121502",
-      "source": "study/20260929-121502.md",
-      "destination": "content/notes/study/20260929-121502.md",
-      "sha256": "fca6aada420a979522a34b224855d4065369a9bb48c58860de776ab4173484ca"
-    },
-    {
       "id": "20260928-141048",
       "source": "wiki/anken001/20260928-141048.md",
       "destination": "content/notes/wiki/anken001/20260928-141048.md",
@@ -46,6 +28,12 @@
       "source": "wiki/anken001/20260928-142529.md",
       "destination": "content/notes/wiki/anken001/20260928-142529.md",
       "sha256": "e05e6467b9d4854efeffea3a31205609cfbd5ceb2290d0a927fbf48939338b4f"
+    },
+    {
+      "id": "20261001-120324",
+      "source": "wiki/anken001/20261001-120324.md",
+      "destination": "content/notes/wiki/anken001/20261001-120324.md",
+      "sha256": "3df8487d47bbad48cb1c1356187e60248e37ca0ae97fb30a83cf0890d9fa8f24"
     },
     {
       "id": "20260929-121503",

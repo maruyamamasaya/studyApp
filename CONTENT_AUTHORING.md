@@ -55,7 +55,10 @@ aliases:
 
    このコマンドは Vault の `study/**/*.md` と `wiki/**/*.md` を `content/notes/` へ厳密に同期し、Frontmatter、ID、重複、静的 route、Wiki Link、HTML 安全化を検証して `dist/` を生成する。0バイトのファイルは下書きとして警告し、削除しない。Vault から削除した同期済み記事は内容 hash を照合してミラーから除去し、`content/notes/` だけに存在する記事はエラーにする。
 3. `git diff --check` と `git diff` で、同期記事、`generated/`、`dist/` の差分を確認する。
-4. 変更を commit / push し、OpenAI Sites の既存プロジェクト `appgprj_6aba0a652f848191850dc665b7023bc0` へ `dist/` を反映する。
+4. 公開まで行う場合は Codex に「Obsidianから同期して、既存のStudy Appサイトへ公開して」と依頼する。`vault:prepare` はローカル生成までで、GitHubへのpushだけでもSitesは更新されない。
+5. Codex は `.openai/hosting.json` の既存project IDを使用し、Sitesの公開スキルでソース履歴を確認・統合する。検証成功後、同じソースをSites repositoryへcommit / pushし、`dist/` をpackageして既存の閲覧範囲を維持したままdeployする。成功statusとURLを確認して完了とする。
+
+記事の追加・削除を自由に行えるよう、生成結果テストは現在のarticle masterを基準にする。HTML安全化・task list・重複見出しは公開記事と独立したMarkdown fixtureで検証する。検証が失敗した場合は、生成が成功していても公開完了とは扱わない。
 
 検証だけを行う場合は `npm run vault:check -- "<Vault path>"`、削除を反映せず追加・更新だけ同期する場合は `npm run vault:sync -- "<Vault path>"` を使う。通常の公開準備では正本と一致させる `vault:prepare` を使う。
 

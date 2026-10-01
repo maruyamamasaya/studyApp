@@ -2,48 +2,6 @@
   "version": 2,
   "articles": [
     {
-      "id": "20260929-121500",
-      "path": "notes/study/20260929-121500.md",
-      "title": "🌟AWS基礎について",
-      "type": "study",
-      "tags": [
-        "AWS",
-        "index"
-      ],
-      "aliases": [
-        "AWS基礎（基礎編）"
-      ],
-      "created": "2026-09-29 12:15:00"
-    },
-    {
-      "id": "20260929-121501",
-      "path": "notes/study/20260929-121501.md",
-      "title": "Markdown記法のサンプル集",
-      "type": "study",
-      "tags": [
-        "markdown",
-        "task"
-      ],
-      "aliases": [
-        "Markdown サンプル"
-      ],
-      "created": "2026-09-29 12:15:01"
-    },
-    {
-      "id": "20260929-121502",
-      "path": "notes/study/20260929-121502.md",
-      "title": "数値計算の誤差",
-      "type": "study",
-      "tags": [
-        "応用情報",
-        "計算"
-      ],
-      "aliases": [
-        "計算誤差"
-      ],
-      "created": "2026-09-29 12:15:02"
-    },
-    {
       "id": "20260928-141048",
       "path": "notes/wiki/anken001/20260928-141048.md",
       "title": "タイトルを表示したい",
@@ -78,6 +36,15 @@
       "tags": [],
       "aliases": [],
       "created": "2026-09-28 14:25:29"
+    },
+    {
+      "id": "20261001-120324",
+      "path": "notes/wiki/anken001/20261001-120324.md",
+      "title": null,
+      "type": "wiki",
+      "tags": [],
+      "aliases": [],
+      "created": "2026-10-01 12:03:24"
     },
     {
       "id": "20260929-121503",
