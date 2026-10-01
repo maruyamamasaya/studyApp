@@ -151,8 +151,13 @@
   function applyTheme(theme) {
     const selectedTheme = theme >= 1 && theme <= THEME_COUNT ? theme : 1;
     document.documentElement.dataset.theme = String(selectedTheme);
-    document.querySelector('meta[name="theme-color"]')
-      .setAttribute('content', THEME_COLORS[selectedTheme - 1]);
+    let themeColor = document.querySelector('meta[name="theme-color"]');
+    if (!themeColor) {
+      themeColor = document.createElement('meta');
+      themeColor.name = 'theme-color';
+      document.head.appendChild(themeColor);
+    }
+    themeColor.setAttribute('content', THEME_COLORS[selectedTheme - 1]);
 
     const button = document.querySelector('.reader-theme');
     if (button) {
