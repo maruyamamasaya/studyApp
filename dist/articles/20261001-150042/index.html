@@ -1,0 +1,1357 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><meta name="description" content="VMwareからOpenShift Virtualizationへの移行 調査整理 — Study App の学習ノート"><meta name="theme-color" content="#f7f7f5"><script>
+      (() => {
+        const themes = ['standard', 'wiki', 'living-aurora', 'blue-cosmos', 'pulse-neon'];
+        try {
+          const savedTheme = localStorage.getItem('study-app:theme');
+          if (themes.includes(savedTheme)) document.documentElement.dataset.theme = savedTheme;
+        } catch {
+          // The standard theme remains usable when storage is unavailable.
+        }
+      })();
+    </script><link rel="icon" type="image/svg+xml" href="/favicon.svg"><title>VMwareからOpenShift Virtualizationへの移行 調査整理 | Study App</title><link rel="stylesheet" href="/_astro/BaseLayout.Blcdandm.css"></head><body><header class="site-header"><div class="header-inner"><a class="brand" href="/" aria-label="Study App ホーム"><span class="brand-mark" aria-hidden="true">S</span><span>Study App</span></a><div class="header-actions"><label class="theme-picker"><span class="theme-picker__label">テーマ</span><span class="theme-picker__swatch" aria-hidden="true"></span><select aria-label="表示テーマ" data-theme-picker><option value="standard">Standard</option><option value="wiki">Wiki</option><option value="living-aurora">Living Aurora</option><option value="blue-cosmos">Blue Cosmos</option><option value="pulse-neon">Pulse Neon</option></select></label></div></div></header><div class="app-shell"><aside class="sidebar"><details class="sidebar-drawer" open><summary>ページ</summary><div class="sidebar-content"><nav class="primary-nav" aria-label="メインナビゲーション"><a href="/">すべての記事</a><a href="/training/">研修資料</a></nav><details class="page-tree" open><summary>ページツリー</summary><nav aria-label="記事の階層"><ul class="tree-level"><li class="tree-node tree-folder is-active-branch"><details open data-tree-folder="wiki" data-active-branch="true"><summary><span class="tree-chevron" aria-hidden="true">›</span><span>Wiki</span></summary><ul class="tree-level"><li class="tree-node tree-folder"><details data-tree-folder="wiki/anken001"><summary><span class="tree-chevron" aria-hidden="true">›</span><span>anken001</span></summary><ul class="tree-level"><li class="tree-node tree-article"><a href="/articles/20261001-145031/">Te社向け 社内RAG基盤 詳細設計書作成タスク整理</a></li></ul></details></li><li class="tree-node tree-folder"><details data-tree-folder="wiki/anken002"><summary><span class="tree-chevron" aria-hidden="true">›</span><span>anken002</span></summary><ul class="tree-level"><li class="tree-node tree-article"><a href="/articles/20261001-145309/">製造A社 Windows Server移行案件 調査整理</a></li></ul></details></li><li class="tree-node tree-folder"><details data-tree-folder="wiki/anken003"><summary><span class="tree-chevron" aria-hidden="true">›</span><span>anken003</span></summary><ul class="tree-level"><li class="tree-node tree-article"><a href="/articles/20261001-145549/">キッティング管理システム AWS構成・調査整理</a></li></ul></details></li><li class="tree-node tree-folder"><details data-tree-folder="wiki/anken004"><summary><span class="tree-chevron" aria-hidden="true">›</span><span>anken004</span></summary><ul class="tree-level"><li class="tree-node tree-article"><a href="/articles/20261001-145705/">医療系システム 非機能要件・クラウド基盤検討整理</a></li></ul></details></li><li class="tree-node tree-folder is-active-branch"><details open data-tree-folder="wiki/anken005" data-active-branch="true"><summary><span class="tree-chevron" aria-hidden="true">›</span><span>anken005</span></summary><ul class="tree-level"><li class="tree-node tree-article"><a class="active" aria-current="page" href="/articles/20261001-150042/">VMwareからOpenShift Virtualizationへの移行 調査整理</a></li></ul></details></li></ul></details></li></ul></nav></details><details class="learning-tools" data-learning-tools data-study-ids="[]"><summary>学習データ</summary><div class="learning-tools__body"><p class="learning-tools__summary"><strong data-learning-summary>0/0</strong><span data-learning-total>0秒</span></p><div class="learning-tools__actions"><button type="button" data-learning-export>保存</button><label>復元<input type="file" accept="application/json,.json" data-learning-import></label></div><p class="learning-tools__status" data-learning-status aria-live="polite"></p></div></details><script type="module" src="/_astro/LearningDataTools.astro_astro_type_script_index_0_lang.CEB3ME2V.js"></script></div></details></aside><div class="content-column"><main class="content-main"><div class="article-layout"><article><header class="article-header article-header--wiki"><a class="back-link" href="/">記事一覧に戻る</a><div class="card-meta"><span>wiki</span><time>2026-10-01 15:00:42</time></div><h1>VMwareからOpenShift Virtualizationへの移行 調査整理</h1><section class="study-progress" data-study-progress data-article-id="20261001-150042" data-article-type="wiki" aria-label="この記事の学習状態"><button type="button" class="study-progress__completion" data-progress-completion aria-pressed="false">○ 未読了</button><span class="study-progress__time">学習 <strong data-progress-time>0秒</strong></span><span class="visually-hidden" data-progress-status aria-live="polite"></span></section><script type="module" src="/_astro/StudyProgressPanel.astro_astro_type_script_index_0_lang.DOy-2xSn.js"></script></header><div class="prose"><h2 id="1-概要">1. 概要</h2>
+<p>VMware環境上で稼働している仮想マシン群について、ライセンス・運用コストの増加を背景に、Red Hat OpenShift Virtualizationへの移行を検討している。</p>
+<p>対象規模は約50台の仮想マシンを想定している。</p>
+<p>現時点では、既存VMware環境の構成確認、OpenShift Virtualizationの機能調査、ストレージ・ネットワーク・バックアップ・移行方式の比較を進めている。</p>
+<p>移行完了目標は2027年3月末頃を想定している。</p>
+<p>本資料は現時点の調査・検討内容を整理したものであり、最終的な構成や移行方式を確定したものではない。</p>
+<hr>
+<h2 id="2-移行の背景">2. 移行の背景</h2>
+<p>既存環境ではVMwareを利用しているが、今後のライセンス費用や運用コストの増加が課題となっている。</p>
+<p>そのため、VMware依存を減らし、OpenShift上で仮想マシンを稼働させる構成への移行を検討している。</p>
+<p>主な目的は以下。</p>
+<ul>
+<li>
+<p>VMwareライセンスコストの削減</p>
+</li>
+<li>
+<p>仮想基盤の標準化</p>
+</li>
+<li>
+<p>コンテナ基盤との統合</p>
+</li>
+<li>
+<p>Kubernetesベースの運用への移行</p>
+</li>
+<li>
+<p>将来的なクラウドネイティブ化への対応</p>
+</li>
+</ul>
+<hr>
+<h2 id="3-openshift-virtualizationとは">3. OpenShift Virtualizationとは</h2>
+<p>OpenShift Virtualizationは、Red Hat OpenShift上で仮想マシンを稼働させるための機能。</p>
+<p>Kubernetes上でVMを管理するKubeVirtをベースとしている。</p>
+<p>従来のVMwareでは、</p>
+<ul>
+<li>
+<p>ESXi</p>
+</li>
+<li>
+<p>vCenter</p>
+</li>
+<li>
+<p>vSphere</p>
+</li>
+</ul>
+<p>などを利用して仮想マシンを管理する。</p>
+<p>OpenShift Virtualizationでは、仮想マシンもKubernetesリソースとして管理する。</p>
+<p>そのため、仮想マシンとコンテナを同じOpenShiftクラスタ上で運用できる。</p>
+<hr>
+<h2 id="4-想定対象規模">4. 想定対象規模</h2>
+<p>現時点では約50台のVMを対象としている。</p>
+<p>対象VMについては、今後以下を整理する必要がある。</p>
+<ul>
+<li>
+<p>OS</p>
+</li>
+<li>
+<p>vCPU</p>
+</li>
+<li>
+<p>メモリ</p>
+</li>
+<li>
+<p>ディスク容量</p>
+</li>
+<li>
+<p>ネットワーク</p>
+</li>
+<li>
+<p>IPアドレス</p>
+</li>
+<li>
+<p>VLAN</p>
+</li>
+<li>
+<p>VMware Tools</p>
+</li>
+<li>
+<p>スナップショット</p>
+</li>
+<li>
+<p>バックアップ</p>
+</li>
+<li>
+<p>依存システム</p>
+</li>
+<li>
+<p>稼働時間</p>
+</li>
+<li>
+<p>停止可能時間</p>
+</li>
+</ul>
+<p>VMごとに移行難易度が異なるため、一覧化して分類する必要がある。</p>
+<hr>
+<h2 id="5-現行vmware環境">5. 現行VMware環境</h2>
+<p>検証環境では以下のESXiを利用している。</p>
+<ul>
+<li>
+<p>ESXi 7.0 Update 3</p>
+</li>
+<li>
+<p>datastore1：約1.78TB</p>
+</li>
+<li>
+<p>空き容量：約209GB</p>
+</li>
+</ul>
+<p>実環境については、今後正確な構成確認が必要。</p>
+<p>確認対象は以下。</p>
+<ul>
+<li>
+<p>ESXiホスト数</p>
+</li>
+<li>
+<p>ESXiバージョン</p>
+</li>
+<li>
+<p>vCenterバージョン</p>
+</li>
+<li>
+<p>クラスタ構成</p>
+</li>
+<li>
+<p>HA</p>
+</li>
+<li>
+<p>DRS</p>
+</li>
+<li>
+<p>vMotion</p>
+</li>
+<li>
+<p>vSAN</p>
+</li>
+<li>
+<p>Datastore</p>
+</li>
+<li>
+<p>NIC構成</p>
+</li>
+<li>
+<p>VLAN</p>
+</li>
+<li>
+<p>NSX</p>
+</li>
+<li>
+<p>バックアップ製品</p>
+</li>
+</ul>
+<hr>
+<h2 id="6-openshift側の構成要素">6. OpenShift側の構成要素</h2>
+<p>OpenShift Virtualization環境では、主に以下を検討する。</p>
+<ul>
+<li>
+<p>OpenShift Container Platform</p>
+</li>
+<li>
+<p>OpenShift Virtualization</p>
+</li>
+<li>
+<p>KubeVirt</p>
+</li>
+<li>
+<p>MTV</p>
+</li>
+<li>
+<p>ODF</p>
+</li>
+<li>
+<p>OADP</p>
+</li>
+<li>
+<p>Multus</p>
+</li>
+<li>
+<p>NMState</p>
+</li>
+<li>
+<p>OpenShift Networking</p>
+</li>
+</ul>
+<p>VMwareで利用していた機能を、OpenShift側でどのように代替するか整理する必要がある。</p>
+<hr>
+<h2 id="7-kubevirt">7. KubeVirt</h2>
+<p>KubeVirtは、Kubernetes上で仮想マシンを実行するための技術。</p>
+<p>仮想マシンはVirtualMachineなどのKubernetesリソースとして管理される。</p>
+<p>OpenShift Virtualizationは、このKubeVirtをOpenShift向けに統合したもの。</p>
+<p>主な役割は以下。</p>
+<ul>
+<li>
+<p>VM作成</p>
+</li>
+<li>
+<p>VM起動・停止</p>
+</li>
+<li>
+<p>CPU / メモリ管理</p>
+</li>
+<li>
+<p>仮想ディスク管理</p>
+</li>
+<li>
+<p>ネットワーク接続</p>
+</li>
+<li>
+<p>ライブマイグレーション</p>
+</li>
+</ul>
+<hr>
+<h2 id="8-mtv">8. MTV</h2>
+<p>Migration Toolkit for Virtualization、通称MTVを利用して、VMwareからOpenShift VirtualizationへのVM移行を行う方法を検討している。</p>
+<p>MTVでは、</p>
+<ul>
+<li>
+<p>VMware環境の接続</p>
+</li>
+<li>
+<p>VM一覧取得</p>
+</li>
+<li>
+<p>移行対象選択</p>
+</li>
+<li>
+<p>ネットワークマッピング</p>
+</li>
+<li>
+<p>ストレージマッピング</p>
+</li>
+<li>
+<p>VM変換</p>
+</li>
+<li>
+<p>データコピー</p>
+</li>
+<li>
+<p>OpenShift上へのVM作成</p>
+</li>
+</ul>
+<p>などを行える。</p>
+<p>約50台のVM移行では、MTVを中心とした移行方式が有力候補。</p>
+<hr>
+<h2 id="9-移行方式">9. 移行方式</h2>
+<p>大きく以下の方式を検討する。</p>
+<h3 id="91-cold-migration">9.1 Cold Migration</h3>
+<p>VMを停止してから移行する方式。</p>
+<p>メリット：</p>
+<ul>
+<li>
+<p>構成が比較的単純</p>
+</li>
+<li>
+<p>データ整合性を確保しやすい</p>
+</li>
+</ul>
+<p>デメリット：</p>
+<ul>
+<li>
+<p>移行中はサービス停止が必要</p>
+</li>
+<li>
+<p>VMサイズによって停止時間が長くなる</p>
+</li>
+</ul>
+<hr>
+<h3 id="92-warm-migration">9.2 Warm Migration</h3>
+<p>VMを稼働させた状態で事前コピーを行い、最終切替時のみ停止する方式。</p>
+<p>メリット：</p>
+<ul>
+<li>
+<p>サービス停止時間を短縮できる</p>
+</li>
+<li>
+<p>大容量VMでも移行しやすい</p>
+</li>
+</ul>
+<p>デメリット：</p>
+<ul>
+<li>
+<p>移行手順が複雑</p>
+</li>
+<li>
+<p>対応条件を確認する必要がある</p>
+</li>
+</ul>
+<p>業務停止時間を短くしたいVMについては、Warm Migrationを検討する。</p>
+<hr>
+<h2 id="10-ストレージ">10. ストレージ</h2>
+<p>OpenShift Virtualizationでは、VMの仮想ディスクをPersistentVolumeとして管理する。</p>
+<p>ストレージ設計は非常に重要。</p>
+<p>現在比較している主な候補は以下。</p>
+<ul>
+<li>
+<p>vSAN継続または連携</p>
+</li>
+<li>
+<p>OpenShift Data Foundation</p>
+</li>
+<li>
+<p>外部ストレージ</p>
+</li>
+<li>
+<p>CSI対応ストレージ</p>
+</li>
+</ul>
+<hr>
+<h2 id="11-vsan">11. vSAN</h2>
+<p>現行VMware環境でvSANを利用している場合、そのデータをそのままOpenShift Virtualizationで利用できるとは限らない。</p>
+<p>移行時には、OpenShift側で利用可能なストレージへデータをコピーする必要がある可能性が高い。</p>
+<p>そのため、</p>
+<ul>
+<li>
+<p>現行vSAN容量</p>
+</li>
+<li>
+<p>使用量</p>
+</li>
+<li>
+<p>IOPS</p>
+</li>
+<li>
+<p>性能</p>
+</li>
+<li>
+<p>冗長方式</p>
+</li>
+</ul>
+<p>を確認する必要がある。</p>
+<hr>
+<h2 id="12-odf">12. ODF</h2>
+<p>OpenShift Data Foundationは、OpenShift向けのSoftware Defined Storage。</p>
+<p>OpenShiftクラスタ内のストレージとして利用できる。</p>
+<p>主な特徴。</p>
+<ul>
+<li>
+<p>Cephベース</p>
+</li>
+<li>
+<p>Kubernetesとの統合</p>
+</li>
+<li>
+<p>PersistentVolume提供</p>
+</li>
+<li>
+<p>レプリケーション</p>
+</li>
+<li>
+<p>障害耐性</p>
+</li>
+</ul>
+<p>OpenShift VirtualizationのVMディスク保存先として有力候補。</p>
+<hr>
+<h2 id="13-vsanとodfの比較">13. vSANとODFの比較</h2>
+<p>VMware環境ではvSANがストレージ基盤として利用されることが多い。</p>
+<p>OpenShift環境では、同様の役割としてODFが候補になる。</p>
+<p>比較観点は以下。</p>
+<ul>
+<li>
+<p>容量</p>
+</li>
+<li>
+<p>性能</p>
+</li>
+<li>
+<p>IOPS</p>
+</li>
+<li>
+<p>レイテンシ</p>
+</li>
+<li>
+<p>冗長性</p>
+</li>
+<li>
+<p>ノード障害対応</p>
+</li>
+<li>
+<p>運用性</p>
+</li>
+<li>
+<p>ライセンス</p>
+</li>
+<li>
+<p>コスト</p>
+</li>
+<li>
+<p>バックアップ</p>
+</li>
+<li>
+<p>拡張性</p>
+</li>
+</ul>
+<p>単純な機能比較ではなく、約50VMのI/O特性を考慮して判断する必要がある。</p>
+<hr>
+<h2 id="14-ネットワーク">14. ネットワーク</h2>
+<p>VMware側で利用しているネットワークをOpenShift側で再現する必要がある。</p>
+<p>確認対象は以下。</p>
+<ul>
+<li>
+<p>VLAN</p>
+</li>
+<li>
+<p>IPアドレス</p>
+</li>
+<li>
+<p>Default Gateway</p>
+</li>
+<li>
+<p>DNS</p>
+</li>
+<li>
+<p>Firewall</p>
+</li>
+<li>
+<p>Load Balancer</p>
+</li>
+<li>
+<p>NAT</p>
+</li>
+<li>
+<p>VPN</p>
+</li>
+<li>
+<p>マルチNIC</p>
+</li>
+<li>
+<p>固定IP</p>
+</li>
+</ul>
+<p>OpenShiftでは、Podネットワークとは別にVM用のネットワークを構成する場合がある。</p>
+<hr>
+<h2 id="15-multus">15. Multus</h2>
+<p>OpenShiftではMultusを利用して、PodやVMに複数のネットワークインターフェースを割り当てることができる。</p>
+<p>例えば、</p>
+<ul>
+<li>
+<p>管理ネットワーク</p>
+</li>
+<li>
+<p>業務ネットワーク</p>
+</li>
+<li>
+<p>バックアップネットワーク</p>
+</li>
+</ul>
+<p>などを分離する構成。</p>
+<p>VMwareで複数のPort GroupやVLANを使用している場合、Multusを利用したネットワーク設計を検討する。</p>
+<hr>
+<h2 id="16-nsx">16. NSX</h2>
+<p>現行VMware環境でNSXを使用している場合、OpenShift移行時の重要な確認ポイントになる。</p>
+<p>NSXでは以下の機能を利用している可能性がある。</p>
+<ul>
+<li>
+<p>Distributed Firewall</p>
+</li>
+<li>
+<p>NAT</p>
+</li>
+<li>
+<p>VPN</p>
+</li>
+<li>
+<p>Load Balancer</p>
+</li>
+<li>
+<p>セグメント</p>
+</li>
+<li>
+<p>ルーティング</p>
+</li>
+</ul>
+<p>これらをOpenShift側でどのように実現するか設計する必要がある。</p>
+<hr>
+<h2 id="17-nsx機能の移行">17. NSX機能の移行</h2>
+<p>例えばDistributed Firewallを利用している場合、OpenShiftでは以下の組み合わせを検討する。</p>
+<ul>
+<li>
+<p>NetworkPolicy</p>
+</li>
+<li>
+<p>Kubernetes ACL</p>
+</li>
+<li>
+<p>Firewall</p>
+</li>
+<li>
+<p>外部NW機器</p>
+</li>
+</ul>
+<p>NATやVPNについては、外部ネットワーク機器や別サービスへ移行する可能性もある。</p>
+<p>そのため、単純にVMだけ移行するのではなく、ネットワーク機能も棚卸しする必要がある。</p>
+<hr>
+<h2 id="18-バックアップ">18. バックアップ</h2>
+<p>OpenShift Virtualizationでは、VMとそのディスクをどのようにバックアップするか検討する必要がある。</p>
+<p>候補としてOADPを調査している。</p>
+<hr>
+<h2 id="19-oadp">19. OADP</h2>
+<p>OpenShift API for Data Protection、通称OADPは、OpenShift上のリソースやPersistentVolumeをバックアップするための仕組み。</p>
+<p>主な用途。</p>
+<ul>
+<li>
+<p>Kubernetesリソースバックアップ</p>
+</li>
+<li>
+<p>PersistentVolumeバックアップ</p>
+</li>
+<li>
+<p>VM関連リソースバックアップ</p>
+</li>
+<li>
+<p>障害時復旧</p>
+</li>
+</ul>
+<p>VMwareで利用していたバックアップ製品と同等の運用が可能か確認する必要がある。</p>
+<hr>
+<h2 id="20-バックアップで確認する事項">20. バックアップで確認する事項</h2>
+<p>以下を整理する。</p>
+<ul>
+<li>
+<p>バックアップ対象</p>
+</li>
+<li>
+<p>フルバックアップ</p>
+</li>
+<li>
+<p>増分バックアップ</p>
+</li>
+<li>
+<p>取得頻度</p>
+</li>
+<li>
+<p>保存期間</p>
+</li>
+<li>
+<p>バックアップ保存先</p>
+</li>
+<li>
+<p>別拠点保存</p>
+</li>
+<li>
+<p>リストア方法</p>
+</li>
+<li>
+<p>VM単位復元</p>
+</li>
+<li>
+<p>ファイル単位復元</p>
+</li>
+<li>
+<p>RPO</p>
+</li>
+<li>
+<p>RTO</p>
+</li>
+</ul>
+<hr>
+<h2 id="21-高可用性">21. 高可用性</h2>
+<p>OpenShiftクラスタでは複数ノードで構成し、ノード障害時でもVMを継続または再起動できる構成を検討する。</p>
+<p>VMware HAに相当する機能がどのように提供されるか確認する。</p>
+<p>想定する障害。</p>
+<ul>
+<li>
+<p>ノード障害</p>
+</li>
+<li>
+<p>ストレージ障害</p>
+</li>
+<li>
+<p>NIC障害</p>
+</li>
+<li>
+<p>VM障害</p>
+</li>
+<li>
+<p>OpenShiftコンポーネント障害</p>
+</li>
+</ul>
+<hr>
+<h2 id="22-ライブマイグレーション">22. ライブマイグレーション</h2>
+<p>OpenShift Virtualizationでも、VMを停止せずに別ノードへ移動するLive Migrationが利用可能。</p>
+<p>VMwareのvMotionに近い機能。</p>
+<p>ただし、</p>
+<ul>
+<li>
+<p>ストレージ構成</p>
+</li>
+<li>
+<p>ネットワーク</p>
+</li>
+<li>
+<p>VM設定</p>
+</li>
+</ul>
+<p>によって利用条件があるため、事前確認が必要。</p>
+<hr>
+<h2 id="23-vmごとの互換性確認">23. VMごとの互換性確認</h2>
+<p>VMware上で動作しているVMが、OpenShift Virtualizationでも問題なく動作するか確認する。</p>
+<p>特に以下。</p>
+<ul>
+<li>
+<p>Windows</p>
+</li>
+<li>
+<p>Linux</p>
+</li>
+<li>
+<p>古いOS</p>
+</li>
+<li>
+<p>VMware Tools</p>
+</li>
+<li>
+<p>仮想NIC</p>
+</li>
+<li>
+<p>仮想ディスク</p>
+</li>
+<li>
+<p>UEFI / BIOS</p>
+</li>
+<li>
+<p>Secure Boot</p>
+</li>
+<li>
+<p>特殊デバイス</p>
+</li>
+<li>
+<p>USB</p>
+</li>
+<li>
+<p>GPU</p>
+</li>
+</ul>
+<p>古いOSや特殊な構成のVMは移行難易度が高くなる可能性がある。</p>
+<hr>
+<h2 id="24-windows-vm">24. Windows VM</h2>
+<p>Windows VMを移行する場合は、VirtIOドライバ等が必要になる場合がある。</p>
+<p>確認事項。</p>
+<ul>
+<li>
+<p>Windowsバージョン</p>
+</li>
+<li>
+<p>VirtIO対応</p>
+</li>
+<li>
+<p>NICドライバ</p>
+</li>
+<li>
+<p>Storageドライバ</p>
+</li>
+<li>
+<p>ライセンス</p>
+</li>
+<li>
+<p>Active Directory</p>
+</li>
+<li>
+<p>固定IP</p>
+</li>
+</ul>
+<p>MTVによる移行時に自動変換可能な範囲も確認する。</p>
+<hr>
+<h2 id="25-linux-vm">25. Linux VM</h2>
+<p>Linuxの場合も以下を確認する。</p>
+<ul>
+<li>
+<p>ディストリビューション</p>
+</li>
+<li>
+<p>カーネル</p>
+</li>
+<li>
+<p>VirtIO</p>
+</li>
+<li>
+<p>NetworkManager</p>
+</li>
+<li>
+<p>NIC名</p>
+</li>
+<li>
+<p>fstab</p>
+</li>
+<li>
+<p>Boot Loader</p>
+</li>
+</ul>
+<p>VMware固有ドライバや設定が残っている場合は修正が必要になる可能性がある。</p>
+<hr>
+<h2 id="26-検証環境">26. 検証環境</h2>
+<p>現時点ではESXiラボ環境を利用して検証している。</p>
+<p>ESXi上にテスト用VMを作成し、OpenShift移行を想定した検証を行う。</p>
+<p>検証例として、AlmaLinux 9を利用した冗長Web構成を作成している。</p>
+<p>構成例。</p>
+<ul>
+<li>
+<p>web1</p>
+</li>
+<li>
+<p>web2</p>
+</li>
+<li>
+<p>HAProxy</p>
+</li>
+<li>
+<p>SQLite access_log</p>
+</li>
+</ul>
+<p>HAProxyからweb1 / web2へHTTPアクセスを分散する構成。</p>
+<hr>
+<h2 id="27-検証で確認したい内容">27. 検証で確認したい内容</h2>
+<p>今後検証したい項目。</p>
+<ol>
+<li>
+<p>VMware VMの検出</p>
+</li>
+<li>
+<p>MTV接続</p>
+</li>
+<li>
+<p>VM移行</p>
+</li>
+<li>
+<p>Cold Migration</p>
+</li>
+<li>
+<p>Warm Migration</p>
+</li>
+<li>
+<p>Windows VM移行</p>
+</li>
+<li>
+<p>Linux VM移行</p>
+</li>
+<li>
+<p>VLAN接続</p>
+</li>
+<li>
+<p>固定IP</p>
+</li>
+<li>
+<p>ODF</p>
+</li>
+<li>
+<p>Live Migration</p>
+</li>
+<li>
+<p>OADPバックアップ</p>
+</li>
+<li>
+<p>VMリストア</p>
+</li>
+<li>
+<p>ノード障害</p>
+</li>
+<li>
+<p>性能</p>
+</li>
+</ol>
+<hr>
+<h2 id="28-性能試験">28. 性能試験</h2>
+<p>OpenShift Virtualizationへ移行した場合に、既存VMware環境と同等以上の性能を維持できるか確認する。</p>
+<p>確認対象。</p>
+<ul>
+<li>
+<p>CPU</p>
+</li>
+<li>
+<p>メモリ</p>
+</li>
+<li>
+<p>Disk IOPS</p>
+</li>
+<li>
+<p>Disk Latency</p>
+</li>
+<li>
+<p>Network Throughput</p>
+</li>
+<li>
+<p>Network Latency</p>
+</li>
+</ul>
+<p>特にストレージ性能はVM全体の性能へ大きく影響する。</p>
+<hr>
+<h2 id="29-容量設計">29. 容量設計</h2>
+<p>対象約50VMについて、以下を合算する。</p>
+<ul>
+<li>
+<p>vCPU</p>
+</li>
+<li>
+<p>Memory</p>
+</li>
+<li>
+<p>Disk</p>
+</li>
+<li>
+<p>IOPS</p>
+</li>
+<li>
+<p>Network</p>
+</li>
+</ul>
+<p>さらにOpenShift自体のリソースも必要。</p>
+<p>そのため、</p>
+<p>VM合計リソース + OpenShift基盤リソース + 障害時余力</p>
+<p>でサイジングする必要がある。</p>
+<hr>
+<h2 id="30-ノード設計">30. ノード設計</h2>
+<p>OpenShift Virtualizationを稼働させるWorker Nodeについて以下を検討する。</p>
+<ul>
+<li>
+<p>Node数</p>
+</li>
+<li>
+<p>CPU</p>
+</li>
+<li>
+<p>Memory</p>
+</li>
+<li>
+<p>Disk</p>
+</li>
+<li>
+<p>NIC</p>
+</li>
+<li>
+<p>冗長性</p>
+</li>
+</ul>
+<p>1台のNodeにVMを詰め込みすぎると、Node障害時の影響が大きくなる。</p>
+<p>そのため、N+1等の障害時余力を持たせる必要がある。</p>
+<hr>
+<h2 id="31-移行順序">31. 移行順序</h2>
+<p>約50VMを一度に移行するのではなく、段階的な移行を想定する。</p>
+<p>例。</p>
+<h3 id="phase-1">Phase 1</h3>
+<p>検証VMを移行。</p>
+<h3 id="phase-2">Phase 2</h3>
+<p>影響の小さいVMを移行。</p>
+<h3 id="phase-3">Phase 3</h3>
+<p>一般業務VMを移行。</p>
+<h3 id="phase-4">Phase 4</h3>
+<p>重要システムを移行。</p>
+<h3 id="phase-5">Phase 5</h3>
+<p>VMware環境を縮退・廃止。</p>
+<hr>
+<h2 id="32-vm分類">32. VM分類</h2>
+<p>移行前にVMを以下のように分類するとよい。</p>
+<h3 id="a">A</h3>
+<p>移行容易。</p>
+<ul>
+<li>
+<p>Linux</p>
+</li>
+<li>
+<p>標準構成</p>
+</li>
+<li>
+<p>停止可能</p>
+</li>
+</ul>
+<h3 id="b">B</h3>
+<p>通常移行。</p>
+<ul>
+<li>
+<p>Windows</p>
+</li>
+<li>
+<p>業務アプリあり</p>
+</li>
+<li>
+<p>停止時間制約あり</p>
+</li>
+</ul>
+<h3 id="c">C</h3>
+<p>要検証。</p>
+<ul>
+<li>
+<p>古いOS</p>
+</li>
+<li>
+<p>特殊ドライバ</p>
+</li>
+<li>
+<p>特殊ネットワーク</p>
+</li>
+</ul>
+<h3 id="d">D</h3>
+<p>移行困難。</p>
+<ul>
+<li>
+<p>VMware固有機能依存</p>
+</li>
+<li>
+<p>特殊デバイス</p>
+</li>
+<li>
+<p>メーカー保証対象外</p>
+</li>
+</ul>
+<p>この分類によって移行順序を決める。</p>
+<hr>
+<h2 id="33-ロールバック">33. ロールバック</h2>
+<p>VM移行ではロールバック手順も重要。</p>
+<p>切替後に問題が発生した場合、VMware側へ戻せるようにする。</p>
+<p>確認事項。</p>
+<ul>
+<li>
+<p>VMware VMをいつまで残すか</p>
+</li>
+<li>
+<p>データ同期方法</p>
+</li>
+<li>
+<p>切戻し条件</p>
+</li>
+<li>
+<p>DNS / IP切替</p>
+</li>
+<li>
+<p>ロールバック判断者</p>
+</li>
+</ul>
+<hr>
+<h2 id="34-移行時の停止時間">34. 移行時の停止時間</h2>
+<p>VMごとに許容停止時間を確認する。</p>
+<p>例えば、</p>
+<ul>
+<li>
+<p>24時間停止可能</p>
+</li>
+<li>
+<p>夜間のみ</p>
+</li>
+<li>
+<p>2時間以内</p>
+</li>
+<li>
+<p>30分以内</p>
+</li>
+<li>
+<p>停止不可</p>
+</li>
+</ul>
+<p>許容停止時間によってCold MigrationかWarm Migrationかを決定する。</p>
+<hr>
+<h2 id="35-運用変更">35. 運用変更</h2>
+<p>OpenShift Virtualizationへ移行すると、従来のVMware運用から運用方法が大きく変わる。</p>
+<p>例えばVM作成も、vCenterではなくOpenShift ConsoleやYAMLで管理する。</p>
+<p>運用担当者には以下の知識が必要になる。</p>
+<ul>
+<li>
+<p>OpenShift</p>
+</li>
+<li>
+<p>Kubernetes</p>
+</li>
+<li>
+<p>YAML</p>
+</li>
+<li>
+<p>ocコマンド</p>
+</li>
+<li>
+<p>KubeVirt</p>
+</li>
+<li>
+<p>Operator</p>
+</li>
+<li>
+<p>StorageClass</p>
+</li>
+<li>
+<p>PVC</p>
+</li>
+<li>
+<p>NetworkAttachmentDefinition</p>
+</li>
+</ul>
+<hr>
+<h2 id="36-監視">36. 監視</h2>
+<p>OpenShiftではPrometheus等を利用した監視が標準的。</p>
+<p>確認対象。</p>
+<ul>
+<li>
+<p>Node</p>
+</li>
+<li>
+<p>VM</p>
+</li>
+<li>
+<p>CPU</p>
+</li>
+<li>
+<p>Memory</p>
+</li>
+<li>
+<p>Storage</p>
+</li>
+<li>
+<p>Network</p>
+</li>
+<li>
+<p>OpenShiftコンポーネント</p>
+</li>
+<li>
+<p>アラート</p>
+</li>
+</ul>
+<p>VM内部の監視を別途行うかも検討する。</p>
+<hr>
+<h2 id="37-セキュリティ">37. セキュリティ</h2>
+<p>以下を整理する。</p>
+<ul>
+<li>
+<p>OpenShift RBAC</p>
+</li>
+<li>
+<p>ユーザー権限</p>
+</li>
+<li>
+<p>VM操作権限</p>
+</li>
+<li>
+<p>NetworkPolicy</p>
+</li>
+<li>
+<p>証明書</p>
+</li>
+<li>
+<p>Secrets</p>
+</li>
+<li>
+<p>管理ネットワーク</p>
+</li>
+<li>
+<p>監査ログ</p>
+</li>
+<li>
+<p>パッチ適用</p>
+</li>
+</ul>
+<p>VMwareからOpenShiftへ移行することで、権限管理の考え方も変わる。</p>
+<hr>
+<h2 id="38-主なリスク">38. 主なリスク</h2>
+<h3 id="381-ストレージ性能">38.1 ストレージ性能</h3>
+<p>ODF等の設計が不適切な場合、VM性能が低下する可能性がある。</p>
+<h3 id="382-ネットワーク移行">38.2 ネットワーク移行</h3>
+<p>NSX依存が強い場合、OpenShift側への移行が複雑になる。</p>
+<h3 id="383-古いvm">38.3 古いVM</h3>
+<p>古いOSやドライバを利用しているVMは移行できない可能性がある。</p>
+<h3 id="384-バックアップ">38.4 バックアップ</h3>
+<p>VMware用バックアップ方式をそのまま利用できない可能性がある。</p>
+<h3 id="385-運用スキル">38.5 運用スキル</h3>
+<p>VMwareとKubernetesでは運用思想が異なるため、運用担当者の学習が必要。</p>
+<hr>
+<h2 id="39-現時点で確認したい事項">39. 現時点で確認したい事項</h2>
+<h3 id="vmware環境">VMware環境</h3>
+<ol>
+<li>
+<p>ESXiホスト数</p>
+</li>
+<li>
+<p>vCenterバージョン</p>
+</li>
+<li>
+<p>対象VM数</p>
+</li>
+<li>
+<p>VM一覧</p>
+</li>
+<li>
+<p>CPU / Memory</p>
+</li>
+<li>
+<p>Disk</p>
+</li>
+<li>
+<p>Datastore</p>
+</li>
+<li>
+<p>vSAN</p>
+</li>
+<li>
+<p>VLAN</p>
+</li>
+<li>
+<p>NSX利用状況</p>
+</li>
+<li>
+<p>バックアップ方式</p>
+</li>
+<li>
+<p>VMware Tools</p>
+</li>
+<li>
+<p>HA</p>
+</li>
+<li>
+<p>DRS</p>
+</li>
+<li>
+<p>vMotion</p>
+</li>
+</ol>
+<h3 id="vm">VM</h3>
+<ol>
+<li>
+<p>OS</p>
+</li>
+<li>
+<p>バージョン</p>
+</li>
+<li>
+<p>アプリ</p>
+</li>
+<li>
+<p>DB</p>
+</li>
+<li>
+<p>固定IP</p>
+</li>
+<li>
+<p>VLAN</p>
+</li>
+<li>
+<p>停止可能時間</p>
+</li>
+<li>
+<p>重要度</p>
+</li>
+<li>
+<p>外部連携</p>
+</li>
+<li>
+<p>特殊デバイス</p>
+</li>
+</ol>
+<h3 id="openshift">OpenShift</h3>
+<ol>
+<li>
+<p>クラスタ構成</p>
+</li>
+<li>
+<p>Node数</p>
+</li>
+<li>
+<p>Nodeスペック</p>
+</li>
+<li>
+<p>ODF構成</p>
+</li>
+<li>
+<p>ネットワーク構成</p>
+</li>
+<li>
+<p>MTV</p>
+</li>
+<li>
+<p>OADP</p>
+</li>
+<li>
+<p>監視</p>
+</li>
+<li>
+<p>バックアップ</p>
+</li>
+<li>
+<p>DR</p>
+</li>
+</ol>
+<hr>
+<h2 id="40-今後の進め方">40. 今後の進め方</h2>
+<p>まずVMware環境を棚卸しする。</p>
+<p>そのうえで以下の順序で進める。</p>
+<ol>
+<li>
+<p>VM一覧作成</p>
+</li>
+<li>
+<p>VM依存関係整理</p>
+</li>
+<li>
+<p>VMware機能棚卸し</p>
+</li>
+<li>
+<p>NSX利用状況確認</p>
+</li>
+<li>
+<p>ストレージ使用量・性能確認</p>
+</li>
+<li>
+<p>OpenShiftサイジング</p>
+</li>
+<li>
+<p>ネットワーク設計</p>
+</li>
+<li>
+<p>ストレージ設計</p>
+</li>
+<li>
+<p>MTV検証</p>
+</li>
+<li>
+<p>OADP検証</p>
+</li>
+<li>
+<p>テストVM移行</p>
+</li>
+<li>
+<p>性能試験</p>
+</li>
+<li>
+<p>移行計画作成</p>
+</li>
+<li>
+<p>本番VM段階移行</p>
+</li>
+<li>
+<p>VMware縮退</p>
+</li>
+</ol>
+<hr>
+<h2 id="41-現時点での整理">41. 現時点での整理</h2>
+<p>本案件では、単純にVMwareのVMをOpenShiftへコピーするだけではなく、</p>
+<ul>
+<li>
+<p>コンピュート</p>
+</li>
+<li>
+<p>ストレージ</p>
+</li>
+<li>
+<p>ネットワーク</p>
+</li>
+<li>
+<p>バックアップ</p>
+</li>
+<li>
+<p>可用性</p>
+</li>
+<li>
+<p>運用</p>
+</li>
+</ul>
+<p>をOpenShiftの考え方に置き換える必要がある。</p>
+<p>特に重要なのは、</p>
+<ul>
+<li>
+<p>MTVによるVM移行</p>
+</li>
+<li>
+<p>vSANとODFの違い</p>
+</li>
+<li>
+<p>NSX機能の移行</p>
+</li>
+<li>
+<p>OADPによるバックアップ</p>
+</li>
+<li>
+<p>VMごとの互換性</p>
+</li>
+<li>
+<p>移行時の停止時間</p>
+</li>
+</ul>
+<p>の6点。</p>
+<p>約50VM規模であれば、一括移行ではなくVMを分類し、検証VMから段階的に移行する方法が現実的と考えられる。</p>
+<p>また、技術的な難易度はVM移行そのものよりも、</p>
+<p>「VMwareで利用していた周辺機能をOpenShiftでどう再現するか」</p>
+<p>の部分が高くなる可能性がある。</p>
+<p>特にNSX、vSAN、バックアップ製品への依存度を早い段階で確認することが重要。</p></div></article><details class="toc" open data-article-toc><summary>目次</summary><nav aria-label="目次"><ol><li class="depth-2"><a href="#1-概要">1. 概要</a></li><li class="depth-2"><a href="#2-移行の背景">2. 移行の背景</a></li><li class="depth-2"><a href="#3-openshift-virtualizationとは">3. OpenShift Virtualizationとは</a></li><li class="depth-2"><a href="#4-想定対象規模">4. 想定対象規模</a></li><li class="depth-2"><a href="#5-現行vmware環境">5. 現行VMware環境</a></li><li class="depth-2"><a href="#6-openshift側の構成要素">6. OpenShift側の構成要素</a></li><li class="depth-2"><a href="#7-kubevirt">7. KubeVirt</a></li><li class="depth-2"><a href="#8-mtv">8. MTV</a></li><li class="depth-2"><a href="#9-移行方式">9. 移行方式</a></li><li class="depth-3"><a href="#91-cold-migration">9.1 Cold Migration</a></li><li class="depth-3"><a href="#92-warm-migration">9.2 Warm Migration</a></li><li class="depth-2"><a href="#10-ストレージ">10. ストレージ</a></li><li class="depth-2"><a href="#11-vsan">11. vSAN</a></li><li class="depth-2"><a href="#12-odf">12. ODF</a></li><li class="depth-2"><a href="#13-vsanとodfの比較">13. vSANとODFの比較</a></li><li class="depth-2"><a href="#14-ネットワーク">14. ネットワーク</a></li><li class="depth-2"><a href="#15-multus">15. Multus</a></li><li class="depth-2"><a href="#16-nsx">16. NSX</a></li><li class="depth-2"><a href="#17-nsx機能の移行">17. NSX機能の移行</a></li><li class="depth-2"><a href="#18-バックアップ">18. バックアップ</a></li><li class="depth-2"><a href="#19-oadp">19. OADP</a></li><li class="depth-2"><a href="#20-バックアップで確認する事項">20. バックアップで確認する事項</a></li><li class="depth-2"><a href="#21-高可用性">21. 高可用性</a></li><li class="depth-2"><a href="#22-ライブマイグレーション">22. ライブマイグレーション</a></li><li class="depth-2"><a href="#23-vmごとの互換性確認">23. VMごとの互換性確認</a></li><li class="depth-2"><a href="#24-windows-vm">24. Windows VM</a></li><li class="depth-2"><a href="#25-linux-vm">25. Linux VM</a></li><li class="depth-2"><a href="#26-検証環境">26. 検証環境</a></li><li class="depth-2"><a href="#27-検証で確認したい内容">27. 検証で確認したい内容</a></li><li class="depth-2"><a href="#28-性能試験">28. 性能試験</a></li><li class="depth-2"><a href="#29-容量設計">29. 容量設計</a></li><li class="depth-2"><a href="#30-ノード設計">30. ノード設計</a></li><li class="depth-2"><a href="#31-移行順序">31. 移行順序</a></li><li class="depth-3"><a href="#phase-1">Phase 1</a></li><li class="depth-3"><a href="#phase-2">Phase 2</a></li><li class="depth-3"><a href="#phase-3">Phase 3</a></li><li class="depth-3"><a href="#phase-4">Phase 4</a></li><li class="depth-3"><a href="#phase-5">Phase 5</a></li><li class="depth-2"><a href="#32-vm分類">32. VM分類</a></li><li class="depth-3"><a href="#a">A</a></li><li class="depth-3"><a href="#b">B</a></li><li class="depth-3"><a href="#c">C</a></li><li class="depth-3"><a href="#d">D</a></li><li class="depth-2"><a href="#33-ロールバック">33. ロールバック</a></li><li class="depth-2"><a href="#34-移行時の停止時間">34. 移行時の停止時間</a></li><li class="depth-2"><a href="#35-運用変更">35. 運用変更</a></li><li class="depth-2"><a href="#36-監視">36. 監視</a></li><li class="depth-2"><a href="#37-セキュリティ">37. セキュリティ</a></li><li class="depth-2"><a href="#38-主なリスク">38. 主なリスク</a></li><li class="depth-3"><a href="#381-ストレージ性能">38.1 ストレージ性能</a></li><li class="depth-3"><a href="#382-ネットワーク移行">38.2 ネットワーク移行</a></li><li class="depth-3"><a href="#383-古いvm">38.3 古いVM</a></li><li class="depth-3"><a href="#384-バックアップ">38.4 バックアップ</a></li><li class="depth-3"><a href="#385-運用スキル">38.5 運用スキル</a></li><li class="depth-2"><a href="#39-現時点で確認したい事項">39. 現時点で確認したい事項</a></li><li class="depth-3"><a href="#vmware環境">VMware環境</a></li><li class="depth-3"><a href="#vm">VM</a></li><li class="depth-3"><a href="#openshift">OpenShift</a></li><li class="depth-2"><a href="#40-今後の進め方">40. 今後の進め方</a></li><li class="depth-2"><a href="#41-現時点での整理">41. 現時点での整理</a></li></ol></nav></details></div></main><footer class="site-footer"><span>Study App</span><a href="https://github.com/maruyamamasaya/studyApp" rel="noreferrer">GitHub</a></footer></div></div><script>
+      (() => {
+        const drawer = document.querySelector('.sidebar-drawer');
+        const mobileSidebar = window.matchMedia('(max-width: 640px)');
+        const syncDrawer = (mobile) => {
+          if (drawer instanceof HTMLDetailsElement) drawer.open = !mobile;
+        };
+        syncDrawer(mobileSidebar.matches);
+        mobileSidebar.addEventListener('change', (event) => syncDrawer(event.matches));
+
+        const treeStorageKey = 'study-app:page-tree-open';
+        const treeFolders = [...document.querySelectorAll('[data-tree-folder]')];
+        try {
+          const saved = localStorage.getItem(treeStorageKey);
+          if (saved !== null) {
+            const openFolders = new Set(JSON.parse(saved));
+            treeFolders.forEach((folder) => {
+              if (folder instanceof HTMLDetailsElement) {
+                folder.open = folder.dataset.activeBranch === 'true' || openFolders.has(folder.dataset.treeFolder);
+              }
+            });
+          }
+          treeFolders.forEach((folder) => folder.addEventListener('toggle', () => {
+            const openFolders = treeFolders
+              .filter((candidate) => candidate instanceof HTMLDetailsElement && candidate.open)
+              .map((candidate) => candidate.dataset.treeFolder);
+            localStorage.setItem(treeStorageKey, JSON.stringify(openFolders));
+          }));
+        } catch {
+          // The server-rendered open state remains usable when storage is unavailable.
+        }
+
+        const picker = document.querySelector('[data-theme-picker]');
+        if (!(picker instanceof HTMLSelectElement)) return;
+
+        const themeColors = {
+          standard: '#f7f7f5',
+          wiki: '#f8f5ec',
+          'living-aurora': '#05070c',
+          'blue-cosmos': '#020611',
+          'pulse-neon': '#030607'
+        };
+        const applyTheme = (theme) => {
+          if (!(theme in themeColors)) return;
+          document.documentElement.dataset.theme = theme;
+          picker.value = theme;
+          document.querySelector('meta[name="theme-color"]')?.setAttribute('content', themeColors[theme]);
+        };
+
+        const initialTheme = document.documentElement.dataset.theme || 'standard';
+        applyTheme(initialTheme);
+        picker.addEventListener('change', () => {
+          applyTheme(picker.value);
+          try {
+            localStorage.setItem('study-app:theme', picker.value);
+          } catch {
+            // Theme switching still works for this page when storage is unavailable.
+          }
+        });
+      })();
+    </script></body></html><script>
+  (() => {
+    const toc = document.querySelector('[data-article-toc]');
+    if (!(toc instanceof HTMLDetailsElement)) return;
+    const mobileArticle = window.matchMedia('(max-width: 860px)');
+    const syncToc = () => { toc.open = !mobileArticle.matches; };
+    syncToc();
+    mobileArticle.addEventListener('change', syncToc);
+    toc.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+      if (mobileArticle.matches) toc.open = false;
+    }));
+  })();
+</script>

@@ -2,88 +2,49 @@
   "version": 2,
   "articles": [
     {
-      "id": "20260928-141048",
-      "path": "notes/wiki/anken001/20260928-141048.md",
-      "title": "タイトルを表示したい",
+      "id": "20261001-145031",
+      "path": "notes/wiki/anken001/20261001-145031.md",
+      "title": "Te社向け 社内RAG基盤 詳細設計書作成タスク整理",
       "type": "wiki",
       "tags": [],
       "aliases": [],
-      "created": "2026-09-28 14:10:48"
+      "created": "2026-10-01 14:50:31"
     },
     {
-      "id": "20260928-141416",
-      "path": "notes/wiki/anken001/20260928-141416.md",
-      "title": null,
+      "id": "20261001-145309",
+      "path": "notes/wiki/anken002/20261001-145309.md",
+      "title": "製造A社 Windows Server移行案件 調査整理",
       "type": "wiki",
       "tags": [],
       "aliases": [],
-      "created": "2026-09-28 14:14:16"
+      "created": "2026-10-01 14:53:09"
     },
     {
-      "id": "20260928-142231",
-      "path": "notes/wiki/anken001/20260928-142231.md",
-      "title": null,
+      "id": "20261001-145549",
+      "path": "notes/wiki/anken003/20261001-145549.md",
+      "title": "キッティング管理システム AWS構成・調査整理",
       "type": "wiki",
       "tags": [],
       "aliases": [],
-      "created": "2026-09-28 14:22:31"
+      "created": "2026-10-01 14:55:49"
     },
     {
-      "id": "20260928-142529",
-      "path": "notes/wiki/anken001/20260928-142529.md",
-      "title": null,
+      "id": "20261001-145705",
+      "path": "notes/wiki/anken004/20261001-145705.md",
+      "title": "医療系システム 非機能要件・クラウド基盤検討整理",
       "type": "wiki",
       "tags": [],
       "aliases": [],
-      "created": "2026-09-28 14:25:29"
+      "created": "2026-10-01 14:57:05"
     },
     {
-      "id": "20261001-120324",
-      "path": "notes/wiki/anken001/20261001-120324.md",
-      "title": null,
+      "id": "20261001-150042",
+      "path": "notes/wiki/anken005/20261001-150042.md",
+      "title": "VMwareからOpenShift Virtualizationへの移行 調査整理",
       "type": "wiki",
       "tags": [],
       "aliases": [],
-      "created": "2026-10-01 12:03:24"
-    },
-    {
-      "id": "20260929-121503",
-      "path": "notes/wiki/phase1/20260929-121503.md",
-      "title": "リンク動作確認",
-      "type": "wiki",
-      "tags": [
-        "phase1",
-        "link"
-      ],
-      "aliases": [
-        "リンク確認"
-      ],
-      "created": "2026-09-29 12:15:03"
-    },
-    {
-      "id": "20260929-121504",
-      "path": "notes/wiki/phase1/20260929-121504.md",
-      "title": "コードと HTML の安全確認",
-      "type": "wiki",
-      "tags": [
-        "phase1",
-        "security"
-      ],
-      "aliases": [],
-      "created": "2026-09-29 12:15:04"
-    },
-    {
-      "id": "20260929-121458",
-      "path": "notes/wiki/training/20260929-121458.md",
-      "title": "README",
-      "type": "wiki",
-      "tags": [
-        "training"
-      ],
-      "aliases": [
-        "研修資料"
-      ],
-      "created": "2026-09-29 12:14:58"
+      "created": "2026-10-01 15:00:42"
     }
   ]
 }

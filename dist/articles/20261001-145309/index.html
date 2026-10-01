@@ -1,0 +1,799 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><meta name="description" content="製造A社 Windows Server移行案件 調査整理 — Study App の学習ノート"><meta name="theme-color" content="#f7f7f5"><script>
+      (() => {
+        const themes = ['standard', 'wiki', 'living-aurora', 'blue-cosmos', 'pulse-neon'];
+        try {
+          const savedTheme = localStorage.getItem('study-app:theme');
+          if (themes.includes(savedTheme)) document.documentElement.dataset.theme = savedTheme;
+        } catch {
+          // The standard theme remains usable when storage is unavailable.
+        }
+      })();
+    </script><link rel="icon" type="image/svg+xml" href="/favicon.svg"><title>製造A社 Windows Server移行案件 調査整理 | Study App</title><link rel="stylesheet" href="/_astro/BaseLayout.Blcdandm.css"></head><body><header class="site-header"><div class="header-inner"><a class="brand" href="/" aria-label="Study App ホーム"><span class="brand-mark" aria-hidden="true">S</span><span>Study App</span></a><div class="header-actions"><label class="theme-picker"><span class="theme-picker__label">テーマ</span><span class="theme-picker__swatch" aria-hidden="true"></span><select aria-label="表示テーマ" data-theme-picker><option value="standard">Standard</option><option value="wiki">Wiki</option><option value="living-aurora">Living Aurora</option><option value="blue-cosmos">Blue Cosmos</option><option value="pulse-neon">Pulse Neon</option></select></label></div></div></header><div class="app-shell"><aside class="sidebar"><details class="sidebar-drawer" open><summary>ページ</summary><div class="sidebar-content"><nav class="primary-nav" aria-label="メインナビゲーション"><a href="/">すべての記事</a><a href="/training/">研修資料</a></nav><details class="page-tree" open><summary>ページツリー</summary><nav aria-label="記事の階層"><ul class="tree-level"><li class="tree-node tree-folder is-active-branch"><details open data-tree-folder="wiki" data-active-branch="true"><summary><span class="tree-chevron" aria-hidden="true">›</span><span>Wiki</span></summary><ul class="tree-level"><li class="tree-node tree-folder"><details data-tree-folder="wiki/anken001"><summary><span class="tree-chevron" aria-hidden="true">›</span><span>anken001</span></summary><ul class="tree-level"><li class="tree-node tree-article"><a href="/articles/20261001-145031/">Te社向け 社内RAG基盤 詳細設計書作成タスク整理</a></li></ul></details></li><li class="tree-node tree-folder is-active-branch"><details open data-tree-folder="wiki/anken002" data-active-branch="true"><summary><span class="tree-chevron" aria-hidden="true">›</span><span>anken002</span></summary><ul class="tree-level"><li class="tree-node tree-article"><a class="active" aria-current="page" href="/articles/20261001-145309/">製造A社 Windows Server移行案件 調査整理</a></li></ul></details></li><li class="tree-node tree-folder"><details data-tree-folder="wiki/anken003"><summary><span class="tree-chevron" aria-hidden="true">›</span><span>anken003</span></summary><ul class="tree-level"><li class="tree-node tree-article"><a href="/articles/20261001-145549/">キッティング管理システム AWS構成・調査整理</a></li></ul></details></li><li class="tree-node tree-folder"><details data-tree-folder="wiki/anken004"><summary><span class="tree-chevron" aria-hidden="true">›</span><span>anken004</span></summary><ul class="tree-level"><li class="tree-node tree-article"><a href="/articles/20261001-145705/">医療系システム 非機能要件・クラウド基盤検討整理</a></li></ul></details></li><li class="tree-node tree-folder"><details data-tree-folder="wiki/anken005"><summary><span class="tree-chevron" aria-hidden="true">›</span><span>anken005</span></summary><ul class="tree-level"><li class="tree-node tree-article"><a href="/articles/20261001-150042/">VMwareからOpenShift Virtualizationへの移行 調査整理</a></li></ul></details></li></ul></details></li></ul></nav></details><details class="learning-tools" data-learning-tools data-study-ids="[]"><summary>学習データ</summary><div class="learning-tools__body"><p class="learning-tools__summary"><strong data-learning-summary>0/0</strong><span data-learning-total>0秒</span></p><div class="learning-tools__actions"><button type="button" data-learning-export>保存</button><label>復元<input type="file" accept="application/json,.json" data-learning-import></label></div><p class="learning-tools__status" data-learning-status aria-live="polite"></p></div></details><script type="module" src="/_astro/LearningDataTools.astro_astro_type_script_index_0_lang.CEB3ME2V.js"></script></div></details></aside><div class="content-column"><main class="content-main"><div class="article-layout"><article><header class="article-header article-header--wiki"><a class="back-link" href="/">記事一覧に戻る</a><div class="card-meta"><span>wiki</span><time>2026-10-01 14:53:09</time></div><h1>製造A社 Windows Server移行案件 調査整理</h1><section class="study-progress" data-study-progress data-article-id="20261001-145309" data-article-type="wiki" aria-label="この記事の学習状態"><button type="button" class="study-progress__completion" data-progress-completion aria-pressed="false">○ 未読了</button><span class="study-progress__time">学習 <strong data-progress-time>0秒</strong></span><span class="visually-hidden" data-progress-status aria-live="polite"></span></section><script type="module" src="/_astro/StudyProgressPanel.astro_astro_type_script_index_0_lang.DOy-2xSn.js"></script></header><div class="prose"><h2 id="1-概要">1. 概要</h2>
+<p>製造業のA社で利用されている既存業務システムについて、Windows Serverの老朽化に伴い、Windows Server 2025への移行を検討する案件。</p>
+<p>仮想環境上に2つのシステムが存在しており、それぞれ異なるWindows Server、アプリケーション、ミドルウェアを使用している。</p>
+<p>本資料は、現時点で確認できている資料や打ち合わせ内容、一般的な移行観点をもとに整理したものであり、最終的な要件・構成を確定したものではない。</p>
+<hr>
+<h2 id="2-案件の目的">2. 案件の目的</h2>
+<p>主な目的は、以下の既存システムをWindows Server 2025環境へ移行すること。</p>
+<h3 id="21-システム">2.1 システム①</h3>
+<p>現行環境はWindows Server 2016。</p>
+<p>主にWeb系の業務アプリケーションが稼働していると想定される。</p>
+<p>主な構成要素は以下。</p>
+<ul>
+<li>
+<p>Windows Server 2016</p>
+</li>
+<li>
+<p>IIS</p>
+</li>
+<li>
+<p>.NET Framework 4.6.2</p>
+</li>
+<li>
+<p>ComponentOne</p>
+</li>
+<li>
+<p>Aspose</p>
+</li>
+<li>
+<p>SQL Server</p>
+</li>
+<li>
+<p>業務Webアプリケーション</p>
+</li>
+</ul>
+<p>移行後は以下を想定。</p>
+<ul>
+<li>
+<p>Windows Server 2025</p>
+</li>
+<li>
+<p>.NET Framework 4.8.1</p>
+</li>
+<li>
+<p>IIS</p>
+</li>
+<li>
+<p>ComponentOne / Asposeの対応バージョン</p>
+</li>
+<li>
+<p>SQL Server継続利用を基本線として検討</p>
+</li>
+</ul>
+<p>基本的にはOS移行と、Windows Server 2025で動作させるための互換性対応が中心になる可能性が高い。</p>
+<hr>
+<h3 id="22-システム">2.2 システム②</h3>
+<p>現行環境はWindows Server 2012 R2。</p>
+<p>業務アプリケーションに加えて、ハンディターミナルとのデータ連携を行っているシステムと考えられる。</p>
+<p>主な構成要素は以下。</p>
+<ul>
+<li>
+<p>Windows Server 2012 R2</p>
+</li>
+<li>
+<p>IIS 8.5</p>
+</li>
+<li>
+<p>VB.NET系アプリケーション</p>
+</li>
+<li>
+<p>データベース</p>
+</li>
+<li>
+<p>ハンディターミナル</p>
+</li>
+<li>
+<p>ハンディとのデータ送受信機能</p>
+</li>
+</ul>
+<p>システム①と比較すると、単純なOS移行だけでなく、ハンディターミナル刷新やデータ連携方式の確認が重要になる。</p>
+<hr>
+<h2 id="3-システムの主な確認事項">3. システム①の主な確認事項</h2>
+<h3 id="31-windows-server-2025への互換性">3.1 Windows Server 2025への互換性</h3>
+<p>既存アプリケーションがWindows Server 2025上で正常に動作するか確認する。</p>
+<p>特に以下を確認する。</p>
+<ul>
+<li>
+<p>IISの互換性</p>
+</li>
+<li>
+<p>.NET Frameworkの互換性</p>
+</li>
+<li>
+<p>OS依存APIの利用有無</p>
+</li>
+<li>
+<p>ファイルパスや権限設定</p>
+</li>
+<li>
+<p>Windows認証利用有無</p>
+</li>
+<li>
+<p>TLSなど通信方式</p>
+</li>
+<li>
+<p>32bit / 64bit依存</p>
+</li>
+</ul>
+<hr>
+<h3 id="32-net-framework">3.2 .NET Framework</h3>
+<p>現行では.NET Framework 4.6.2を使用している可能性がある。</p>
+<p>Windows Server 2025への移行に伴い、.NET Framework 4.8.1への更新を想定する。</p>
+<p>確認事項は以下。</p>
+<ul>
+<li>
+<p>ソースコードの互換性</p>
+</li>
+<li>
+<p>廃止・非推奨APIの利用</p>
+</li>
+<li>
+<p>外部ライブラリとの互換性</p>
+</li>
+<li>
+<p>ビルド環境</p>
+</li>
+<li>
+<p>Web.config等の設定変更</p>
+</li>
+</ul>
+<hr>
+<h3 id="33-componentone--aspose">3.3 ComponentOne / Aspose</h3>
+<p>Excel出力やグラフ表示などで利用されている可能性がある。</p>
+<p>Windows Server 2025および.NET Framework 4.8.1で利用可能か確認する。</p>
+<p>特に以下を確認する。</p>
+<ul>
+<li>
+<p>現在利用している製品名</p>
+</li>
+<li>
+<p>バージョン</p>
+</li>
+<li>
+<p>ライセンス</p>
+</li>
+<li>
+<p>Windows Server 2025対応状況</p>
+</li>
+<li>
+<p>.NET Framework 4.8.1対応状況</p>
+</li>
+<li>
+<p>バージョンアップ時のアプリ改修有無</p>
+</li>
+</ul>
+<p>古いバージョンを利用している場合、OS移行よりもライブラリ更新に伴うアプリ改修のほうが大きくなる可能性がある。</p>
+<hr>
+<h2 id="4-システムの主な確認事項">4. システム②の主な確認事項</h2>
+<h2 id="41-ハンディターミナル">4.1 ハンディターミナル</h2>
+<p>システム②では、ハンディターミナルとの連携が重要なポイントになる。</p>
+<p>現時点では、以下のような運用を行っている可能性がある。</p>
+<ul>
+<li>
+<p>工場内でハンディを使用</p>
+</li>
+<li>
+<p>Wi-Fi接続できない場所でも利用</p>
+</li>
+<li>
+<p>オフライン状態で端末内にデータを保持</p>
+</li>
+<li>
+<p>Wi-Fi接続時にサーバへ送信</p>
+</li>
+<li>
+<p>クレードル接続時にサーバと同期</p>
+</li>
+</ul>
+<p>このため、単純なオンラインWebシステムとして刷新するのではなく、オフライン運用を考慮する必要がある。</p>
+<hr>
+<h2 id="42-ハンディ連携方式">4.2 ハンディ連携方式</h2>
+<p>現行のハンディとサーバ間の連携方式を確認する必要がある。</p>
+<p>候補としては以下が考えられる。</p>
+<ul>
+<li>
+<p>TCP/IP通信</p>
+</li>
+<li>
+<p>HTTP / HTTPS API</p>
+</li>
+<li>
+<p>CSVファイル連携</p>
+</li>
+<li>
+<p>共有フォルダ</p>
+</li>
+<li>
+<p>FTP / SFTP</p>
+</li>
+<li>
+<p>データベース直接接続</p>
+</li>
+<li>
+<p>メーカー専用ミドルウェア</p>
+</li>
+<li>
+<p>専用SDK</p>
+</li>
+</ul>
+<p>現行方式によって、Windows Server 2025移行時の影響範囲が大きく変わる。</p>
+<hr>
+<h2 id="43-ハンディ端末の刷新">4.3 ハンディ端末の刷新</h2>
+<p>現在使用しているハンディターミナル自体を継続利用するのか、新しい端末へ変更するのか確認する。</p>
+<p>刷新する場合は、以下を確認する。</p>
+<ul>
+<li>
+<p>オフライン動作</p>
+</li>
+<li>
+<p>Wi-Fi利用</p>
+</li>
+<li>
+<p>クレードル同期</p>
+</li>
+<li>
+<p>バーコード読取</p>
+</li>
+<li>
+<p>QRコード読取</p>
+</li>
+<li>
+<p>バッテリー性能</p>
+</li>
+<li>
+<p>耐久性</p>
+</li>
+<li>
+<p>防塵・防水</p>
+</li>
+<li>
+<p>メーカーサポート期間</p>
+</li>
+<li>
+<p>Windows / Android等のOS</p>
+</li>
+<li>
+<p>SDK提供状況</p>
+</li>
+<li>
+<p>サーバ側との接続方法</p>
+</li>
+</ul>
+<p>ハンディ端末の選定をこちら側である程度コントロールできる場合、既存システムへの依存が少ない端末・方式を選定することで、アプリケーション改修を抑えられる可能性がある。</p>
+<hr>
+<h2 id="5-データベース">5. データベース</h2>
+<p>現行ではSQL Serverを利用していると考えられる。</p>
+<p>システム①についてはSQL Server継続利用が有力。</p>
+<p>一方で、一部システムについては無償DBへの変更も検討対象となっている。</p>
+<p>候補としてSQL Server Expressが考えられる。</p>
+<hr>
+<h2 id="51-sql-server-express">5.1 SQL Server Express</h2>
+<p>データ量が小規模であれば、SQL Server Expressを利用できる可能性がある。</p>
+<p>現時点では、</p>
+<ul>
+<li>
+<p>DB容量は1GB未満の可能性</p>
+</li>
+<li>
+<p>1日のデータ更新件数も数十件程度の可能性</p>
+</li>
+</ul>
+<p>があるため、単純な容量・処理性能だけであればExpressでも対応できる可能性がある。</p>
+<p>ただし、可用性要件によって判断が大きく変わる。</p>
+<hr>
+<h2 id="52-データ損失要件">5.2 データ損失要件</h2>
+<p>重要な確認事項として、</p>
+<p>「1件もデータを失いたくない」</p>
+<p>という要望の意味を確認する必要がある。</p>
+<p>具体的には以下を確認する。</p>
+<h3 id="rpo">RPO</h3>
+<p>障害発生時に、どこまでデータ損失を許容できるか。</p>
+<p>例：</p>
+<ul>
+<li>
+<p>RPO = 0</p>
+</li>
+<li>
+<p>数分以内</p>
+</li>
+<li>
+<p>1時間以内</p>
+</li>
+<li>
+<p>前日バックアップ時点まで</p>
+</li>
+</ul>
+<p>RPO = 0が必須の場合、SQL Server Express単体での実現は難しく、冗長化や上位エディションを含めた構成を検討する必要がある。</p>
+<hr>
+<h3 id="rto">RTO</h3>
+<p>障害発生後、どの程度の時間でシステムを復旧させる必要があるか。</p>
+<p>例：</p>
+<ul>
+<li>
+<p>即時</p>
+</li>
+<li>
+<p>30分以内</p>
+</li>
+<li>
+<p>1時間以内</p>
+</li>
+<li>
+<p>数時間以内</p>
+</li>
+<li>
+<p>翌営業日</p>
+</li>
+</ul>
+<p>RPOとRTOによって、必要なバックアップ・冗長化構成が決まる。</p>
+<hr>
+<h2 id="6-バックアップ">6. バックアップ</h2>
+<p>最低限、日次バックアップは必要と考えられる。</p>
+<p>ただし、バックアップのみでは障害発生直前のデータを保護できない。</p>
+<p>以下を要件として整理する必要がある。</p>
+<ul>
+<li>
+<p>フルバックアップ</p>
+</li>
+<li>
+<p>差分バックアップ</p>
+</li>
+<li>
+<p>トランザクションログバックアップ</p>
+</li>
+<li>
+<p>バックアップ取得頻度</p>
+</li>
+<li>
+<p>バックアップ保存期間</p>
+</li>
+<li>
+<p>別サーバ / 別ストレージへの保存</p>
+</li>
+<li>
+<p>リストア試験</p>
+</li>
+<li>
+<p>障害復旧手順</p>
+</li>
+</ul>
+<hr>
+<h2 id="7-仮想基盤">7. 仮想基盤</h2>
+<p>現在は仮想環境上でWindows Serverが稼働している。</p>
+<p>今回も仮想マシンとしてWindows Server 2025を構築する可能性が高い。</p>
+<p>インフラ側では以下を確認する。</p>
+<ul>
+<li>
+<p>仮想基盤の種類</p>
+</li>
+<li>
+<p>CPU</p>
+</li>
+<li>
+<p>メモリ</p>
+</li>
+<li>
+<p>ストレージ</p>
+</li>
+<li>
+<p>ネットワーク</p>
+</li>
+<li>
+<p>VLAN</p>
+</li>
+<li>
+<p>IPアドレス</p>
+</li>
+<li>
+<p>DNS</p>
+</li>
+<li>
+<p>Active Directory参加</p>
+</li>
+<li>
+<p>バックアップ方式</p>
+</li>
+<li>
+<p>ウイルス対策</p>
+</li>
+<li>
+<p>監視</p>
+</li>
+<li>
+<p>Windows Update</p>
+</li>
+<li>
+<p>サーバ証明書</p>
+</li>
+</ul>
+<hr>
+<h2 id="8-ネットワーク">8. ネットワーク</h2>
+<p>特にシステム②では、ハンディとの通信があるためネットワーク確認が重要。</p>
+<p>以下を確認する。</p>
+<ul>
+<li>
+<p>工場内Wi-Fi構成</p>
+</li>
+<li>
+<p>Wi-Fiが届かないエリア</p>
+</li>
+<li>
+<p>ハンディ利用場所</p>
+</li>
+<li>
+<p>サーバ接続経路</p>
+</li>
+<li>
+<p>使用ポート</p>
+</li>
+<li>
+<p>Firewall設定</p>
+</li>
+<li>
+<p>拠点間通信</p>
+</li>
+<li>
+<p>VPN</p>
+</li>
+<li>
+<p>お客様先でハンディを利用するか</p>
+</li>
+<li>
+<p>インターネット経由通信の有無</p>
+</li>
+</ul>
+<p>特に、</p>
+<p>「ハンディを自社工場内だけで使うのか」</p>
+<p>「お客様先でも利用するのか」</p>
+<p>はシステム構成に大きく影響する。</p>
+<hr>
+<h2 id="9-業務内容">9. 業務内容</h2>
+<p>対象システムは物流・製造系の業務管理に関連していると考えられる。</p>
+<p>現時点で想定されている業務イメージは以下。</p>
+<ul>
+<li>
+<p>コンテナ箱の貸出</p>
+</li>
+<li>
+<p>コンテナ箱の回収</p>
+</li>
+<li>
+<p>洗浄</p>
+</li>
+<li>
+<p>製品等の詰め込み</p>
+</li>
+<li>
+<p>ハンディによるバーコード等の読み取り</p>
+</li>
+<li>
+<p>サーバへの実績登録</p>
+</li>
+</ul>
+<p>具体的な業務フローについては、追加確認が必要。</p>
+<hr>
+<h2 id="10-アプリケーション側の主な懸念事項">10. アプリケーション側の主な懸念事項</h2>
+<p>今回の案件では、インフラ移行だけでなくアプリケーション側の影響が比較的大きい可能性がある。</p>
+<p>特に以下が重要。</p>
+<ul>
+<li>
+<p>.NET Framework互換性</p>
+</li>
+<li>
+<p>VB.NET互換性</p>
+</li>
+<li>
+<p>IIS互換性</p>
+</li>
+<li>
+<p>ComponentOne / Aspose</p>
+</li>
+<li>
+<p>DB接続方式</p>
+</li>
+<li>
+<p>SQL Serverバージョン</p>
+</li>
+<li>
+<p>OS依存処理</p>
+</li>
+<li>
+<p>ファイル共有</p>
+</li>
+<li>
+<p>ハンディSDK</p>
+</li>
+<li>
+<p>ハンディ連携ミドルウェア</p>
+</li>
+<li>
+<p>通信プロトコル</p>
+</li>
+<li>
+<p>オフライン同期処理</p>
+</li>
+</ul>
+<p>現時点の感覚では、案件全体としてはアプリ側の割合が比較的大きく、</p>
+<p>アプリ：インフラ = 7：3程度</p>
+<p>場合によっては、</p>
+<p>アプリ：インフラ = 8：2程度</p>
+<p>になる可能性がある。</p>
+<p>ただし、これはソースコードや現行設定を詳細確認する前の暫定的な見立て。</p>
+<hr>
+<h2 id="11-特にリスクが高いポイント">11. 特にリスクが高いポイント</h2>
+<h3 id="111-ハンディ依存">11.1 ハンディ依存</h3>
+<p>業務アプリケーションやDB設計が現行ハンディの仕様に強く依存している場合、端末変更に伴うアプリ改修が大きくなる可能性がある。</p>
+<hr>
+<h3 id="112-古いライブラリ">11.2 古いライブラリ</h3>
+<p>ComponentOne、Aspose等のバージョンが古い場合、Windows Server 2025への移行に伴いライブラリ更新が必要になる可能性がある。</p>
+<p>その場合、単純なOS移行ではなく、アプリケーション改修案件となる。</p>
+<hr>
+<h3 id="113-現行仕様が不明">11.3 現行仕様が不明</h3>
+<p>古いシステムでは、仕様書と実装が一致していない可能性がある。</p>
+<p>そのため、</p>
+<ul>
+<li>
+<p>設計書</p>
+</li>
+<li>
+<p>ソースコード</p>
+</li>
+<li>
+<p>IIS設定</p>
+</li>
+<li>
+<p>DB</p>
+</li>
+<li>
+<p>サーバ設定</p>
+</li>
+<li>
+<p>ハンディ設定</p>
+</li>
+</ul>
+<p>を実環境と照らし合わせる必要がある。</p>
+<hr>
+<h3 id="114-データ損失要件">11.4 データ損失要件</h3>
+<p>「1件も失いたくない」がRPO=0を意味する場合、DB構成・バックアップ構成の検討範囲が大きくなる。</p>
+<p>最初に確認すべき重要項目。</p>
+<hr>
+<h2 id="12-現時点で確認したい事項">12. 現時点で確認したい事項</h2>
+<h3 id="121-共通">12.1 共通</h3>
+<ol>
+<li>
+<p>現行サーバ構成</p>
+</li>
+<li>
+<p>仮想基盤構成</p>
+</li>
+<li>
+<p>Windows Serverの正確なバージョン</p>
+</li>
+<li>
+<p>IISバージョン</p>
+</li>
+<li>
+<p>.NET Frameworkバージョン</p>
+</li>
+<li>
+<p>DB製品・バージョン</p>
+</li>
+<li>
+<p>DB容量</p>
+</li>
+<li>
+<p>1日のデータ更新量</p>
+</li>
+<li>
+<p>利用ユーザー数</p>
+</li>
+<li>
+<p>利用端末数</p>
+</li>
+<li>
+<p>可用性要件</p>
+</li>
+<li>
+<p>RPO</p>
+</li>
+<li>
+<p>RTO</p>
+</li>
+<li>
+<p>バックアップ要件</p>
+</li>
+<li>
+<p>監視要件</p>
+</li>
+</ol>
+<hr>
+<h3 id="122-システム">12.2 システム①</h3>
+<ol>
+<li>
+<p>ComponentOneの製品・バージョン</p>
+</li>
+<li>
+<p>Asposeの製品・バージョン</p>
+</li>
+<li>
+<p>.NET Framework 4.8.1対応可否</p>
+</li>
+<li>
+<p>Windows Server 2025対応可否</p>
+</li>
+<li>
+<p>SQL Server継続利用可否</p>
+</li>
+<li>
+<p>アプリケーション改修範囲</p>
+</li>
+</ol>
+<hr>
+<h3 id="123-システム">12.3 システム②</h3>
+<ol>
+<li>
+<p>現行ハンディメーカー・型番</p>
+</li>
+<li>
+<p>ハンディOS</p>
+</li>
+<li>
+<p>ハンディ台数</p>
+</li>
+<li>
+<p>利用場所</p>
+</li>
+<li>
+<p>お客様先での利用有無</p>
+</li>
+<li>
+<p>オフライン利用方法</p>
+</li>
+<li>
+<p>Wi-Fi復旧時の同期方法</p>
+</li>
+<li>
+<p>クレードル同期方法</p>
+</li>
+<li>
+<p>サーバとの通信方式</p>
+</li>
+<li>
+<p>利用しているSDK</p>
+</li>
+<li>
+<p>利用しているミドルウェア</p>
+</li>
+<li>
+<p>バーコード仕様</p>
+</li>
+<li>
+<p>データフォーマット</p>
+</li>
+<li>
+<p>同期時の重複・競合制御</p>
+</li>
+<li>
+<p>ハンディ刷新予定</p>
+</li>
+<li>
+<p>スマートフォン等への置換可否</p>
+</li>
+</ol>
+<hr>
+<h2 id="13-今後の進め方">13. 今後の進め方</h2>
+<p>まず現行環境の棚卸しを行い、Windows Server 2025でそのまま動作するものと、改修が必要なものを切り分ける。</p>
+<p>そのうえで、</p>
+<ol>
+<li>
+<p>OS移行影響調査</p>
+</li>
+<li>
+<p>アプリケーション互換性調査</p>
+</li>
+<li>
+<p>ミドルウェア互換性調査</p>
+</li>
+<li>
+<p>DB移行方式検討</p>
+</li>
+<li>
+<p>ハンディ連携方式確認</p>
+</li>
+<li>
+<p>ハンディ刷新方針決定</p>
+</li>
+<li>
+<p>バックアップ・可用性要件整理</p>
+</li>
+<li>
+<p>新環境設計</p>
+</li>
+<li>
+<p>移行方式設計</p>
+</li>
+<li>
+<p>移行・切替・試験計画作成</p>
+</li>
+</ol>
+<p>の順で整理していくのがよいと考える。</p>
+<hr>
+<h2 id="14-現時点での整理">14. 現時点での整理</h2>
+<p>システム①については、</p>
+<p>「Windows Server 2025へのOS移行＋既存アプリケーションの互換性対応」</p>
+<p>が中心になる可能性が高い。</p>
+<p>一方、システム②については、</p>
+<p>「Windows Server移行＋ハンディターミナル刷新・連携方式の見直し」</p>
+<p>が中心になる可能性があり、①</p></div></article><details class="toc" open data-article-toc><summary>目次</summary><nav aria-label="目次"><ol><li class="depth-2"><a href="#1-概要">1. 概要</a></li><li class="depth-2"><a href="#2-案件の目的">2. 案件の目的</a></li><li class="depth-3"><a href="#21-システム">2.1 システム①</a></li><li class="depth-3"><a href="#22-システム">2.2 システム②</a></li><li class="depth-2"><a href="#3-システムの主な確認事項">3. システム①の主な確認事項</a></li><li class="depth-3"><a href="#31-windows-server-2025への互換性">3.1 Windows Server 2025への互換性</a></li><li class="depth-3"><a href="#32-net-framework">3.2 .NET Framework</a></li><li class="depth-3"><a href="#33-componentone--aspose">3.3 ComponentOne / Aspose</a></li><li class="depth-2"><a href="#4-システムの主な確認事項">4. システム②の主な確認事項</a></li><li class="depth-2"><a href="#41-ハンディターミナル">4.1 ハンディターミナル</a></li><li class="depth-2"><a href="#42-ハンディ連携方式">4.2 ハンディ連携方式</a></li><li class="depth-2"><a href="#43-ハンディ端末の刷新">4.3 ハンディ端末の刷新</a></li><li class="depth-2"><a href="#5-データベース">5. データベース</a></li><li class="depth-2"><a href="#51-sql-server-express">5.1 SQL Server Express</a></li><li class="depth-2"><a href="#52-データ損失要件">5.2 データ損失要件</a></li><li class="depth-3"><a href="#rpo">RPO</a></li><li class="depth-3"><a href="#rto">RTO</a></li><li class="depth-2"><a href="#6-バックアップ">6. バックアップ</a></li><li class="depth-2"><a href="#7-仮想基盤">7. 仮想基盤</a></li><li class="depth-2"><a href="#8-ネットワーク">8. ネットワーク</a></li><li class="depth-2"><a href="#9-業務内容">9. 業務内容</a></li><li class="depth-2"><a href="#10-アプリケーション側の主な懸念事項">10. アプリケーション側の主な懸念事項</a></li><li class="depth-2"><a href="#11-特にリスクが高いポイント">11. 特にリスクが高いポイント</a></li><li class="depth-3"><a href="#111-ハンディ依存">11.1 ハンディ依存</a></li><li class="depth-3"><a href="#112-古いライブラリ">11.2 古いライブラリ</a></li><li class="depth-3"><a href="#113-現行仕様が不明">11.3 現行仕様が不明</a></li><li class="depth-3"><a href="#114-データ損失要件">11.4 データ損失要件</a></li><li class="depth-2"><a href="#12-現時点で確認したい事項">12. 現時点で確認したい事項</a></li><li class="depth-3"><a href="#121-共通">12.1 共通</a></li><li class="depth-3"><a href="#122-システム">12.2 システム①</a></li><li class="depth-3"><a href="#123-システム">12.3 システム②</a></li><li class="depth-2"><a href="#13-今後の進め方">13. 今後の進め方</a></li><li class="depth-2"><a href="#14-現時点での整理">14. 現時点での整理</a></li></ol></nav></details></div></main><footer class="site-footer"><span>Study App</span><a href="https://github.com/maruyamamasaya/studyApp" rel="noreferrer">GitHub</a></footer></div></div><script>
+      (() => {
+        const drawer = document.querySelector('.sidebar-drawer');
+        const mobileSidebar = window.matchMedia('(max-width: 640px)');
+        const syncDrawer = (mobile) => {
+          if (drawer instanceof HTMLDetailsElement) drawer.open = !mobile;
+        };
+        syncDrawer(mobileSidebar.matches);
+        mobileSidebar.addEventListener('change', (event) => syncDrawer(event.matches));
+
+        const treeStorageKey = 'study-app:page-tree-open';
+        const treeFolders = [...document.querySelectorAll('[data-tree-folder]')];
+        try {
+          const saved = localStorage.getItem(treeStorageKey);
+          if (saved !== null) {
+            const openFolders = new Set(JSON.parse(saved));
+            treeFolders.forEach((folder) => {
+              if (folder instanceof HTMLDetailsElement) {
+                folder.open = folder.dataset.activeBranch === 'true' || openFolders.has(folder.dataset.treeFolder);
+              }
+            });
+          }
+          treeFolders.forEach((folder) => folder.addEventListener('toggle', () => {
+            const openFolders = treeFolders
+              .filter((candidate) => candidate instanceof HTMLDetailsElement && candidate.open)
+              .map((candidate) => candidate.dataset.treeFolder);
+            localStorage.setItem(treeStorageKey, JSON.stringify(openFolders));
+          }));
+        } catch {
+          // The server-rendered open state remains usable when storage is unavailable.
+        }
+
+        const picker = document.querySelector('[data-theme-picker]');
+        if (!(picker instanceof HTMLSelectElement)) return;
+
+        const themeColors = {
+          standard: '#f7f7f5',
+          wiki: '#f8f5ec',
+          'living-aurora': '#05070c',
+          'blue-cosmos': '#020611',
+          'pulse-neon': '#030607'
+        };
+        const applyTheme = (theme) => {
+          if (!(theme in themeColors)) return;
+          document.documentElement.dataset.theme = theme;
+          picker.value = theme;
+          document.querySelector('meta[name="theme-color"]')?.setAttribute('content', themeColors[theme]);
+        };
+
+        const initialTheme = document.documentElement.dataset.theme || 'standard';
+        applyTheme(initialTheme);
+        picker.addEventListener('change', () => {
+          applyTheme(picker.value);
+          try {
+            localStorage.setItem('study-app:theme', picker.value);
+          } catch {
+            // Theme switching still works for this page when storage is unavailable.
+          }
+        });
+      })();
+    </script></body></html><script>
+  (() => {
+    const toc = document.querySelector('[data-article-toc]');
+    if (!(toc instanceof HTMLDetailsElement)) return;
+    const mobileArticle = window.matchMedia('(max-width: 860px)');
+    const syncToc = () => { toc.open = !mobileArticle.matches; };
+    syncToc();
+    mobileArticle.addEventListener('change', syncToc);
+    toc.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+      if (mobileArticle.matches) toc.open = false;
+    }));
+  })();
+</script>

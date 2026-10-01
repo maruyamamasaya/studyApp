@@ -1,0 +1,465 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><meta name="description" content="Te社向け 社内RAG基盤 詳細設計書作成タスク整理 — Study App の学習ノート"><meta name="theme-color" content="#f7f7f5"><script>
+      (() => {
+        const themes = ['standard', 'wiki', 'living-aurora', 'blue-cosmos', 'pulse-neon'];
+        try {
+          const savedTheme = localStorage.getItem('study-app:theme');
+          if (themes.includes(savedTheme)) document.documentElement.dataset.theme = savedTheme;
+        } catch {
+          // The standard theme remains usable when storage is unavailable.
+        }
+      })();
+    </script><link rel="icon" type="image/svg+xml" href="/favicon.svg"><title>Te社向け 社内RAG基盤 詳細設計書作成タスク整理 | Study App</title><link rel="stylesheet" href="/_astro/BaseLayout.Blcdandm.css"></head><body><header class="site-header"><div class="header-inner"><a class="brand" href="/" aria-label="Study App ホーム"><span class="brand-mark" aria-hidden="true">S</span><span>Study App</span></a><div class="header-actions"><label class="theme-picker"><span class="theme-picker__label">テーマ</span><span class="theme-picker__swatch" aria-hidden="true"></span><select aria-label="表示テーマ" data-theme-picker><option value="standard">Standard</option><option value="wiki">Wiki</option><option value="living-aurora">Living Aurora</option><option value="blue-cosmos">Blue Cosmos</option><option value="pulse-neon">Pulse Neon</option></select></label></div></div></header><div class="app-shell"><aside class="sidebar"><details class="sidebar-drawer" open><summary>ページ</summary><div class="sidebar-content"><nav class="primary-nav" aria-label="メインナビゲーション"><a href="/">すべての記事</a><a href="/training/">研修資料</a></nav><details class="page-tree" open><summary>ページツリー</summary><nav aria-label="記事の階層"><ul class="tree-level"><li class="tree-node tree-folder is-active-branch"><details open data-tree-folder="wiki" data-active-branch="true"><summary><span class="tree-chevron" aria-hidden="true">›</span><span>Wiki</span></summary><ul class="tree-level"><li class="tree-node tree-folder is-active-branch"><details open data-tree-folder="wiki/anken001" data-active-branch="true"><summary><span class="tree-chevron" aria-hidden="true">›</span><span>anken001</span></summary><ul class="tree-level"><li class="tree-node tree-article"><a class="active" aria-current="page" href="/articles/20261001-145031/">Te社向け 社内RAG基盤 詳細設計書作成タスク整理</a></li></ul></details></li><li class="tree-node tree-folder"><details data-tree-folder="wiki/anken002"><summary><span class="tree-chevron" aria-hidden="true">›</span><span>anken002</span></summary><ul class="tree-level"><li class="tree-node tree-article"><a href="/articles/20261001-145309/">製造A社 Windows Server移行案件 調査整理</a></li></ul></details></li><li class="tree-node tree-folder"><details data-tree-folder="wiki/anken003"><summary><span class="tree-chevron" aria-hidden="true">›</span><span>anken003</span></summary><ul class="tree-level"><li class="tree-node tree-article"><a href="/articles/20261001-145549/">キッティング管理システム AWS構成・調査整理</a></li></ul></details></li><li class="tree-node tree-folder"><details data-tree-folder="wiki/anken004"><summary><span class="tree-chevron" aria-hidden="true">›</span><span>anken004</span></summary><ul class="tree-level"><li class="tree-node tree-article"><a href="/articles/20261001-145705/">医療系システム 非機能要件・クラウド基盤検討整理</a></li></ul></details></li><li class="tree-node tree-folder"><details data-tree-folder="wiki/anken005"><summary><span class="tree-chevron" aria-hidden="true">›</span><span>anken005</span></summary><ul class="tree-level"><li class="tree-node tree-article"><a href="/articles/20261001-150042/">VMwareからOpenShift Virtualizationへの移行 調査整理</a></li></ul></details></li></ul></details></li></ul></nav></details><details class="learning-tools" data-learning-tools data-study-ids="[]"><summary>学習データ</summary><div class="learning-tools__body"><p class="learning-tools__summary"><strong data-learning-summary>0/0</strong><span data-learning-total>0秒</span></p><div class="learning-tools__actions"><button type="button" data-learning-export>保存</button><label>復元<input type="file" accept="application/json,.json" data-learning-import></label></div><p class="learning-tools__status" data-learning-status aria-live="polite"></p></div></details><script type="module" src="/_astro/LearningDataTools.astro_astro_type_script_index_0_lang.CEB3ME2V.js"></script></div></details></aside><div class="content-column"><main class="content-main"><div class="article-layout"><article><header class="article-header article-header--wiki"><a class="back-link" href="/">記事一覧に戻る</a><div class="card-meta"><span>wiki</span><time>2026-10-01 14:50:31</time></div><h1>Te社向け 社内RAG基盤 詳細設計書作成タスク整理</h1><section class="study-progress" data-study-progress data-article-id="20261001-145031" data-article-type="wiki" aria-label="この記事の学習状態"><button type="button" class="study-progress__completion" data-progress-completion aria-pressed="false">○ 未読了</button><span class="study-progress__time">学習 <strong data-progress-time>0秒</strong></span><span class="visually-hidden" data-progress-status aria-live="polite"></span></section><script type="module" src="/_astro/StudyProgressPanel.astro_astro_type_script_index_0_lang.DOy-2xSn.js"></script></header><div class="prose"><h2 id="1-タスク概要">1. タスク概要</h2>
+<p>お客様は <strong>Te社</strong>。</p>
+<p>Te社内で利用する <strong>RAG基盤</strong> について、既存システム・既存ソースコードを確認しながら、<strong>社内向けの詳細設計書を整理・作成する</strong>ことが今回の主なタスク。</p>
+<p>現時点では、期限は <strong>10/23頃まで</strong> と認識している。</p>
+<p>主な成果物は、</p>
+<ul>
+<li>
+<p>社内RAG基盤の詳細設計書</p>
+</li>
+<li>
+<p>15項目以上の設計項目を整理</p>
+</li>
+<li>
+<p>既存コード・設定・仕様を確認したうえで内容を正確に記載</p>
+</li>
+<li>
+<p>最終的にTe社内で利用できる品質まで仕上げる</p>
+</li>
+</ul>
+<p>というもの。</p>
+<hr>
+<h2 id="2-rag基盤の背景">2. RAG基盤の背景</h2>
+<p>基盤は <strong>Microsoft Azure</strong> 上に構築されている。</p>
+<p>元々はPoCとして、<strong>Accentureが作成したRAG基盤／資材が存在していた可能性がある</strong>。</p>
+<p>そのPoCや提供物をベースとして、</p>
+<p><strong>Accenture側のPoC・提供資材<br>
+→ Te社向けに再開発・カスタマイズ<br>
+→ 現在実際に動作している社内RAG基盤</strong></p>
+<p>という流れになっていると考えられる。</p>
+<p>現時点では、既にソースコードは存在しており、実際に動作している。</p>
+<hr>
+<h2 id="3-環境">3. 環境</h2>
+<p>少なくとも、</p>
+<ul>
+<li>
+<p>社内利用環境</p>
+</li>
+<li>
+<p>開発環境</p>
+</li>
+</ul>
+<p>のように複数環境が存在している可能性がある。</p>
+<p>ただし、</p>
+<ul>
+<li>
+<p>環境が正確に何種類あるのか</p>
+</li>
+<li>
+<p>開発／検証／本番など、どのように分離されているのか</p>
+</li>
+<li>
+<p>Azureリソースが環境単位でどのように分かれているのか</p>
+</li>
+</ul>
+<p>については要確認。</p>
+<p>また、Te社独自で実装された部分としては、現時点の認識では <strong>認証基盤など一部の機能</strong> が中心である可能性がある。</p>
+<hr>
+<h2 id="4-既存ドキュメント">4. 既存ドキュメント</h2>
+<p>Accentureから提供されている資料として、<strong>HTML形式のドキュメントのようなもの</strong>が存在している。</p>
+<p>その中には、</p>
+<ul>
+<li>
+<p>各種パラメータ</p>
+</li>
+<li>
+<p>ソースコード仕様</p>
+</li>
+<li>
+<p>モジュール仕様</p>
+</li>
+<li>
+<p>設定内容</p>
+</li>
+<li>
+<p>API等の仕様</p>
+</li>
+<li>
+<p>その他システム仕様</p>
+</li>
+</ul>
+<p>などが掲載されている可能性がある。</p>
+<p>ただし、その資料はあくまで元となるPoC／提供システム側の仕様であり、<strong>現在のTe社向けRAG基盤については、別途社内用の詳細設計書を作成する必要がある</strong>。</p>
+<p>そのため、</p>
+<p><strong>既存Accenture資料<br>
+＋ 現在のTe社向けソースコード<br>
+＋ Azureの実環境・設定<br>
+↓<br>
+Te社向け詳細設計書</strong></p>
+<p>という形で情報を整理していくことになる。</p>
+<hr>
+<h2 id="5-ソースコード">5. ソースコード</h2>
+<p>RAG基盤のアプリケーション部分は主に <strong>Python</strong> で実装されている。</p>
+<p>Azure上で動作しているPythonソースコードを確認しながら設計書を作成する想定。</p>
+<p>ソースコードは、おそらく</p>
+<ul>
+<li>
+<p>機能単位</p>
+</li>
+<li>
+<p>モジュール単位</p>
+</li>
+<li>
+<p>サービス単位</p>
+</li>
+</ul>
+<p>などで分割されている。</p>
+<p>また、Git等のリポジトリについても、<strong>用途や機能ごとに複数リポジトリへ分割されている</strong>と考えられる。</p>
+<p>現時点では、</p>
+<ul>
+<li>
+<p>Pythonコードの修正まで担当するのか</p>
+</li>
+<li>
+<p>ドキュメント作成だけなのか</p>
+</li>
+<li>
+<p>設計書作成中に判明した問題を修正するのか</p>
+</li>
+<li>
+<p>修正する場合、どの範囲まで担当するのか</p>
+</li>
+</ul>
+<p>は不明。</p>
+<p>ただし、今後ソースコード修正が発生する可能性はありそう。</p>
+<p>まずは <strong>既存ソースコードを読み解き、詳細設計書を完成させることが優先タスク</strong> と考えられる。</p>
+<hr>
+<h2 id="6-詳細設計書の作成方法">6. 詳細設計書の作成方法</h2>
+<p>Te社には、社内専用のAIが用意されている。</p>
+<p>AIは <strong>Claudeベースの仕組み</strong> と聞いており、Te社専用環境で利用できるため、社内ソースコードや設計情報を入力してもセキュリティ上問題ない運用になっていると考えられる。</p>
+<p>想定している作業フローは以下。</p>
+<ol>
+<li>
+<p>Azure上で動作しているPythonソースコードを確認</p>
+</li>
+<li>
+<p>対象モジュール・機能を整理</p>
+</li>
+<li>
+<p>Te社専用AIへコードや必要情報を入力</p>
+</li>
+<li>
+<p>AIにソースコード解析・仕様整理をさせる</p>
+</li>
+<li>
+<p>AIから詳細設計書の元となる情報を出力</p>
+</li>
+<li>
+<p>出力内容と実際のソースコードを照合</p>
+</li>
+<li>
+<p>Accenture提供ドキュメントとも照合</p>
+</li>
+<li>
+<p>自分で内容を修正・整理</p>
+</li>
+<li>
+<p>Te社指定の詳細設計書フォーマットへ転記</p>
+</li>
+<li>
+<p>最終的な詳細設計書として完成させる</p>
+</li>
+</ol>
+<p>つまり、AIに設計書を完全に任せるのではなく、</p>
+<p><strong>AIで解析・下書き<br>
+→ 人間がコードと資料を確認<br>
+→ 詳細設計書として整える</strong></p>
+<p>という進め方になる。</p>
+<hr>
+<h2 id="7-te社専用aiについての確認事項">7. Te社専用AIについての確認事項</h2>
+<p>Te社専用AIについては、利用可能であることは分かっているものの、以下はまだ不明。</p>
+<ul>
+<li>
+<p>Claudeの具体的なモデル</p>
+</li>
+<li>
+<p>1回に入力可能なコード量</p>
+</li>
+<li>
+<p>コンテキスト長</p>
+</li>
+<li>
+<p>レスポンス精度</p>
+</li>
+<li>
+<p>コード解析精度</p>
+</li>
+<li>
+<p>ファイルアップロード可否</p>
+</li>
+<li>
+<p>複数ファイルをまとめて解析できるか</p>
+</li>
+<li>
+<p>HTML資料を読み込ませられるか</p>
+</li>
+<li>
+<p>レート制限</p>
+</li>
+<li>
+<p>1日／1時間あたりの利用制限</p>
+</li>
+<li>
+<p>出力文字数制限</p>
+</li>
+<li>
+<p>セッションをまたいで情報を保持できるか</p>
+</li>
+<li>
+<p>リポジトリ単位で解析できる仕組みがあるか</p>
+</li>
+</ul>
+<p>特に、ソースコード量が多い場合、<strong>モジュール単位で解析する運用になる可能性が高い</strong>。</p>
+<hr>
+<h2 id="8-成果物">8. 成果物</h2>
+<p>今回の主要成果物は <strong>詳細設計書</strong>。</p>
+<p>少なくとも <strong>15項目以上の設計項目</strong> が存在しており、それぞれについて内容を整理して完成させる必要がある。</p>
+<p>詳細設計書には、今後確認次第では例えば以下のような内容が含まれる可能性がある。</p>
+<ul>
+<li>
+<p>システム概要</p>
+</li>
+<li>
+<p>システム構成</p>
+</li>
+<li>
+<p>Azure構成</p>
+</li>
+<li>
+<p>モジュール構成</p>
+</li>
+<li>
+<p>Pythonモジュール仕様</p>
+</li>
+<li>
+<p>処理フロー</p>
+</li>
+<li>
+<p>API仕様</p>
+</li>
+<li>
+<p>データ入出力</p>
+</li>
+<li>
+<p>RAG処理</p>
+</li>
+<li>
+<p>ドキュメント取込処理</p>
+</li>
+<li>
+<p>Embedding処理</p>
+</li>
+<li>
+<p>Vector DB検索</p>
+</li>
+<li>
+<p>LLM呼び出し</p>
+</li>
+<li>
+<p>プロンプト</p>
+</li>
+<li>
+<p>認証</p>
+</li>
+<li>
+<p>認可</p>
+</li>
+<li>
+<p>ログ</p>
+</li>
+<li>
+<p>例外処理</p>
+</li>
+<li>
+<p>リトライ</p>
+</li>
+<li>
+<p>タイムアウト</p>
+</li>
+<li>
+<p>セキュリティ</p>
+</li>
+<li>
+<p>設定値／環境変数</p>
+</li>
+<li>
+<p>Key Vault等の秘密情報管理</p>
+</li>
+<li>
+<p>外部サービス連携</p>
+</li>
+<li>
+<p>デプロイ</p>
+</li>
+<li>
+<p>監視</p>
+</li>
+<li>
+<p>運用</p>
+</li>
+</ul>
+<p>ただし、実際に作成する15項目以上の正式な項目については、Te社の詳細設計書テンプレートを確認する必要がある。</p>
+<hr>
+<h2 id="9-現時点での優先順位">9. 現時点での優先順位</h2>
+<p>現時点では、まず以下を把握することが重要。</p>
+<p><strong>① 詳細設計書のテンプレート確認</strong></p>
+<p>何を15項目以上作成する必要があるのかを把握する。</p>
+<p><strong>② 既存ドキュメント確認</strong></p>
+<p>Accenture提供のHTML資料に、どこまで仕様が記載されているのか確認する。</p>
+<p><strong>③ リポジトリ構成確認</strong></p>
+<p>Pythonコードがどのような単位で分割されているのか確認する。</p>
+<p><strong>④ Azure構成確認</strong></p>
+<p>PythonコードがAzureのどのサービス上で動作しているのか把握する。</p>
+<p><strong>⑤ Te社独自実装部分の特定</strong></p>
+<p>Accenture版から何を変更・追加したのか確認する。</p>
+<p><strong>⑥ Te社専用AIの性能・制限確認</strong></p>
+<p>コード解析にどこまで利用できるか確認する。</p>
+<p><strong>⑦ 詳細設計書作成</strong></p>
+<p>AIによる解析を補助として利用しながら、人の手で内容を確認・整理して完成させる。</p>
+<hr>
+<h2 id="10-現時点での要確認事項">10. 現時点での要確認事項</h2>
+<p>特に早めに確認したい内容は以下。</p>
+<ul>
+<li>
+<p>正式な納期は10/23で間違いないか</p>
+</li>
+<li>
+<p>詳細設計書は全部で何項目あるのか</p>
+</li>
+<li>
+<p>詳細設計書の既存テンプレートはあるか</p>
+</li>
+<li>
+<p>担当する設計書の範囲はどこまでか</p>
+</li>
+<li>
+<p>Accenture提供HTML資料の内容</p>
+</li>
+<li>
+<p>Te社向けに変更された箇所</p>
+</li>
+<li>
+<p>Pythonリポジトリはいくつ存在するか</p>
+</li>
+<li>
+<p>各リポジトリの役割</p>
+</li>
+<li>
+<p>Azure上の構成</p>
+</li>
+<li>
+<p>開発／検証／本番等の環境構成</p>
+</li>
+<li>
+<p>認証基盤の仕組み</p>
+</li>
+<li>
+<p>RAG部分で利用しているAzureサービス</p>
+</li>
+<li>
+<p>ソースコード修正も作業範囲に入るのか</p>
+</li>
+<li>
+<p>Te社専用AIへ入力できる情報の範囲</p>
+</li>
+<li>
+<p>AIの入力・出力・レート制限</p>
+</li>
+<li>
+<p>設計書レビューを誰が行うのか</p>
+</li>
+<li>
+<p>10/23までに完成なのか、レビュー提出なのか</p>
+</li>
+</ul>
+<hr>
+<h2 id="11-現時点での一言まとめ">11. 現時点での一言まとめ</h2>
+<p>今回の作業は、</p>
+<blockquote>
+<p><strong>「Accentureが作成したPoC／既存設計資料をベースにTe社向けに再開発され、現在Azure上で実際に稼働しているPythonベースのRAG基盤について、既存ソースコード・Azure構成・既存HTML仕様書を読み解き、Te社専用AIも活用しながら、10/23頃までに15項目以上の社内向け詳細設計書を完成させる」</strong></p>
+</blockquote>
+<p>というタスクと整理できる。</p>
+<p>現時点では、<strong>新規開発よりも「既に動いているものを正確に読み解いて設計書へ落とす」ことが中心</strong>と考えられる。</p>
+<p>ソースコード修正については可能性はあるものの、現時点では作業範囲として確定していない。</p></div></article><details class="toc" open data-article-toc><summary>目次</summary><nav aria-label="目次"><ol><li class="depth-2"><a href="#1-タスク概要">1. タスク概要</a></li><li class="depth-2"><a href="#2-rag基盤の背景">2. RAG基盤の背景</a></li><li class="depth-2"><a href="#3-環境">3. 環境</a></li><li class="depth-2"><a href="#4-既存ドキュメント">4. 既存ドキュメント</a></li><li class="depth-2"><a href="#5-ソースコード">5. ソースコード</a></li><li class="depth-2"><a href="#6-詳細設計書の作成方法">6. 詳細設計書の作成方法</a></li><li class="depth-2"><a href="#7-te社専用aiについての確認事項">7. Te社専用AIについての確認事項</a></li><li class="depth-2"><a href="#8-成果物">8. 成果物</a></li><li class="depth-2"><a href="#9-現時点での優先順位">9. 現時点での優先順位</a></li><li class="depth-2"><a href="#10-現時点での要確認事項">10. 現時点での要確認事項</a></li><li class="depth-2"><a href="#11-現時点での一言まとめ">11. 現時点での一言まとめ</a></li></ol></nav></details></div></main><footer class="site-footer"><span>Study App</span><a href="https://github.com/maruyamamasaya/studyApp" rel="noreferrer">GitHub</a></footer></div></div><script>
+      (() => {
+        const drawer = document.querySelector('.sidebar-drawer');
+        const mobileSidebar = window.matchMedia('(max-width: 640px)');
+        const syncDrawer = (mobile) => {
+          if (drawer instanceof HTMLDetailsElement) drawer.open = !mobile;
+        };
+        syncDrawer(mobileSidebar.matches);
+        mobileSidebar.addEventListener('change', (event) => syncDrawer(event.matches));
+
+        const treeStorageKey = 'study-app:page-tree-open';
+        const treeFolders = [...document.querySelectorAll('[data-tree-folder]')];
+        try {
+          const saved = localStorage.getItem(treeStorageKey);
+          if (saved !== null) {
+            const openFolders = new Set(JSON.parse(saved));
+            treeFolders.forEach((folder) => {
+              if (folder instanceof HTMLDetailsElement) {
+                folder.open = folder.dataset.activeBranch === 'true' || openFolders.has(folder.dataset.treeFolder);
+              }
+            });
+          }
+          treeFolders.forEach((folder) => folder.addEventListener('toggle', () => {
+            const openFolders = treeFolders
+              .filter((candidate) => candidate instanceof HTMLDetailsElement && candidate.open)
+              .map((candidate) => candidate.dataset.treeFolder);
+            localStorage.setItem(treeStorageKey, JSON.stringify(openFolders));
+          }));
+        } catch {
+          // The server-rendered open state remains usable when storage is unavailable.
+        }
+
+        const picker = document.querySelector('[data-theme-picker]');
+        if (!(picker instanceof HTMLSelectElement)) return;
+
+        const themeColors = {
+          standard: '#f7f7f5',
+          wiki: '#f8f5ec',
+          'living-aurora': '#05070c',
+          'blue-cosmos': '#020611',
+          'pulse-neon': '#030607'
+        };
+        const applyTheme = (theme) => {
+          if (!(theme in themeColors)) return;
+          document.documentElement.dataset.theme = theme;
+          picker.value = theme;
+          document.querySelector('meta[name="theme-color"]')?.setAttribute('content', themeColors[theme]);
+        };
+
+        const initialTheme = document.documentElement.dataset.theme || 'standard';
+        applyTheme(initialTheme);
+        picker.addEventListener('change', () => {
+          applyTheme(picker.value);
+          try {
+            localStorage.setItem('study-app:theme', picker.value);
+          } catch {
+            // Theme switching still works for this page when storage is unavailable.
+          }
+        });
+      })();
+    </script></body></html><script>
+  (() => {
+    const toc = document.querySelector('[data-article-toc]');
+    if (!(toc instanceof HTMLDetailsElement)) return;
+    const mobileArticle = window.matchMedia('(max-width: 860px)');
+    const syncToc = () => { toc.open = !mobileArticle.matches; };
+    syncToc();
+    mobileArticle.addEventListener('change', syncToc);
+    toc.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+      if (mobileArticle.matches) toc.open = false;
+    }));
+  })();
+</script>

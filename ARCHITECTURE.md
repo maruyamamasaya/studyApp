@@ -41,6 +41,7 @@ docs/**/*.md ── build_note_index.py ──► _note-index.json
 | 外部 Vault `study/**/*.md` / `wiki/**/*.md` | 記事の唯一の正本。Obsidianで作成・編集する |
 | `content/notes/**/*.md` | Git / build / Sites向けの生成ミラー。filename stemとFrontmatter IDを一致させ、直接編集しない |
 | `scripts/sync-obsidian-content.mjs` | Vault の `study/` / `wiki/` を検証し、同期管理外ファイルを上書きせず `content/notes/` へ反映する |
+| `sync-and-publish.cmd` / `scripts/publish-obsidian.mjs` | 同期・check成功後、ChatGPTログイン済みCodex CLIを自動承認review付きで起動し、既存Sitesの認証・source push・deployを依頼する。構造化されたdeployment成功結果のみを完了と扱う |
 | `generated/obsidian-sync-manifest.json` | 同期元相対 path、同期先、ID、内容 hash。安全な更新と明示 prune の境界 |
 | `app/src/content.config.ts` | Astro content collection の Frontmatter schema と表示用正規化 |
 | `app/src/domain/article.mjs` | parser、ID / path invariant、tags / aliases、link index の純粋 domain |

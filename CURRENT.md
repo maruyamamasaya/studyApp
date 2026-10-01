@@ -40,6 +40,7 @@ updated: 2026-09-29
 - 外部 Obsidian Vault `Document organization` の `study/` / `wiki/` を記事の唯一の正本とし、`npm run vault:prepare -- "<Vault path>"` が検証付きで公開ミラー `content/notes/` と `dist/` を更新する。`content/notes/` は直接編集しない。
 - 初期記事をVaultへ配置後、Obsidian上の追加・更新・削除を正本として同期している。現在は10件。
 - 2026-10-01の同期で記事は8件。公開手順は`CONTENT_AUTHORING.md`に集約し、`vault:prepare`によるローカル準備とSitesへのdeployを区別する。生成結果テストは削除可能な公開記事の固定IDに依存せず、現行masterと独立fixtureで検証する。
+- `sync-and-publish.cmd`または`npm run vault:publish`が同期・検証後にCodex CLIへ既存Sites公開を依頼する一括入口。CLIのSites接続と認証が必要で、自動承認reviewと公開statusの成功確認を維持する。CLI経由deployの実環境確認は未完了。
 
 ## 既知の制約・未解決事項
 

@@ -46,6 +46,22 @@ aliases:
 
 ## 追加から公開まで
 
+通常はリポジトリ直下の `sync-and-publish.cmd` をダブルクリックする。Obsidian Vaultの同期・削除反映、検証、サイト生成、Codex CLI経由のSites公開を順に実行する。エラーがあれば停止し、native deploymentの成功を確認できた場合だけ「公開完了」とURLを表示する。
+
+コマンドからも実行できる。
+
+```powershell
+npm run vault:publish
+```
+
+Vaultの既定はリポジトリと同じ親フォルダの`Document organization`。別のVaultなら`npm run vault:publish -- "<Vault path>"`または`STUDY_APP_VAULT`で指定する。
+
+Node.js、Git、Git Bash、依存パッケージ、ChatGPTログイン済みCodex CLI、Sites接続が必要。公開用モデルはCLIのモデル一覧にある`gpt-6-sol`を明示指定し、アプリ側のモデル設定を引き継がない。変更する場合は`STUDY_APP_PUBLISH_MODEL`を設定する。Codexの利用枠を消費する。認証切れの場合は`codex login`を行って再実行する。Sites接続がCLIで利用できない場合は公開失敗として止まり、Codex desktopのこのchatで公開を依頼する。永久tokenの保存や認証・approvalの無効化は行わない。CLIの自動承認レビューで拒否された処理は失敗として返す。
+
+起動条件だけ確認する場合は`npm run vault:publish -- --check-only`。これはVaultフォルダ、CLIの所在・ログインだけを確認し、Sites toolへの接続やdeployを確認するものではない。
+
+以下は個別操作・復旧時の手順。
+
 1. Obsidian で `study/` または `wiki/` の直下・配下に新規 Markdown を作る。Templater が対応テンプレートを適用し、Asia/Tokyo の ID を filename と Frontmatter に設定する。
 2. Study App の repository root で次を実行する。
 
@@ -61,6 +77,13 @@ aliases:
 記事の追加・削除を自由に行えるよう、生成結果テストは現在のarticle masterを基準にする。HTML安全化・task list・重複見出しは公開記事と独立したMarkdown fixtureで検証する。検証が失敗した場合は、生成が成功していても公開完了とは扱わない。
 
 WindowsでSites公開スクリプトを実行する際は、既存Git Bashの`C:\Program Files\Git\bin`をそのプロセスのPATHの先頭へ追加する。package処理が未設定のWSLのbashを呼ぶ場合は公開が完了しない。ソースpush後にpackageが失敗した場合は、同じソースからpackageを再作成してsave/deployを続ける。
+
+このWindows環境では、公開スクリプトを起動するPowerShellプロセスに次を設定する（恒久的な環境変数変更は不要）。`TAR_OPTIONS`は`C:`をリモートホストと誤認するtarの挙動を回避する。
+
+```powershell
+$env:PATH = "C:\Program Files\Git\bin;" + $env:PATH
+$env:TAR_OPTIONS = "--force-local"
+```
 
 検証だけを行う場合は `npm run vault:check -- "<Vault path>"`、削除を反映せず追加・更新だけ同期する場合は `npm run vault:sync -- "<Vault path>"` を使う。通常の公開準備では正本と一致させる `vault:prepare` を使う。
 

@@ -9,3 +9,5 @@
 - 旧docs記事は変更しないため旧索引は再生成しない。
 - npm run checkはdomain 22件、output 4件とbuildが成功。git diff --checkも成功。
 - Sites source push後、packageが未設定WSLのbashを呼んで失敗。既存Git BashをプロセスPATHの先頭へ指定して再実行する。
+- Git BashのtarがC:をremoteと解釈したため、プロセス限定TAR_OPTIONS=--force-localでpackage成功。
+- source af49d0e18e25016dc73f08b60c2ea6f31147d97bを既存owner-only範囲でdeployし、status=succeededを確認。URL: https://study-app-maruyama.maruyama-001.chatgpt.site
