@@ -30,7 +30,7 @@ test('wiki / study を相対パスを保って同期し、空の下書きを除�
   const plan = await planObsidianSync(paths);
   assert.equal(plan.entries.length, 1);
   assert.equal(plan.skipped.length, 1);
-  assert.equal(plan.entries[0].destination, 'content/notes/wiki/nested/20260929-120000.md');
+  assert.equal(plan.entries[0].destination, 'docs/wiki/nested/20260929-120000.md');
   await applyObsidianSync(plan);
   assert.equal(await fs.readFile(path.join(paths.repositoryRoot, plan.entries[0].destination), 'utf8'), plan.entries[0].markdown);
 });
@@ -47,16 +47,16 @@ test('同期管理外の既存ファイルを上書きしない', async (t) => {
   t.after(() => fs.rm(paths.root, { recursive: true, force: true }));
   const relative = path.join('wiki', '20260929-120000.md');
   await fs.writeFile(path.join(paths.vaultRoot, relative), note('20260929-120000', 'wiki'));
-  const destination = path.join(paths.repositoryRoot, 'content', 'notes', relative);
+  const destination = path.join(paths.repositoryRoot, 'docs', relative);
   await fs.mkdir(path.dirname(destination), { recursive: true });
   await fs.writeFile(destination, '既存の別内容');
   await assert.rejects(() => planObsidianSync(paths), /同期管理外の既存ファイル/u);
 });
 
-test('Vault に存在しない content/notes の記事を拒否する', async (t) => {
+test('Vault に存在しない docs の記事を拒否する', async (t) => {
   const paths = await fixture();
   t.after(() => fs.rm(paths.root, { recursive: true, force: true }));
-  const destination = path.join(paths.repositoryRoot, 'content', 'notes', 'study', '20260929-120001.md');
+  const destination = path.join(paths.repositoryRoot, 'docs', 'study', '20260929-120001.md');
   await fs.mkdir(path.dirname(destination), { recursive: true });
   await fs.writeFile(destination, note('20260929-120001', 'study'));
   await assert.rejects(() => planObsidianSync(paths), /Vault の生成ミラー/u);

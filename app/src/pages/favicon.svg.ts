@@ -1,4 +1,0 @@
-export function GET() {
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="15" fill="#07111f"/><path d="M16 16h25a7 7 0 0 1 7 7v25H23a7 7 0 0 1-7-7V16Z" fill="#18d1b1"/><path d="M23 16v25a7 7 0 0 0 7 7" fill="none" stroke="#07111f" stroke-width="4"/><path d="M29 25h12M29 32h12" stroke="#07111f" stroke-width="3" stroke-linecap="round"/></svg>`;
-  return new Response(svg, { headers: { 'Content-Type': 'image/svg+xml' } });
-}

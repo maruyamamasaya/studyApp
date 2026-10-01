@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "articles": [
+    {
+      "id": "2c079d2d-dfee-4859-a4b2-0c96d7df3efa",
+      "path": "README.md",
+      "title": "README"
+    },
+    {
+      "id": "e8258910-7fe4-40c0-8bc6-fe1657210a8b",
+      "path": "training/README.md",
+      "title": "README"
+    },
+    {
+      "id": "20261001-145031",
+      "path": "wiki/anken001/20261001-145031.md",
+      "title": "Te社向け 社内RAG基盤 詳細設計書作成タスク整理"
+    },
+    {
+      "id": "20261001-145309",
+      "path": "wiki/anken002/20261001-145309.md",
+      "title": "製造A社 Windows Server移行案件 調査整理"
+    },
+    {
+      "id": "20261001-145549",
+      "path": "wiki/anken003/20261001-145549.md",
+      "title": "キッティング管理システム AWS構成・調査整理"
+    },
+    {
+      "id": "20261001-145705",
+      "path": "wiki/anken004/20261001-145705.md",
+      "title": "医療系システム 非機能要件・クラウド基盤検討整理"
+    },
+    {
+      "id": "20261001-150042",
+      "path": "wiki/anken005/20261001-150042.md",
+      "title": "VMwareからOpenShift Virtualizationへの移行 調査整理"
+    }
+  ]
+}

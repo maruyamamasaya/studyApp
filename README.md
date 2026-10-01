@@ -1,21 +1,17 @@
 # Study App
 
-Obsidian Vault の Markdown を正本とし、Study Web、Wiki、将来の AI / RAG から再利用できる学習基盤へ再構築するプロジェクトです。
+Obsidianの記事をDocsifyで読む静的サイトです。記事はVaultの`study/`・`wiki/`で編集し、`docs/`へ一方向に同期します。
 
-## 現在の状態
+## 普段の更新
 
-Astro + TypeScript で一覧・研修一覧・個別記事を静的生成します。Obsidian Vault の `study/` と `wiki/` が唯一の編集元で、検証付き同期コマンドが Git 管理された公開ミラー `content/notes/` と `dist/` を生成します。
+`sync-and-publish.cmd`をダブルクリックするか、次を実行します。
 
-既存 `maruyamamasaya/study` の全記事と学習状態は移行しません。必要な記事は Obsidian で新しく作り直し、旧 `docs/` は参照用として変更せず残します。
+```powershell
+npm run vault:publish
+```
 
-記事の追加方法と公開手順は [CONTENT_AUTHORING.md](CONTENT_AUTHORING.md) を参照してください。
+同期・索引更新・テストの後、`docs/`と同期manifestだけをcommitしてGitHubへpushします。Pages設定済みならGitHub Actionsが`docs/`をそのまま公開します。AIやCodexは起動しません。push完了とサイト公開完了は別で、結果はGitHubのActions画面で確認します。
 
-## 設計資料
+ローカル同期だけなら`npm run vault:prepare`。起動前に`npm install`が必要です。Node.js、Git、Python 3を使います。
 
-- [現行機能と互換性](CURRENT_FEATURES.md)
-- [データモデル](DATA_MODEL.md)
-- [移行計画](MIGRATION_PLAN.md)
-- [現在の状態](CURRENT.md)
-- [現行アーキテクチャ](ARCHITECTURE.md)
-
-旧リポジトリは `maruyamamasaya/study`、新しい開発先は `maruyamamasaya/studyApp` です。
+詳細は[CONTENT_AUTHORING.md](CONTENT_AUTHORING.md)、状態は[CURRENT.md](CURRENT.md)、構成は[ARCHITECTURE.md](ARCHITECTURE.md)を参照してください。

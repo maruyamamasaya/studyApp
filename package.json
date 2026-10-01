@@ -1,22 +1,15 @@
 {
   "name": "study-app",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
-    "dev": "npm run content:build && astro dev",
+    "dev": "node scripts/serve-docs.mjs",
     "vault:check": "node scripts/sync-obsidian-content.mjs --check",
-    "vault:sync": "node scripts/sync-obsidian-content.mjs",
+    "vault:sync": "node scripts/sync-obsidian-content.mjs --prune",
     "vault:prepare": "node scripts/prepare-obsidian-content.mjs",
     "vault:publish": "node scripts/publish-obsidian.mjs",
-    "content:build": "node scripts/build-content-index.mjs",
-    "build": "npm run content:build && astro build --force",
-    "test": "node --test tests/article-search.test.mjs tests/content-model.test.mjs tests/navigation-tree.test.mjs tests/obsidian-sync.test.mjs tests/study-progress.test.mjs tests/publish-obsidian.test.mjs",
-    "test:output": "node --test tests/generated-site.test.mjs",
-    "check": "npm run test && npm run build && npm run test:output"
+    "test": "node --test tests/content-model.test.mjs tests/obsidian-sync.test.mjs tests/unique-heading-ids.test.js",
+    "check": "npm run test"
   },
-  "dependencies": {
-    "@astrojs/markdown-remark": "7.3.1",
-    "astro": "7.3.5",
-    "yaml": "2.8.1"
-  }
+  "dependencies": { "yaml": "2.8.1" }
 }

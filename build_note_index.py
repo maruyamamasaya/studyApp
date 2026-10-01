@@ -8,7 +8,12 @@ from pathlib import Path
 DOCS_DIR = Path("docs")
 OUTPUT_FILE = DOCS_DIR / "_note-index.json"
 ARTICLE_MASTER_FILE = DOCS_DIR / "_article-master.json"
-HOMEPAGE_FILE = "📚 Study Notes Hub.md"
+HOMEPAGE_FILE = "README.md"
+
+try:
+    metadata = {article["path"]: article for article in json.loads((DOCS_DIR / "_article-metadata.json").read_text(encoding="utf-8"))}
+except FileNotFoundError:
+    metadata = {}
 
 index: dict[str, list[str]] = defaultdict(list)
 
@@ -25,13 +30,16 @@ article_ids = {
 articles: list[dict[str, str]] = []
 
 for markdown_file in DOCS_DIR.rglob("*.md"):
+    if markdown_file.name == "_sidebar.md":
+        continue
     relative_path = markdown_file.relative_to(DOCS_DIR)
     article_path = relative_path.as_posix()
+    details = metadata.get(article_path, {})
 
     articles.append({
-        "id": article_ids.get(article_path, str(uuid.uuid4())),
+        "id": details.get("id") or article_ids.get(article_path, str(uuid.uuid4())),
         "path": article_path,
-        "title": markdown_file.stem,
+        "title": details.get("title") or ("未設定" if details else markdown_file.stem),
     })
 
     # DocsifyのトップページはWikiリンクの解決対象から除外
@@ -42,6 +50,10 @@ for markdown_file in DOCS_DIR.rglob("*.md"):
     note_name = markdown_file.stem
 
     index[note_name].append(path_without_extension)
+    for name in [details.get("title"), *details.get("aliases", [])]:
+        if name and path_without_extension not in index[name]:
+            index[name].append(path_without_extension)
+    index[path_without_extension] = [path_without_extension]
 
 sorted_index = {
     note_name: sorted(paths)

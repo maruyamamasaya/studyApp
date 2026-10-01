@@ -15,19 +15,19 @@
 ## 実装時の原則
 
 - 推測だけで変更せず、既存実装と履歴を確認する。コードが現在の挙動を示しても、その理由が不明なら理由まで推測しない。
-- 現在の静的 Docsify 構成と、ルートサイト・`docs/training/` サイト間の共有資産を意識する。
+- 現在の静的 Docsify 構成と、ルートサイト・`docs/training/` サイト間の共有資産を意識する。AstroとSitesの経路は廃止済み。
 - 無関係な整形、記事改稿、生成物変更を混ぜない。
-- セキュリティや権限を安易に弱めない。特に `docs/password-gate.js` はクライアント側の表示制御であり、本物のアクセス制御として扱わない。
+- セキュリティや権限を安易に弱めない。現行サイトは一般公開する設計であり、クライアント側password gateを本物のアクセス制御として扱わない。
 - エラーを隠すだけの回避策を恒久対応にしない。原因、暫定性、残課題を記録する。
 - Markdown の追加・改名・削除後は `python3 build_note_index.py` を実行し、`docs/_note-index.json` と `docs/_article-master.json` を同じ変更に含める。既存記事の ID は維持する。
-- `docs/` は外部ノートから同期される運用がある。同期方法を変える場合は [`docs/md更新用コマンド.md`](docs/md更新用コマンド.md) と競合しないか確認する。
+- `docs/study/`と`docs/wiki/`は外部Vaultからの生成ミラー。同期手順は`CONTENT_AUTHORING.md`に従う。旧rsync手順は現行運用では使用しない。
 
 ## 検証コマンド
 
-依存パッケージのインストールやビルド工程は現在存在しない。変更範囲に応じて、実在する次のコマンドを使う。
+依存はFrontmatter検証用のyamlのみ。HTML buildは不要。変更範囲に応じて、実在する次のコマンドを使う。
 
 ```bash
-node tests/password-gate.test.js
+npm test
 node tests/unique-heading-ids.test.js
 python3 build_note_index.py
 git diff --check

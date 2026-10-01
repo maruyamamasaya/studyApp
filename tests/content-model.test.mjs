@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { buildLinkIndex, normalizeArticle, normalizePath, parseFrontmatter, validateArticleSet } from '../app/src/domain/article.mjs';
+import { buildLinkIndex, normalizeArticle, normalizePath, parseFrontmatter, validateArticleSet } from '../scripts/lib/article.mjs';
 
 const validData = {
   id: '20260929-120000',

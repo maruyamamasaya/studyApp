@@ -1,90 +1,47 @@
-# Markdown 記事の追加と公開
+# 記事の編集・同期・公開
 
-## 配置場所とファイル名
+## 編集
 
-新しい記事は Obsidian Vault の次の2フォルダで作成する。ここが記事の唯一の正本である。`content/notes/**/*.md` は Git / Sites で再現可能にする公開用ミラーであり、直接編集しない。旧 Docsify 用の `docs/` にも新規記事を置かない。
+記事はObsidian Vaultの`study/`または`wiki/`で編集します。`docs/`は生成ミラーなので直接編集しません。Vaultは既定でStudy Appの隣の`Document organization`です。
 
-学習記事:
+ID、filename、created、type、tagsのFrontmatterは現在のObsidianテンプレートを使います。IDを変更しないでください。
 
-```text
-C:\Users\m-maruyama\Development\Document organization\study\20260929-142430.md
-```
+## 一括更新
 
-Wiki 記事:
-
-```text
-C:\Users\m-maruyama\Development\Document organization\wiki\20260929-142430.md
-```
-
-filename stem と `frontmatter.id` は必ず一致させる。ID は Asia/Tokyo の作成時刻を `YYYYMMDD-HHmmss` で表す。同じ秒の ID が既にある場合は未使用の秒まで進める。既存 ID は変更しない。
-
-## Frontmatter
-
-```md
----
-id: 20260929-142430
-title: ゼロトラストの基本
-type: study
-tags:
-  - security
-  - zero-trust
-created: "2026-09-29 14:24:30"
-updated:
-aliases:
-  - Zero Trust
----
-
-# 概要
-```
-
-- `title` は空欄でもよく、その場合の画面表示は `未設定` になる。
-- `type` の初期値は `study` または `wiki`。未知の値は Phase 1 では warning として扱う。
-- `tags` は必須の配列で、空なら `[]` とする。前後空白、空要素、重複は生成時に除去される。
-- `aliases` は任意の配列。前後空白、空要素、重複、title と同じ値は除去される。
-- `created` は Asia/Tokyo のローカル時刻。テンプレートでは YAML parser の差を避けるため引用符で囲む。既存の引用符なし YAML 日時も同じ表示値として受理する。
-- `updated` は Obsidian テンプレート互換の任意項目。空欄でも閲覧でき、現時点では記事 ID や並び順に使わない。
-
-## 追加から公開まで
-
-通常はリポジトリ直下の `sync-and-publish.cmd` をダブルクリックする。Obsidian Vaultの同期・削除反映、検証、サイト生成、Codex CLI経由のSites公開を順に実行する。エラーがあれば停止し、native deploymentの成功を確認できた場合だけ「公開完了」とURLを表示する。
-
-コマンドからも実行できる。
+`sync-and-publish.cmd`をダブルクリックします。コマンドからは次のとおりです。
 
 ```powershell
 npm run vault:publish
 ```
 
-Vaultの既定はリポジトリと同じ親フォルダの`Document organization`。別のVaultなら`npm run vault:publish -- "<Vault path>"`または`STUDY_APP_VAULT`で指定する。
+1. Vaultを検証し、Markdownの追加・更新・削除をdocsへ反映します。
+2. 記事一覧・Wiki Link索引を更新してテストします。
+3. docsと同期manifestだけをcommitし、origin/mainへpushします。
+4. GitHub ActionsがdocsをPagesへ公開します。Actionsで成功を確認してください。
 
-Node.js、Git、Git Bash、依存パッケージ、ChatGPTログイン済みCodex CLI、Sites接続が必要。公開用モデルはCLIのモデル一覧にある`gpt-6-sol`を明示指定し、アプリ側のモデル設定を引き継がない。変更する場合は`STUDY_APP_PUBLISH_MODEL`を設定する。Codexの利用枠を消費する。認証切れの場合は`codex login`を行って再実行する。Sites接続がCLIで利用できない場合は公開失敗として止まり、Codex desktopのこのchatで公開を依頼する。永久tokenの保存や認証・approvalの無効化は行わない。CLIの自動承認レビューで拒否された処理は失敗として返す。
+AI・Codex・API key・Sitesを使用しません。初回だけNode.js、Python 3、Git、GitHub認証、npm install、GitHub Pages設定が必要です。
 
-起動条件だけ確認する場合は`npm run vault:publish -- --check-only`。これはVaultフォルダ、CLIの所在・ログインだけを確認し、Sites toolへの接続やdeployを確認するものではない。
-
-以下は個別操作・復旧時の手順。
-
-1. Obsidian で `study/` または `wiki/` の直下・配下に新規 Markdown を作る。Templater が対応テンプレートを適用し、Asia/Tokyo の ID を filename と Frontmatter に設定する。
-2. Study App の repository root で次を実行する。
-
-   ```powershell
-   npm run vault:prepare -- "C:\Users\m-maruyama\Development\Document organization"
-   ```
-
-   このコマンドは Vault の `study/**/*.md` と `wiki/**/*.md` を `content/notes/` へ厳密に同期し、Frontmatter、ID、重複、静的 route、Wiki Link、HTML 安全化を検証して `dist/` を生成する。0バイトのファイルは下書きとして警告し、削除しない。Vault から削除した同期済み記事は内容 hash を照合してミラーから除去し、`content/notes/` だけに存在する記事はエラーにする。
-3. `git diff --check` と `git diff` で、同期記事、`generated/`、`dist/` の差分を確認する。
-4. 公開まで行う場合は Codex に「Obsidianから同期して、既存のStudy Appサイトへ公開して」と依頼する。`vault:prepare` はローカル生成までで、GitHubへのpushだけでもSitesは更新されない。
-5. Codex は `.openai/hosting.json` の既存project IDを使用し、Sitesの公開スキルでソース履歴を確認・統合する。検証成功後、同じソースをSites repositoryへcommit / pushし、`dist/` をpackageして既存の閲覧範囲を維持したままdeployする。成功statusとURLを確認して完了とする。
-
-記事の追加・削除を自由に行えるよう、生成結果テストは現在のarticle masterを基準にする。HTML安全化・task list・重複見出しは公開記事と独立したMarkdown fixtureで検証する。検証が失敗した場合は、生成が成功していても公開完了とは扱わない。
-
-WindowsでSites公開スクリプトを実行する際は、既存Git Bashの`C:\Program Files\Git\bin`をそのプロセスのPATHの先頭へ追加する。package処理が未設定のWSLのbashを呼ぶ場合は公開が完了しない。ソースpush後にpackageが失敗した場合は、同じソースからpackageを再作成してsave/deployを続ける。
-
-このWindows環境では、公開スクリプトを起動するPowerShellプロセスに次を設定する（恒久的な環境変数変更は不要）。`TAR_OPTIONS`は`C:`をリモートホストと誤認するtarの挙動を回避する。
+## ローカルで確認
 
 ```powershell
-$env:PATH = "C:\Program Files\Git\bin;" + $env:PATH
-$env:TAR_OPTIONS = "--force-local"
+npm run vault:prepare
+npm run dev
 ```
 
-検証だけを行う場合は `npm run vault:check -- "<Vault path>"`、削除を反映せず追加・更新だけ同期する場合は `npm run vault:sync -- "<Vault path>"` を使う。通常の公開準備では正本と一致させる `vault:prepare` を使う。
+`http://127.0.0.1:8000/`を開きます。PythonがPATHにない場合は`STUDY_APP_PYTHON`にPython実行ファイルの絶対pathを設定してください。このPCでは既存bundled Pythonも検出します。
 
-公開済みの静的サイト上のファイル選択 UI から Vault を直接更新・再デプロイすることはできない。ブラウザーは任意のローカルフォルダへ常時アクセスできず、Sites への永続反映には認証された build/deploy 処理が必要なため、現段階の「アップロード」に相当する操作は上記ローカルコマンドとする。
+Vaultを変える場合:
+
+```powershell
+npm run vault:prepare -- "C:\path\to\Vault"
+```
+
+同期予定だけ確認する場合は`npm run vault:check -- "<Vault path>"`です。
+
+## 失敗したとき
+
+検証・Gitエラー時は停止します。同期先を直接編集した場合はVaultへ修正を戻し、差分を確認してください。Git履歴分岐は手動で確認し、force pushで解消しないでください。
+
+GitHubへのpush成功は公開成功ではありません。初回Pages未設定やActions失敗時はサイトが更新されません。Sitesの旧URLとは別の公開先です。
+
+Pagesの公開サイトとMarkdownは誰でも閲覧できます。秘密情報は記事へ含めないでください。非公開repositoryのPages利用可否はGitHubプランに依存します。
