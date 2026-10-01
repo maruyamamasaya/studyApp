@@ -720,6 +720,7 @@
   }
 
   function setHeaderLineContent(line, text) {
+    line.title = text;
     line.innerHTML =
       '<span class="reader-header__track">' +
         '<span class="reader-header__text"></span>' +
@@ -802,7 +803,8 @@
     const notePath = getCurrentNotePath();
     const pathParts = notePath.split('/').filter(Boolean);
     const fileName = pathParts.pop() || HOMEPAGE_FILE;
-    const title = fileName.replace(/\.md$/i, '');
+    const title = document.querySelector('.markdown-section h1')?.textContent.trim()
+      || fileName.replace(/\.md$/i, '');
     const directory = pathParts.length ? pathParts.join(' / ') : 'トップ';
 
     setHeaderLineContent(header.querySelector('.reader-header__path'), directory);
@@ -1265,6 +1267,9 @@
     });
 
     hook.doneEach(function () {
+      document.body.classList.toggle('reader-home', getCurrentNotePath() === HOMEPAGE_FILE);
+      document.querySelectorAll('.sidebar-nav a, .markdown-section h1, .markdown-section > ul a')
+        .forEach(function (element) { element.title = element.textContent.trim(); });
       createThemeSwitcher();
       createDesktopSidebarControls();
       updateReaderHeader();

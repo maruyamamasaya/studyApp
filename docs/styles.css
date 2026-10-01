@@ -157,9 +157,11 @@ body {
 }
 
 .reader-header__track {
-  display: inline-flex;
+  display: block;
   min-width: 0;
-  width: max-content;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .reader-header__text--copy {
@@ -207,18 +209,55 @@ body {
 
 .reader-header__path.is-overflowing,
 .reader-header__title.is-overflowing {
-  text-overflow: clip;
+  text-overflow: ellipsis;
 }
 
 .reader-header__path.is-overflowing .reader-header__track,
 .reader-header__title.is-overflowing .reader-header__track {
-  animation: reader-header-marquee 20s linear infinite;
+  animation: none;
 }
 
 .reader-header__path.is-overflowing .reader-header__text,
 .reader-header__title.is-overflowing .reader-header__text {
-  display: inline-block;
-  padding-right: 3rem;
+  padding-right: 0;
+}
+
+.reader-header__text--copy {
+  display: none !important;
+}
+
+.sidebar-nav a {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.reader-home .markdown-section > ul {
+  list-style: none;
+  padding: 0;
+}
+
+.reader-home .markdown-section > ul > li {
+  margin: 0.6rem 0;
+}
+
+.reader-home .markdown-section > ul > li > a {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: block;
+  overflow: hidden;
+  padding: 0.75rem 1rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.markdown-section h1 {
+  font-size: clamp(1.4rem, 2.4vw, 1.8rem);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
 .reader-theme {
