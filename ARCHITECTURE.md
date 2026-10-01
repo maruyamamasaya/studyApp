@@ -23,6 +23,7 @@ GitHub Pages → DocsifyがブラウザーでMarkdownを描画
 - `docs/content-tools.js`: 表示時にFrontmatterを隠してtitleを付け、DOMPurifyで描画HTMLをsanitizeする。
 - `docs/obsidian-wikilinks.js`: Wiki Linkのtitle・alias・filename索引からリンクを生成する。
 - `docs/reader-tools.js`・`styles.css`・`unique-heading-ids.js`: 従来のテーマ、検索、学習状態、目次等の閲覧支援。
+  wikiの二列構成を維持し、検索・目次はsidebar側、学習時間は記事先頭、Vaultのtagsはタイトル下に表示する。重複したホーム操作は置かず、サイト名から一覧へ戻る。
 - `.github/workflows/pages.yml`: docsだけをPages artifactとして配信。秘密情報・Vault全体・保守資料をartifactへ含めない。
 
 Astro・OpenAI Sites・Codex CLIによる公開経路は現行構成にない。DocsifyとDOMPurifyはjsDelivrを使うため完全offline閲覧は未対応。添付ファイル同期は未対応。公開は閲覧制限なしの構成であり、非公開repositoryでもPagesの閲覧は非公開にならない。

@@ -5,6 +5,7 @@
     if (!response.ok) throw new Error('記事情報を読み込めません');
     return response.json();
   });
+  window.studyArticleMetadata = metadata;
   window.$docsify = window.$docsify || {};
   window.$docsify.plugins = (window.$docsify.plugins || []).concat(function (hook, vm) {
     hook.beforeEach(function (markdown, next) {

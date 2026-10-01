@@ -885,10 +885,6 @@
         '<span class="reader-navigation__icon" aria-hidden="true">←</span>' +
         '<span>戻る</span>' +
       '</button>' +
-      '<a class="reader-navigation__button reader-home" href="#/">' +
-        '<span class="reader-navigation__icon" aria-hidden="true">⌂</span>' +
-        '<span>ホーム</span>' +
-      '</a>' +
       '<button class="reader-navigation__button reader-forward" type="button">' +
         '<span class="reader-navigation__icon" aria-hidden="true">→</span>' +
         '<span>次に進む</span>' +
@@ -942,9 +938,6 @@
         '<span aria-hidden="true">←</span>' +
         '<span>戻る</span>' +
       '</button>' +
-      '<a class="reader-history-navigation__button reader-history-home" href="#/" aria-label="ホーム" title="ホーム">' +
-        '<span aria-hidden="true">⌂</span>' +
-      '</a>' +
       '<button class="reader-history-navigation__button reader-forward" type="button">' +
         '<span>次に進む</span>' +
         '<span aria-hidden="true">→</span>' +
@@ -974,7 +967,7 @@
     navigation.hidden = !isDesktopLayout() && isHomepage && !backupLink;
     if (isDesktopLayout()) {
       navigation.querySelectorAll('.reader-navigation__button').forEach(function (button) {
-        button.hidden = !button.classList.contains('reader-home') &&
+        button.hidden = !button.classList.contains('reader-toc') &&
           !button.classList.contains('reader-search') &&
           !button.classList.contains('reader-backup-link');
       });
@@ -1283,6 +1276,29 @@
       initializeArticleProgress();
       enableLearningTimer();
       closeTableOfContents();
+      const notePath = getCanonicalNotePath(getCurrentNotePath()).replace(/\.md$/i, '');
+      if (window.studyArticleMetadata) {
+        window.studyArticleMetadata.then(function (articles) {
+          if (notePath !== getCanonicalNotePath(getCurrentNotePath()).replace(/\.md$/i, '')) return;
+          const article = articles.find(function (item) { return item.path.replace(/\.md$/i, '') === notePath; });
+          const section = document.querySelector('.markdown-section');
+          if (!article || !section || section.querySelector('.reader-tags')) return;
+          const tags = document.createElement('div');
+          tags.className = 'reader-tags';
+          tags.setAttribute('aria-label', '記事のタグ');
+          const label = document.createElement('span');
+          label.textContent = 'タグ';
+          tags.appendChild(label);
+          (article.tags.length ? article.tags : ['未設定']).forEach(function (tag) {
+            const chip = document.createElement('span');
+            chip.className = 'reader-tag';
+            chip.textContent = tag;
+            tags.appendChild(chip);
+          });
+          const heading = section.querySelector('h1');
+          if (heading) heading.after(tags);
+        }).catch(function (error) { console.warn('[Reader tags]', error); });
+      }
     });
   }
 

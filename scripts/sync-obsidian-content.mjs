@@ -129,7 +129,7 @@ export async function applyObsidianSync(plan, { prune = false } = {}) {
   const label = (value) => value.replace(/[\\`*_[\]<>#]/gu, '\\$&').replace(/[\r\n]/gu, ' ');
   const links = plan.entries.map((entry) => `- [${label(entry.article.displayTitle)}](${entry.source.split('/').map(encodeURIComponent).join('/')})`);
   await fs.writeFile(path.join(plan.repositoryRoot, 'docs/README.md'), '# Study Notes\n\n' + links.join('\n') + '\n');
-  await fs.writeFile(path.join(plan.repositoryRoot, 'docs/_sidebar.md'), '[ホーム](/)\n\n' + links.join('\n') + '\n');
+  await fs.writeFile(path.join(plan.repositoryRoot, 'docs/_sidebar.md'), links.join('\n') + '\n');
   await fs.mkdir(path.join(plan.repositoryRoot, 'docs/training'), { recursive: true });
   const studyLinks = plan.entries.filter((entry) => entry.article.type === 'study').map((entry) => `- [${label(entry.article.displayTitle)}](../#/${entry.source.replace(/\.md$/u, '').split('/').map(encodeURIComponent).join('/')})`);
   await fs.writeFile(path.join(plan.repositoryRoot, 'docs/training/README.md'), '# 研修資料\n\n' + (studyLinks.join('\n') || '学習記事はまだありません。') + '\n');
