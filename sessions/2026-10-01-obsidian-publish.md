@@ -7,3 +7,5 @@
 - CONTENT_AUTHORINGにローカル準備とSites公開の境界、Codexへの一括依頼、成功判定を記録した。
 - Vaultの空title/本文記事、標準Markdown linkから削除済み記事への参照は著者側の残課題。自動改稿しない。
 - 旧docs記事は変更しないため旧索引は再生成しない。
+- npm run checkはdomain 22件、output 4件とbuildが成功。git diff --checkも成功。
+- Sites source push後、packageが未設定WSLのbashを呼んで失敗。既存Git BashをプロセスPATHの先頭へ指定して再実行する。

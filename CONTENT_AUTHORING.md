@@ -60,6 +60,8 @@ aliases:
 
 記事の追加・削除を自由に行えるよう、生成結果テストは現在のarticle masterを基準にする。HTML安全化・task list・重複見出しは公開記事と独立したMarkdown fixtureで検証する。検証が失敗した場合は、生成が成功していても公開完了とは扱わない。
 
+WindowsでSites公開スクリプトを実行する際は、既存Git Bashの`C:\Program Files\Git\bin`をそのプロセスのPATHの先頭へ追加する。package処理が未設定のWSLのbashを呼ぶ場合は公開が完了しない。ソースpush後にpackageが失敗した場合は、同じソースからpackageを再作成してsave/deployを続ける。
+
 検証だけを行う場合は `npm run vault:check -- "<Vault path>"`、削除を反映せず追加・更新だけ同期する場合は `npm run vault:sync -- "<Vault path>"` を使う。通常の公開準備では正本と一致させる `vault:prepare` を使う。
 
 公開済みの静的サイト上のファイル選択 UI から Vault を直接更新・再デプロイすることはできない。ブラウザーは任意のローカルフォルダへ常時アクセスできず、Sites への永続反映には認証された build/deploy 処理が必要なため、現段階の「アップロード」に相当する操作は上記ローカルコマンドとする。
