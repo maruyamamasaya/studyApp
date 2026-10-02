@@ -14,7 +14,9 @@
 - 旧Astroの学習状態version 2は自動移行しない。Docsify reader toolsのブラウザー保存状態は別扱い。
 - PythonがPATHにない場合はSTUDY_APP_PYTHONで指定。このPCではインストール済みのbundled Pythonも検出する。AI呼び出しは不要。
 
-検証済み: 14テスト、同期差分0、索引ID維持、diff check、ローカルブラウザーでホーム・記事・研修ホーム。
+検証済み: 15テスト、同期差分0、索引ID維持、diff check。RAG学習記事50件を公開metadataとブラウザー本文・内部リンクで確認。
+
+RAG学習記事のPages deploy成功（Actions run 36943720864、commit a72287f）。
 
 初回Pages deployは成功（Actions run 36826656659、commit fad01db）。公開URLで記事一覧・本文表示を確認済み。
 
