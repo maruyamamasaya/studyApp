@@ -4,6 +4,7 @@ import path from 'node:path';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 import { normalizeArticle, normalizePath, parseFrontmatter, validateArticleSet } from './lib/article.mjs';
+import { APP_CATALOG_FILE, buildAppCatalog } from './lib/app-articles.mjs';
 
 const DEFAULT_SOURCE_FOLDERS = ['study', 'wiki'];
 const projectRoot = path.resolve(fileURLToPath(new URL('..', import.meta.url)));
@@ -97,6 +98,7 @@ export async function planObsidianSync({ vaultRoot, repositoryRoot = projectRoot
 }
 
 export async function applyObsidianSync(plan, { prune = false } = {}) {
+  const appCatalog = buildAppCatalog(plan.entries);
   for (const change of plan.changes) {
     const destination = path.join(plan.repositoryRoot, change.destination);
     await fs.mkdir(path.dirname(destination), { recursive: true });
@@ -125,6 +127,7 @@ export async function applyObsidianSync(plan, { prune = false } = {}) {
     skipped: plan.skipped
   }, null, 2)}\n`);
   await fs.mkdir(path.join(plan.repositoryRoot, 'docs'), { recursive: true });
+  await fs.writeFile(path.join(plan.repositoryRoot, 'docs', APP_CATALOG_FILE), JSON.stringify(appCatalog, null, 2) + '\n');
   await fs.writeFile(path.join(plan.repositoryRoot, 'docs/_article-metadata.json'), JSON.stringify(plan.entries.map((entry) => entry.article), null, 2) + '\n');
   const label = (value) => value.replace(/[\\`*_[\]<>#]/gu, '\\$&').replace(/[\r\n]/gu, ' ');
   const links = plan.entries.map((entry) => `- [${label(entry.article.displayTitle)}](${entry.source.split('/').map(encodeURIComponent).join('/')})`);
@@ -169,9 +172,11 @@ async function main() {
     throw new Error('Vault path が必要です。例: npm run vault:sync -- "C:\\path\\to\\Vault"');
   }
   const plan = await planObsidianSync({ vaultRoot: vaultArgument });
-  for (const item of plan.skipped) console.warn(`SKIP ${item.source}: ${item.reason}`);
-  for (const change of plan.changes) console.log(`${checkOnly ? 'PENDING' : change.action.toUpperCase()} ${change.source} -> ${change.destination}`);
-  for (const stale of plan.stale) console.warn(`${prune ? 'PRUNE' : 'STALE'} ${stale.destination}`);
+  if (args.includes('--verbose')) {
+    for (const item of plan.skipped) console.warn(`SKIP ${item.source}: ${item.reason}`);
+    for (const change of plan.changes) console.log(`${checkOnly ? 'PENDING' : change.action.toUpperCase()} ${change.source} -> ${change.destination}`);
+    for (const stale of plan.stale) console.warn(`${prune ? 'PRUNE' : 'STALE'} ${stale.destination}`);
+  }
   if (!checkOnly) await applyObsidianSync(plan, { prune });
   console.log(`${plan.entries.length} 件を検証、${plan.changes.length} 件の差分、${plan.skipped.length} 件の下書きを除外しました。`);
   if (checkOnly && (plan.changes.length || plan.stale.length)) process.exitCode = 2;

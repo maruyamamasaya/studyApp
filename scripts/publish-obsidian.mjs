@@ -3,9 +3,17 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('../', import.meta.url));
 function git(args, capture = false) {
-  const result = spawnSync('git', args, { cwd: root, encoding: 'utf8', stdio: capture ? 'pipe' : 'inherit', shell: false });
+  const result = spawnSync('git', args, { cwd: root, encoding: 'utf8', stdio: 'pipe', shell: false });
   if (result.error) throw result.error;
-  if (result.status !== 0) throw new Error('Git処理が失敗しました。公開成功とは扱いません。');
+  if (result.status !== 0) {
+    if (result.stdout) process.stderr.write(result.stdout);
+    if (result.stderr) process.stderr.write(result.stderr);
+    throw new Error('Git処理が失敗しました。公開成功とは扱いません。');
+  }
+  if (!capture && process.argv.includes('--verbose')) {
+    if (result.stdout) process.stdout.write(result.stdout);
+    if (result.stderr) process.stderr.write(result.stderr);
+  }
   return result.stdout?.trim();
 }
 try {

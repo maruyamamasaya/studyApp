@@ -8,7 +8,8 @@
     "vault:sync": "node scripts/sync-obsidian-content.mjs --prune",
     "vault:prepare": "node scripts/prepare-obsidian-content.mjs",
     "vault:publish": "node scripts/publish-obsidian.mjs",
-    "test": "node --test tests/content-model.test.mjs tests/obsidian-sync.test.mjs tests/unique-heading-ids.test.js",
+    "app:verify": "node scripts/verify-app-catalog.mjs",
+    "test": "node --test tests/content-model.test.mjs tests/obsidian-sync.test.mjs tests/app-catalog.test.mjs tests/unique-heading-ids.test.js",
     "check": "npm run test"
   },
   "dependencies": { "yaml": "2.8.1" }

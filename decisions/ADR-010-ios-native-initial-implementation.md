@@ -1,0 +1,12 @@
+# ADR-010: iOS初期実装を同じリポジトリのios配下で管理する
+
+status: accepted
+updated: 2026-10-02
+
+ユーザーがWindowsで実装を進め、ビルドとテストを帰宅後のMacへ回す方針を承認した。記事配信契約と同時に追えるよう、このリポジトリのios配下へ独立したアプリを追加する。Pagesの配信対象はdocsのみで、iOSコードは含めない。
+
+SwiftUI、iOS 17以降を初期値とする。本文はMarkdownUI 2.4.1で描画し、XcodeGenのproject.ymlをプロジェクト構成の正本とする。依存ライブラリはmaintenance modeのため、描画確認と将来の移行判断はMac側で行う。
+
+記録はCodableの版付きJSONをApplication Supportにatomic保存する。小規模な個人用記録とバックアップを先に成立させるため、SwiftDataを初期実装へ追加しない。読込不正を空データとして上書きせず、復元では明示確認を行う。Web記録へ依存しない。通信は専用一覧v1の検証と本文hash照合を行う。
+
+Windowsでの実装はビルド成功を意味しない。Macの手順、テストと未対応事項はios/README.mdに記録する。

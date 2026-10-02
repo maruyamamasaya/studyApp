@@ -3,6 +3,7 @@ import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
+import { articleContentHash } from '../scripts/lib/app-articles.mjs';
 import { applyObsidianSync, planObsidianSync } from '../scripts/sync-obsidian-content.mjs';
 
 async function fixture() {
@@ -45,6 +46,10 @@ test('配置フォルダと記事種別を分離し、wiki 内の study を研�
   await applyObsidianSync(plan);
   assert.match(await fs.readFile(path.join(paths.repositoryRoot, 'docs/training/README.md'), 'utf8'), /wiki\/20260929-120000/u);
   assert.equal(await fs.readFile(path.join(paths.repositoryRoot, plan.entries[0].destination), 'utf8'), note('20260929-120000', 'study'));
+  const appCatalog = JSON.parse(await fs.readFile(path.join(paths.repositoryRoot, 'docs/app-articles.v1.json'), 'utf8'));
+  assert.equal(appCatalog.articles[0].id, '20260929-120000');
+  assert.equal(appCatalog.articles[0].path, 'wiki/20260929-120000.md');
+  assert.equal(appCatalog.articles[0].contentHash, articleContentHash(note('20260929-120000', 'study')));
 });
 
 test('未対応の記事種別を拒否する', async (t) => {
@@ -88,4 +93,5 @@ test('前回同期済みで未変更の記事だけを prune できる', async (
   assert.equal(prunePlan.stale.length, 1);
   await applyObsidianSync(prunePlan, { prune: true });
   await assert.rejects(() => fs.access(destination), /ENOENT/u);
+  assert.deepEqual(JSON.parse(await fs.readFile(path.join(paths.repositoryRoot, 'docs/app-articles.v1.json'), 'utf8')).articles, []);
 });
