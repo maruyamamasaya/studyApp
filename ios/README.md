@@ -27,7 +27,7 @@ XcodeでStudyApp schemeと利用可能なiPhone Simulatorを選び、Runする�
 
 ## 自動テスト
 
-XcodeのProduct > Testで7件のXCTestを実行する。hash、URL、一覧Schema・重複、Frontmatter・コード内リンク保護、リンク解決、記録の再起動・復元・重複防止、破損ファイル保護を確認する。
+XcodeのProduct > Testで23件のXCTestを実行する。hash、URL、一覧Schema・重複、Frontmatter・コード内リンク保護、リンク解決、記録の再起動・復元・重複防止、破損ファイル保護、音声の管理JSON・取り込み・台本・再生位置・BGM保存を確認する。
 
 CLIの場合、先に利用可能なSimulatorを確認する。
 
@@ -57,3 +57,11 @@ xcodebuild -project StudyApp.xcodeproj -scheme StudyApp \
 見出しリンクは記事の先頭を開く。見出しへのスクロール、画像・添付、記事のオフライン保存、日別集計と日付またぎの配分、復習モード、クラウド同期は未実装。履歴は保存した計測区間を日時順に表示する。本文の埋め込みHTMLと画像の描画はMacで検証する。任意JavaScriptを実行するWebViewは使用しない。
 
 時間はmonotonic uptimeで測り30秒ごとに保存する。OSが保存の機会なくアプリを終了した場合、最後の未保存区間は最大約30秒失われ得る。アプリのバックアップ復元中は計測中の記事を開かない。WindowsではSwiftツールチェーンを導入していないため、ビルド成功・テスト成功を判定できていない。
+
+## 事前生成音声
+
+「聴く」タブと記事画面から、iCloud Drive等のファイルを取り込める。フォルダ同期と管理JSONによる自動紐付け、同じtrackIDの差し替えと台本の取り込み、端末内コピーの再生、位置保存、倍速、BGM、バックグラウンドとロック画面の操作を実装した。生成処理は追加していない。受け入れ形式と実機確認は[AUDIO_IMPORT.md](AUDIO_IMPORT.md)を参照する。XcodeGenを再生成し、Background Audio設定を反映してから確認する。
+
+## 学習番組
+
+番組の再生順、連続再生、0〜10秒のインターバル、BGM、最後の番組の途中再開を追加した。制作側の番組JSONとMacでの確認手順は[RADIO_PLAYBACK.md](RADIO_PLAYBACK.md)。ビルド・23件のXCTest・実機検証はMacでまとめて行う。

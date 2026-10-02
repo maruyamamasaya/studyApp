@@ -17,18 +17,33 @@ import UniformTypeIdentifiers
     }
 }
 
-@main struct StudyApp: App {
+@main @MainActor struct StudyApp: App {
     @StateObject private var library = Library()
     @StateObject private var store = StudyStore()
+    @StateObject private var audio: AudioLibraryModel
+    @StateObject private var player: TrackPlayer
+    @Environment(\.scenePhase) private var scenePhase
+    init() {
+        let audio = AudioLibraryModel()
+        _audio = StateObject(wrappedValue: audio)
+        _player = StateObject(wrappedValue: TrackPlayer(library: audio))
+    }
     var body: some Scene {
         WindowGroup {
             TabView {
                 ArticleList().tabItem { Label("記事", systemImage: "books.vertical") }
+                NavigationStack { AudioView() }.tabItem { Label("聴く", systemImage: "headphones") }
                 HistoryView().tabItem { Label("履歴", systemImage: "clock") }
                 SettingsView().tabItem { Label("設定", systemImage: "gearshape") }
             }
             .environmentObject(library).environmentObject(store)
+            .environmentObject(audio).environmentObject(player)
+            .onChange(of: scenePhase) { _, phase in
+                if phase != .active { player.savePosition() }
+                else { Task { await audio.refresh() } }
+            }
             .task { await library.reload() }
+            .task { await audio.refresh() }
             .alert("記録の保存エラー", isPresented: Binding(get: { store.error != nil }, set: { if !$0 { store.error = nil } })) {
                 Button("閉じる") { store.error = nil }
             } message: { Text(store.error ?? "") }
@@ -101,6 +116,7 @@ import UniformTypeIdentifiers
             VStack(alignment: .leading, spacing: 16) {
                 Text(current.title).font(.title.bold())
                 Text(current.tags.joined(separator: " · ")).font(.caption).foregroundStyle(.secondary)
+                NavigationLink { AudioView(article: current) } label: { Label("この記事の音声", systemImage: "headphones") }
                 Text("学習時間 \(Int(store.seconds(for: article.id) / 60))分")
                 Button(completed ? "未読了に戻す" : "読了にする") {
                     timer.flush(articleID: article.id, store: store, resume: false)

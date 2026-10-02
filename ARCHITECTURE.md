@@ -43,5 +43,12 @@ Astro・OpenAI Sites・Codex CLIによる公開経路は現行構成にない。
 - `ios/Sources/ArticleLinks.swift`: Frontmatter除去、コード内を除くWiki Link変換、一覧内のID・path・title・alias解決。
 - `ios/Sources/StudyStore.swift`: 独立した記録JSONのatomic保存、復元検証、monotonic uptimeでの計測区間。
 - `ios/Sources/StudyApp.swift`: 一覧・検索・フォルダ・本文・履歴・設定、画面とアプリ状態による計測制御。本文はMarkdownUI。
+- `ios/Sources/AudioLibrary.swift`: 許可された制作物フォルダをbookmarkで保持し、起動/アクティブ復帰/手動操作で同期。管理JSONのarticleID/trackIDで自動紐付けと差し替えを行い、playlistIDとtrackIDsの番組一覧も同期する。Application Supportへコピーし、音声一覧と位置をatomic保存。学習記録バックアップとは独立。
+- `ios/Sources/TrackPlayer.swift`: AVAudioPlayerでナレーションとBGMを再生。倍速、位置保存、AudioSessionとMediaPlayerによるバックグラウンド・ロック画面操作、割り込み停止。
+- `ios/Sources/AudioView.swift`: 「聴く」タブと記事別音声画面。ファイル取り込み・台本・再生操作。入力形式はios/AUDIO_IMPORT.md。
+
+音声は制作側で事前生成し、iCloud Drive等のファイルを利用する。アプリによる生成API呼び出し、iCloudフォルダ自動監視、音声のPages公開は行わない。原本は変更せず、同期成功後に端末内コピーと一覧を更新する。
 
 プロジェクト生成・ビルド・テストはMacで行う。現時点の制約と手順は[ios/README.md](ios/README.md)を参照する。
+
+- `ios/Sources/RadioSession.swift`: 番組Schema、順番のスナップショットと再開状態、ナレーション/インターバル/終了の遷移、無音PCM。TrackPlayerが音声終了のdelegateで次の区間を進める。BGMは別プレイヤーで継続し、pauseと番組終了時に停止する。番組と端末の間隔設定、再開状態は音声一覧JSONに保存する。

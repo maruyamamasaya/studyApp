@@ -23,4 +23,8 @@ RAG学習記事のPages deploy成功（Actions run 36943720864、commit a72287f�
 
 残課題: 旧Sitesのリモートサイトは残っている。画像・添付ファイル同期は未対応。Vaultバックアップ方針は未決定。
 
-iOS版はWindowsで初期コードを実装済み。[IOS_APP_CONCEPT.md](IOS_APP_CONCEPT.md)に記事共通・機能と記録独立・PagesからHTTPS取得の方針を整理した。Macが未準備のため、先にWindowsで記事配信側を実装。通常同期でapp-articles.v1.jsonを生成し、app:verifyでHTTP取得と本文hashを確認できる。[APP_ARTICLE_DELIVERY.md](APP_ARTICLE_DELIVERY.md)にv1契約を記載。ios/にSwiftUIの一覧・本文・内部リンク・読了・学習時間・履歴・JSONバックアップを追加。MacのXcodeビルド・型検査・7件のXCTest・実機確認は未実行。[ios/README.md](ios/README.md)に帰宅後の手順と未対応事項を記載。新配信ファイルの公開確認は次のpublish後に行う。
+iOS版はWindowsで初期コードを実装済み。[IOS_APP_CONCEPT.md](IOS_APP_CONCEPT.md)に記事共通・機能と記録独立・PagesからHTTPS取得の方針を整理した。通常同期でapp-articles.v1.jsonを生成し、app:verifyでHTTP取得と本文hashを確認できる。[APP_ARTICLE_DELIVERY.md](APP_ARTICLE_DELIVERY.md)にv1契約を記載。初期実装はcfedff4でmainへpush済み、Pages deployと55記事の公開HTTP検証に成功。ios/にSwiftUIの一覧・本文・内部リンク・読了・学習時間・履歴・JSONバックアップを追加。[ios/README.md](ios/README.md)にMacでの手順と未対応事項を記載。
+
+事前生成音声の受け入れを追加: 「聴く」タブ、iCloud Drive等の制作物フォルダ同期、管理JSONのarticleIDとUUIDのtrackIDによる自動紐付けと音声差し替え、台本の表示、端末内コピー、再生位置・倍速・BGM・バックグラウンド/ロック画面操作。制作ツールはこれからVOICEVOX等を使って用意する方針。受け入れ形式は[ios/AUDIO_IMPORT.md](ios/AUDIO_IMPORT.md)。MacのXcodeビルド・型検査・23件のXCTest・実機確認は未実行。
+
+ラジオ構成: *.playlist.jsonの配列順で連続再生、標準3秒/0〜10秒のインターバル、BGM、前/次、最後の番組の途中再開を実装。仕様とMacでの確認は[ios/RADIO_PLAYBACK.md](ios/RADIO_PLAYBACK.md)。ユーザー依頼で音声機能一式をリモートへ反映する。
