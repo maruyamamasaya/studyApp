@@ -1,0 +1,9 @@
+# MyMusicを参考にした記事カルーセル
+
+ユーザー依頼: MyMusicのUIを参考に、正方形カードを横スライドする形式。
+
+参照: 指定GitHubのHEADとMacのMyMusic checkoutのHEADが1cca1135f625816d67891c8105646f2f2e078148で一致。MyMusic/Views/Home/HomeView.swiftのHomeCarouselSection/HomeItemTileを読み、LazyHStack・viewAligned・角丸18・タイトルと短いdescriptionを参考にした。MyMusicは読取のみで変更なし。
+
+実装: ホームのピックアップと保存済みお気に入りを正方形記事タイルの横カルーセルへ変更。タイトル3行、冒頭2行、フォルダ末尾・タグ・お気に入り/読了/音声状態を表示。Dynamic Typeでタイルを拡大。手動入れ替え時はスクロールを先頭へ戻す。前回の記事の横長カードと検索/タグ/フォルダ結果の縦一覧は維持。フレイバーテキストは追加しない。
+
+検証: Simulatorの30件XCTest成功、実機ビルド成功。Simulatorで正方形カード・本文抜粋・お気に入り表示を目視確認。横移動の自動入力はSimulatorで反応せず、ジェスチャーの実機手動確認は残る。横スクロールは標準ScrollView/scrollTargetLayout/viewAlignedで実装。索引生成の差分なし、diff check成功。Vesperaへの上書きインストールと起動成功。

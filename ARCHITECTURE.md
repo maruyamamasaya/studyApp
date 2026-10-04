@@ -14,7 +14,7 @@ docs/study・docs/wiki のMarkdown
 GitHub repository
   ↓ GitHub Actions（HTML buildなし）
 GitHub Pages → DocsifyがブラウザーでMarkdownを描画
-             → iOSアプリ（初期コード、Mac未検証）がJSONとMarkdownをHTTPS取得
+             → iOSアプリ（Macビルド・テスト検証済み）がJSONとMarkdownをHTTPS取得
 ```
 
 - `scripts/lib/article.mjs`: YAML、Frontmatter、ID、created、重複の検証。依存はyamlのみ。
@@ -42,13 +42,29 @@ Astro・OpenAI Sites・Codex CLIによる公開経路は現行構成にない。
 - `ios/Sources/ArticleClient.swift`: 専用一覧v1の検証、HTTPS取得、リダイレクト拒否、15秒の要求Timeout、最大3回の限定Retry、本文hash照合。
 - `ios/Sources/ArticleLinks.swift`: Frontmatter除去、コード内を除くWiki Link変換、一覧内のID・path・title・alias解決。
 - `ios/Sources/StudyStore.swift`: 独立した記録JSONのatomic保存、復元検証、monotonic uptimeでの計測区間。
-- `ios/Sources/StudyApp.swift`: 一覧・検索・フォルダ・本文・履歴・設定、画面とアプリ状態による計測制御。本文はMarkdownUI。
+- `ios/Sources/StudyApp.swift`: 一覧・検索・フォルダ・本文・履歴・設定、画面とアプリ状態による計測制御。本文はMarkdownUI。下部タブは記事・聴く・番組・フォルダ・設定で、履歴は設定のNavigationStack内で開く。
 - `ios/Sources/AudioLibrary.swift`: 許可された制作物フォルダをbookmarkで保持し、起動/アクティブ復帰/手動操作で同期。管理JSONのarticleID/trackIDで自動紐付けと差し替えを行い、playlistIDとtrackIDsの番組一覧も同期する。Application Supportへコピーし、音声一覧と位置をatomic保存。学習記録バックアップとは独立。
 - `ios/Sources/TrackPlayer.swift`: AVAudioPlayerでナレーションとBGMを再生。倍速、位置保存、AudioSessionとMediaPlayerによるバックグラウンド・ロック画面操作、割り込み停止。
-- `ios/Sources/AudioView.swift`: 「聴く」タブと記事別音声画面。ファイル取り込み・台本・再生操作。入力形式はios/AUDIO_IMPORT.md。
+- `ios/Sources/AudioView.swift`: 音声一覧、独立した番組一覧/詳細、専用再生画面、聴く/番組のミニプレイヤー、設定内の音声取り込みを担当。記事からは再生画面を直接開き、別の記事の音声なら再生を開始する。入力形式はios/AUDIO_IMPORT.md。
 
 音声は制作側で事前生成し、iCloud Drive等のファイルを利用する。アプリによる生成API呼び出し、iCloudフォルダ自動監視、音声のPages公開は行わない。原本は変更せず、同期成功後に端末内コピーと一覧を更新する。
 
 プロジェクト生成・ビルド・テストはMacで行う。現時点の制約と手順は[ios/README.md](ios/README.md)を参照する。
 
 - `ios/Sources/RadioSession.swift`: 番組Schema、順番のスナップショットと再開状態、ナレーション/インターバル/終了の遷移、無音PCM。TrackPlayerが音声終了のdelegateで次の区間を進める。BGMは別プレイヤーで継続し、pauseと番組終了時に停止する。番組と端末の間隔設定、再開状態は音声一覧JSONに保存する。
+
+- `ios/Resources/Assets.xcassets`: 抽象的な1024pxアイコン。project.ymlのResourcesとAppIcon設定からビルドへ取り込む。署名Teamは端末導入時にローカル指定し、共有設定へ固定しない。
+
+- `ios/Sources/LibraryViews.swift`: ホーム・日替わり選出・タグ検索・階層フォルダ・お気に入り/コレクション管理。フォルダ開閉はUserDefaults。
+- `ios/Sources/StudyDesign.swift`: 明暗対応の共通色、タグの折返しLayout、MarkdownUIの本文Theme。
+- `StudyBackup`のoptional favorites/collectionsは記事IDで個人整理を保存し、旧v1復元とatomic保存・破損保護を維持する。
+
+- `ios/Sources/ArticlePreview.swift`: 本文冒頭をプレーンテキスト化し、最大140文字/表示2行へ制限。Libraryが本文をID+hashでメモリcacheし、同じ本文取得を共有する。永続的なoffline保存ではない。
+
+- `ios/Sources/ArticleCarousel.swift`: ホームの正方形記事タイルとLazyHStack横スクロール、viewAlignedスナップ。Dynamic Typeでカード寸法を拡大する。本文取得/記録保存は既存Library/StudyStoreを使う。
+
+- `ios/Sources/HistorySummary.swift`: sessionsを記事IDごとにまとめ、合計秒数と最新の区間終了時刻を計算する表示用集計。保存済みsessionを変更しない。
+
+- `StudyApp`の各タブのNavigationStack外側にbottom safeAreaInsetで`AudioMiniPlayer`を配置。本文の画面遷移でも表示を維持し、本文の表示領域を確保する。共有`TrackPlayer`の状態でタイトル・進捗・再生/一時停止を表示。
+
+- `AudioTrack.listened`はoptional Boolとして既存音声index v1に保存。再生終了delegateの成功通知で、現在のlocalFileが一致する音声だけ聴取済みにする。`AudioIndex.listenedCount`が番組のtrackIDsを集計する。音声hashが変わる再取り込みでは状態をリセットし、台本/metadataのみの変更は維持する。学習記録の読了/時間やbackupには含めない。

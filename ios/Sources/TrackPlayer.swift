@@ -211,6 +211,9 @@ import MediaPlayer
             }
             guard self.narration === player else { return }
             guard flag else { self.pause(); self.error = "音声の再生が正常に完了しませんでした。"; return }
+            if let track = self.track {
+                self.library.setListened(true, id: track.id, expectedFile: track.localFile)
+            }
             if var current = self.radio {
                 self.library.savePosition(0, id: current.trackID)
                 current.finishedNarration(); self.radio = current

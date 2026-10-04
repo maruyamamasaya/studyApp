@@ -150,4 +150,70 @@ final class AudioLibraryTests: XCTestCase {
         XCTAssertThrowsError(try library.importTracks(files))
         XCTAssertTrue(library.index.tracks.isEmpty)
     }
+    func testListenedPersistsAndReplacementResetsIt() throws {
+        let root = directory(); defer { try? FileManager.default.removeItem(at: root) }
+        let library = AudioLibrary(directory: root)
+        let m = manifest()
+        let json = ImportedAudioFile(name: "a.track.json", data: try JSONEncoder().encode(m))
+        let audio = ImportedAudioFile(name: "voice.wav", data: wav())
+        try library.importTracks([json, audio, ImportedAudioFile(name: "script.txt", data: Data("原台本".utf8))])
+        let originalFile = library.index.tracks[0].localFile
+        try library.setListened(true, trackID: m.trackID, expectedFile: originalFile)
+        XCTAssertTrue(AudioLibrary(directory: root).index.tracks[0].isListened)
+        try library.importTracks([json, audio, ImportedAudioFile(name: "script.txt", data: Data("修正台本".utf8))])
+        XCTAssertTrue(library.index.tracks[0].isListened)
+        var replacement = wav(); replacement[replacement.count - 1] = 1
+        try library.importTracks([json, ImportedAudioFile(name: "voice.wav", data: replacement),
+                                  ImportedAudioFile(name: "script.txt", data: Data("修正台本".utf8))])
+        XCTAssertFalse(library.index.tracks[0].isListened)
+        // 差し替え前の再生終了通知で、新しい音声を聴取済みにしない。
+        try library.setListened(true, trackID: m.trackID, expectedFile: originalFile)
+        XCTAssertFalse(library.index.tracks[0].isListened)
+        try library.setListened(true, trackID: m.trackID)
+        try library.setListened(false, trackID: m.trackID)
+        XCTAssertFalse(AudioLibrary(directory: root).index.tracks[0].isListened)
+    }
+    func testOldIndexAndProgramListenedCounts() throws {
+        let a = manifest(script: nil), b = manifest(script: nil)
+        let old = AudioIndex(tracks: [AudioTrack(manifest: a, localFile: "a.wav", script: nil)])
+        let encoded = try JSONEncoder().encode(old)
+        XCTAssertFalse(String(decoding: encoded, as: UTF8.self).contains("listened"))
+        var decoded = try JSONDecoder().decode(AudioIndex.self, from: encoded).validated()
+        XCTAssertFalse(decoded.tracks[0].isListened)
+        decoded.tracks[0].listened = true
+        decoded.tracks.append(AudioTrack(manifest: b, localFile: "b.wav", script: nil))
+        let program = PlaylistManifest(schemaVersion: 1, playlistID: UUID(), title: "番組",
+                                       trackIDs: [a.trackID, b.trackID, UUID()], gapSeconds: 0)
+        XCTAssertEqual(decoded.listenedCount(in: program), 1)
+    }
+    @MainActor func testPlaybackEndMarksListenedButSkippingDoesNot() async throws {
+        let root = directory(); defer { try? FileManager.default.removeItem(at: root) }
+        let storage = AudioLibrary(directory: root)
+        let a = manifest(script: nil), b = manifest(file: "second.wav", script: nil)
+        let program = PlaylistManifest(schemaVersion: 1, playlistID: UUID(), title: "番組",
+                                       trackIDs: [a.trackID, b.trackID], gapSeconds: 0)
+        try storage.importTracks([
+            ImportedAudioFile(name: "a.track.json", data: try JSONEncoder().encode(a)),
+            ImportedAudioFile(name: "b.track.json", data: try JSONEncoder().encode(b)),
+            ImportedAudioFile(name: "p.playlist.json", data: try JSONEncoder().encode(program)),
+            ImportedAudioFile(name: "voice.wav", data: wav()), ImportedAudioFile(name: "second.wav", data: wav())])
+        let defaultsName = UUID().uuidString
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: defaultsName))
+        defer { defaults.removePersistentDomain(forName: defaultsName) }
+        let model = AudioLibraryModel(storage: storage, defaults: defaults)
+        let player = TrackPlayer(library: model)
+        player.playProgram(program)
+        player.nextTrack()
+        XCTAssertFalse(model.index.tracks.first(where: { $0.id == a.trackID })!.isListened)
+        for _ in 0..<30 {
+            if model.index.tracks.first(where: { $0.id == b.trackID })!.isListened { break }
+            try await Task.sleep(nanoseconds: 100_000_000)
+        }
+        player.pause()
+        XCTAssertNil(player.error)
+        XCTAssertTrue(model.index.tracks.first(where: { $0.id == b.trackID })!.isListened)
+        XCTAssertFalse(model.index.tracks.first(where: { $0.id == a.trackID })!.isListened)
+        XCTAssertEqual(model.index.listenedCount(in: program), 1)
+    }
+
 }
