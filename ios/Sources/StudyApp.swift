@@ -7,11 +7,38 @@ import UniformTypeIdentifiers
     @Published var error: String?
     @Published var loading = false
     let client = ArticleClient()
+    @Published private(set) var excerpts: [String: String] = [:]
+    @Published private(set) var excerptFailures: Set<String> = []
+    private var bodies: [String: String] = [:]
+    private var requests: [String: Task<String, Error>] = [:]
+    static func cacheKey(_ article: Article) -> String { article.id + "/" + article.contentHash }
+    func content(_ article: Article) async throws -> String {
+        let key = Self.cacheKey(article)
+        if let body = bodies[key] { return body }
+        let request: Task<String, Error>
+        if let existing = requests[key] { request = existing }
+        else {
+            request = Task { try await client.content(article) }
+            requests[key] = request
+        }
+        defer { requests[key] = nil }
+        let body = try await request.value
+        bodies[key] = body
+        return body
+    }
+    func loadExcerpt(_ article: Article) async {
+        let key = Self.cacheKey(article)
+        guard excerpts[key] == nil else { return }
+        do {
+            excerpts[key] = ArticlePreview.excerpt(try await content(article))
+            excerptFailures.remove(key)
+        } catch { excerptFailures.insert(key) }
+    }
     func reload() async {
         guard !loading else { return }
         loading = true
         defer { loading = false }
-        do { articles = try await client.catalog().articles; error = nil }
+        do { articles = try await client.catalog().articles; error = nil; excerptFailures.removeAll() }
         catch is CancellationError { }
         catch { self.error = error.localizedDescription }
     }
@@ -31,11 +58,14 @@ import UniformTypeIdentifiers
     var body: some Scene {
         WindowGroup {
             TabView {
-                ArticleList().tabItem { Label("記事", systemImage: "books.vertical") }
-                NavigationStack { AudioView() }.tabItem { Label("聴く", systemImage: "headphones") }
-                HistoryView().tabItem { Label("履歴", systemImage: "clock") }
-                SettingsView().tabItem { Label("設定", systemImage: "gearshape") }
+                ArticleList().safeAreaInset(edge: .bottom, spacing: 0) { AudioMiniPlayer() }.tabItem { Label("記事", systemImage: "books.vertical") }
+                NavigationStack { AudioView() }.safeAreaInset(edge: .bottom, spacing: 0) { AudioMiniPlayer() }.tabItem { Label("聴く", systemImage: "headphones") }
+                NavigationStack { ProgramsView() }.safeAreaInset(edge: .bottom, spacing: 0) { AudioMiniPlayer() }.tabItem { Label("番組", systemImage: "play.rectangle") }
+                NavigationStack { FolderBrowser() }.safeAreaInset(edge: .bottom, spacing: 0) { AudioMiniPlayer() }.tabItem { Label("フォルダ", systemImage: "folder") }
+                SettingsView().safeAreaInset(edge: .bottom, spacing: 0) { AudioMiniPlayer() }.tabItem { Label("設定", systemImage: "gearshape") }
             }
+            .font(.callout)
+            .tint(StudyDesign.accent)
             .environmentObject(library).environmentObject(store)
             .environmentObject(audio).environmentObject(player)
             .onChange(of: scenePhase) { _, phase in
@@ -44,53 +74,12 @@ import UniformTypeIdentifiers
             }
             .task { await library.reload() }
             .task { await audio.refresh() }
+            .alert("音声", isPresented: Binding(get: { player.error != nil || audio.error != nil }, set: { if !$0 { player.error = nil; audio.error = nil } })) {
+                Button("閉じる") { player.error = nil; audio.error = nil }
+            } message: { Text(player.error ?? audio.error ?? "") }
             .alert("記録の保存エラー", isPresented: Binding(get: { store.error != nil }, set: { if !$0 { store.error = nil } })) {
                 Button("閉じる") { store.error = nil }
             } message: { Text(store.error ?? "") }
-        }
-    }
-}
-
-@MainActor struct ArticleList: View {
-    @EnvironmentObject private var library: Library
-    @EnvironmentObject private var store: StudyStore
-    @State private var query = ""
-    @State private var folder = ""
-    @State private var unreadOnly = false
-    private var filtered: [Article] {
-        library.articles.filter { article in
-            (folder.isEmpty || article.folder == folder) &&
-            (!unreadOnly || store.data.progress[article.id]?.completed != true) &&
-            (query.isEmpty || ([article.title] + article.tags + article.aliases).contains { $0.localizedCaseInsensitiveContains(query) })
-        }
-    }
-    var body: some View {
-        NavigationStack {
-            List {
-                if library.loading { ProgressView("一覧を取得中") }
-                if let error = library.error {
-                    Text(error).foregroundStyle(.red)
-                    Button("再試行") { Task { await library.reload() } }
-                }
-                Picker("フォルダ", selection: $folder) {
-                    Text("すべて").tag("")
-                    ForEach(Array(Set(library.articles.map(\.folder))).sorted(), id: \.self) { Text($0).tag($0) }
-                }
-                Toggle("未読了のみ", isOn: $unreadOnly)
-                ForEach(filtered) { article in
-                    NavigationLink(value: article) {
-                        VStack(alignment: .leading, spacing: 5) {
-                            Label(article.title, systemImage: store.data.progress[article.id]?.completed == true ? "checkmark.circle.fill" : "doc.text")
-                            Text(article.folder).font(.caption).foregroundStyle(.secondary)
-                        }
-                    }
-                }
-                if filtered.isEmpty && !library.loading && library.error == nil { Text("対象の記事がありません。") }
-            }
-            .navigationTitle("学習ノート")
-            .searchable(text: $query, prompt: "タイトル・タグ・別名")
-            .refreshable { await library.reload() }
-            .navigationDestination(for: Article.self) { ArticleReader(article: $0) }
         }
     }
 }
@@ -107,31 +96,61 @@ import UniformTypeIdentifiers
     @State private var candidates: [Article] = []
     @State private var showCandidates = false
     @State private var linkNotice = false
+    @State private var showSave = false
+    @EnvironmentObject private var audio: AudioLibraryModel
     private let pulse = Timer.publish(every: 30, on: .main, in: .common).autoconnect()
     private var current: Article { library.articles.first(where: { $0.id == article.id }) ?? article }
     private var completed: Bool { store.data.progress[article.id]?.completed == true }
     private var running: Bool { visible && scenePhase == .active && markdown != nil && !completed }
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                Text(current.title).font(.title.bold())
-                Text(current.tags.joined(separator: " · ")).font(.caption).foregroundStyle(.secondary)
-                NavigationLink { AudioView(article: current) } label: { Label("この記事の音声", systemImage: "headphones") }
-                Text("学習時間 \(Int(store.seconds(for: article.id) / 60))分")
-                Button(completed ? "未読了に戻す" : "読了にする") {
-                    timer.flush(articleID: article.id, store: store, resume: false)
-                    store.toggle(article)
-                    syncTimer()
+            VStack(alignment: .leading, spacing: 24) {
+                VStack(alignment: .leading, spacing: 16) {
+                    Text(current.folder).font(.caption.weight(.medium)).foregroundStyle(.secondary)
+                    Text(current.title).font(.title.bold()).tracking(-0.6).fixedSize(horizontal: false, vertical: true)
+                    TagFlow {
+                        ForEach(Array(Set(current.tags)).sorted(), id: \.self) { tag in
+                            NavigationLink { ArticleResultsScreen(title: tag, tag: tag) } label: { TagPill(text: tag) }
+                        }
+                    }
+                    HStack {
+                        Label("学習 \(Int(store.seconds(for: article.id) / 60))分", systemImage: "clock")
+                        if completed { Label("読了", systemImage: "checkmark.circle.fill") }
+                    }.font(.caption).foregroundStyle(.secondary)
+                    if audio.index.tracks.contains(where: { $0.manifest.articleID == article.id }) {
+                        NavigationLink { AudioPlayerView(article: current) } label: {
+                            Label("この記事を聴く", systemImage: "headphones").font(.footnote.weight(.semibold))
+                                .padding(14).frame(maxWidth: .infinity).background(StudyDesign.accent.opacity(0.09), in: RoundedRectangle(cornerRadius: 14))
+                        }
+                    }
                 }
+                Divider()
                 if let markdown {
                     Markdown(markdown, baseURL: try? ArticleClient.url(for: current.path))
+                        .markdownTheme(StudyDesign.reader)
+                        .textSelection(.enabled)
                         .environment(\.openURL, OpenURLAction { url in open(url) })
+                    VStack(spacing: 12) {
+                        Button(completed ? "未読了に戻す" : "読了として記録") {
+                            timer.flush(articleID: article.id, store: store, resume: false)
+                            store.toggle(article)
+                            syncTimer()
+                        }.buttonStyle(.borderedProminent)
+                    }.frame(maxWidth: .infinity).padding(24).background(StudyDesign.accent.opacity(0.06), in: RoundedRectangle(cornerRadius: 20))
                 } else if let error {
                     Text(error).foregroundStyle(.red)
                     Button("一覧を更新して再試行") { Task { await library.reload(); await load() } }
                 } else { ProgressView("本文を取得中") }
-            }.padding()
+            }.padding(22).frame(maxWidth: 760, alignment: .leading).frame(maxWidth: .infinity)
         }
+        .background(StudyDesign.surface)
+        .toolbar {
+            Button { showSave = true } label: {
+                Image(systemName: store.isFavorite(article.id) ? "bookmark.fill" : "bookmark")
+            }.accessibilityLabel("お気に入り・コレクションに保存")
+        }
+        .sheet(isPresented: $showSave) { SaveArticleView(article: current) }
+        .onChange(of: showSave) { _, showing in visible = !showing; syncTimer() }
         .navigationTitle(article.title).navigationBarTitleDisplayMode(.inline)
         .task { await load() }
         .onAppear { visible = true; syncTimer() }
@@ -163,16 +182,16 @@ import UniformTypeIdentifiers
         do {
             if library.articles.isEmpty { await library.reload() }
             guard let latest = library.articles.first(where: { $0.id == article.id }) else { throw ReaderError.message("この記事は現在の一覧にありません。") }
-            do { markdown = ArticleLinks.body(try await library.client.content(latest)) }
+            do { markdown = ArticleLinks.body(try await library.content(latest)) }
             catch ReaderError.mismatch {
                 await library.reload()
                 guard let updated = library.articles.first(where: { $0.id == article.id }) else { throw ReaderError.mismatch }
-                markdown = ArticleLinks.body(try await library.client.content(updated))
+                markdown = ArticleLinks.body(try await library.content(updated))
             }
             try Task.checkCancellation()
             store.viewed(latest); syncTimer()
         } catch is CancellationError { markdown = nil }
-        catch { error = error.localizedDescription }
+        catch { self.error = error.localizedDescription }
     }
     private func open(_ url: URL) -> OpenURLAction.Result {
         let target: String
@@ -191,18 +210,21 @@ import UniformTypeIdentifiers
 
 @MainActor struct HistoryView: View {
     @EnvironmentObject private var store: StudyStore
+    @EnvironmentObject private var library: Library
+    private var history: [ArticleHistorySummary] { ArticleHistorySummary.summarize(store.data.sessions) }
     var body: some View {
-        NavigationStack {
-            List {
-                Text("合計 \(Int(store.data.sessions.reduce(0) { $0 + $1.durationSeconds } / 60))分")
-                ForEach(store.data.sessions.sorted { $0.startedAt > $1.startedAt }) { session in
-                    VStack(alignment: .leading) {
-                        Text(store.data.progress[session.articleId]?.title ?? session.articleId)
-                        Text("\(session.startedAt.formatted()) · \(Int(session.durationSeconds))秒").font(.caption)
-                    }
-                }
-            }.navigationTitle("学習履歴")
-        }
+        List {
+            ForEach(history) { entry in
+                VStack(alignment: .leading, spacing: 6) {
+                    Text(library.articles.first(where: { $0.id == entry.id })?.title ?? store.data.progress[entry.id]?.title ?? entry.id)
+                        .font(.subheadline.weight(.semibold))
+                    Text("合計 \(entry.durationText)").font(.caption).foregroundStyle(.secondary)
+                }.padding(.vertical, 4)
+            }
+            if history.isEmpty {
+                ContentUnavailableView("学習履歴はまだありません", systemImage: "clock")
+            }
+        }.navigationTitle("学習履歴").navigationBarTitleDisplayMode(.inline)
     }
 }
 
@@ -226,12 +248,18 @@ struct BackupDocument: FileDocument {
         NavigationStack {
             Form {
                 Section("学習記録") {
+                    NavigationLink { HistoryView() } label: {
+                        Label("学習履歴", systemImage: "clock")
+                    }
                     Button("バックアップを書き出す") {
                         do { document = BackupDocument(data: try store.export()); export = true }
                         catch { message = error.localizedDescription }
                     }
                     Button("バックアップから復元") { importing = true }
                     Text("復元すると現在の記録を置き換えます。Webの記録とは独立しています。")
+                }
+                Section("音声") {
+                    NavigationLink { AudioSettingsView() } label: { Label("音声・同期", systemImage: "headphones") }
                 }
                 Section("記事の配信元") { Text(ArticleClient.baseURL.absoluteString).font(.caption) }
             }.navigationTitle("設定")

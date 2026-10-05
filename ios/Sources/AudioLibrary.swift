@@ -32,6 +32,8 @@ struct AudioTrack: Codable, Identifiable {
     let script: String?
     var audioHash: String? = nil
     var positionSeconds: Double = 0
+    var listened: Bool? = nil
+    var isListened: Bool { listened == true }
 }
 struct AudioIndex: Codable {
     var schemaVersion = 1
@@ -40,6 +42,10 @@ struct AudioIndex: Codable {
     var programs: [PlaylistManifest]? = nil
     var radio: RadioSession? = nil
     var gapOverrides: [String: Double]? = nil
+    func listenedCount(in program: PlaylistManifest) -> Int {
+        let completed = Set(tracks.filter(\.isListened).map(\.id))
+        return program.trackIDs.filter { completed.contains($0) }.count
+    }
     func validated() throws -> AudioIndex {
         guard schemaVersion == 1, Set(tracks.map(\.id)).count == tracks.count,
               bgmFile.map(AudioLibrary.safeFilename) ?? true else { throw ReaderError.invalid }
@@ -211,7 +217,8 @@ final class AudioLibrary {
                     written.append(filename)
                 }
                 let track = AudioTrack(manifest: manifest, localFile: filename, script: script,
-                    audioHash: hash, positionSeconds: sameAudio ? (old?.positionSeconds ?? 0) : 0)
+                    audioHash: hash, positionSeconds: sameAudio ? (old?.positionSeconds ?? 0) : 0,
+                    listened: sameAudio ? old?.listened : nil)
                 if let oldIndex { next.tracks[oldIndex] = track } else { next.tracks.append(track) }
                 changed += 1
             }
@@ -243,6 +250,14 @@ final class AudioLibrary {
         var next = index
         guard let i = next.tracks.firstIndex(where: { $0.id == trackID }), seconds.isFinite else { return }
         next.tracks[i].positionSeconds = max(0, seconds)
+        try save(next)
+    }
+    func setListened(_ value: Bool, trackID: UUID, expectedFile: String? = nil) throws {
+        var next = index
+        guard let i = next.tracks.firstIndex(where: { $0.id == trackID }),
+              expectedFile == nil || next.tracks[i].localFile == expectedFile else { return }
+        guard next.tracks[i].isListened != value else { return }
+        next.tracks[i].listened = value
         try save(next)
     }
     func saveRadio(_ radio: RadioSession?) throws {
@@ -317,6 +332,10 @@ final class AudioLibrary {
     }
     func savePosition(_ seconds: Double, id: UUID) {
         do { try storage.position(seconds, trackID: id); index = storage.index }
+        catch { self.error = error.localizedDescription }
+    }
+    func setListened(_ value: Bool, id: UUID, expectedFile: String? = nil) {
+        do { try storage.setListened(value, trackID: id, expectedFile: expectedFile); index = storage.index }
         catch { self.error = error.localizedDescription }
     }
     func saveRadio(_ radio: RadioSession?) {

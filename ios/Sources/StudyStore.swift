@@ -16,6 +16,9 @@ struct StudyBackup: Codable {
     var schemaVersion = 1
     var progress: [String: ProgressRecord] = [:]
     var sessions: [StudySession] = []
+    // Optional fields preserve decoding of existing version 1 backups.
+    var favorites: [String]?
+    var collections: [ArticleCollection]?
 
     func validated() throws -> StudyBackup {
         guard schemaVersion == 1, Set(sessions.map(\.id)).count == sessions.count,
@@ -23,6 +26,15 @@ struct StudyBackup: Codable {
               sessions.allSatisfy({ Catalog.matches($0.articleId, "^[0-9]{8}-[0-9]{6}$") &&
                   $0.durationSeconds.isFinite && $0.durationSeconds >= 0 && $0.durationSeconds <= 86400 })
         else { throw ReaderError.message("バックアップの形式が不正です。") }
+        let favorites = favorites ?? []
+        let collections = collections ?? []
+        guard Set(favorites).count == favorites.count,
+              favorites.allSatisfy({ Catalog.matches($0, "^[0-9]{8}-[0-9]{6}$") }),
+              Set(collections.map(\.id)).count == collections.count,
+              collections.allSatisfy({ !$0.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
+                  $0.name.count <= 80 && Set($0.articleIDs).count == $0.articleIDs.count &&
+                  $0.articleIDs.allSatisfy({ Catalog.matches($0, "^[0-9]{8}-[0-9]{6}$") }) })
+        else { throw ReaderError.message("お気に入り・コレクションの形式が不正です。") }
         return self
     }
 }
@@ -91,6 +103,48 @@ struct StudyBackup: Codable {
     func seconds(for id: String) -> Double {
         data.sessions.filter { $0.articleId == id }.reduce(0) { $0 + $1.durationSeconds }
     }
+    func isFavorite(_ id: String) -> Bool { (data.favorites ?? []).contains(id) }
+    func toggleFavorite(_ id: String) {
+        update { next in
+            var ids = next.favorites ?? []
+            if ids.contains(id) { ids.removeAll { $0 == id } } else { ids.append(id) }
+            next.favorites = ids
+        }
+    }
+    func createCollection(_ name: String) {
+        let name = String(name.trimmingCharacters(in: .whitespacesAndNewlines).prefix(80))
+        guard !name.isEmpty else { return }
+        update { next in
+            var collections = next.collections ?? []
+            collections.append(ArticleCollection(id: UUID(), name: name, articleIDs: []))
+            next.collections = collections
+        }
+    }
+    func renameCollection(_ id: UUID, name: String) {
+        let name = String(name.trimmingCharacters(in: .whitespacesAndNewlines).prefix(80))
+        guard !name.isEmpty else { return }
+        update { next in
+            guard let index = next.collections?.firstIndex(where: { $0.id == id }) else { return }
+            next.collections?[index].name = name
+        }
+    }
+    func deleteCollection(_ id: UUID) {
+        update { $0.collections?.removeAll { $0.id == id } }
+    }
+    func toggleMembership(_ articleID: String, collectionID: UUID) {
+        update { next in
+            guard let index = next.collections?.firstIndex(where: { $0.id == collectionID }) else { return }
+            var ids = next.collections?[index].articleIDs ?? []
+            if ids.contains(articleID) { ids.removeAll { $0 == articleID } } else { ids.append(articleID) }
+            next.collections?[index].articleIDs = ids
+        }
+    }
+}
+
+struct ArticleCollection: Codable, Identifiable {
+    let id: UUID
+    var name: String
+    var articleIDs: [String]
 }
 
 // 30秒ごとに区間を確定。時計変更に影響されないuptimeで経過時間を測る。
