@@ -36,9 +36,18 @@ test('ID の欠落・形式不正・filename 不一致を拒否する', () => {
   assert.throws(() => normalizeArticle(validData, 'notes/study/20260929-120001.md'), /一致しません/);
 });
 
-test('未知 type は warning、実在しない created は error にする', () => {
-  const { warnings } = normalizeArticle({ ...validData, type: 'reference' }, 'notes/study/20260929-120000.md');
-  assert.match(warnings[0], /未知の type/);
+test('任意のtypeと未指定を受け入れ、文字列以外は拒否する', () => {
+  for (const type of ['Applied', '自由な分類', '', '   ', undefined, null]) {
+    const result = normalizeArticle({ ...validData, type }, 'notes/study/20260929-120000.md');
+    assert.equal(result.article.type, typeof type === 'string' ? type.trim() : '');
+    assert.deepEqual(result.warnings, []);
+  }
+  for (const type of [1, false, [], {}]) {
+    assert.throws(() => normalizeArticle({ ...validData, type }, 'notes/study/20260929-120000.md'), /type は/);
+  }
+});
+
+test('実在しない created は error にする', () => {
   assert.throws(() => normalizeArticle({ ...validData, created: '2026-02-30 12:00:00' }, 'notes/study/20260929-120000.md'), /created は/);
 });
 

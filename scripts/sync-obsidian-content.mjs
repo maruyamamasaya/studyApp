@@ -6,7 +6,8 @@ import { fileURLToPath } from 'node:url';
 import { normalizeArticle, normalizePath, parseFrontmatter, validateArticleSet } from './lib/article.mjs';
 import { APP_CATALOG_FILE, buildAppCatalog } from './lib/app-articles.mjs';
 
-const DEFAULT_SOURCE_FOLDERS = ['study', 'wiki'];
+const DEFAULT_SOURCE_FOLDERS = ['wiki'];
+const MIRROR_FOLDERS = ['study', 'wiki'];
 const projectRoot = path.resolve(fileURLToPath(new URL('..', import.meta.url)));
 
 export async function planObsidianSync({ vaultRoot, repositoryRoot = projectRoot }) {
@@ -29,9 +30,6 @@ export async function planObsidianSync({ vaultRoot, repositoryRoot = projectRoot
       const destinationRelative = normalizePath(path.join('docs', sourceRelative));
       const { data } = parseFrontmatter(markdown, sourceRelative);
       const { article } = normalizeArticle(data, sourceRelative);
-      if (!DEFAULT_SOURCE_FOLDERS.includes(article.type)) {
-        throw new Error(`${sourceRelative}: type は study または wiki を指定してください（現在 ${article.type}）`);
-      }
       entries.push({
         id: article.id,
         article,
@@ -81,7 +79,7 @@ export async function planObsidianSync({ vaultRoot, repositoryRoot = projectRoot
   const mirrorRoot = path.join(repositoryRoot, 'docs');
   let mirrorFiles = [];
   try {
-    for (const folder of DEFAULT_SOURCE_FOLDERS) {
+    for (const folder of MIRROR_FOLDERS) {
       const directory = path.join(mirrorRoot, folder);
       try { mirrorFiles.push(...await walkMarkdown(directory)); } catch (error) { if (error.code !== 'ENOENT') throw error; }
     }

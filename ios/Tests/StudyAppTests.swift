@@ -2,8 +2,8 @@ import XCTest
 @testable import StudyApp
 
 final class StudyAppTests: XCTestCase {
-    private func article(id: String = "20261001-171535", path: String = "wiki/anken001/20261001-171535.md", title: String = "RAG") -> Article {
-        Article(id: id, title: title, path: path, type: "study", tags: ["RAG"], aliases: ["検索拡張生成"],
+    private func article(id: String = "20261001-171535", path: String = "wiki/anken001/20261001-171535.md", title: String = "RAG", type: String = "study") -> Article {
+        Article(id: id, title: title, path: path, type: type, tags: ["RAG"], aliases: ["検索拡張生成"],
                 created: "2026-10-01 17:15:35", contentHash: String(repeating: "0", count: 64))
     }
     func testHashMatchesPublishedAlgorithm() {
@@ -25,6 +25,24 @@ final class StudyAppTests: XCTestCase {
         XCTAssertThrowsError(try Catalog(schemaVersion: 2, revision: String(repeating: "0", count: 64), articles: []).validated())
         XCTAssertThrowsError(try Catalog(schemaVersion: 1, revision: String(repeating: "0", count: 64), articles: [a, a]).validated())
         XCTAssertNoThrow(try Catalog(schemaVersion: 1, revision: String(repeating: "0", count: 64), articles: []).validated())
+    }
+    func testCatalogAcceptsDevelopmentLogAlongsideExistingArticles() throws {
+        let articles = [article(),
+                        article(id: "20261001-171536", path: "wiki/anken001/20261001-171536.md", type: "wiki"),
+                        article(id: "20261005-093655", path: "wiki/official/20261005-093655.md", type: "development-log")]
+        let catalog = Catalog(schemaVersion: 1, revision: String(repeating: "0", count: 64), articles: articles)
+        let decoded = try JSONDecoder().decode(Catalog.self, from: JSONEncoder().encode(catalog))
+        XCTAssertEqual(try decoded.validated().articles.count, 3)
+        for type in ["Applied", "自由な分類", ""] {
+            let custom = Catalog(schemaVersion: 1, revision: catalog.revision, articles: [article(type: type)])
+            let decodedCustom = try JSONDecoder().decode(Catalog.self, from: JSONEncoder().encode(custom))
+            XCTAssertEqual(try decodedCustom.validated().articles.first?.type, type)
+        }
+        var invalid = try XCTUnwrap(JSONSerialization.jsonObject(with: JSONEncoder().encode(article())) as? [String: Any])
+        for value in [1, false, NSNull(), ["Applied"]] as [Any] {
+            invalid["type"] = value
+            XCTAssertThrowsError(try JSONDecoder().decode(Article.self, from: JSONSerialization.data(withJSONObject: invalid)))
+        }
     }
     func testFrontmatterWikiLinksAndCode() {
         let converted = ArticleLinks.body("---\ntitle: テスト\n---\n[[検索拡張生成|RAG]]\n```python\n[[変更しない]]\n```\n`[[変更しない]]`")

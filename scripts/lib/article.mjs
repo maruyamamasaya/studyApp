@@ -3,7 +3,6 @@ import { parse } from 'yaml';
 
 export const ARTICLE_ID_PATTERN = /^\d{8}-\d{6}$/u;
 export const CREATED_PATTERN = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/u;
-export const KNOWN_TYPES = new Set(['study', 'wiki']);
 
 export function normalizePath(value) {
   return value.replaceAll('\\', '/').split('/').filter((segment) => segment && segment !== '.').reduce((parts, segment) => {
@@ -61,9 +60,8 @@ export function normalizeArticle(data, filePath) {
   if (data.id !== stem) errors.push(`id ${String(data.id)} と filename ${filename} が一致しません`);
 
   const title = typeof data.title === 'string' && data.title.trim() ? data.title.trim() : null;
-  if (typeof data.type !== 'string' || !data.type.trim()) errors.push('type は必須文字列です');
+  if (data.type != null && typeof data.type !== 'string') errors.push('type は文字列または未指定にしてください');
   const type = typeof data.type === 'string' ? data.type.trim() : '';
-  if (type && !KNOWN_TYPES.has(type)) warnings.push(`未知の type "${type}" を拡張値として扱います`);
 
   let tags = [];
   let aliases = [];

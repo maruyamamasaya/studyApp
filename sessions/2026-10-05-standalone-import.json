@@ -1,0 +1,2162 @@
+[
+  {
+    "source": "作業ログ/Amazon Linux 2023上のWordPressサーバーを軽量化・高速化・安定化するための設定メモ.md",
+    "status": "imported",
+    "destination": "wiki/作業ログ/20261005-164642.md",
+    "id": "20261005-164642",
+    "duplicateOf": null,
+    "originalHash": "93e63f0bc8279650cb1121282665fe0f472796cc6f586aa96ae0a67070f7bded",
+    "wikiLinks": 0
+  },
+  {
+    "source": "作業ログ/EC2からhttps化する方法.md",
+    "status": "imported",
+    "destination": "wiki/作業ログ/20261005-164643.md",
+    "id": "20261005-164643",
+    "duplicateOf": null,
+    "originalHash": "2892478a06e3bf5036b223e427b2c8166af9bfb78cc968931d844972e00d32e1",
+    "wikiLinks": 0
+  },
+  {
+    "source": "作業ログ/PM2でアプリを再起動する更新用デプロイスクリプト.md",
+    "status": "imported",
+    "destination": "wiki/作業ログ/20261005-164644.md",
+    "id": "20261005-164644",
+    "duplicateOf": null,
+    "originalHash": "c3a013471e0b5b142ae3d871c9361e3a10661e9dd1699754d82fea24d20cba29",
+    "wikiLinks": 0
+  },
+  {
+    "source": "作業ログ/YASUKARI 予約システム ロジック概要.md",
+    "status": "imported",
+    "destination": "wiki/作業ログ/20261005-164645.md",
+    "id": "20261005-164645",
+    "duplicateOf": null,
+    "originalHash": "fa82dba80b5448cc11178d58bebb1bf001c35a0e44fb16fce16f2dc668a51169",
+    "wikiLinks": 0
+  },
+  {
+    "source": "作業ログ/yasukari/API Routes 調査結果.md",
+    "status": "imported",
+    "destination": "wiki/作業ログ/yasukari/20261005-164646.md",
+    "id": "20261005-164646",
+    "duplicateOf": null,
+    "originalHash": "57603d253b18da5583dbc6842a2a06342807632c23f9eb489cf9bc08fbd48cd6",
+    "wikiLinks": 0
+  },
+  {
+    "source": "作業ログ/yasukari/AWS接続調査結果.md",
+    "status": "imported",
+    "destination": "wiki/作業ログ/yasukari/20261005-164647.md",
+    "id": "20261005-164647",
+    "duplicateOf": null,
+    "originalHash": "4f5732dacc87c49c914da99cadf95d6b5f82436723d5238abed875589ffad448",
+    "wikiLinks": 0
+  },
+  {
+    "source": "作業ログ/yasukari/DynamoDB調査結果.md",
+    "status": "imported",
+    "destination": "wiki/作業ログ/yasukari/20261005-164648.md",
+    "id": "20261005-164648",
+    "duplicateOf": null,
+    "originalHash": "2d3085440bf26076f3ca65357015f77da7508d0bf6e3f212baacaad1faed613a",
+    "wikiLinks": 0
+  },
+  {
+    "source": "作業ログ/yasukari/PAY.JP処理の調査結果.md",
+    "status": "imported",
+    "destination": "wiki/作業ログ/yasukari/20261005-164649.md",
+    "id": "20261005-164649",
+    "duplicateOf": null,
+    "originalHash": "5b2595ccce8677040c363c980bd3f62011f86a987d0759bfb24c6d74fc44d532",
+    "wikiLinks": 0
+  },
+  {
+    "source": "作業ログ/yasukari/yasukari.md",
+    "status": "held-index",
+    "destination": null,
+    "id": null,
+    "duplicateOf": null,
+    "originalHash": "7f0dd5a13e5b598d3666ac5651777617cc16676b8b01176e044c3b5ce7acea09",
+    "wikiLinks": 19
+  },
+  {
+    "source": "作業ログ/yasukari/①予約フロー.md",
+    "status": "imported",
+    "destination": "wiki/作業ログ/yasukari/20261005-164650.md",
+    "id": "20261005-164650",
+    "duplicateOf": null,
+    "originalHash": "604158bb1b0b33274b469b74e7e584cb1b28282c10a5ad866bc30a980c015ab4",
+    "wikiLinks": 0
+  },
+  {
+    "source": "作業ログ/yasukari/②重複予約判定.md",
+    "status": "imported",
+    "destination": "wiki/作業ログ/yasukari/20261005-164651.md",
+    "id": "20261005-164651",
+    "duplicateOf": null,
+    "originalHash": "2f67a14611175eca860d3291002cd95854dcd2695a3a28f7c869e55af94fb02a",
+    "wikiLinks": 0
+  },
+  {
+    "source": "作業ログ/yasukari/③料金システム.md",
+    "status": "imported",
+    "destination": "wiki/作業ログ/yasukari/20261005-164652.md",
+    "id": "20261005-164652",
+    "duplicateOf": null,
+    "originalHash": "d4c2babaaea71f56d21f2f445557fd5a68098618d183bb68036c791c4f82b645",
+    "wikiLinks": 0
+  },
+  {
+    "source": "作業ログ/yasukari/④PAY.JP決済.md",
+    "status": "imported",
+    "destination": "wiki/作業ログ/yasukari/20261005-164653.md",
+    "id": "20261005-164653",
+    "duplicateOf": null,
+    "originalHash": "6cce3f68da603908ec56d3137eb8bdc99bb03b381c8863c5ce53fbf13400ed22",
+    "wikiLinks": 0
+  },
+  {
+    "source": "作業ログ/yasukari/⑤認証処理.md",
+    "status": "imported",
+    "destination": "wiki/作業ログ/yasukari/20261005-164654.md",
+    "id": "20261005-164654",
+    "duplicateOf": null,
+    "originalHash": "033291c38fdcb25a916dee5ed537816c62d77658726bc121dde83716be4a0942",
+    "wikiLinks": 0
+  },
+  {
+    "source": "作業ログ/yasukari/⑥DynamoDB設計.md",
+    "status": "imported",
+    "destination": "wiki/作業ログ/yasukari/20261005-164655.md",
+    "id": "20261005-164655",
+    "duplicateOf": null,
+    "originalHash": "83e83d8a915f7825ac45e0e57ade893b1e22299cc99795ca71e961d01ed43a9e",
+    "wikiLinks": 0
+  },
+  {
+    "source": "作業ログ/yasukari/⑦AWS構成.md",
+    "status": "imported",
+    "destination": "wiki/作業ログ/yasukari/20261005-164656.md",
+    "id": "20261005-164656",
+    "duplicateOf": null,
+    "originalHash": "559f7009488bc1ca4c6b952171ed308673bea72270bfed5334c43a609b5cf2d9",
+    "wikiLinks": 0
+  },
+  {
+    "source": "作業ログ/yasukari/⑧API一覧.md",
+    "status": "imported",
+    "destination": "wiki/作業ログ/yasukari/20261005-164657.md",
+    "id": "20261005-164657",
+    "duplicateOf": null,
+    "originalHash": "4ac69224c02508bd958212efb4c47c825c9f49171b7508e78a115ec605f68c63",
+    "wikiLinks": 0
+  },
+  {
+    "source": "作業ログ/yasukari/⑨管理画面.md",
+    "status": "imported",
+    "destination": "wiki/作業ログ/yasukari/20261005-164658.md",
+    "id": "20261005-164658",
+    "duplicateOf": null,
+    "originalHash": "4403ca1a283209d5cc21d16d1114e9bdefde8fab8b3468437696dee729413581",
+    "wikiLinks": 0
+  },
+  {
+    "source": "作業ログ/yasukari/予約処理の調査結果.md",
+    "status": "imported",
+    "destination": "wiki/作業ログ/yasukari/20261005-164659.md",
+    "id": "20261005-164659",
+    "duplicateOf": null,
+    "originalHash": "f545d8adbc70ab21aea158e24146ce6fbabc099cb10eeed305e8e839aae83c54",
+    "wikiLinks": 0
+  },
+  {
+    "source": "作業ログ/yasukari/予約重複判定の調査結果.md",
+    "status": "imported",
+    "destination": "wiki/作業ログ/yasukari/20261005-164700.md",
+    "id": "20261005-164700",
+    "duplicateOf": null,
+    "originalHash": "3ba98f6ae12a8755a945b0344614ddd5411bf3f9104c99dbd4322d70c1f31d0a",
+    "wikiLinks": 0
+  },
+  {
+    "source": "作業ログ/yasukari/料金計算の調査結果.md",
+    "status": "imported",
+    "destination": "wiki/作業ログ/yasukari/20261005-164701.md",
+    "id": "20261005-164701",
+    "duplicateOf": null,
+    "originalHash": "2d64aa5866e00bf53e00599dc6d29a9cdd1896141e2301f0d8672fe6c9984498",
+    "wikiLinks": 0
+  },
+  {
+    "source": "作業ログ/yasukari/管理画面調査結果.md",
+    "status": "imported",
+    "destination": "wiki/作業ログ/yasukari/20261005-164702.md",
+    "id": "20261005-164702",
+    "duplicateOf": null,
+    "originalHash": "aa25fbb2c0bb18f2a3c4d384b82fb08ae939c08275c854be29a2e98388136237",
+    "wikiLinks": 0
+  },
+  {
+    "source": "作業ログ/yasukari/認証処理の調査結果.md",
+    "status": "imported",
+    "destination": "wiki/作業ログ/yasukari/20261005-164703.md",
+    "id": "20261005-164703",
+    "duplicateOf": null,
+    "originalHash": "61a8a22d0f5c90f69f2c4c01e4da9d96818fae1c0e21cba479d9f24156d92f03",
+    "wikiLinks": 0
+  },
+  {
+    "source": "保管用・未リンク/TypeScriptまとめ.md",
+    "status": "imported",
+    "destination": "wiki/保管用・未リンク/20261005-164704.md",
+    "id": "20261005-164704",
+    "duplicateOf": null,
+    "originalHash": "5a71a14cac6f27fb2b00358e9e4d6dd07edc02416ea42fcb54cd7f107d668bce",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/API.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164705.md",
+    "id": "20261005-164705",
+    "duplicateOf": null,
+    "originalHash": "777f533a78841a973f130e037f1181ad14dacc257c899b4195fd36f279508303",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/App Router.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164706.md",
+    "id": "20261005-164706",
+    "duplicateOf": null,
+    "originalHash": "caf7f0b5e75ed3e11f0582c497cfff4198a42721812582e7539a29bc1493824e",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/CAC.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164707.md",
+    "id": "20261005-164707",
+    "duplicateOf": null,
+    "originalHash": "e688c631a03f38f625a11605e6071b3ff5cb55df40223934b010c5442e589676",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/CRM.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164708.md",
+    "id": "20261005-164708",
+    "duplicateOf": null,
+    "originalHash": "117090d50a592d6f0b3e15f08f98cf72a6a2508a629898b265151ab4e7d15e39",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/ChatGPT（GPT-5.5）.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164709.md",
+    "id": "20261005-164709",
+    "duplicateOf": null,
+    "originalHash": "4b7de2862dc3519d837f7315a9374a0d6d7e3be6e89e0be1b99ce2a46a2baebd",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/Claude Opus 5.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164710.md",
+    "id": "20261005-164710",
+    "duplicateOf": null,
+    "originalHash": "5f0f30e20027e71da0391ec82d559792bdda8228f39166d148dd62b6d576867a",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/Cursor.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164711.md",
+    "id": "20261005-164711",
+    "duplicateOf": null,
+    "originalHash": "76b95d50993f72cca2c59df33821da5306dcff483855f64b05401f75315731e7",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/DNS設定.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164712.md",
+    "id": "20261005-164712",
+    "duplicateOf": null,
+    "originalHash": "7dec6e80471329c116408a701b7b04732b7077a0c2b0fafaa1999e08e3735341",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/Homebrew.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164713.md",
+    "id": "20261005-164713",
+    "duplicateOf": null,
+    "originalHash": "dd2eef573f8da72618704ce2be1ea98539cda0a17372976bacfa48e27e8423f3",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/IPアドレス設定.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164714.md",
+    "id": "20261005-164714",
+    "duplicateOf": null,
+    "originalHash": "e3a1daade39443b8260086b95e5f62396319369bb3d84523b8b418a896e24a38",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/IaC.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164715.md",
+    "id": "20261005-164715",
+    "duplicateOf": null,
+    "originalHash": "26ce8de68d0e2a05e62375efd636961a832277d81d36ca2376e3ae416c90a780",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/KGI.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164716.md",
+    "id": "20261005-164716",
+    "duplicateOf": null,
+    "originalHash": "3c324dcba2d911c313ecb014788a24d0aee3b1fe84075ac3fb1d087864392db5",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/KPI.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164717.md",
+    "id": "20261005-164717",
+    "duplicateOf": null,
+    "originalHash": "6aeac9cff10cd393813675aa057b3fb072090d62014e11f72e1067ae250ffbbb",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/Kubernetes.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164718.md",
+    "id": "20261005-164718",
+    "duplicateOf": null,
+    "originalHash": "67b8463ca22fc792806037686e3f1c5ea5ac8de950bd93c130f5f14e7715f2bc",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/LTV.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164719.md",
+    "id": "20261005-164719",
+    "duplicateOf": null,
+    "originalHash": "703f22794ebffeab714afe3461b4f812d540ee08dd0c832ed464788753198158",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/Linuxインストール.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164720.md",
+    "id": "20261005-164720",
+    "duplicateOf": null,
+    "originalHash": "d7086a4050f0bb287aa3a9ac5a860fab0808198d5e003436bbf5cc74c53e32ff",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/ORDER BYとは？.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164721.md",
+    "id": "20261005-164721",
+    "duplicateOf": null,
+    "originalHash": "18019ecf78b010010fbd5aa8093bd1c681ceb77a4dbea08995e36b293b4394aa",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/PR.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164722.md",
+    "id": "20261005-164722",
+    "duplicateOf": null,
+    "originalHash": "12ee8c0d88df1a5421f7670385f6e4e584f186f41fff28524ddf292944c17b71",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/Push.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164723.md",
+    "id": "20261005-164723",
+    "duplicateOf": null,
+    "originalHash": "8aeaae59989f59bd14b29d6b46a4c2d3a06acff44c8b659342ed3c0872647d01",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/RAID設定.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164724.md",
+    "id": "20261005-164724",
+    "duplicateOf": null,
+    "originalHash": "dae97c8d82a35eac5e1edb6823b2a33c712615eddc4f2ef5dcfaa50c0f16c6d3",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/RDS.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164725.md",
+    "id": "20261005-164725",
+    "duplicateOf": null,
+    "originalHash": "e6978905d14578b20ab6d444a062b3c5844ffdd67666961a1404fe906c1cfe2c",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/RedHat.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164726.md",
+    "id": "20261005-164726",
+    "duplicateOf": null,
+    "originalHash": "60a4f19ed467907995c6ecb101c5acde9e53830b6e4ab9edcc9378f261d12075",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/SSH設定.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164727.md",
+    "id": "20261005-164727",
+    "duplicateOf": null,
+    "originalHash": "fb47b84360372e7949dca86170602dcde87a295b744aaa4953ce957dde963d63",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/Sandbox（サンドボックス）.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164728.md",
+    "id": "20261005-164728",
+    "duplicateOf": null,
+    "originalHash": "79a0348468178ab5ed5f85193e362635d6345afe2e6fb177d0764546bd6c3069",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/VS Code（Visual Studio Code）.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164729.md",
+    "id": "20261005-164729",
+    "duplicateOf": null,
+    "originalHash": "df3f218e4694c3169fef3537b702fc30122954cf8ad39e0187c6d1f38ef57db8",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/Windows Serverインストール.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164730.md",
+    "id": "20261005-164730",
+    "duplicateOf": null,
+    "originalHash": "dc531fa28d60c4322177127f5d84c835d52db915c537c8bfb8f5d3edd00164f2",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/YAML.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164731.md",
+    "id": "20261005-164731",
+    "duplicateOf": null,
+    "originalHash": "8a2eb8147ef6daa1858c175530c33c4ce2ef07a23546b431b82a2b2934a9f0a2",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/nginx.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164732.md",
+    "id": "20261005-164732",
+    "duplicateOf": null,
+    "originalHash": "0aa919b928a3807c7440b47afb77bf913575243c91986f0859ac57d25cebbd0c",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/アンチパターン（Anti-pattern）とは？.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164733.md",
+    "id": "20261005-164733",
+    "duplicateOf": null,
+    "originalHash": "2a340274335d3c6710bf9febe0aabd7927234133c9135fc8720382010c14d13f",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/アーキテクチャ.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164734.md",
+    "id": "20261005-164734",
+    "duplicateOf": null,
+    "originalHash": "144690733c86b27233960def9b20a118854dfd0f2da4439b661a64e2c94476d6",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/アーンドメディア.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164735.md",
+    "id": "20261005-164735",
+    "duplicateOf": null,
+    "originalHash": "55fe9d5dec0c7dbac59670e0cd75a85fa4318885c837a9a3827d830c992b0c6b",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/オウンドメディア.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164736.md",
+    "id": "20261005-164736",
+    "duplicateOf": null,
+    "originalHash": "cde45e3d194d797b4a5efac9d1d21fffeddf231ce7a1475336409feb85db03a5",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/サーバー構築について.md",
+    "status": "held-index",
+    "destination": null,
+    "id": null,
+    "duplicateOf": null,
+    "originalHash": "2dc16d190115d4fe2ff3330b184675538c9fe92d19f4b59a549c4472e96266f7",
+    "wikiLinks": 9
+  },
+  {
+    "source": "用語解説/ソフトウェアアップデート.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164737.md",
+    "id": "20261005-164737",
+    "duplicateOf": null,
+    "originalHash": "e655adfa3526c99092e425c1702764353f377b43c0611537246f94e364615925",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/パーティション作成.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164738.md",
+    "id": "20261005-164738",
+    "duplicateOf": null,
+    "originalHash": "1b126eff35a3050ae9f0d100d879b300703b21d57ab83d31b524e87f52802f95",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/ペイドメディア.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164739.md",
+    "id": "20261005-164739",
+    "duplicateOf": null,
+    "originalHash": "7a6c790930fdcf9441d60dd975d33708defa7fb209663e1e7acf0905205c5798",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/ホスト名設定.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164740.md",
+    "id": "20261005-164740",
+    "duplicateOf": null,
+    "originalHash": "adeda77bcb4d9ac47b1eeee77e451b23ee52e49c147404a4b82c6d5c9c6ac95c",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/マーケティングファネル.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164741.md",
+    "id": "20261005-164741",
+    "duplicateOf": null,
+    "originalHash": "e91854aab93f9d96959b3a1d22250da9d32439fc077f7f3079afe6e2a8f5097c",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/リテンション.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164742.md",
+    "id": "20261005-164742",
+    "duplicateOf": null,
+    "originalHash": "c9ba85defad9dfc1073e32f474953c4bb8c4c61e68338a3e34e8f0cb662cb2bd",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/副作用.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164743.md",
+    "id": "20261005-164743",
+    "duplicateOf": null,
+    "originalHash": "e6371b8cb13fdadac868335d9dfe0d89f0562743f196ec3460f1e23127280e3f",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/時刻同期.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164744.md",
+    "id": "20261005-164744",
+    "duplicateOf": null,
+    "originalHash": "23f4d9349d117f2f48dc81d75b54a6d8d9c29b27f598f552de6b31a25a92ad99",
+    "wikiLinks": 0
+  },
+  {
+    "source": "用語解説/集客チャネル.md",
+    "status": "imported",
+    "destination": "wiki/用語解説/20261005-164745.md",
+    "id": "20261005-164745",
+    "duplicateOf": null,
+    "originalHash": "24c7d9020c00589ee467d5c5daf97e38d00a982760739281fd6c846ac828366c",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：マインド系・開発ノウハウ/AIに“チーム”や“プロセス”を任せるのではなく、明確に区切った実行タスクを任せるべき.md",
+    "status": "imported",
+    "destination": "wiki/記事：マインド系・開発ノウハウ/20261005-164746.md",
+    "id": "20261005-164746",
+    "duplicateOf": null,
+    "originalHash": "ebf86408cd498be8f7d6a6a2f07736fe26feb690223e9f043472d2db4998d174",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：マインド系・開発ノウハウ/AIのアウトプットをそのまま出す人にならないために.md",
+    "status": "imported",
+    "destination": "wiki/記事：マインド系・開発ノウハウ/20261005-164747.md",
+    "id": "20261005-164747",
+    "duplicateOf": null,
+    "originalHash": "9485bea5d1a3da651fa87cc5453a7f293a212dbf35dd2a4b922cea1a77a0e0fb",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：マインド系・開発ノウハウ/「良いプロンプトを書く」よりも「AIとの仕事の進め方を設計する」.md",
+    "status": "imported",
+    "destination": "wiki/記事：マインド系・開発ノウハウ/20261005-164748.md",
+    "id": "20261005-164748",
+    "duplicateOf": null,
+    "originalHash": "657b4f08193fe67ca8384b1f581c20896351168e733f96a611112ef27372367c",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：マインド系・開発ノウハウ/すべての企業がAIについて答えるべき6つの問い.md",
+    "status": "imported",
+    "destination": "wiki/記事：マインド系・開発ノウハウ/20261005-164749.md",
+    "id": "20261005-164749",
+    "duplicateOf": null,
+    "originalHash": "b133784c7e44ec972edae0014ce7069cae355de8c52c7b62e4334a18bf045edf",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：マインド系・開発ノウハウ/マルチタスクが上手くなることではなく、「案件は複数持つが、実作業はなるべく1つずつ流す」仕組みを作ること.md",
+    "status": "imported",
+    "destination": "wiki/記事：マインド系・開発ノウハウ/20261005-164750.md",
+    "id": "20261005-164750",
+    "duplicateOf": null,
+    "originalHash": "61476b6338927b85325fa59cb8215669404516d1e7dc461af5b613c0b29ac8c9",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：マインド系・開発ノウハウ/役割を広げれば、本当に強くなれるのか.md",
+    "status": "imported",
+    "destination": "wiki/記事：マインド系・開発ノウハウ/20261005-164751.md",
+    "id": "20261005-164751",
+    "duplicateOf": null,
+    "originalHash": "07b52644a5988604213304eadac195db6856141bd5455764a54111c75bdace56",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：マインド系・開発ノウハウ/新人エンジニア教育で重要な要素まとめ.md",
+    "status": "imported",
+    "destination": "wiki/記事：マインド系・開発ノウハウ/20261005-164752.md",
+    "id": "20261005-164752",
+    "duplicateOf": null,
+    "originalHash": "6e1fd5ef92ec683f21a61c547fe4bf47e6c9a969bfef92616d97a4187da7cb77",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：マインド系・開発ノウハウ/知識を増やすだけでは、仕事はできるようにならない.md",
+    "status": "imported",
+    "destination": "wiki/記事：マインド系・開発ノウハウ/20261005-164753.md",
+    "id": "20261005-164753",
+    "duplicateOf": null,
+    "originalHash": "203d4fac8d7c59c0a45bd2c88f2d0f5c80f1ab78c317523ca1c5f35b85f00519",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：マインド系・開発ノウハウ/社内ITは“作ること”ではなく、“使われて業務が変わること”までが仕事.md",
+    "status": "imported",
+    "destination": "wiki/記事：マインド系・開発ノウハウ/20261005-164754.md",
+    "id": "20261005-164754",
+    "duplicateOf": null,
+    "originalHash": "78831b78d4301850fa0ae61f98f05ef056a5fb0578cbe7ae1c0cbdaaad191255",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：マインド系・開発ノウハウ/西川計測が持っている業務パッケージを顧客ごとに拡張する業務Webシステム開発.md",
+    "status": "imported",
+    "destination": "wiki/記事：マインド系・開発ノウハウ/20261005-164755.md",
+    "id": "20261005-164755",
+    "duplicateOf": null,
+    "originalHash": "d1933254e3ced7a96a56c762f1d04199efaa95600e9490fc39b75016b7b96900",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/AWS からGCへの移行はできるか？.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164756.md",
+    "id": "20261005-164756",
+    "duplicateOf": null,
+    "originalHash": "5c14b177e5bf1480e171de59c2280f49fb5d7b9b11c1454e97ab162e6440798b",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/CI／CD基礎編：開発・テスト・デプロイを自動化する仕組み.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164757.md",
+    "id": "20261005-164757",
+    "duplicateOf": null,
+    "originalHash": "b075e0dddeb4109462411f83a1aea0c89b9dfaa9d77dd1ab40c8408733f6cc79",
+    "wikiLinks": 1
+  },
+  {
+    "source": "記事：基礎編/Docker基礎編：インフラエンジニアが知っておきたいコンテナの仕組み.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164758.md",
+    "id": "20261005-164758",
+    "duplicateOf": null,
+    "originalHash": "af8ddb92796e7beceb01af283486e8bf5191a25483ae61d856ce2ceea9303044",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/DynamoDBとは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164759.md",
+    "id": "20261005-164759",
+    "duplicateOf": null,
+    "originalHash": "425b6bd48a356de2af43c3dcf00c6687eed288f9e98ec635f813addda3545fea",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/GitHub Actions.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164800.md",
+    "id": "20261005-164800",
+    "duplicateOf": null,
+    "originalHash": "377956dd1911d1486315d37065532dab241d26f1d806a27777cba64ad43a1feb",
+    "wikiLinks": 3
+  },
+  {
+    "source": "記事：基礎編/GitHub Pages.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164801.md",
+    "id": "20261005-164801",
+    "duplicateOf": null,
+    "originalHash": "59d10080a81c5fc49c374f6edcbf14887c40bd20b82467906720cdb5a6263d7e",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/Go言語とは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164802.md",
+    "id": "20261005-164802",
+    "duplicateOf": null,
+    "originalHash": "f902798e4c900d612706dace292d2745b5c3ca36a99a995161a3f50b96ae3b2f",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/HTTPS と認証 基礎編.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164803.md",
+    "id": "20261005-164803",
+    "duplicateOf": null,
+    "originalHash": "644b24b76b61f3a755fafe8e3e74d16a3529dc7e3af32511c7087eafcded64c3",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/IPアドレス・ポート番号・プロトコルの仕組み.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164804.md",
+    "id": "20261005-164804",
+    "duplicateOf": null,
+    "originalHash": "d7841fb977205d8b80e1c4e128498d0650cd2d7f198dfa0eb5880f45ba4b9e90",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/JavaScript 基礎編 ― Webページを「動かす」ためのプログラミング言語 ―.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164805.md",
+    "id": "20261005-164805",
+    "duplicateOf": null,
+    "originalHash": "17b280f333fc8b18c757f16005b19806c94b2bd017248ac942f9e1fb1cb619b3",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/Javaで理解するオブジェクト指向入門.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164806.md",
+    "id": "20261005-164806",
+    "duplicateOf": null,
+    "originalHash": "b0f6489f72e3324baa0af3e818cdd5a9da1c8a09b8f432b479ded9f637dbb9ca",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/Javaのオブジェクト化とは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164807.md",
+    "id": "20261005-164807",
+    "duplicateOf": null,
+    "originalHash": "f9ae0e63765205e75b928ab62b871742e0527063ff692d6afa965f6e8565f444",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/Linuxでいう apt や yum.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164808.md",
+    "id": "20261005-164808",
+    "duplicateOf": null,
+    "originalHash": "0a2080cae5a54d1e39cc91c9c2c2cefd14641920aadf5deb1024699f1bb015c1",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/Linuxとは？インフラエンジニアが知っておきたい基礎知識.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164809.md",
+    "id": "20261005-164809",
+    "duplicateOf": null,
+    "originalHash": "cc69334e20135116d395c20882d606a7d36b3eedd9e8da4358ac1059fe314960",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/Linux・Red Hat・Enterprise の基本.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164810.md",
+    "id": "20261005-164810",
+    "duplicateOf": null,
+    "originalHash": "9970b26d8120ba32c00af620868c7a6265e71abe032ecf3976da9d6614956a8d",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/Linux基礎編：インフラエンジニアが最初に理解したいOSの基本.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164811.md",
+    "id": "20261005-164811",
+    "duplicateOf": null,
+    "originalHash": "12855a8fedb4ce7e4a37631759dec1f3e464d2dc92d97dbe8d97e83ac4ca43bf",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/Nest.js と Next.js の違い.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164812.md",
+    "id": "20261005-164812",
+    "duplicateOf": null,
+    "originalHash": "d0f9f8fb72b8e6a9349cd1071856a62f159586649dada73a3fa18b483af1d121",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/Next.js 基礎編 ― Reactで本格的なWebアプリを作るためのフレームワーク ―.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164813.md",
+    "id": "20261005-164813",
+    "duplicateOf": null,
+    "originalHash": "f5375e009748b00f6e3256cb1e1fde152aa8c422bae04f71180c81444e0aa28f",
+    "wikiLinks": 1
+  },
+  {
+    "source": "記事：基礎編/Node.js 基礎編 ― JavaScriptを「ブラウザの外」で動かすための実行環境 ―.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164814.md",
+    "id": "20261005-164814",
+    "duplicateOf": null,
+    "originalHash": "a673037edfed29e2ea0cd4923391a4ec577eb2c1df65ee06a7327a7282185051",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/Proxy（プロキシ）とは.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164815.md",
+    "id": "20261005-164815",
+    "duplicateOf": null,
+    "originalHash": "3132de14c7e42fc82a41e8c0851a8085aa55c85c37699859491c5e37b39b063e",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/Pythonでよく使われるライブラリ.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164816.md",
+    "id": "20261005-164816",
+    "duplicateOf": null,
+    "originalHash": "bc5440f5a2e94c9db82aeeaa30ad607383a5f7c9f49687c744ac833d66a25f89",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/React 基礎編 ― Web画面を「部品」に分けて作るためのライブラリ ―.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164817.md",
+    "id": "20261005-164817",
+    "duplicateOf": null,
+    "originalHash": "3953d95dc6aa2183ef049ad2d2767cb827af210b3d09353a9499be9039ec38e7",
+    "wikiLinks": 1
+  },
+  {
+    "source": "記事：基礎編/Reactでよく出てくる Component → Props ／ State.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164818.md",
+    "id": "20261005-164818",
+    "duplicateOf": null,
+    "originalHash": "d8140a347a7c220b1800f574eb8982f3c70083269d757d257e149b62de636d72",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/SSL／TLS証明書とは？ HTTPSを支える「証明」と「暗号化」の仕組み.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164819.md",
+    "id": "20261005-164819",
+    "duplicateOf": null,
+    "originalHash": "d6a4d3e72798c6fa1845eb80097420f781f5debe684ae267394106839e9377ff",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/Session（セッション）基礎編.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164820.md",
+    "id": "20261005-164820",
+    "duplicateOf": null,
+    "originalHash": "8af1a1ae34858b834898d00bd50de7ca3e49a3e4f74ab55e080552759da83bcf",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/Terraformとは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164821.md",
+    "id": "20261005-164821",
+    "duplicateOf": null,
+    "originalHash": "86c6e0c0c89f6fb1e631c7ee0e47963dbc42cb470b9aa449b4ba9fb07a909809",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/Terraformの基本コード入門.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164822.md",
+    "id": "20261005-164822",
+    "duplicateOf": null,
+    "originalHash": "3a5c836c91e479ca6de62502517a4525d6f5cc867003cf9001c5d07c3d733c87",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/Terraformの基本的な流れ.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164823.md",
+    "id": "20261005-164823",
+    "duplicateOf": null,
+    "originalHash": "b76fc5a485f531e38a2064d438b2ecaf3c30fd02e233397124ec7eef910df767",
+    "wikiLinks": 1
+  },
+  {
+    "source": "記事：基礎編/TypeScript 基礎編　 ― JavaScriptを「安全に書く」ための言語 ―.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164824.md",
+    "id": "20261005-164824",
+    "duplicateOf": null,
+    "originalHash": "89e3708192f00e660c153cc033350325900e57f9c4ba5ba64f9acf6da5260a65",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/VMware ESXiとは？ 仮想化の仕組みから実務まで.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164825.md",
+    "id": "20261005-164825",
+    "duplicateOf": null,
+    "originalHash": "3d981967e089df49544603169d8e61f50731118d6e76c1d88bad7bd8c03a7af2",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/VMwareまとめ.md",
+    "status": "held-index",
+    "destination": null,
+    "id": null,
+    "duplicateOf": null,
+    "originalHash": "db34d60b0cb54f356fd5d2febd119d9f3a764e9fc987bb1c6462796f3b8c1c43",
+    "wikiLinks": 5
+  },
+  {
+    "source": "記事：基礎編/Vue.js API通信・Pinia状態管理 入門.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164826.md",
+    "id": "20261005-164826",
+    "duplicateOf": null,
+    "originalHash": "94e05937645a90241370fede2c30657e918254df9a5abe2ccbc9bb312d00ee1b",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/Vue.js コンポーネント・Props・Emits・Vue Router 入門.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164827.md",
+    "id": "20261005-164827",
+    "duplicateOf": null,
+    "originalHash": "cc17e84b69e24162870ac5ca73b593059b31f3919274264830e6f2fa9151d02c",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/Vue.js 入門編.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164828.md",
+    "id": "20261005-164828",
+    "duplicateOf": null,
+    "originalHash": "0e9e75a0ca835e8d7605e34c3b4daf728a21a982ed4b80515cc3e36a0ca6ba32",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/WebサーバーとDBサーバーの仕組み.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164829.md",
+    "id": "20261005-164829",
+    "duplicateOf": null,
+    "originalHash": "5314607a469c93bd68cc3713a1c3ecd069f63d91d7ba912d83f0ee319da57fe2",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/Webセキュリティで覚えておきたい基本用語.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164830.md",
+    "id": "20261005-164830",
+    "duplicateOf": null,
+    "originalHash": "084bc916a1f85f5aca46074ec00ea27fa5ee0bbb8bdd7f7516fe12375cb78737",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/Webセキュリティ基礎編.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164831.md",
+    "id": "20261005-164831",
+    "duplicateOf": null,
+    "originalHash": "787f03cb8c5922beca791a87127123a740235874759c2f51763e1c64a1dc760e",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/npmとは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164832.md",
+    "id": "20261005-164832",
+    "duplicateOf": null,
+    "originalHash": "6053ccc9318e9c8f62bcfc32418168ccdd521c2030bc9d8a4acf0668994d8af7",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/pipとは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164833.md",
+    "id": "20261005-164833",
+    "duplicateOf": null,
+    "originalHash": "b7437d64cbb1512195a1a3fad1ff34ab01c7148c9f2c32ec69fdca879d6b9611",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/インフラエンジニアに求められるスキルとは？基礎から見る全体像.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164834.md",
+    "id": "20261005-164834",
+    "duplicateOf": null,
+    "originalHash": "682b5da296b47e1d6ca2573b2c9cea5fcc48a1e19faf249df7bbbc32eaa235d1",
+    "wikiLinks": 3
+  },
+  {
+    "source": "記事：基礎編/インフラ系の記事でよく出る用語.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164835.md",
+    "id": "20261005-164835",
+    "duplicateOf": null,
+    "originalHash": "16ffd44cee65db542f53deac6cddcc50ca69c1d0f7f3123e341ec45dfa0cd234",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/エンジニアにおける「構築」とは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164836.md",
+    "id": "20261005-164836",
+    "duplicateOf": null,
+    "originalHash": "b4a78e5120bf3c32885528c6c3dab365652c6251a8cd5e1a2788648199484075",
+    "wikiLinks": 5
+  },
+  {
+    "source": "記事：基礎編/エンジニアにおける「設計」とは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164837.md",
+    "id": "20261005-164837",
+    "duplicateOf": null,
+    "originalHash": "4944e9d5591747ea9f7797cf3578673ddc4853e006b4962c324ca2c406fd94f6",
+    "wikiLinks": 1
+  },
+  {
+    "source": "記事：基礎編/エンジニアに必要なスキルの全体像.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164838.md",
+    "id": "20261005-164838",
+    "duplicateOf": null,
+    "originalHash": "adaf17b8a7467e1788fa99387956a6c6991478f486e6ad17f788d5d266293d2b",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/オブジェクト指向とは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164839.md",
+    "id": "20261005-164839",
+    "duplicateOf": null,
+    "originalHash": "598b4ea6b306c74bc18d5072e522abbffb64f70fc18d4538604d1a04d2b44d40",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/オブジェクト指向はJavaよりずっと前からある.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164840.md",
+    "id": "20261005-164840",
+    "duplicateOf": null,
+    "originalHash": "68a5a25579085afb7fec7d88e24b099505b89c79b8877bfd3d5fbee6fbf19e4d",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/オンプレネットワーク入門：ルーティング・L2L3スイッチ・Firewall・SSH.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164841.md",
+    "id": "20261005-164841",
+    "duplicateOf": null,
+    "originalHash": "13d3e7d5b8bd440cf214714bfe11391def917cf31e74834059243018025c187b",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/オンプレミスとは？実際の業務・案件で何をするのか.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164842.md",
+    "id": "20261005-164842",
+    "duplicateOf": null,
+    "originalHash": "80013bef2215a302b33cb33aefab39cd94cbf0539d960235fc1b991268aec80e",
+    "wikiLinks": 9
+  },
+  {
+    "source": "記事：基礎編/サーバーとクラウド基礎編：インフラエンジニアが知っておきたい仕組み.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164843.md",
+    "id": "20261005-164843",
+    "duplicateOf": null,
+    "originalHash": "614a389edc7e1bed7979c1dc9cf9471daa994d31cc6f1248cb5a80690b79e711",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/セキュリティ基礎編：インフラエンジニアが知っておきたいシステムを守る仕組み.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164844.md",
+    "id": "20261005-164844",
+    "duplicateOf": null,
+    "originalHash": "2c0933593e0d29c196a796680b7ed46a971d226c8e750feeede44a88d13d8d62",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/テーブル・主キー・外部キー・JOIN・インデックスを理解する.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164845.md",
+    "id": "20261005-164845",
+    "duplicateOf": null,
+    "originalHash": "ce8d8e649d1d24b2385c7a5ff58d5fd558de61ba74c34c661e67a71529a3a57c",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/データベースの種類について.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164846.md",
+    "id": "20261005-164846",
+    "duplicateOf": null,
+    "originalHash": "9972b9dd57576a57ad0edcc3f008c43d917ac3770d0106407d4498fc08608bb6",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/データベース基礎編：インフラエンジニアが知っておきたいデータ管理の仕組み.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164847.md",
+    "id": "20261005-164847",
+    "duplicateOf": null,
+    "originalHash": "e85e4e6992715a3b6a46a6fde3dd4245572d754019e7f2b931c5b90b4d6ad283",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/ネットワークエンジニアが実務で何をしているか.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164848.md",
+    "id": "20261005-164848",
+    "duplicateOf": null,
+    "originalHash": "d0c800e340b544235602cabe2e3ccfe18ab9034fc3fb3d185c9497d9eab30fa9",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/ネットワーク基礎編：インフラエンジニアが知っておきたい基本.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164849.md",
+    "id": "20261005-164849",
+    "duplicateOf": null,
+    "originalHash": "4457ed7666258def704a4943a78b78fdcff24d116fa1a9b0b5cdf90494b0ac2a",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/ネットワーク基礎編：インフラエンジニアが知っておきたい基本無題のファイル.md",
+    "status": "duplicate",
+    "destination": null,
+    "id": null,
+    "duplicateOf": "wiki/記事：基礎編/20261005-164849.md",
+    "originalHash": "4457ed7666258def704a4943a78b78fdcff24d116fa1a9b0b5cdf90494b0ac2a",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/バックエンドでよく見る技術用語・概念.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164850.md",
+    "id": "20261005-164850",
+    "duplicateOf": null,
+    "originalHash": "0c8734519ced328181de5173aa0b2751509bc4cea09bc6da58920d2c1aa71ed4",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/パッケージマネージャー入門 — apt・npm・pipとライブラリ管理.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164851.md",
+    "id": "20261005-164851",
+    "duplicateOf": null,
+    "originalHash": "1fa52f5ee220ecb084a1985b91e84df84f465ddd70fb6a5f2f1db303d02bb186",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/フロントエンドエンジニアに必要なスキル.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164852.md",
+    "id": "20261005-164852",
+    "duplicateOf": null,
+    "originalHash": "04152de5b16f5374bd9dbe692c33945adee1373a9ccc410d2ef8ce3bfa385570",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/フロントエンド系記事で頻繁に出てくる技術用語・概念.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164853.md",
+    "id": "20261005-164853",
+    "duplicateOf": null,
+    "originalHash": "233a780124fdd8529ab7d1493805510f9aa3c0ca199a5beeb1f41e095bd0f21e",
+    "wikiLinks": 2
+  },
+  {
+    "source": "記事：基礎編/メインフレームとサーバー.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164854.md",
+    "id": "20261005-164854",
+    "duplicateOf": null,
+    "originalHash": "432acaa0a546a93814409f6f8e632a495294042bb16f5f52851877d169899553",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/ライブラリはどこに保存される？.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164855.md",
+    "id": "20261005-164855",
+    "duplicateOf": null,
+    "originalHash": "af1187df02a36781e66c60ac7d6b44b084d1ce08a7446b5da65663105aec3778",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/基礎AWS/AWS Amplifyとは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/基礎AWS/20261005-164856.md",
+    "id": "20261005-164856",
+    "duplicateOf": null,
+    "originalHash": "eb6d8070a764e859adeb7f906357c23cc122731ba6af516939bf272f7a97ca53",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/基礎AWS/AWS Certificate Manager（ACM）.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/基礎AWS/20261005-164857.md",
+    "id": "20261005-164857",
+    "duplicateOf": null,
+    "originalHash": "264be34292348e6a85dd7768e973f5877f2b1623cb66a15cfbd748ce759ac1f8",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/基礎AWS/AWS Lambdaとは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/基礎AWS/20261005-164858.md",
+    "id": "20261005-164858",
+    "duplicateOf": null,
+    "originalHash": "8a7c33f16ba1b6841f8798e787159e2097bc91818d72897b4a5895f6e19d0a8a",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/基礎AWS/AWSにおけるAZ.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/基礎AWS/20261005-164859.md",
+    "id": "20261005-164859",
+    "duplicateOf": null,
+    "originalHash": "cb89ba3df7f60cb28c66beb9a4b194b9af5989e58570d11c8c4aa7c43500a62b",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/基礎AWS/AWSのAIサービス全体像.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/基礎AWS/20261005-164900.md",
+    "id": "20261005-164900",
+    "duplicateOf": null,
+    "originalHash": "db6c809c41cf03ac2c55b91ef0af0ead2d6c65c74f52011e09a1ab3b455e7349",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/基礎AWS/AWSリージョン（Region）.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/基礎AWS/20261005-164901.md",
+    "id": "20261005-164901",
+    "duplicateOf": null,
+    "originalHash": "1a914ae4bd5e87fc86bae0c7c7a031844f68976c18e73ba726cd12401d85d201",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/基礎AWS/AZ.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/基礎AWS/20261005-164902.md",
+    "id": "20261005-164902",
+    "duplicateOf": null,
+    "originalHash": "3a44a721288f9ba4e3a9f5f4bf5b6330040e6ae1354113e27026cbe9f714bcd0",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/基礎AWS/Amazon API Gateway とは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/基礎AWS/20261005-164903.md",
+    "id": "20261005-164903",
+    "duplicateOf": null,
+    "originalHash": "e499f91101c160dc63ff5bf7bc7e20d3a112f3fd16f0ab26bc0998bc7e647f78",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/基礎AWS/Amazon Auroraとは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/基礎AWS/20261005-164904.md",
+    "id": "20261005-164904",
+    "duplicateOf": null,
+    "originalHash": "ce256b374f31be1b2a34077e47a8c8adc8d2bf59fa8afde7225824c2284f38fd",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/基礎AWS/Amazon Bedrockとは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/基礎AWS/20261005-164905.md",
+    "id": "20261005-164905",
+    "duplicateOf": null,
+    "originalHash": "c0d1db0ab6b030a547c3b8835bbcb4328f125099c0b602fd48831e0eb7e7fd24",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/基礎AWS/Amazon CloudFront.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/基礎AWS/20261005-164906.md",
+    "id": "20261005-164906",
+    "duplicateOf": null,
+    "originalHash": "5e534d693f1ca2bd3c28329b92c4fa64d56c8cb544928a6ae09341f2a1dd7743",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/基礎AWS/Amazon CloudWatch.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/基礎AWS/20261005-164907.md",
+    "id": "20261005-164907",
+    "duplicateOf": null,
+    "originalHash": "be0fa8637f08dab63e6e9f6e826e6510172eef45d3ebcbd2d6ee5a9d9f29335d",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/基礎AWS/Amazon Cognito とは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/基礎AWS/20261005-164908.md",
+    "id": "20261005-164908",
+    "duplicateOf": null,
+    "originalHash": "7776cf38dcfafbf22981733c06bfcd025e47bddf625615da3a2bc40af7afbd4c",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/基礎AWS/Amazon EC2（Elastic Compute Cloud）.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/基礎AWS/20261005-164909.md",
+    "id": "20261005-164909",
+    "duplicateOf": null,
+    "originalHash": "f47c272328f52124fd3848dc0c6e9980f2be02b130f4f8e87c6b7411e5e4b177",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/基礎AWS/Amazon RDS（Relational Database Service）とは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/基礎AWS/20261005-164910.md",
+    "id": "20261005-164910",
+    "duplicateOf": null,
+    "originalHash": "4501357d2335bb4f5eba19ffe11e150b858243d153b3e932e37f984b94f1526c",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/基礎AWS/Amazon S3（Simple Storage Service）.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/基礎AWS/20261005-164911.md",
+    "id": "20261005-164911",
+    "duplicateOf": null,
+    "originalHash": "885ce2a61ca3dcb6127658084c8768a642db423061a799bf46138399963d3011",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/基礎AWS/Amazon SES（Simple Email Service）.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/基礎AWS/20261005-164912.md",
+    "id": "20261005-164912",
+    "duplicateOf": null,
+    "originalHash": "dc587bbe093eab6382ee5c0fab064c1109224164c2a907a9638bbbab6f8575d0",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/基礎AWS/Amazon VPCとは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/基礎AWS/20261005-164913.md",
+    "id": "20261005-164913",
+    "duplicateOf": null,
+    "originalHash": "921b1ca5503c31e321fc03c2a1f711ad2744e3dfcc4311c4d209df799c78d1a8",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/基礎AWS/DynamoDBとは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/基礎AWS/20261005-164914.md",
+    "id": "20261005-164914",
+    "duplicateOf": null,
+    "originalHash": "bb6b231063495825b7371bf73648f58e9542132ca756c0a97118339174cae508",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/基礎AWS/Elastic Beanstalkとは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/基礎AWS/20261005-164915.md",
+    "id": "20261005-164915",
+    "duplicateOf": null,
+    "originalHash": "e483024015bc0e5159632dce7708645f3be2cd6ae647d01d3744baa3c28af108",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/基礎AWS/IAM（Identity and Access Management）.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/基礎AWS/20261005-164916.md",
+    "id": "20261005-164916",
+    "duplicateOf": null,
+    "originalHash": "d334a10467ed897205b31cb089ba8436cb3058946d92654965826e7a452b554c",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/基礎AWS/Multi-AZ.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/基礎AWS/20261005-164917.md",
+    "id": "20261005-164917",
+    "duplicateOf": null,
+    "originalHash": "89fe7543452770bbc2fc06488781c3ab297accd07f39c2c212f669d1c47fb264",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/基礎AWS/Route 53.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/基礎AWS/20261005-164918.md",
+    "id": "20261005-164918",
+    "duplicateOf": null,
+    "originalHash": "c0b4ae755ea73cf742b656959bbd2ac9aa0a28b4d74fc09d41a4ff1fadbd56e3",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/基礎AWS/フェイルオーバーとは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/基礎AWS/20261005-164919.md",
+    "id": "20261005-164919",
+    "duplicateOf": null,
+    "originalHash": "19b31fbafd9fa2ca614c9ebb0555202b6a3cdd63280c5181d6c8bd69c2ab62f9",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/基礎AWS/フェイルバック.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/基礎AWS/20261005-164920.md",
+    "id": "20261005-164920",
+    "duplicateOf": null,
+    "originalHash": "47b2bfb3bc8259e3c0152fffd50322a86d8bf64ad152589caf207583baf35f54",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/基礎AWS/メール配信の仕組み.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/基礎AWS/20261005-164921.md",
+    "id": "20261005-164921",
+    "duplicateOf": null,
+    "originalHash": "2d72ada03b9e08c4a9cfd484b1d75d4e78aba39296bd714285f89168feb634a9",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/基礎AWS/冗長化.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/基礎AWS/20261005-164922.md",
+    "id": "20261005-164922",
+    "duplicateOf": null,
+    "originalHash": "424b4d539cc597db61d181a3b706b9c34cc406a6e1931f38512e8f245aabf5b0",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/基礎AWS/生成AIを作るためのサービス.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/基礎AWS/20261005-164923.md",
+    "id": "20261005-164923",
+    "duplicateOf": null,
+    "originalHash": "dae49a441d420e7c2c77e0f20f7fbc280d4c009f3cbcb0d4c71dcd780920f21e",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/基礎AWS/高可用性・HA.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/基礎AWS/20261005-164924.md",
+    "id": "20261005-164924",
+    "duplicateOf": null,
+    "originalHash": "19e900baa8919e4620c7c85afb2910d5ac15411ab1794e46bfe53cbdce387f75",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：基礎編/基礎AWS/🌟AWS基礎について.md",
+    "status": "held-index",
+    "destination": null,
+    "id": null,
+    "duplicateOf": null,
+    "originalHash": "d84a96355704adfdc078b278e572750378dcbf8ff66ccd351e6b8c0e4984464c",
+    "wikiLinks": 30
+  },
+  {
+    "source": "記事：基礎編/運用・監視とは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：基礎編/20261005-164925.md",
+    "id": "20261005-164925",
+    "duplicateOf": null,
+    "originalHash": "bab940b02e0e4d8d2c0d4736137c93353fca834e41757e47530112ad50b2beb9",
+    "wikiLinks": 1
+  },
+  {
+    "source": "記事：実務編/AGENTS.mdとは？（初心者向け）.md",
+    "status": "imported",
+    "destination": "wiki/記事：実務編/20261005-164926.md",
+    "id": "20261005-164926",
+    "duplicateOf": null,
+    "originalHash": "70d745792e910ac9dffec1c5d4ade193cd049f3ec2253a0c09a0e5e67f3b1f48",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実務編/AI開発でよくある失敗.md",
+    "status": "imported",
+    "destination": "wiki/記事：実務編/20261005-164927.md",
+    "id": "20261005-164927",
+    "duplicateOf": null,
+    "originalHash": "909c6c1d9baafbad84e8541b301ec5e7905f112d5d05da087d309518f82b8f55",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実務編/CLAUDE.md と AGENTS.md の違い.md",
+    "status": "imported",
+    "destination": "wiki/記事：実務編/20261005-164928.md",
+    "id": "20261005-164928",
+    "duplicateOf": null,
+    "originalHash": "a4523d0c9f2a4ee960db5a9eff659dec09b5128463b86fadc71402b1cac0724c",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実務編/Google アナリティクス（GA4）とは.md",
+    "status": "imported",
+    "destination": "wiki/記事：実務編/20261005-164929.md",
+    "id": "20261005-164929",
+    "duplicateOf": null,
+    "originalHash": "017db4d11ed51bac5964ee2a1774cbd2b0354e0045b2b4e7f95ab9801de5e9cc",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実務編/Googleタグ（GTM）とGA4イベントの仕組み.md",
+    "status": "imported",
+    "destination": "wiki/記事：実務編/20261005-164930.md",
+    "id": "20261005-164930",
+    "duplicateOf": null,
+    "originalHash": "1de3475e49c3b4c4394418f1178a279568a073df5a3239d1ce68efa9ffc0ab91",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実務編/MCPサーバーを「全部盛り」で接続しない.md",
+    "status": "imported",
+    "destination": "wiki/記事：実務編/20261005-164931.md",
+    "id": "20261005-164931",
+    "duplicateOf": null,
+    "originalHash": "bec0a04e7be8a89be59777642d85faf7c7c0f6170a98c5176967bba1f861c91b",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実務編/MEdigital インフラ領域｜想定業務・案件・必要スキルまとめ.md",
+    "status": "imported",
+    "destination": "wiki/記事：実務編/20261005-164932.md",
+    "id": "20261005-164932",
+    "duplicateOf": null,
+    "originalHash": "8b4dfd6ff40c714d4375588c2974cfec216b341d277cb3af53a6c9281f51cc17",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実務編/SEO（検索エンジン最適化）とは.md",
+    "status": "imported",
+    "destination": "wiki/記事：実務編/20261005-164933.md",
+    "id": "20261005-164933",
+    "duplicateOf": null,
+    "originalHash": "93681c38f73e11e6cc5f49a25de93fafd57e9ebf06b2a677ed2031ef509ebd27",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実務編/TEPcube上のVMware脱却・OpenShiftマイグレーション検討.md",
+    "status": "imported",
+    "destination": "wiki/記事：実務編/20261005-164934.md",
+    "id": "20261005-164934",
+    "duplicateOf": null,
+    "originalHash": "8c2128df33c4c1ca7dcce5b9b38a88206930199ec22f54c7433b4e272dd224a5",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実務編/VMware 30VM構成・コスト・クラウド比較まとめ.md",
+    "status": "imported",
+    "destination": "wiki/記事：実務編/20261005-164935.md",
+    "id": "20261005-164935",
+    "duplicateOf": null,
+    "originalHash": "79e358efda1b5f338e8bc086159093d5a0a2fd8e7bbaf7bb0a87f97c5613020e",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実務編/VMware ESXi VM vMotion vSphere HA 実務まとめ.md",
+    "status": "imported",
+    "destination": "wiki/記事：実務編/20261005-164936.md",
+    "id": "20261005-164936",
+    "duplicateOf": null,
+    "originalHash": "fd2f420c7a301e0eab8b4cb5aef50473cb2a9afb24142e1e8cb55f5d7c012912",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実務編/VMware オンプレ更改案件｜参画初日に確認すること..md",
+    "status": "imported",
+    "destination": "wiki/記事：実務編/20261005-164937.md",
+    "id": "20261005-164937",
+    "duplicateOf": null,
+    "originalHash": "ffefc20f309f97e25b877d6e1caa259d433fe88c49e8993b3df0ca5a040b0c3f",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実務編/VMwareのコスト増加とBroadcom買収後の変化.md",
+    "status": "imported",
+    "destination": "wiki/記事：実務編/20261005-164938.md",
+    "id": "20261005-164938",
+    "duplicateOf": null,
+    "originalHash": "badc038b400744bcec9e5d5c8a0a7edc9569311eda29ab0269ee7580eed1592f",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実務編/VMware脱却・OpenShift移行案件の現状整理.md",
+    "status": "imported",
+    "destination": "wiki/記事：実務編/20261005-164939.md",
+    "id": "20261005-164939",
+    "duplicateOf": null,
+    "originalHash": "c75ef9fb733661408a160e5cce8e55c5aff1883406a068fbd7caad91c1960299",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実務編/VMware脱却・次期仮想基盤検討案件.md",
+    "status": "imported",
+    "destination": "wiki/記事：実務編/20261005-164940.md",
+    "id": "20261005-164940",
+    "duplicateOf": null,
+    "originalHash": "c83e3c50a0bf6fe33bb212e9479c7cf329c7ac05cd4278bc279600326fa9d765",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実務編/WebサイトへGoogleタグ（GTM）・GA4を組み込む際に気を付けたこと・工夫したこと.md",
+    "status": "imported",
+    "destination": "wiki/記事：実務編/20261005-164941.md",
+    "id": "20261005-164941",
+    "duplicateOf": null,
+    "originalHash": "a47a4d234a4883bb631dd3ea5b30ea96cddd548c9e8cd9f6e5c9cfbd760bfd52",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実務編/Webマーケティングとは.md",
+    "status": "imported",
+    "destination": "wiki/記事：実務編/20261005-164942.md",
+    "id": "20261005-164942",
+    "duplicateOf": null,
+    "originalHash": "75d7cb090576899edc98805913930cc84f81f09ff2acab1a00b5550b51a66fb7",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実務編/Webマーケティング全体ロードマップ.md",
+    "status": "imported",
+    "destination": "wiki/記事：実務編/20261005-164943.md",
+    "id": "20261005-164943",
+    "duplicateOf": null,
+    "originalHash": "6b9f4f48a681e410f6888f6470e8fe4172b3e33c48dab47e1eee098153326302",
+    "wikiLinks": 11
+  },
+  {
+    "source": "記事：実務編/エージェントとは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：実務編/20261005-164944.md",
+    "id": "20261005-164944",
+    "duplicateOf": null,
+    "originalHash": "ef5e94351d364337aaf14aee7db56331846668b7e6e6df1d4cbe647f997e6b13",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実務編/オンプレ環境の構成と複雑性まとめ.md",
+    "status": "imported",
+    "destination": "wiki/記事：実務編/20261005-164945.md",
+    "id": "20261005-164945",
+    "duplicateOf": null,
+    "originalHash": "669ac2a0040dc0a2ee41e42a1007eee00851e5a03c2a6112c231978a1da05d52",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実務編/スマホアプリ開発でよく出てくる技術の組み合わせ.md",
+    "status": "imported",
+    "destination": "wiki/記事：実務編/20261005-164946.md",
+    "id": "20261005-164946",
+    "duplicateOf": null,
+    "originalHash": "c7951e80297f05d816a28a861f9a68cf08ec8953ef2b30e29e639419042a2389",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実務編/モバイルアプリ開発でよく使われる技術スタック一覧.md",
+    "status": "imported",
+    "destination": "wiki/記事：実務編/20261005-164947.md",
+    "id": "20261005-164947",
+    "duplicateOf": null,
+    "originalHash": "9d5aba855ba91a505d7cc63afaa6dcdc4f5f8cbf1eb3239f2501e99fe6825d0b",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実務編/予約システムを作る場合.md",
+    "status": "imported",
+    "destination": "wiki/記事：実務編/20261005-164948.md",
+    "id": "20261005-164948",
+    "duplicateOf": null,
+    "originalHash": "6005073f16c9ef79f9629fd1462dfe91604036bd9441e86c09e4233505f8a1ea",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実務編/実装途中で ／compact するのは危険.md",
+    "status": "imported",
+    "destination": "wiki/記事：実務編/20261005-164949.md",
+    "id": "20261005-164949",
+    "duplicateOf": null,
+    "originalHash": "b2b27aef7da935b56d9238bf9f2c56af4ebfa556948bb60659f4e1fa9b1a2641",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実務編/無人バイクレンタルサービス Webシステム刷新プロジェクト.md",
+    "status": "imported",
+    "destination": "wiki/記事：実務編/20261005-164950.md",
+    "id": "20261005-164950",
+    "duplicateOf": null,
+    "originalHash": "2476bab0b4a355f3d3c35fe2abb978e465a2e55ce6d0275e5d635eca069013cd",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実務編/第1章 Webマーケティング基礎編.md",
+    "status": "imported",
+    "destination": "wiki/記事：実務編/20261005-164951.md",
+    "id": "20261005-164951",
+    "duplicateOf": null,
+    "originalHash": "9e3f88f7f873c233610685f3407ffc31e8961a9ef5b242d867ad2733e3628fde",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実務編/第2章 SEO（検索エンジン最適化）.md",
+    "status": "imported",
+    "destination": "wiki/記事：実務編/20261005-164952.md",
+    "id": "20261005-164952",
+    "duplicateOf": null,
+    "originalHash": "790df6adbeb83d317646f8840a9c94fe2a3eacb0b95653b9c54c306d02ef09a1",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実務編/第2章 SEO（検索エンジン最適化）無題のファイル.md",
+    "status": "duplicate",
+    "destination": null,
+    "id": null,
+    "duplicateOf": "wiki/記事：実務編/20261005-164952.md",
+    "originalHash": "790df6adbeb83d317646f8840a9c94fe2a3eacb0b95653b9c54c306d02ef09a1",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実務編/第3章 Google Search Console.md",
+    "status": "imported",
+    "destination": "wiki/記事：実務編/20261005-164953.md",
+    "id": "20261005-164953",
+    "duplicateOf": null,
+    "originalHash": "ae0be8d20c248fc77ee4bb2f9b718a1f48660a0f09209c396a6c306e85d4a807",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/PostgreSQL と MySQL の違い.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/20261005-164954.md",
+    "id": "20261005-164954",
+    "duplicateOf": null,
+    "originalHash": "d8435110bf4c73c33cc40a43affff5210511287dda9037b0b849f7f51bc5de5d",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/React編/Component（部品）.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/React編/20261005-164955.md",
+    "id": "20261005-164955",
+    "duplicateOf": null,
+    "originalHash": "f12811db3f20de9a1d1257280fe06f61cd3899f897f6e2498cfbdc4d287ba81e",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/React編/Conditional Rendering（条件分岐）.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/React編/20261005-164956.md",
+    "id": "20261005-164956",
+    "duplicateOf": null,
+    "originalHash": "95f92766f851bb150a16e0c91c009375018fd1888e8690c336e65f69c8f8b357",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/React編/Context（共通データ）.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/React編/20261005-164957.md",
+    "id": "20261005-164957",
+    "duplicateOf": null,
+    "originalHash": "b4a40de1c887c4539bd208a7f3635c4a56d9632caa2430a71488b6c2c88e4b19",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/React編/Event（クリックなど）.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/React編/20261005-164958.md",
+    "id": "20261005-164958",
+    "duplicateOf": null,
+    "originalHash": "5594711e15a1f74d5f943be95498aa11fdbac164e370685ad1bea4e594c12a04",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/React編/Hooks（便利機能）.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/React編/20261005-164959.md",
+    "id": "20261005-164959",
+    "duplicateOf": null,
+    "originalHash": "6ce4e303c98ae8a5aaafb310d3b949342420dbc4bdc44c2b99779921ee4ec768",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/React編/JSX（HTMLっぽく書ける）.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/React編/20261005-165000.md",
+    "id": "20261005-165000",
+    "duplicateOf": null,
+    "originalHash": "68edd3ad8a01f27d4b1b397506743aacbea2ca3f75c651c3148ff940003e3eba",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/React編/List Rendering（繰り返し表示）.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/React編/20261005-165001.md",
+    "id": "20261005-165001",
+    "duplicateOf": null,
+    "originalHash": "29737515a13580ca3f5ba4349cf016da5f95546fc486568016cac544481b9988",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/React編/Props（親→子へデータ）.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/React編/20261005-165002.md",
+    "id": "20261005-165002",
+    "duplicateOf": null,
+    "originalHash": "a4e0ecb42462b900f7157aa25278fc1388a391b1234ec17931425cb59d1e3f25",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/React編/React Hooks（リアクト フックス）.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/React編/20261005-165003.md",
+    "id": "20261005-165003",
+    "duplicateOf": null,
+    "originalHash": "8294cc40ab824bc6b546d3b2bcdb369b08af9e5e2be6dfbe5600cfdb4211de63",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/React編/Reactの全体像.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/React編/20261005-165004.md",
+    "id": "20261005-165004",
+    "duplicateOf": null,
+    "originalHash": "7e8ffb8ea1250532aca1fa83587bc77f6ef1d805e6a15e20909a119da8e3a5ae",
+    "wikiLinks": 12
+  },
+  {
+    "source": "記事：実践編/React編/Router（画面遷移）.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/React編/20261005-165005.md",
+    "id": "20261005-165005",
+    "duplicateOf": null,
+    "originalHash": "3efc6c1131d2c1db2db5b8225ffb55bf96896ce6e7a163b40932180b23ddaffa",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/React編/State（状態）.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/React編/20261005-165006.md",
+    "id": "20261005-165006",
+    "duplicateOf": null,
+    "originalHash": "46c2e4e45cc914ce9871f83ff6c11a9920bd7e0c2d9f255ec949735f2e92487c",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/React編/Suspense・Lazy（遅延読み込み）.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/React編/20261005-165007.md",
+    "id": "20261005-165007",
+    "duplicateOf": null,
+    "originalHash": "b4ca249845a20ed2d492bb0f30b35d9979d5dc2a146f377a0469c9de65f77385",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/Subdomain Takeover（サブドメイン乗っ取り）.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/20261005-165008.md",
+    "id": "20261005-165008",
+    "duplicateOf": null,
+    "originalHash": "261825806c882fd95ea2203cdaf24aed15ca95b0171fd00f98b9f7cdff73f1ed",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/TypeScriptの型におけるJSXサポート.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/20261005-165009.md",
+    "id": "20261005-165009",
+    "duplicateOf": null,
+    "originalHash": "b1ecb793876659fcbc3c1cf7ffe9ee0558dcd3f3c10c89489e588e802d2e0141",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/TypeScriptの設計思想と `enum` を理解する.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/20261005-165010.md",
+    "id": "20261005-165010",
+    "duplicateOf": null,
+    "originalHash": "9140ee183049733ed22c2c993098c98094edca74b3e2248cfd0baab8f5bd2c06",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/XSSはなぜ成立し、Reactはなぜ防げるのか.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/20261005-165011.md",
+    "id": "20261005-165011",
+    "duplicateOf": null,
+    "originalHash": "770e2b7ebaf5377c0453ad285f244adcef7a082ad0cd8a877db436335a83f3e6",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/dynamoDBは複雑な分析には向いていない？.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/20261005-165012.md",
+    "id": "20261005-165012",
+    "duplicateOf": null,
+    "originalHash": "5bf1edd6f9c2a1a3c6c5e095b7e522726e3c36bb99b93d16a585ec8e040abefd",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/npm test・lint・Gitコミットの関係.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/20261005-165013.md",
+    "id": "20261005-165013",
+    "duplicateOf": null,
+    "originalHash": "9fdf940ee725d5651d003a808709fb99d4accc803bcd54ed26c0cf5f64bb9862",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/「NoSQL = ACIDが弱い」？.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/20261005-165014.md",
+    "id": "20261005-165014",
+    "duplicateOf": null,
+    "originalHash": "d431ca0376e2f4b55dfc6a4dd8f28e9034629a56190c16abace871d519094652",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/データベース応用編 - 実務で役立つ5つの重要な知識.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/20261005-165015.md",
+    "id": "20261005-165015",
+    "duplicateOf": null,
+    "originalHash": "9e888ebe5fe9f4fbf5d6d4320803435bfdcee05d75f4f45450e251eaea1a31a3",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/データベース用語解説/ACID特性とは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/データベース用語解説/20261005-165016.md",
+    "id": "20261005-165016",
+    "duplicateOf": null,
+    "originalHash": "ecafa553c47c0cfe68f8bd6e74536fb4c843a3a98539a989327eb672d2af1119",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/データベース用語解説/COMMITとは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/データベース用語解説/20261005-165017.md",
+    "id": "20261005-165017",
+    "duplicateOf": null,
+    "originalHash": "a72918af9969953a0c61d0043ddcaa8499908199a7df617ab981996bc88f441e",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/データベース用語解説/EXPLAINとは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/データベース用語解説/20261005-165018.md",
+    "id": "20261005-165018",
+    "duplicateOf": null,
+    "originalHash": "b046fddb3cc656f221d45583471283121b3830fca12893b044e543563f6458f3",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/データベース用語解説/Full Scan（フルスキャン）とは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/データベース用語解説/20261005-165019.md",
+    "id": "20261005-165019",
+    "duplicateOf": null,
+    "originalHash": "b9670ad8daa1a143e977356eee2101f12cb38f222e52c23b1646adcf7f215f0f",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/データベース用語解説/GROUP BYとは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/データベース用語解説/20261005-165020.md",
+    "id": "20261005-165020",
+    "duplicateOf": null,
+    "originalHash": "f045a59cfc6c79a83854f75c167c4456e29883c6456791eaeda7ab2240058201",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/データベース用語解説/HAVINGとは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/データベース用語解説/20261005-165021.md",
+    "id": "20261005-165021",
+    "duplicateOf": null,
+    "originalHash": "1268ac1de746889fa77a0efea983e87a0234f9464ee6708dd2b20b48cc69672d",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/データベース用語解説/Index Scanとは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/データベース用語解説/20261005-165022.md",
+    "id": "20261005-165022",
+    "duplicateOf": null,
+    "originalHash": "e1026973f4c5dfed1d19ccdcfc45e8035681a5a31303d1e3d484d463974321a3",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/データベース用語解説/Primary Key（主キー）／ Foreign Key（外部キー）とは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/データベース用語解説/20261005-165023.md",
+    "id": "20261005-165023",
+    "duplicateOf": null,
+    "originalHash": "36a6b437a91971dd537dd9aa13b9bd3d0bc21cc82af6cf5befed7e9131bb7af4",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/データベース用語解説/ROLLBACKとは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/データベース用語解説/20261005-165024.md",
+    "id": "20261005-165024",
+    "duplicateOf": null,
+    "originalHash": "3d5231fdb169e4dc730ddeba099923d5fec935e9b1dadec853dc6025fd7b3dec",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/データベース用語解説/インデックス（Index）とは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/データベース用語解説/20261005-165025.md",
+    "id": "20261005-165025",
+    "duplicateOf": null,
+    "originalHash": "f85236da0086fad484b696ea17249e897bb67481d7c185d420158b33e97cb08e",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/データベース用語解説/サブクエリ（Subquery）とは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/データベース用語解説/20261005-165026.md",
+    "id": "20261005-165026",
+    "duplicateOf": null,
+    "originalHash": "00cea6d0f2ffdad11948a94c03c9d510b215ab685381eeccbb71d0750306d286",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/データベース用語解説/デッドロック（Deadlock）とは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/データベース用語解説/20261005-165027.md",
+    "id": "20261005-165027",
+    "duplicateOf": null,
+    "originalHash": "796329b8ad0c3c2c6e2f84e76c2b0fc9c542348483bfbef24b2a0f960b0a7450",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/データベース用語解説/トランザクション（Transaction）とは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/データベース用語解説/20261005-165028.md",
+    "id": "20261005-165028",
+    "duplicateOf": null,
+    "originalHash": "18f0b31fc27fbfada8b5403206207923659063678cb2dd4fbe695a6f3686b6bd",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/データベース用語解説/ロック（Lock）とは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/データベース用語解説/20261005-165029.md",
+    "id": "20261005-165029",
+    "duplicateOf": null,
+    "originalHash": "a1485e02847152ddb90606236008bb275264753640fab92b8a20a90a6b6a3908",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/データベース用語解説/実務でよく使うSQL文のサンプル集.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/データベース用語解説/20261005-165030.md",
+    "id": "20261005-165030",
+    "duplicateOf": null,
+    "originalHash": "f1aa444df3451a959f214153e3b025aee150635ecdc6c2447fb2ea64a0a3deec",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/データベース用語解説/排他制御（Exclusive Control）とは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/データベース用語解説/20261005-165031.md",
+    "id": "20261005-165031",
+    "duplicateOf": null,
+    "originalHash": "2ab71689dc015ff32cb96f5f675f107f26e063979d7bcbaeff06380f63b3d893",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/データベース用語解説/正規化（Normalization）とは？.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/データベース用語解説/20261005-165032.md",
+    "id": "20261005-165032",
+    "duplicateOf": null,
+    "originalHash": "cfc4e61600758d7ff40466398a3f57ef33ce277869d9c01ab1e9f2f154ce50d5",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/データベース用語解説シリーズ.md",
+    "status": "held-index",
+    "destination": null,
+    "id": null,
+    "duplicateOf": null,
+    "originalHash": "fc050e4e2701cfef1b0146c27ec0ea5c57bdd0d47bbaa4d48d8a387255be4c93",
+    "wikiLinks": 19
+  },
+  {
+    "source": "記事：実践編/本番環境に .git が残ると何が起きるか.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/20261005-165033.md",
+    "id": "20261005-165033",
+    "duplicateOf": null,
+    "originalHash": "28ab8823d312c78129fb44ae4288cdbfde559408a9d3eb5bf385280d53085792",
+    "wikiLinks": 0
+  },
+  {
+    "source": "記事：実践編/正規化の例.md",
+    "status": "imported",
+    "destination": "wiki/記事：実践編/20261005-165034.md",
+    "id": "20261005-165034",
+    "duplicateOf": null,
+    "originalHash": "d753fe8d19d11943ba90bb2cfb547919e8a4a4e0f7b1fa2d4956341e2f643906",
+    "wikiLinks": 0
+  }
+]

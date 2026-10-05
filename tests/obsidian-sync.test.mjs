@@ -21,12 +21,12 @@ async function fixture() {
 
 const note = (id, type) => `---\nid: ${id}\ntitle:\ntype: ${type}\ntags: []\ncreated: "2026-09-29 12:00:00"\nupdated:\naliases: []\n---\n\n本文\n`;
 
-test('wiki / study を相対パスを保って同期し、空の下書きを除外する', async (t) => {
+test('study フォルダなしで wiki を相対パスを保って同期し、空の下書きを除外する', async (t) => {
   const paths = await fixture();
   t.after(() => fs.rm(paths.root, { recursive: true, force: true }));
   await fs.mkdir(path.join(paths.vaultRoot, 'wiki', 'nested'));
   await fs.writeFile(path.join(paths.vaultRoot, 'wiki', 'nested', '20260929-120000.md'), note('20260929-120000', 'wiki'));
-  await fs.writeFile(path.join(paths.vaultRoot, 'study', 'draft.md'), '');
+  await fs.writeFile(path.join(paths.vaultRoot, 'wiki', 'draft.md'), '');
 
   const plan = await planObsidianSync(paths);
   assert.equal(plan.entries.length, 1);
@@ -52,11 +52,23 @@ test('配置フォルダと記事種別を分離し、wiki 内の study を研�
   assert.equal(appCatalog.articles[0].contentHash, articleContentHash(note('20260929-120000', 'study')));
 });
 
-test('未対応の記事種別を拒否する', async (t) => {
+test('任意の種別・空欄・type省略を原文のまま同期し配信する', async (t) => {
   const paths = await fixture();
   t.after(() => fs.rm(paths.root, { recursive: true, force: true }));
-  await fs.writeFile(path.join(paths.vaultRoot, 'wiki', '20260929-120000.md'), note('20260929-120000', 'other'));
-  await assert.rejects(() => planObsidianSync(paths), /type は study または wiki/u);
+  const texts = [note('20260929-120000', 'Applied'), note('20260929-120001', ''),
+    note('20260929-120002', '').replace('type: \n', '')];
+  for (const [index, text] of texts.entries()) {
+    await fs.writeFile(path.join(paths.vaultRoot, 'wiki', `20260929-12000${index}.md`), text);
+  }
+  const plan = await planObsidianSync(paths);
+  await applyObsidianSync(plan);
+  const catalog = JSON.parse(await fs.readFile(path.join(paths.repositoryRoot, 'docs/app-articles.v1.json'), 'utf8'));
+  assert.deepEqual(catalog.articles.map(article => article.type), ['Applied', '', '']);
+  for (const [index, text] of texts.entries()) {
+    assert.equal(await fs.readFile(path.join(paths.repositoryRoot, 'docs/wiki', `20260929-12000${index}.md`), 'utf8'), text);
+  }
+  const training = await fs.readFile(path.join(paths.repositoryRoot, 'docs/training/README.md'), 'utf8');
+  assert.doesNotMatch(training, /20260929-12000/u);
 });
 
 test('同期管理外の既存ファイルを上書きしない', async (t) => {
@@ -82,7 +94,7 @@ test('Vault に存在しない docs の記事を拒否する', async (t) => {
 test('前回同期済みで未変更の記事だけを prune できる', async (t) => {
   const paths = await fixture();
   t.after(() => fs.rm(paths.root, { recursive: true, force: true }));
-  const source = path.join(paths.vaultRoot, 'study', '20260929-120000.md');
+  const source = path.join(paths.vaultRoot, 'wiki', '20260929-120000.md');
   await fs.writeFile(source, note('20260929-120000', 'study'));
   const firstPlan = await planObsidianSync(paths);
   await applyObsidianSync(firstPlan);
@@ -94,4 +106,15 @@ test('前回同期済みで未変更の記事だけを prune できる', async (
   await applyObsidianSync(prunePlan, { prune: true });
   await assert.rejects(() => fs.access(destination), /ENOENT/u);
   assert.deepEqual(JSON.parse(await fs.readFile(path.join(paths.repositoryRoot, 'docs/app-articles.v1.json'), 'utf8')).articles, []);
+});
+
+test('開発メモを原本の種別を維持して同期する', async (t) => {
+  const paths = await fixture();
+  t.after(() => fs.rm(paths.root, { recursive: true, force: true }));
+  await fs.writeFile(path.join(paths.vaultRoot, 'wiki', '20260929-120000.md'), note('20260929-120000', 'development-log'));
+  const plan = await planObsidianSync(paths);
+  await applyObsidianSync(plan);
+  const catalog = JSON.parse(await fs.readFile(path.join(paths.repositoryRoot, 'docs/app-articles.v1.json'), 'utf8'));
+  assert.equal(catalog.articles[0].type, 'development-log');
+  assert.doesNotMatch(await fs.readFile(path.join(paths.repositoryRoot, 'docs/training/README.md'), 'utf8'), /20260929-120000/);
 });

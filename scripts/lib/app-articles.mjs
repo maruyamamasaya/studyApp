@@ -44,7 +44,7 @@ export function validateAppCatalog(catalog) {
   for (const article of catalog.articles) {
     if (!article || typeof article.id !== 'string' || !/^\d{8}-\d{6}$/u.test(article.id) ||
         typeof article.title !== 'string' || !article.title.trim() ||
-        !validPath(article.path) || !['study', 'wiki'].includes(article.type) ||
+        !validPath(article.path) || typeof article.type !== 'string' ||
         !HASH_PATTERN.test(article.contentHash) || typeof article.created !== 'string' ||
         !/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/u.test(article.created) ||
         ![article.tags, article.aliases].every((values) => Array.isArray(values) && values.every((value) => typeof value === 'string'))) {

@@ -44,6 +44,8 @@ xcodebuild -project StudyApp.xcodeproj -scheme StudyApp \
 
 ## 手動確認
 
+- 自由なtypeに対応した版への更新後、Applied・development-log・未指定の記事が一覧に表示され、本文を開けること。旧版は許可リストにない種別を拒否して一覧全体の形式エラーになる。Webの再公開だけでは端末内の検証処理は更新されない。
+
 - 日本語の長い記事、表、コード、ダークモード、文字サイズ、VoiceOver。
 - 検索、フォルダ、未読了絞り込み、引っ張って一覧更新。
 - Wiki Linkと通常の相対Markdownリンク。候補が複数の場合の選択、未解決リンク、外部リンク。

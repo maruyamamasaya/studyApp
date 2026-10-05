@@ -2,11 +2,11 @@
 
 ## 編集
 
-記事はObsidian Vaultの`study/`または`wiki/`で編集します。`docs/`は生成ミラーなので直接編集しません。Vaultは既定でStudy Appの隣の`Document organization`です。
+記事はObsidian Vaultの`wiki/`で編集します。`docs/`は生成ミラーなので直接編集しません。Vaultは既定でStudy Appの隣の`Document organization`です。
 
 ID、filename、created、type、tagsのFrontmatterは現在のObsidianテンプレートを使います。IDを変更しないでください。
 
-保存フォルダと記事種別は別に扱います。`wiki/anken001/`などの案件フォルダにも`type: study`の学習記事を置けます。同期は元の相対パスとFrontmatterを維持し、研修一覧は配置場所ではなく`type: study`を対象にします。対応するtypeは`study`と`wiki`です。
+保存フォルダと記事種別は別に扱います。`type`には`Applied`など任意の文字列を指定でき、空欄や項目の省略も可能です。数字・配列など文字列以外の指定は拒否します。同期は元の相対パスとFrontmatterを維持し、研修一覧は配置場所ではなく`type: study`を対象にします。他の種別や未指定の記事もルートサイトの一覧へ掲載します。`settings/`・`templates/`は同期しません。
 
 ## 一括更新
 

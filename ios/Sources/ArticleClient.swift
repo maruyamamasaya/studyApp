@@ -26,7 +26,6 @@ struct Catalog: Codable {
         for article in articles {
             guard Self.matches(article.id, "^[0-9]{8}-[0-9]{6}$"),
                   !article.title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
-                  ["study", "wiki"].contains(article.type),
                   Self.matches(article.created, "^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}$"),
                   Self.matches(article.contentHash, "^[0-9a-f]{64}$"),
                   ids.insert(article.id).inserted,

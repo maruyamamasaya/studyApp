@@ -37,6 +37,20 @@ test('日本語・空白・記号を含むpathから正しい本文URLを作る'
   assert.equal(url.origin, 'https://example.com');
 });
 
+test('任意の種別と空文字列を配信し、文字列以外は拒否する', () => {
+  const types = ['study', 'wiki', 'development-log', 'Applied', '自由な分類', ''];
+  const entries = types.map((type, index) => {
+    const value = entry(`20261005-09365${index}`);
+    return { ...value, article: { ...value.article, type } };
+  });
+  const catalog = buildAppCatalog(entries);
+  assert.deepEqual(validateAppCatalog(JSON.parse(JSON.stringify(catalog))).articles.map(a => a.type),
+    types);
+  for (const type of [null, undefined, 1, false, [], {}]) {
+    assert.throws(() => buildAppCatalog([{ ...entries[0], article: { ...entries[0].article, type } }]), /不正/u);
+  }
+});
+
 test('未対応Schema、ID重複、不正なpathを拒否する', () => {
   const catalog = buildAppCatalog([entry()]);
   assert.throws(() => validateAppCatalog({ ...catalog, schemaVersion: 2 }), /schemaVersion/u);
