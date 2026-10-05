@@ -1,7 +1,6 @@
 {
   "version": 1,
   "sourceFolders": [
-    "study",
     "wiki"
   ],
   "entries": [
@@ -9,7 +8,7 @@
       "id": "20261001-145031",
       "article": {
         "id": "20261001-145031",
-        "path": "wiki/anken001/20261001-145031.md",
+        "path": "wiki/anken/anken001/20261001-145031.md",
         "filename": "20261001-145031.md",
         "title": "Te社向け 社内RAG基盤 詳細設計書作成タスク整理",
         "displayTitle": "Te社向け 社内RAG基盤 詳細設計書作成タスク整理",
@@ -19,15 +18,15 @@
         "aliases": [],
         "created": "2026-10-01 14:50:31"
       },
-      "source": "wiki/anken001/20261001-145031.md",
-      "destination": "docs/wiki/anken001/20261001-145031.md",
+      "source": "wiki/anken/anken001/20261001-145031.md",
+      "destination": "docs/wiki/anken/anken001/20261001-145031.md",
       "sha256": "215bb606cf7b6ae723ccbe2cc805dbe617e4fa479726a95e9ca0be74569cb3eb"
     },
     {
       "id": "20261001-171533",
       "article": {
         "id": "20261001-171533",
-        "path": "wiki/anken001/20261001-171533.md",
+        "path": "wiki/anken/anken001/20261001-171533.md",
         "filename": "20261001-171533.md",
         "title": "RAGとは",
         "displayTitle": "RAGとは",
@@ -41,15 +40,15 @@
         "aliases": [],
         "created": "2026-10-01 17:15:33"
       },
-      "source": "wiki/anken001/20261001-171533.md",
-      "destination": "docs/wiki/anken001/20261001-171533.md",
+      "source": "wiki/anken/anken001/20261001-171533.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171533.md",
       "sha256": "eb70fe7c3bdf7464b3fcfcda054b9ddae4cb4edd317fb9fffe306741e9ca5974"
     },
     {
       "id": "20261001-171534",
       "article": {
         "id": "20261001-171534",
-        "path": "wiki/anken001/20261001-171534.md",
+        "path": "wiki/anken/anken001/20261001-171534.md",
         "filename": "20261001-171534.md",
         "title": "RAG全体構成",
         "displayTitle": "RAG全体構成",
@@ -63,15 +62,15 @@
         "aliases": [],
         "created": "2026-10-01 17:15:34"
       },
-      "source": "wiki/anken001/20261001-171534.md",
-      "destination": "docs/wiki/anken001/20261001-171534.md",
+      "source": "wiki/anken/anken001/20261001-171534.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171534.md",
       "sha256": "9880ae206ffd3d1715484702162e65f503b6e3d0b99776f713a0df627f39d27f"
     },
     {
       "id": "20261001-171535",
       "article": {
         "id": "20261001-171535",
-        "path": "wiki/anken001/20261001-171535.md",
+        "path": "wiki/anken/anken001/20261001-171535.md",
         "filename": "20261001-171535.md",
         "title": "RAGの処理フロー",
         "displayTitle": "RAGの処理フロー",
@@ -85,15 +84,15 @@
         "aliases": [],
         "created": "2026-10-01 17:15:35"
       },
-      "source": "wiki/anken001/20261001-171535.md",
-      "destination": "docs/wiki/anken001/20261001-171535.md",
+      "source": "wiki/anken/anken001/20261001-171535.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171535.md",
       "sha256": "bccf26dc7d1ba535e41a6cf15eef6442c2d2879907fd79718d4af3d6b5e3d4de"
     },
     {
       "id": "20261001-171536",
       "article": {
         "id": "20261001-171536",
-        "path": "wiki/anken001/20261001-171536.md",
+        "path": "wiki/anken/anken001/20261001-171536.md",
         "filename": "20261001-171536.md",
         "title": "文書取り込み",
         "displayTitle": "文書取り込み",
@@ -107,15 +106,15 @@
         "aliases": [],
         "created": "2026-10-01 17:15:36"
       },
-      "source": "wiki/anken001/20261001-171536.md",
-      "destination": "docs/wiki/anken001/20261001-171536.md",
+      "source": "wiki/anken/anken001/20261001-171536.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171536.md",
       "sha256": "2615abb30d24c00b0d1fc3a1d65fa550b8bc5d73f78c066ca466c4ab6830c291"
     },
     {
       "id": "20261001-171537",
       "article": {
         "id": "20261001-171537",
-        "path": "wiki/anken001/20261001-171537.md",
+        "path": "wiki/anken/anken001/20261001-171537.md",
         "filename": "20261001-171537.md",
         "title": "PDF解析",
         "displayTitle": "PDF解析",
@@ -129,15 +128,15 @@
         "aliases": [],
         "created": "2026-10-01 17:15:37"
       },
-      "source": "wiki/anken001/20261001-171537.md",
-      "destination": "docs/wiki/anken001/20261001-171537.md",
+      "source": "wiki/anken/anken001/20261001-171537.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171537.md",
       "sha256": "c6e61af6f783f867c4529f76184cd5f9837aeb670372f64c76652a1336b43ef5"
     },
     {
       "id": "20261001-171538",
       "article": {
         "id": "20261001-171538",
-        "path": "wiki/anken001/20261001-171538.md",
+        "path": "wiki/anken/anken001/20261001-171538.md",
         "filename": "20261001-171538.md",
         "title": "OCR",
         "displayTitle": "OCR",
@@ -151,15 +150,15 @@
         "aliases": [],
         "created": "2026-10-01 17:15:38"
       },
-      "source": "wiki/anken001/20261001-171538.md",
-      "destination": "docs/wiki/anken001/20261001-171538.md",
+      "source": "wiki/anken/anken001/20261001-171538.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171538.md",
       "sha256": "f18b9442b8c456d257c1037ba5ea55bc7b821717fb998758e4de5fb6e073d82c"
     },
     {
       "id": "20261001-171539",
       "article": {
         "id": "20261001-171539",
-        "path": "wiki/anken001/20261001-171539.md",
+        "path": "wiki/anken/anken001/20261001-171539.md",
         "filename": "20261001-171539.md",
         "title": "Chunk（文書分割の単位）",
         "displayTitle": "Chunk（文書分割の単位）",
@@ -175,15 +174,15 @@
         ],
         "created": "2026-10-01 17:15:39"
       },
-      "source": "wiki/anken001/20261001-171539.md",
-      "destination": "docs/wiki/anken001/20261001-171539.md",
+      "source": "wiki/anken/anken001/20261001-171539.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171539.md",
       "sha256": "dd0ecc54fdd847fadfe5b8b7872f06079744c26604b7bd4c62eb5e53f65eb393"
     },
     {
       "id": "20261001-171540",
       "article": {
         "id": "20261001-171540",
-        "path": "wiki/anken001/20261001-171540.md",
+        "path": "wiki/anken/anken001/20261001-171540.md",
         "filename": "20261001-171540.md",
         "title": "Embedding（文章のベクトル化）",
         "displayTitle": "Embedding（文章のベクトル化）",
@@ -199,15 +198,15 @@
         ],
         "created": "2026-10-01 17:15:40"
       },
-      "source": "wiki/anken001/20261001-171540.md",
-      "destination": "docs/wiki/anken001/20261001-171540.md",
+      "source": "wiki/anken/anken001/20261001-171540.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171540.md",
       "sha256": "3cac589007ad72c6f1d9a6ef5d8bb15088115aac0473624101d83338507deb36"
     },
     {
       "id": "20261001-171541",
       "article": {
         "id": "20261001-171541",
-        "path": "wiki/anken001/20261001-171541.md",
+        "path": "wiki/anken/anken001/20261001-171541.md",
         "filename": "20261001-171541.md",
         "title": "Vector Search（意味の近さで探す検索）",
         "displayTitle": "Vector Search（意味の近さで探す検索）",
@@ -223,15 +222,15 @@
         ],
         "created": "2026-10-01 17:15:41"
       },
-      "source": "wiki/anken001/20261001-171541.md",
-      "destination": "docs/wiki/anken001/20261001-171541.md",
+      "source": "wiki/anken/anken001/20261001-171541.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171541.md",
       "sha256": "40a1b8316a1a466d21b8813f6dd4dcd71b93ba856cfce6ba34e13750c4c3a61a"
     },
     {
       "id": "20261001-171542",
       "article": {
         "id": "20261001-171542",
-        "path": "wiki/anken001/20261001-171542.md",
+        "path": "wiki/anken/anken001/20261001-171542.md",
         "filename": "20261001-171542.md",
         "title": "Keyword Search（語句で探す検索）",
         "displayTitle": "Keyword Search（語句で探す検索）",
@@ -247,15 +246,15 @@
         ],
         "created": "2026-10-01 17:15:42"
       },
-      "source": "wiki/anken001/20261001-171542.md",
-      "destination": "docs/wiki/anken001/20261001-171542.md",
+      "source": "wiki/anken/anken001/20261001-171542.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171542.md",
       "sha256": "be2b1c01c5e01b135abb85d3edc0e96b17bb19a0f5f6af801525eb7f29d88589"
     },
     {
       "id": "20261001-171543",
       "article": {
         "id": "20261001-171543",
-        "path": "wiki/anken001/20261001-171543.md",
+        "path": "wiki/anken/anken001/20261001-171543.md",
         "filename": "20261001-171543.md",
         "title": "Hybrid Search（検索方式の組み合わせ）",
         "displayTitle": "Hybrid Search（検索方式の組み合わせ）",
@@ -271,15 +270,15 @@
         ],
         "created": "2026-10-01 17:15:43"
       },
-      "source": "wiki/anken001/20261001-171543.md",
-      "destination": "docs/wiki/anken001/20261001-171543.md",
+      "source": "wiki/anken/anken001/20261001-171543.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171543.md",
       "sha256": "6c3a70dba109a3ad2b3a63d74ca876d9768dd2167206a9691c3d4d6b9c3270cf"
     },
     {
       "id": "20261001-171544",
       "article": {
         "id": "20261001-171544",
-        "path": "wiki/anken001/20261001-171544.md",
+        "path": "wiki/anken/anken001/20261001-171544.md",
         "filename": "20261001-171544.md",
         "title": "Top-K（上位候補の取得件数）",
         "displayTitle": "Top-K（上位候補の取得件数）",
@@ -295,15 +294,15 @@
         ],
         "created": "2026-10-01 17:15:44"
       },
-      "source": "wiki/anken001/20261001-171544.md",
-      "destination": "docs/wiki/anken001/20261001-171544.md",
+      "source": "wiki/anken/anken001/20261001-171544.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171544.md",
       "sha256": "6b96f8df9ef6542de68c5d431bacfcd589a2f2cd1a6e9d31eb64960d4cbc605e"
     },
     {
       "id": "20261001-171545",
       "article": {
         "id": "20261001-171545",
-        "path": "wiki/anken001/20261001-171545.md",
+        "path": "wiki/anken/anken001/20261001-171545.md",
         "filename": "20261001-171545.md",
         "title": "Rerank（検索結果の再順位付け）",
         "displayTitle": "Rerank（検索結果の再順位付け）",
@@ -319,15 +318,15 @@
         ],
         "created": "2026-10-01 17:15:45"
       },
-      "source": "wiki/anken001/20261001-171545.md",
-      "destination": "docs/wiki/anken001/20261001-171545.md",
+      "source": "wiki/anken/anken001/20261001-171545.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171545.md",
       "sha256": "bafce352125cbcfee62fe02635b8f8a7441f99dd7eb1fad9f4e894a3664571f4"
     },
     {
       "id": "20261001-171546",
       "article": {
         "id": "20261001-171546",
-        "path": "wiki/anken001/20261001-171546.md",
+        "path": "wiki/anken/anken001/20261001-171546.md",
         "filename": "20261001-171546.md",
         "title": "Metadata Filter（属性と権限による絞り込み）",
         "displayTitle": "Metadata Filter（属性と権限による絞り込み）",
@@ -343,15 +342,15 @@
         ],
         "created": "2026-10-01 17:15:46"
       },
-      "source": "wiki/anken001/20261001-171546.md",
-      "destination": "docs/wiki/anken001/20261001-171546.md",
+      "source": "wiki/anken/anken001/20261001-171546.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171546.md",
       "sha256": "19ddef88ed7c937e13bb2fae5a9308434813262800a1cffc3ebf1b22a358f45e"
     },
     {
       "id": "20261001-171547",
       "article": {
         "id": "20261001-171547",
-        "path": "wiki/anken001/20261001-171547.md",
+        "path": "wiki/anken/anken001/20261001-171547.md",
         "filename": "20261001-171547.md",
         "title": "Prompt（LLMへの指示）",
         "displayTitle": "Prompt（LLMへの指示）",
@@ -367,15 +366,15 @@
         ],
         "created": "2026-10-01 17:15:47"
       },
-      "source": "wiki/anken001/20261001-171547.md",
-      "destination": "docs/wiki/anken001/20261001-171547.md",
+      "source": "wiki/anken/anken001/20261001-171547.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171547.md",
       "sha256": "fc9324616c4da022595c2e8efea976436eb3d3497391d84c0b43c49c8ba0d3b8"
     },
     {
       "id": "20261001-171548",
       "article": {
         "id": "20261001-171548",
-        "path": "wiki/anken001/20261001-171548.md",
+        "path": "wiki/anken/anken001/20261001-171548.md",
         "filename": "20261001-171548.md",
         "title": "Context（回答に使う根拠情報）",
         "displayTitle": "Context（回答に使う根拠情報）",
@@ -391,15 +390,15 @@
         ],
         "created": "2026-10-01 17:15:48"
       },
-      "source": "wiki/anken001/20261001-171548.md",
-      "destination": "docs/wiki/anken001/20261001-171548.md",
+      "source": "wiki/anken/anken001/20261001-171548.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171548.md",
       "sha256": "ae53a6f3baf3dfb2a9c67863d3ac10054d542b0c97925df717d621635c4a0720"
     },
     {
       "id": "20261001-171549",
       "article": {
         "id": "20261001-171549",
-        "path": "wiki/anken001/20261001-171549.md",
+        "path": "wiki/anken/anken001/20261001-171549.md",
         "filename": "20261001-171549.md",
         "title": "Token（LLMの処理単位）",
         "displayTitle": "Token（LLMの処理単位）",
@@ -415,15 +414,15 @@
         ],
         "created": "2026-10-01 17:15:49"
       },
-      "source": "wiki/anken001/20261001-171549.md",
-      "destination": "docs/wiki/anken001/20261001-171549.md",
+      "source": "wiki/anken/anken001/20261001-171549.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171549.md",
       "sha256": "a8116f0b20094cb835e4a94e35f4e56e1c1ec1bfeeb9ef256f228f4a99008910"
     },
     {
       "id": "20261001-171550",
       "article": {
         "id": "20261001-171550",
-        "path": "wiki/anken001/20261001-171550.md",
+        "path": "wiki/anken/anken001/20261001-171550.md",
         "filename": "20261001-171550.md",
         "title": "Hallucination（根拠のない回答生成）",
         "displayTitle": "Hallucination（根拠のない回答生成）",
@@ -439,15 +438,15 @@
         ],
         "created": "2026-10-01 17:15:50"
       },
-      "source": "wiki/anken001/20261001-171550.md",
-      "destination": "docs/wiki/anken001/20261001-171550.md",
+      "source": "wiki/anken/anken001/20261001-171550.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171550.md",
       "sha256": "4f8ed9ac173c826a39d3b2d297675d5b0b1141c928d2a15c479190a8962f6d11"
     },
     {
       "id": "20261001-171551",
       "article": {
         "id": "20261001-171551",
-        "path": "wiki/anken001/20261001-171551.md",
+        "path": "wiki/anken/anken001/20261001-171551.md",
         "filename": "20261001-171551.md",
         "title": "PythonでのRAG実装",
         "displayTitle": "PythonでのRAG実装",
@@ -462,15 +461,15 @@
         "aliases": [],
         "created": "2026-10-01 17:15:51"
       },
-      "source": "wiki/anken001/20261001-171551.md",
-      "destination": "docs/wiki/anken001/20261001-171551.md",
+      "source": "wiki/anken/anken001/20261001-171551.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171551.md",
       "sha256": "352a995d23f8dce63cc8e8eccc980573802ca65d076a63e3176e6bfc25125f8c"
     },
     {
       "id": "20261001-171552",
       "article": {
         "id": "20261001-171552",
-        "path": "wiki/anken001/20261001-171552.md",
+        "path": "wiki/anken/anken001/20261001-171552.md",
         "filename": "20261001-171552.md",
         "title": "APIの基本",
         "displayTitle": "APIの基本",
@@ -484,15 +483,15 @@
         "aliases": [],
         "created": "2026-10-01 17:15:52"
       },
-      "source": "wiki/anken001/20261001-171552.md",
-      "destination": "docs/wiki/anken001/20261001-171552.md",
+      "source": "wiki/anken/anken001/20261001-171552.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171552.md",
       "sha256": "0766b90459e7e5c194ff40bee4ab0edeb82565e028922e839edbf490740d855d"
     },
     {
       "id": "20261001-171553",
       "article": {
         "id": "20261001-171553",
-        "path": "wiki/anken001/20261001-171553.md",
+        "path": "wiki/anken/anken001/20261001-171553.md",
         "filename": "20261001-171553.md",
         "title": "JSONとHTTP",
         "displayTitle": "JSONとHTTP",
@@ -506,15 +505,15 @@
         "aliases": [],
         "created": "2026-10-01 17:15:53"
       },
-      "source": "wiki/anken001/20261001-171553.md",
-      "destination": "docs/wiki/anken001/20261001-171553.md",
+      "source": "wiki/anken/anken001/20261001-171553.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171553.md",
       "sha256": "6fd23b84e2481a5e15656987c963417b53b20de20afdaf775875f99d746d98d1"
     },
     {
       "id": "20261001-171554",
       "article": {
         "id": "20261001-171554",
-        "path": "wiki/anken001/20261001-171554.md",
+        "path": "wiki/anken/anken001/20261001-171554.md",
         "filename": "20261001-171554.md",
         "title": "async / await（Pythonの非同期処理）",
         "displayTitle": "async / await（Pythonの非同期処理）",
@@ -530,15 +529,15 @@
         ],
         "created": "2026-10-01 17:15:54"
       },
-      "source": "wiki/anken001/20261001-171554.md",
-      "destination": "docs/wiki/anken001/20261001-171554.md",
+      "source": "wiki/anken/anken001/20261001-171554.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171554.md",
       "sha256": "28017e5a1de35b3141375f279678c352aa1bf42ee62d0836368137d23cc7a7a1"
     },
     {
       "id": "20261001-171555",
       "article": {
         "id": "20261001-171555",
-        "path": "wiki/anken001/20261001-171555.md",
+        "path": "wiki/anken/anken001/20261001-171555.md",
         "filename": "20261001-171555.md",
         "title": "Retry（失敗時の再試行）",
         "displayTitle": "Retry（失敗時の再試行）",
@@ -554,15 +553,15 @@
         ],
         "created": "2026-10-01 17:15:55"
       },
-      "source": "wiki/anken001/20261001-171555.md",
-      "destination": "docs/wiki/anken001/20261001-171555.md",
+      "source": "wiki/anken/anken001/20261001-171555.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171555.md",
       "sha256": "6848759d078985469fed2a9f7a51ce0d3d83bc4a46f8bd80ea3951be50b80ca2"
     },
     {
       "id": "20261001-171556",
       "article": {
         "id": "20261001-171556",
-        "path": "wiki/anken001/20261001-171556.md",
+        "path": "wiki/anken/anken001/20261001-171556.md",
         "filename": "20261001-171556.md",
         "title": "Exponential Backoff（待機時間を増やす再試行）",
         "displayTitle": "Exponential Backoff（待機時間を増やす再試行）",
@@ -578,15 +577,15 @@
         ],
         "created": "2026-10-01 17:15:56"
       },
-      "source": "wiki/anken001/20261001-171556.md",
-      "destination": "docs/wiki/anken001/20261001-171556.md",
+      "source": "wiki/anken/anken001/20261001-171556.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171556.md",
       "sha256": "fd552aeb9ed40aefb30677fff5678a9f20fc57b42a20067406d3f47a9627d11c"
     },
     {
       "id": "20261001-171557",
       "article": {
         "id": "20261001-171557",
-        "path": "wiki/anken001/20261001-171557.md",
+        "path": "wiki/anken/anken001/20261001-171557.md",
         "filename": "20261001-171557.md",
         "title": "Timeout（処理の待ち時間制限）",
         "displayTitle": "Timeout（処理の待ち時間制限）",
@@ -602,15 +601,15 @@
         ],
         "created": "2026-10-01 17:15:57"
       },
-      "source": "wiki/anken001/20261001-171557.md",
-      "destination": "docs/wiki/anken001/20261001-171557.md",
+      "source": "wiki/anken/anken001/20261001-171557.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171557.md",
       "sha256": "665a5026bd67a7aa071b3bdfc9ebb2108e12b94b21301428dadb5ec966d3db4b"
     },
     {
       "id": "20261001-171558",
       "article": {
         "id": "20261001-171558",
-        "path": "wiki/anken001/20261001-171558.md",
+        "path": "wiki/anken/anken001/20261001-171558.md",
         "filename": "20261001-171558.md",
         "title": "Circuit Breaker（継続障害の封じ込め）",
         "displayTitle": "Circuit Breaker（継続障害の封じ込め）",
@@ -626,15 +625,15 @@
         ],
         "created": "2026-10-01 17:15:58"
       },
-      "source": "wiki/anken001/20261001-171558.md",
-      "destination": "docs/wiki/anken001/20261001-171558.md",
+      "source": "wiki/anken/anken001/20261001-171558.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171558.md",
       "sha256": "28002181d8cf87c515f47bb4f4e82367648b6905b63a41ef51870f033a9b02e0"
     },
     {
       "id": "20261001-171559",
       "article": {
         "id": "20261001-171559",
-        "path": "wiki/anken001/20261001-171559.md",
+        "path": "wiki/anken/anken001/20261001-171559.md",
         "filename": "20261001-171559.md",
         "title": "Queue（処理待ちの仕事をためる仕組み）",
         "displayTitle": "Queue（処理待ちの仕事をためる仕組み）",
@@ -650,15 +649,15 @@
         ],
         "created": "2026-10-01 17:15:59"
       },
-      "source": "wiki/anken001/20261001-171559.md",
-      "destination": "docs/wiki/anken001/20261001-171559.md",
+      "source": "wiki/anken/anken001/20261001-171559.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171559.md",
       "sha256": "efacf7b36da97bab1cfd7f84bd8eb530f5b9af5bd064731c007d273b71386eba"
     },
     {
       "id": "20261001-171600",
       "article": {
         "id": "20261001-171600",
-        "path": "wiki/anken001/20261001-171600.md",
+        "path": "wiki/anken/anken001/20261001-171600.md",
         "filename": "20261001-171600.md",
         "title": "並列処理（RAGの同時実行制御）",
         "displayTitle": "並列処理（RAGの同時実行制御）",
@@ -674,15 +673,15 @@
         ],
         "created": "2026-10-01 17:16:00"
       },
-      "source": "wiki/anken001/20261001-171600.md",
-      "destination": "docs/wiki/anken001/20261001-171600.md",
+      "source": "wiki/anken/anken001/20261001-171600.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171600.md",
       "sha256": "429fd05d98b5b0f4212002f34c0a8c09c47ea4e1ff57e256ed441b4632ffc498"
     },
     {
       "id": "20261001-171601",
       "article": {
         "id": "20261001-171601",
-        "path": "wiki/anken001/20261001-171601.md",
+        "path": "wiki/anken/anken001/20261001-171601.md",
         "filename": "20261001-171601.md",
         "title": "Cache（結果の安全な再利用）",
         "displayTitle": "Cache（結果の安全な再利用）",
@@ -698,15 +697,15 @@
         ],
         "created": "2026-10-01 17:16:01"
       },
-      "source": "wiki/anken001/20261001-171601.md",
-      "destination": "docs/wiki/anken001/20261001-171601.md",
+      "source": "wiki/anken/anken001/20261001-171601.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171601.md",
       "sha256": "da760f233b9fdb549f49e7eb10364563e8f0bf06146d5116fd2172d43b7cdefc"
     },
     {
       "id": "20261001-171602",
       "article": {
         "id": "20261001-171602",
-        "path": "wiki/anken001/20261001-171602.md",
+        "path": "wiki/anken/anken001/20261001-171602.md",
         "filename": "20261001-171602.md",
         "title": "Azure OpenAI（生成とEmbeddingの実行基盤）",
         "displayTitle": "Azure OpenAI（生成とEmbeddingの実行基盤）",
@@ -723,15 +722,15 @@
         ],
         "created": "2026-10-01 17:16:02"
       },
-      "source": "wiki/anken001/20261001-171602.md",
-      "destination": "docs/wiki/anken001/20261001-171602.md",
+      "source": "wiki/anken/anken001/20261001-171602.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171602.md",
       "sha256": "6d6a87a9d308ebd37655dbb4f166afaafb69d0fdc8595b7c580cd4d91d0ea863"
     },
     {
       "id": "20261001-171603",
       "article": {
         "id": "20261001-171603",
-        "path": "wiki/anken001/20261001-171603.md",
+        "path": "wiki/anken/anken001/20261001-171603.md",
         "filename": "20261001-171603.md",
         "title": "Azure AI Search（RAGの検索基盤）",
         "displayTitle": "Azure AI Search（RAGの検索基盤）",
@@ -747,15 +746,15 @@
         ],
         "created": "2026-10-01 17:16:03"
       },
-      "source": "wiki/anken001/20261001-171603.md",
-      "destination": "docs/wiki/anken001/20261001-171603.md",
+      "source": "wiki/anken/anken001/20261001-171603.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171603.md",
       "sha256": "1e692f1e1535d97c26849afe0210ef85c5c494b222d8b6ee7038d7e6547b3422"
     },
     {
       "id": "20261001-171604",
       "article": {
         "id": "20261001-171604",
-        "path": "wiki/anken001/20261001-171604.md",
+        "path": "wiki/anken/anken001/20261001-171604.md",
         "filename": "20261001-171604.md",
         "title": "Blob Storage（文書原本の保存）",
         "displayTitle": "Blob Storage（文書原本の保存）",
@@ -771,15 +770,15 @@
         ],
         "created": "2026-10-01 17:16:04"
       },
-      "source": "wiki/anken001/20261001-171604.md",
-      "destination": "docs/wiki/anken001/20261001-171604.md",
+      "source": "wiki/anken/anken001/20261001-171604.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171604.md",
       "sha256": "c575a963f9734d17adfb2026cbc15c443518fca68c46becded9d4a4139ce610d"
     },
     {
       "id": "20261001-171605",
       "article": {
         "id": "20261001-171605",
-        "path": "wiki/anken001/20261001-171605.md",
+        "path": "wiki/anken/anken001/20261001-171605.md",
         "filename": "20261001-171605.md",
         "title": "Key Vault（秘密情報と鍵の管理）",
         "displayTitle": "Key Vault（秘密情報と鍵の管理）",
@@ -795,15 +794,15 @@
         ],
         "created": "2026-10-01 17:16:05"
       },
-      "source": "wiki/anken001/20261001-171605.md",
-      "destination": "docs/wiki/anken001/20261001-171605.md",
+      "source": "wiki/anken/anken001/20261001-171605.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171605.md",
       "sha256": "e84402c42cf16ef18d573378a08350b3fab8b95951b663600aaac3a3f6a9a5d5"
     },
     {
       "id": "20261001-171606",
       "article": {
         "id": "20261001-171606",
-        "path": "wiki/anken001/20261001-171606.md",
+        "path": "wiki/anken/anken001/20261001-171606.md",
         "filename": "20261001-171606.md",
         "title": "Application Insights（アプリの動作観測）",
         "displayTitle": "Application Insights（アプリの動作観測）",
@@ -819,15 +818,15 @@
         ],
         "created": "2026-10-01 17:16:06"
       },
-      "source": "wiki/anken001/20261001-171606.md",
-      "destination": "docs/wiki/anken001/20261001-171606.md",
+      "source": "wiki/anken/anken001/20261001-171606.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171606.md",
       "sha256": "c52737f8185f539ee5aea0b39f671bfa8df625b5d17f6302fdd434738fe67b91"
     },
     {
       "id": "20261001-171607",
       "article": {
         "id": "20261001-171607",
-        "path": "wiki/anken001/20261001-171607.md",
+        "path": "wiki/anken/anken001/20261001-171607.md",
         "filename": "20261001-171607.md",
         "title": "Log Analytics（ログの検索と分析）",
         "displayTitle": "Log Analytics（ログの検索と分析）",
@@ -843,15 +842,15 @@
         ],
         "created": "2026-10-01 17:16:07"
       },
-      "source": "wiki/anken001/20261001-171607.md",
-      "destination": "docs/wiki/anken001/20261001-171607.md",
+      "source": "wiki/anken/anken001/20261001-171607.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171607.md",
       "sha256": "fa69bcfb137b30d2e96c281385accc5025c34eefa97d9caadf48d3e034c1eb8e"
     },
     {
       "id": "20261001-171608",
       "article": {
         "id": "20261001-171608",
-        "path": "wiki/anken001/20261001-171608.md",
+        "path": "wiki/anken/anken001/20261001-171608.md",
         "filename": "20261001-171608.md",
         "title": "Entra ID（利用者とアプリの認証基盤）",
         "displayTitle": "Entra ID（利用者とアプリの認証基盤）",
@@ -867,15 +866,15 @@
         ],
         "created": "2026-10-01 17:16:08"
       },
-      "source": "wiki/anken001/20261001-171608.md",
-      "destination": "docs/wiki/anken001/20261001-171608.md",
+      "source": "wiki/anken/anken001/20261001-171608.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171608.md",
       "sha256": "e66a385ee17e64b67a3c255076e1cbd80666a2307f8b04818da2f5bac00937ce"
     },
     {
       "id": "20261001-171609",
       "article": {
         "id": "20261001-171609",
-        "path": "wiki/anken001/20261001-171609.md",
+        "path": "wiki/anken/anken001/20261001-171609.md",
         "filename": "20261001-171609.md",
         "title": "OAuth 2.0（APIアクセス権を得る仕組み）",
         "displayTitle": "OAuth 2.0（APIアクセス権を得る仕組み）",
@@ -891,15 +890,15 @@
         ],
         "created": "2026-10-01 17:16:09"
       },
-      "source": "wiki/anken001/20261001-171609.md",
-      "destination": "docs/wiki/anken001/20261001-171609.md",
+      "source": "wiki/anken/anken001/20261001-171609.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171609.md",
       "sha256": "a215e0cda4797335f7eafdccbc78790b8bacbda028141e96773119fb814cc386"
     },
     {
       "id": "20261001-171610",
       "article": {
         "id": "20261001-171610",
-        "path": "wiki/anken001/20261001-171610.md",
+        "path": "wiki/anken/anken001/20261001-171610.md",
         "filename": "20261001-171610.md",
         "title": "OpenID Connect（サインイン情報の連携）",
         "displayTitle": "OpenID Connect（サインイン情報の連携）",
@@ -915,15 +914,15 @@
         ],
         "created": "2026-10-01 17:16:10"
       },
-      "source": "wiki/anken001/20261001-171610.md",
-      "destination": "docs/wiki/anken001/20261001-171610.md",
+      "source": "wiki/anken/anken001/20261001-171610.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171610.md",
       "sha256": "48b06226d5cb275bef1a164a1b8e32604359782d851b4b8ed9a6865e41754bd7"
     },
     {
       "id": "20261001-171611",
       "article": {
         "id": "20261001-171611",
-        "path": "wiki/anken001/20261001-171611.md",
+        "path": "wiki/anken/anken001/20261001-171611.md",
         "filename": "20261001-171611.md",
         "title": "JWT（署名付きトークンの検証）",
         "displayTitle": "JWT（署名付きトークンの検証）",
@@ -939,15 +938,15 @@
         ],
         "created": "2026-10-01 17:16:11"
       },
-      "source": "wiki/anken001/20261001-171611.md",
-      "destination": "docs/wiki/anken001/20261001-171611.md",
+      "source": "wiki/anken/anken001/20261001-171611.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171611.md",
       "sha256": "ff14b09f53e7a581338faf78ee721397b58dc91a6199f33b3e8ab6d06869c44c"
     },
     {
       "id": "20261001-171612",
       "article": {
         "id": "20261001-171612",
-        "path": "wiki/anken001/20261001-171612.md",
+        "path": "wiki/anken/anken001/20261001-171612.md",
         "filename": "20261001-171612.md",
         "title": "JWT署名鍵（公開鍵取得と鍵更新）",
         "displayTitle": "JWT署名鍵（公開鍵取得と鍵更新）",
@@ -963,15 +962,15 @@
         ],
         "created": "2026-10-01 17:16:12"
       },
-      "source": "wiki/anken001/20261001-171612.md",
-      "destination": "docs/wiki/anken001/20261001-171612.md",
+      "source": "wiki/anken/anken001/20261001-171612.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171612.md",
       "sha256": "41bc13e74ff507f7703900226c7a7c67d90ed50f1ffeddfd33f232ac53f19d06"
     },
     {
       "id": "20261001-171613",
       "article": {
         "id": "20261001-171613",
-        "path": "wiki/anken001/20261001-171613.md",
+        "path": "wiki/anken/anken001/20261001-171613.md",
         "filename": "20261001-171613.md",
         "title": "API Role（役割によるAPI認可）",
         "displayTitle": "API Role（役割によるAPI認可）",
@@ -987,15 +986,15 @@
         ],
         "created": "2026-10-01 17:16:13"
       },
-      "source": "wiki/anken001/20261001-171613.md",
-      "destination": "docs/wiki/anken001/20261001-171613.md",
+      "source": "wiki/anken/anken001/20261001-171613.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171613.md",
       "sha256": "11eaec98efc3fe4a7434fbfaffb25bbd1c7d99feffdab5dcde1a09b1b099ff8d"
     },
     {
       "id": "20261001-171614",
       "article": {
         "id": "20261001-171614",
-        "path": "wiki/anken001/20261001-171614.md",
+        "path": "wiki/anken/anken001/20261001-171614.md",
         "filename": "20261001-171614.md",
         "title": "Scope（委任アクセスの権限範囲）",
         "displayTitle": "Scope（委任アクセスの権限範囲）",
@@ -1011,15 +1010,15 @@
         ],
         "created": "2026-10-01 17:16:14"
       },
-      "source": "wiki/anken001/20261001-171614.md",
-      "destination": "docs/wiki/anken001/20261001-171614.md",
+      "source": "wiki/anken/anken001/20261001-171614.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171614.md",
       "sha256": "8b38dcef9dafa5d82adba689afe8b9c4905cde0844da83c616c1116381ce8483"
     },
     {
       "id": "20261001-171615",
       "article": {
         "id": "20261001-171615",
-        "path": "wiki/anken001/20261001-171615.md",
+        "path": "wiki/anken/anken001/20261001-171615.md",
         "filename": "20261001-171615.md",
         "title": "Managed Identity（Azureが管理するアプリのID）",
         "displayTitle": "Managed Identity（Azureが管理するアプリのID）",
@@ -1035,15 +1034,15 @@
         ],
         "created": "2026-10-01 17:16:15"
       },
-      "source": "wiki/anken001/20261001-171615.md",
-      "destination": "docs/wiki/anken001/20261001-171615.md",
+      "source": "wiki/anken/anken001/20261001-171615.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171615.md",
       "sha256": "b64bf98e31139b5a0e3653681878f7dd913d5599539dcdd8c4610e1768102efc"
     },
     {
       "id": "20261001-171616",
       "article": {
         "id": "20261001-171616",
-        "path": "wiki/anken001/20261001-171616.md",
+        "path": "wiki/anken/anken001/20261001-171616.md",
         "filename": "20261001-171616.md",
         "title": "RAG基盤の認証・認可",
         "displayTitle": "RAG基盤の認証・認可",
@@ -1058,15 +1057,15 @@
         "aliases": [],
         "created": "2026-10-01 17:16:16"
       },
-      "source": "wiki/anken001/20261001-171616.md",
-      "destination": "docs/wiki/anken001/20261001-171616.md",
+      "source": "wiki/anken/anken001/20261001-171616.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171616.md",
       "sha256": "84567e30b25be9245233b2839ada17e00f793b2bb123fd0d13eec079871b4ec2"
     },
     {
       "id": "20261001-171617",
       "article": {
         "id": "20261001-171617",
-        "path": "wiki/anken001/20261001-171617.md",
+        "path": "wiki/anken/anken001/20261001-171617.md",
         "filename": "20261001-171617.md",
         "title": "RAG基盤のセキュリティ",
         "displayTitle": "RAG基盤のセキュリティ",
@@ -1081,15 +1080,15 @@
         "aliases": [],
         "created": "2026-10-01 17:16:17"
       },
-      "source": "wiki/anken001/20261001-171617.md",
-      "destination": "docs/wiki/anken001/20261001-171617.md",
+      "source": "wiki/anken/anken001/20261001-171617.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171617.md",
       "sha256": "93f2ecd21b824eb711eb5aa04103c4faa983e7195e7b72e48527eb3b43ab31d3"
     },
     {
       "id": "20261001-171618",
       "article": {
         "id": "20261001-171618",
-        "path": "wiki/anken001/20261001-171618.md",
+        "path": "wiki/anken/anken001/20261001-171618.md",
         "filename": "20261001-171618.md",
         "title": "RAG基盤のログ",
         "displayTitle": "RAG基盤のログ",
@@ -1104,15 +1103,15 @@
         "aliases": [],
         "created": "2026-10-01 17:16:18"
       },
-      "source": "wiki/anken001/20261001-171618.md",
-      "destination": "docs/wiki/anken001/20261001-171618.md",
+      "source": "wiki/anken/anken001/20261001-171618.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171618.md",
       "sha256": "442f243623b38364cbb5affcde416a231b67be97bfdbfb7f038314e3b1c765a6"
     },
     {
       "id": "20261001-171619",
       "article": {
         "id": "20261001-171619",
-        "path": "wiki/anken001/20261001-171619.md",
+        "path": "wiki/anken/anken001/20261001-171619.md",
         "filename": "20261001-171619.md",
         "title": "RAG基盤の監視",
         "displayTitle": "RAG基盤の監視",
@@ -1127,15 +1126,15 @@
         "aliases": [],
         "created": "2026-10-01 17:16:19"
       },
-      "source": "wiki/anken001/20261001-171619.md",
-      "destination": "docs/wiki/anken001/20261001-171619.md",
+      "source": "wiki/anken/anken001/20261001-171619.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171619.md",
       "sha256": "33eee6be333b1b5a66168cb6b8612214793f5626f2e10b29be4d08238890e55d"
     },
     {
       "id": "20261001-171620",
       "article": {
         "id": "20261001-171620",
-        "path": "wiki/anken001/20261001-171620.md",
+        "path": "wiki/anken/anken001/20261001-171620.md",
         "filename": "20261001-171620.md",
         "title": "RAG基盤のコスト管理",
         "displayTitle": "RAG基盤のコスト管理",
@@ -1149,15 +1148,15 @@
         "aliases": [],
         "created": "2026-10-01 17:16:20"
       },
-      "source": "wiki/anken001/20261001-171620.md",
-      "destination": "docs/wiki/anken001/20261001-171620.md",
+      "source": "wiki/anken/anken001/20261001-171620.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171620.md",
       "sha256": "0e28cfc618e0418c36a9499bf57139238e7679014d344de01a29d1ed3777950b"
     },
     {
       "id": "20261001-171621",
       "article": {
         "id": "20261001-171621",
-        "path": "wiki/anken001/20261001-171621.md",
+        "path": "wiki/anken/anken001/20261001-171621.md",
         "filename": "20261001-171621.md",
         "title": "RAGでよく起きる問題",
         "displayTitle": "RAGでよく起きる問題",
@@ -1172,15 +1171,15 @@
         "aliases": [],
         "created": "2026-10-01 17:16:21"
       },
-      "source": "wiki/anken001/20261001-171621.md",
-      "destination": "docs/wiki/anken001/20261001-171621.md",
+      "source": "wiki/anken/anken001/20261001-171621.md",
+      "destination": "docs/wiki/anken/anken001/20261001-171621.md",
       "sha256": "5417c45c58aaee8fe97a5441b8b3a7b0d2a2be16bf0f848c75259d658592dd56"
     },
     {
       "id": "20261001-145309",
       "article": {
         "id": "20261001-145309",
-        "path": "wiki/anken002/20261001-145309.md",
+        "path": "wiki/anken/anken002/20261001-145309.md",
         "filename": "20261001-145309.md",
         "title": "製造A社 Windows Server移行案件 調査整理",
         "displayTitle": "製造A社 Windows Server移行案件 調査整理",
@@ -1190,15 +1189,15 @@
         "aliases": [],
         "created": "2026-10-01 14:53:09"
       },
-      "source": "wiki/anken002/20261001-145309.md",
-      "destination": "docs/wiki/anken002/20261001-145309.md",
+      "source": "wiki/anken/anken002/20261001-145309.md",
+      "destination": "docs/wiki/anken/anken002/20261001-145309.md",
       "sha256": "9192e666c23c64ac126b04b4e24dca7cd0d14b92788be66be20eba08a362e1e2"
     },
     {
       "id": "20261001-145549",
       "article": {
         "id": "20261001-145549",
-        "path": "wiki/anken003/20261001-145549.md",
+        "path": "wiki/anken/anken003/20261001-145549.md",
         "filename": "20261001-145549.md",
         "title": "キッティング管理システム AWS構成・調査整理",
         "displayTitle": "キッティング管理システム AWS構成・調査整理",
@@ -1208,15 +1207,15 @@
         "aliases": [],
         "created": "2026-10-01 14:55:49"
       },
-      "source": "wiki/anken003/20261001-145549.md",
-      "destination": "docs/wiki/anken003/20261001-145549.md",
+      "source": "wiki/anken/anken003/20261001-145549.md",
+      "destination": "docs/wiki/anken/anken003/20261001-145549.md",
       "sha256": "75384e00cd162df0c4dd02c6645b230eff0e38b9651664bc639b75a9813b1bc8"
     },
     {
       "id": "20261001-145705",
       "article": {
         "id": "20261001-145705",
-        "path": "wiki/anken004/20261001-145705.md",
+        "path": "wiki/anken/anken004/20261001-145705.md",
         "filename": "20261001-145705.md",
         "title": "医療系システム 非機能要件・クラウド基盤検討整理",
         "displayTitle": "医療系システム 非機能要件・クラウド基盤検討整理",
@@ -1226,15 +1225,15 @@
         "aliases": [],
         "created": "2026-10-01 14:57:05"
       },
-      "source": "wiki/anken004/20261001-145705.md",
-      "destination": "docs/wiki/anken004/20261001-145705.md",
+      "source": "wiki/anken/anken004/20261001-145705.md",
+      "destination": "docs/wiki/anken/anken004/20261001-145705.md",
       "sha256": "c860ac083449545a0e6cf8788922ed512e35427a21aed29e7bc76f4e229bec91"
     },
     {
       "id": "20261001-150042",
       "article": {
         "id": "20261001-150042",
-        "path": "wiki/anken005/20261001-150042.md",
+        "path": "wiki/anken/anken005/20261001-150042.md",
         "filename": "20261001-150042.md",
         "title": "VMwareからOpenShift Virtualizationへの移行 調査整理",
         "displayTitle": "VMwareからOpenShift Virtualizationへの移行 調査整理",
@@ -1244,9 +1243,31 @@
         "aliases": [],
         "created": "2026-10-01 15:00:42"
       },
-      "source": "wiki/anken005/20261001-150042.md",
-      "destination": "docs/wiki/anken005/20261001-150042.md",
+      "source": "wiki/anken/anken005/20261001-150042.md",
+      "destination": "docs/wiki/anken/anken005/20261001-150042.md",
       "sha256": "bf26ba7845efae3c1ca96271bbc504af2ed7ebb1f33ec369e6ab2ba6d285da39"
+    },
+    {
+      "id": "20261005-093655",
+      "article": {
+        "id": "20261005-093655",
+        "path": "wiki/official/20261005-093655.md",
+        "filename": "20261005-093655.md",
+        "title": "個人開発メモ 2026-10-05",
+        "displayTitle": "個人開発メモ 2026-10-05",
+        "internalLabel": "個人開発メモ 2026-10-05",
+        "type": "development-log",
+        "tags": [
+          "development",
+          "personal-project",
+          "unity"
+        ],
+        "aliases": [],
+        "created": "2026-10-05 09:36:55"
+      },
+      "source": "wiki/official/20261005-093655.md",
+      "destination": "docs/wiki/official/20261005-093655.md",
+      "sha256": "458cc7959c02330271b6959d9531f41db8d7371ea41e96617d2ba035d9aa92a6"
     }
   ],
   "skipped": []
