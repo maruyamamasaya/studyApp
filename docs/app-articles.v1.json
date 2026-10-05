@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "18359509a083249c3abbeab859151b13c469159329e493ad231a61a4d204ada7",
+  "revision": "67899d65916827baa5f241b74a6f5765a1ae2679648a205dc8d098108f449eec",
   "articles": [
     {
       "id": "20261001-145031",
@@ -737,7 +737,7 @@
       ],
       "aliases": [],
       "created": "2026-10-01 17:16:16",
-      "contentHash": "c7b26cdc325071dd6a3f63da1fab8fc86cfb4a262589d72d2ab21836ed8933fd"
+      "contentHash": "84567e30b25be9245233b2839ada17e00f793b2bb123fd0d13eec079871b4ec2"
     },
     {
       "id": "20261001-171617",
@@ -767,7 +767,7 @@
       ],
       "aliases": [],
       "created": "2026-10-01 17:16:18",
-      "contentHash": "d8e318da21f9e018b0e5cca6c22cad234ebc44e00d280a9cd6712b2bfaaabffc"
+      "contentHash": "442f243623b38364cbb5affcde416a231b67be97bfdbfb7f038314e3b1c765a6"
     },
     {
       "id": "20261001-171619",
