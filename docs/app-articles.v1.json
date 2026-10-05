@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "cbfb046aceb03845dd876c9a7971e4667c711a8d07e966ae5147ae9bd22db84f",
+  "revision": "de08c90ac7bcc4644026678c73aaa6fb88b7640234da7b1e59ba593c25d8bdf3",
   "articles": [
     {
       "id": "20261001-145031",
@@ -826,6 +826,194 @@
       "aliases": [],
       "created": "2026-10-05 09:36:55",
       "contentHash": "458cc7959c02330271b6959d9531f41db8d7371ea41e96617d2ba035d9aa92a6"
+    },
+    {
+      "id": "20261005-095507",
+      "title": "応用情報技術者試験（AP）と2027年度からの新試験制度まとめ",
+      "path": "wiki/study/Applied/20261005-095507.md",
+      "type": "Applied",
+      "tags": [
+        "応用技術者試験"
+      ],
+      "aliases": [],
+      "created": "2026-10-05 09:55:07",
+      "contentHash": "eafec907e8c1e7cfbccb0f6e11d2afdf3c935af1d8fcfa5c9116ed0046526d13"
+    },
+    {
+      "id": "20261005-095743",
+      "title": "AI学習手法：試験対策まとめ",
+      "path": "wiki/study/Applied/20261005-095743.md",
+      "type": "Applied",
+      "tags": [
+        "応用技術者試験"
+      ],
+      "aliases": [],
+      "created": "2026-10-05 09:57:43",
+      "contentHash": "7dbbeaac67990338f5b1f720682b3b30a080820a6f385d4133e33e43799a9648"
+    },
+    {
+      "id": "20261005-095910",
+      "title": "BNF",
+      "path": "wiki/study/Applied/20261005-095910.md",
+      "type": "Applied",
+      "tags": [
+        "応用技術者試験"
+      ],
+      "aliases": [],
+      "created": "2026-10-05 09:59:10",
+      "contentHash": "fc1de8cedc722d7863919262dba9f63896dc16d892159059d3bd940dff6ecbdc"
+    },
+    {
+      "id": "20261005-095941",
+      "title": "CAP定理",
+      "path": "wiki/study/Applied/20261005-095941.md",
+      "type": "Applied",
+      "tags": [
+        "応用技術者試験"
+      ],
+      "aliases": [],
+      "created": "2026-10-05 09:59:41",
+      "contentHash": "252fa39eca1ee7ad00e5f2902993ab03c68d179d6188aec4ee0e8e1da4cd7de2"
+    },
+    {
+      "id": "20261005-100103",
+      "title": "CPUの基本",
+      "path": "wiki/study/Applied/20261005-100103.md",
+      "type": "Applied",
+      "tags": [
+        "応用技術者試験"
+      ],
+      "aliases": [],
+      "created": "2026-10-05 10:01:03",
+      "contentHash": "3d4defbde9ed75775ddcd9b3fd43567075d5337f660dd3692822e206bc69454c"
+    },
+    {
+      "id": "20261005-100146",
+      "title": "Hadoop",
+      "path": "wiki/study/Applied/20261005-100146.md",
+      "type": "Applied",
+      "tags": [
+        "応用技術者試験"
+      ],
+      "aliases": [],
+      "created": "2026-10-05 10:01:46",
+      "contentHash": "865ab53ccf8e067abb3e975713f432655bcebd9820bb6cf5d79314fab8dff96c"
+    },
+    {
+      "id": "20261005-100210",
+      "title": "IPパケットとイーサネットフレームの違い",
+      "path": "wiki/study/Applied/20261005-100210.md",
+      "type": "Applied",
+      "tags": [
+        "応用技術者試験"
+      ],
+      "aliases": [],
+      "created": "2026-10-05 10:02:10",
+      "contentHash": "7d7edf85dc0c64c3accc0f7467085e44669011db3415afbf067c58e6fd6e787d"
+    },
+    {
+      "id": "20261005-100236",
+      "title": "IT投資効果の評価方法",
+      "path": "wiki/study/Applied/20261005-100236.md",
+      "type": "Applied",
+      "tags": [
+        "応用技術者試験"
+      ],
+      "aliases": [],
+      "created": "2026-10-05 10:02:36",
+      "contentHash": "3e2d9afe37565ed5c49c88649024879f5eea81c06be63df065b90c57ed5baee7"
+    },
+    {
+      "id": "20261005-100311",
+      "title": "JIS：アイコンの分かりやすさ",
+      "path": "wiki/study/Applied/20261005-100311.md",
+      "type": "",
+      "tags": [],
+      "aliases": [],
+      "created": "2026-10-05 10:03:11",
+      "contentHash": "6b52673063a51a9fa74c17e105c1b14560eceeceb3d91325044f136ac6e106e7"
+    },
+    {
+      "id": "20261005-100345",
+      "title": "MTBF と MTTR",
+      "path": "wiki/study/Applied/20261005-100345.md",
+      "type": "Applied",
+      "tags": [
+        "応用技術者試験"
+      ],
+      "aliases": [],
+      "created": "2026-10-05 10:03:45",
+      "contentHash": "18525e882df3ba144e1e90f6b8149dfc1ff7ffa3dad3ca288e0d64820fff9d4f"
+    },
+    {
+      "id": "20261005-100422",
+      "title": "PMBOK：リスク対応",
+      "path": "wiki/study/Applied/20261005-100422.md",
+      "type": "Applied",
+      "tags": [
+        "応用技術者試験"
+      ],
+      "aliases": [],
+      "created": "2026-10-05 10:04:22",
+      "contentHash": "9e88e002338ec3d3b409341d84b9ed2997e86ceb1dd034c8693a58cdf1687e7a"
+    },
+    {
+      "id": "20261005-100450",
+      "title": "SBOM・SIEM・脆弱性管理・CMDBの違い",
+      "path": "wiki/study/Applied/20261005-100450.md",
+      "type": "Applied",
+      "tags": [
+        "応用技術者試験"
+      ],
+      "aliases": [],
+      "created": "2026-10-05 10:04:50",
+      "contentHash": "2364e9a2025e6f947556fbb5a20981ea184982d57daddb56b85f8bfbd014d273"
+    },
+    {
+      "id": "20261005-100526",
+      "title": "SOA・SLA・ERP・BPR",
+      "path": "wiki/study/Applied/20261005-100526.md",
+      "type": "Applied",
+      "tags": [
+        "応用技術者試験"
+      ],
+      "aliases": [],
+      "created": "2026-10-05 10:05:26",
+      "contentHash": "f2b26ff3b7819829285478ec10aede2e09b5d8af8877064c103b6914e950cbdc"
+    },
+    {
+      "id": "20261005-100556",
+      "title": "SPF（Sender Policy Framework）",
+      "path": "wiki/study/Applied/20261005-100556.md",
+      "type": "Applied",
+      "tags": [
+        "応用技術者試験"
+      ],
+      "aliases": [],
+      "created": "2026-10-05 10:05:56",
+      "contentHash": "1bedd5344230fb1effd55e6c12c221fcb11227d3bf3d921f6048d30b5534919f"
+    },
+    {
+      "id": "20261005-100628",
+      "title": "SQL追加論点【UNION・集合演算など】",
+      "path": "wiki/study/Applied/20261005-100628.md",
+      "type": "Applied",
+      "tags": [
+        "応用技術者試験"
+      ],
+      "aliases": [],
+      "created": "2026-10-05 10:06:28",
+      "contentHash": "0720369bdf54f9cc0d52e3620640e1515417cf48d55060dd8a10d95412e6b2f7"
+    },
+    {
+      "id": "20261005-100754",
+      "title": "SQL：COALESCE",
+      "path": "wiki/study/Applied/20261005-100754.md",
+      "type": "Applied",
+      "tags": [],
+      "aliases": [],
+      "created": "2026-10-05 10:07:54",
+      "contentHash": "0fa0cbf05363db89de91e51c258636bfc4053bfa34068ab83514636b3160a5e7"
     }
   ]
 }

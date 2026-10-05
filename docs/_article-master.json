@@ -285,6 +285,86 @@
       "id": "20261005-093655",
       "path": "wiki/official/20261005-093655.md",
       "title": "個人開発メモ 2026-10-05"
+    },
+    {
+      "id": "20261005-095507",
+      "path": "wiki/study/Applied/20261005-095507.md",
+      "title": "応用情報技術者試験（AP）と2027年度からの新試験制度まとめ"
+    },
+    {
+      "id": "20261005-095743",
+      "path": "wiki/study/Applied/20261005-095743.md",
+      "title": "AI学習手法：試験対策まとめ"
+    },
+    {
+      "id": "20261005-095910",
+      "path": "wiki/study/Applied/20261005-095910.md",
+      "title": "BNF"
+    },
+    {
+      "id": "20261005-095941",
+      "path": "wiki/study/Applied/20261005-095941.md",
+      "title": "CAP定理"
+    },
+    {
+      "id": "20261005-100103",
+      "path": "wiki/study/Applied/20261005-100103.md",
+      "title": "CPUの基本"
+    },
+    {
+      "id": "20261005-100146",
+      "path": "wiki/study/Applied/20261005-100146.md",
+      "title": "Hadoop"
+    },
+    {
+      "id": "20261005-100210",
+      "path": "wiki/study/Applied/20261005-100210.md",
+      "title": "IPパケットとイーサネットフレームの違い"
+    },
+    {
+      "id": "20261005-100236",
+      "path": "wiki/study/Applied/20261005-100236.md",
+      "title": "IT投資効果の評価方法"
+    },
+    {
+      "id": "20261005-100311",
+      "path": "wiki/study/Applied/20261005-100311.md",
+      "title": "JIS：アイコンの分かりやすさ"
+    },
+    {
+      "id": "20261005-100345",
+      "path": "wiki/study/Applied/20261005-100345.md",
+      "title": "MTBF と MTTR"
+    },
+    {
+      "id": "20261005-100422",
+      "path": "wiki/study/Applied/20261005-100422.md",
+      "title": "PMBOK：リスク対応"
+    },
+    {
+      "id": "20261005-100450",
+      "path": "wiki/study/Applied/20261005-100450.md",
+      "title": "SBOM・SIEM・脆弱性管理・CMDBの違い"
+    },
+    {
+      "id": "20261005-100526",
+      "path": "wiki/study/Applied/20261005-100526.md",
+      "title": "SOA・SLA・ERP・BPR"
+    },
+    {
+      "id": "20261005-100556",
+      "path": "wiki/study/Applied/20261005-100556.md",
+      "title": "SPF（Sender Policy Framework）"
+    },
+    {
+      "id": "20261005-100628",
+      "path": "wiki/study/Applied/20261005-100628.md",
+      "title": "SQL追加論点【UNION・集合演算など】"
+    },
+    {
+      "id": "20261005-100754",
+      "path": "wiki/study/Applied/20261005-100754.md",
+      "title": "SQL：COALESCE"
     }
   ]
 }

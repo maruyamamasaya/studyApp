@@ -164,6 +164,57 @@
   "20261005-093655": [
     "wiki/official/20261005-093655"
   ],
+  "20261005-095507": [
+    "wiki/study/Applied/20261005-095507"
+  ],
+  "20261005-095743": [
+    "wiki/study/Applied/20261005-095743"
+  ],
+  "20261005-095910": [
+    "wiki/study/Applied/20261005-095910"
+  ],
+  "20261005-095941": [
+    "wiki/study/Applied/20261005-095941"
+  ],
+  "20261005-100103": [
+    "wiki/study/Applied/20261005-100103"
+  ],
+  "20261005-100146": [
+    "wiki/study/Applied/20261005-100146"
+  ],
+  "20261005-100210": [
+    "wiki/study/Applied/20261005-100210"
+  ],
+  "20261005-100236": [
+    "wiki/study/Applied/20261005-100236"
+  ],
+  "20261005-100311": [
+    "wiki/study/Applied/20261005-100311"
+  ],
+  "20261005-100345": [
+    "wiki/study/Applied/20261005-100345"
+  ],
+  "20261005-100422": [
+    "wiki/study/Applied/20261005-100422"
+  ],
+  "20261005-100450": [
+    "wiki/study/Applied/20261005-100450"
+  ],
+  "20261005-100526": [
+    "wiki/study/Applied/20261005-100526"
+  ],
+  "20261005-100556": [
+    "wiki/study/Applied/20261005-100556"
+  ],
+  "20261005-100628": [
+    "wiki/study/Applied/20261005-100628"
+  ],
+  "20261005-100754": [
+    "wiki/study/Applied/20261005-100754"
+  ],
+  "AI学習手法：試験対策まとめ": [
+    "wiki/study/Applied/20261005-095743"
+  ],
   "API Role": [
     "wiki/anken/anken001/20261001-171613"
   ],
@@ -191,11 +242,20 @@
   "Azure OpenAI（生成とEmbeddingの実行基盤）": [
     "wiki/anken/anken001/20261001-171602"
   ],
+  "BNF": [
+    "wiki/study/Applied/20261005-095910"
+  ],
   "Blob Storage": [
     "wiki/anken/anken001/20261001-171604"
   ],
   "Blob Storage（文書原本の保存）": [
     "wiki/anken/anken001/20261001-171604"
+  ],
+  "CAP定理": [
+    "wiki/study/Applied/20261005-095941"
+  ],
+  "CPUの基本": [
+    "wiki/study/Applied/20261005-100103"
   ],
   "Cache": [
     "wiki/anken/anken001/20261001-171601"
@@ -239,6 +299,9 @@
   "Exponential Backoff（待機時間を増やす再試行）": [
     "wiki/anken/anken001/20261001-171556"
   ],
+  "Hadoop": [
+    "wiki/study/Applied/20261005-100146"
+  ],
   "Hallucination": [
     "wiki/anken/anken001/20261001-171550"
   ],
@@ -250,6 +313,15 @@
   ],
   "Hybrid Search（検索方式の組み合わせ）": [
     "wiki/anken/anken001/20261001-171543"
+  ],
+  "IPパケットとイーサネットフレームの違い": [
+    "wiki/study/Applied/20261005-100210"
+  ],
+  "IT投資効果の評価方法": [
+    "wiki/study/Applied/20261005-100236"
+  ],
+  "JIS：アイコンの分かりやすさ": [
+    "wiki/study/Applied/20261005-100311"
   ],
   "JSONとHTTP": [
     "wiki/anken/anken001/20261001-171553"
@@ -284,6 +356,9 @@
   "Log Analytics（ログの検索と分析）": [
     "wiki/anken/anken001/20261001-171607"
   ],
+  "MTBF と MTTR": [
+    "wiki/study/Applied/20261005-100345"
+  ],
   "Managed Identity": [
     "wiki/anken/anken001/20261001-171615"
   ],
@@ -313,6 +388,9 @@
   ],
   "PDF解析": [
     "wiki/anken/anken001/20261001-171537"
+  ],
+  "PMBOK：リスク対応": [
+    "wiki/study/Applied/20261005-100422"
   ],
   "Prompt": [
     "wiki/anken/anken001/20261001-171547"
@@ -370,6 +448,21 @@
   ],
   "Retry（失敗時の再試行）": [
     "wiki/anken/anken001/20261001-171555"
+  ],
+  "SBOM・SIEM・脆弱性管理・CMDBの違い": [
+    "wiki/study/Applied/20261005-100450"
+  ],
+  "SOA・SLA・ERP・BPR": [
+    "wiki/study/Applied/20261005-100526"
+  ],
+  "SPF（Sender Policy Framework）": [
+    "wiki/study/Applied/20261005-100556"
+  ],
+  "SQL追加論点【UNION・集合演算など】": [
+    "wiki/study/Applied/20261005-100628"
+  ],
+  "SQL：COALESCE": [
+    "wiki/study/Applied/20261005-100754"
   ],
   "Scope": [
     "wiki/anken/anken001/20261001-171614"
@@ -581,6 +674,54 @@
   "wiki/official/20261005-093655": [
     "wiki/official/20261005-093655"
   ],
+  "wiki/study/Applied/20261005-095507": [
+    "wiki/study/Applied/20261005-095507"
+  ],
+  "wiki/study/Applied/20261005-095743": [
+    "wiki/study/Applied/20261005-095743"
+  ],
+  "wiki/study/Applied/20261005-095910": [
+    "wiki/study/Applied/20261005-095910"
+  ],
+  "wiki/study/Applied/20261005-095941": [
+    "wiki/study/Applied/20261005-095941"
+  ],
+  "wiki/study/Applied/20261005-100103": [
+    "wiki/study/Applied/20261005-100103"
+  ],
+  "wiki/study/Applied/20261005-100146": [
+    "wiki/study/Applied/20261005-100146"
+  ],
+  "wiki/study/Applied/20261005-100210": [
+    "wiki/study/Applied/20261005-100210"
+  ],
+  "wiki/study/Applied/20261005-100236": [
+    "wiki/study/Applied/20261005-100236"
+  ],
+  "wiki/study/Applied/20261005-100311": [
+    "wiki/study/Applied/20261005-100311"
+  ],
+  "wiki/study/Applied/20261005-100345": [
+    "wiki/study/Applied/20261005-100345"
+  ],
+  "wiki/study/Applied/20261005-100422": [
+    "wiki/study/Applied/20261005-100422"
+  ],
+  "wiki/study/Applied/20261005-100450": [
+    "wiki/study/Applied/20261005-100450"
+  ],
+  "wiki/study/Applied/20261005-100526": [
+    "wiki/study/Applied/20261005-100526"
+  ],
+  "wiki/study/Applied/20261005-100556": [
+    "wiki/study/Applied/20261005-100556"
+  ],
+  "wiki/study/Applied/20261005-100628": [
+    "wiki/study/Applied/20261005-100628"
+  ],
+  "wiki/study/Applied/20261005-100754": [
+    "wiki/study/Applied/20261005-100754"
+  ],
   "キッティング管理システム AWS構成・調査整理": [
     "wiki/anken/anken003/20261001-145549"
   ],
@@ -595,6 +736,9 @@
   ],
   "医療系システム 非機能要件・クラウド基盤検討整理": [
     "wiki/anken/anken004/20261001-145705"
+  ],
+  "応用情報技術者試験（AP）と2027年度からの新試験制度まとめ": [
+    "wiki/study/Applied/20261005-095507"
   ],
   "文書取り込み": [
     "wiki/anken/anken001/20261001-171536"

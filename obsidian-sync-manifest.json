@@ -1268,6 +1268,322 @@
       "source": "wiki/official/20261005-093655.md",
       "destination": "docs/wiki/official/20261005-093655.md",
       "sha256": "458cc7959c02330271b6959d9531f41db8d7371ea41e96617d2ba035d9aa92a6"
+    },
+    {
+      "id": "20261005-095507",
+      "article": {
+        "id": "20261005-095507",
+        "path": "wiki/study/Applied/20261005-095507.md",
+        "filename": "20261005-095507.md",
+        "title": "応用情報技術者試験（AP）と2027年度からの新試験制度まとめ",
+        "displayTitle": "応用情報技術者試験（AP）と2027年度からの新試験制度まとめ",
+        "internalLabel": "応用情報技術者試験（AP）と2027年度からの新試験制度まとめ",
+        "type": "Applied",
+        "tags": [
+          "応用技術者試験"
+        ],
+        "aliases": [],
+        "created": "2026-10-05 09:55:07"
+      },
+      "source": "wiki/study/Applied/20261005-095507.md",
+      "destination": "docs/wiki/study/Applied/20261005-095507.md",
+      "sha256": "eafec907e8c1e7cfbccb0f6e11d2afdf3c935af1d8fcfa5c9116ed0046526d13"
+    },
+    {
+      "id": "20261005-095743",
+      "article": {
+        "id": "20261005-095743",
+        "path": "wiki/study/Applied/20261005-095743.md",
+        "filename": "20261005-095743.md",
+        "title": "AI学習手法：試験対策まとめ",
+        "displayTitle": "AI学習手法：試験対策まとめ",
+        "internalLabel": "AI学習手法：試験対策まとめ",
+        "type": "Applied",
+        "tags": [
+          "応用技術者試験"
+        ],
+        "aliases": [],
+        "created": "2026-10-05 09:57:43"
+      },
+      "source": "wiki/study/Applied/20261005-095743.md",
+      "destination": "docs/wiki/study/Applied/20261005-095743.md",
+      "sha256": "7dbbeaac67990338f5b1f720682b3b30a080820a6f385d4133e33e43799a9648"
+    },
+    {
+      "id": "20261005-095910",
+      "article": {
+        "id": "20261005-095910",
+        "path": "wiki/study/Applied/20261005-095910.md",
+        "filename": "20261005-095910.md",
+        "title": "BNF",
+        "displayTitle": "BNF",
+        "internalLabel": "BNF",
+        "type": "Applied",
+        "tags": [
+          "応用技術者試験"
+        ],
+        "aliases": [],
+        "created": "2026-10-05 09:59:10"
+      },
+      "source": "wiki/study/Applied/20261005-095910.md",
+      "destination": "docs/wiki/study/Applied/20261005-095910.md",
+      "sha256": "fc1de8cedc722d7863919262dba9f63896dc16d892159059d3bd940dff6ecbdc"
+    },
+    {
+      "id": "20261005-095941",
+      "article": {
+        "id": "20261005-095941",
+        "path": "wiki/study/Applied/20261005-095941.md",
+        "filename": "20261005-095941.md",
+        "title": "CAP定理",
+        "displayTitle": "CAP定理",
+        "internalLabel": "CAP定理",
+        "type": "Applied",
+        "tags": [
+          "応用技術者試験"
+        ],
+        "aliases": [],
+        "created": "2026-10-05 09:59:41"
+      },
+      "source": "wiki/study/Applied/20261005-095941.md",
+      "destination": "docs/wiki/study/Applied/20261005-095941.md",
+      "sha256": "252fa39eca1ee7ad00e5f2902993ab03c68d179d6188aec4ee0e8e1da4cd7de2"
+    },
+    {
+      "id": "20261005-100103",
+      "article": {
+        "id": "20261005-100103",
+        "path": "wiki/study/Applied/20261005-100103.md",
+        "filename": "20261005-100103.md",
+        "title": "CPUの基本",
+        "displayTitle": "CPUの基本",
+        "internalLabel": "CPUの基本",
+        "type": "Applied",
+        "tags": [
+          "応用技術者試験"
+        ],
+        "aliases": [],
+        "created": "2026-10-05 10:01:03"
+      },
+      "source": "wiki/study/Applied/20261005-100103.md",
+      "destination": "docs/wiki/study/Applied/20261005-100103.md",
+      "sha256": "3d4defbde9ed75775ddcd9b3fd43567075d5337f660dd3692822e206bc69454c"
+    },
+    {
+      "id": "20261005-100146",
+      "article": {
+        "id": "20261005-100146",
+        "path": "wiki/study/Applied/20261005-100146.md",
+        "filename": "20261005-100146.md",
+        "title": "Hadoop",
+        "displayTitle": "Hadoop",
+        "internalLabel": "Hadoop",
+        "type": "Applied",
+        "tags": [
+          "応用技術者試験"
+        ],
+        "aliases": [],
+        "created": "2026-10-05 10:01:46"
+      },
+      "source": "wiki/study/Applied/20261005-100146.md",
+      "destination": "docs/wiki/study/Applied/20261005-100146.md",
+      "sha256": "865ab53ccf8e067abb3e975713f432655bcebd9820bb6cf5d79314fab8dff96c"
+    },
+    {
+      "id": "20261005-100210",
+      "article": {
+        "id": "20261005-100210",
+        "path": "wiki/study/Applied/20261005-100210.md",
+        "filename": "20261005-100210.md",
+        "title": "IPパケットとイーサネットフレームの違い",
+        "displayTitle": "IPパケットとイーサネットフレームの違い",
+        "internalLabel": "IPパケットとイーサネットフレームの違い",
+        "type": "Applied",
+        "tags": [
+          "応用技術者試験"
+        ],
+        "aliases": [],
+        "created": "2026-10-05 10:02:10"
+      },
+      "source": "wiki/study/Applied/20261005-100210.md",
+      "destination": "docs/wiki/study/Applied/20261005-100210.md",
+      "sha256": "7d7edf85dc0c64c3accc0f7467085e44669011db3415afbf067c58e6fd6e787d"
+    },
+    {
+      "id": "20261005-100236",
+      "article": {
+        "id": "20261005-100236",
+        "path": "wiki/study/Applied/20261005-100236.md",
+        "filename": "20261005-100236.md",
+        "title": "IT投資効果の評価方法",
+        "displayTitle": "IT投資効果の評価方法",
+        "internalLabel": "IT投資効果の評価方法",
+        "type": "Applied",
+        "tags": [
+          "応用技術者試験"
+        ],
+        "aliases": [],
+        "created": "2026-10-05 10:02:36"
+      },
+      "source": "wiki/study/Applied/20261005-100236.md",
+      "destination": "docs/wiki/study/Applied/20261005-100236.md",
+      "sha256": "3e2d9afe37565ed5c49c88649024879f5eea81c06be63df065b90c57ed5baee7"
+    },
+    {
+      "id": "20261005-100311",
+      "article": {
+        "id": "20261005-100311",
+        "path": "wiki/study/Applied/20261005-100311.md",
+        "filename": "20261005-100311.md",
+        "title": "JIS：アイコンの分かりやすさ",
+        "displayTitle": "JIS：アイコンの分かりやすさ",
+        "internalLabel": "JIS：アイコンの分かりやすさ",
+        "type": "",
+        "tags": [],
+        "aliases": [],
+        "created": "2026-10-05 10:03:11"
+      },
+      "source": "wiki/study/Applied/20261005-100311.md",
+      "destination": "docs/wiki/study/Applied/20261005-100311.md",
+      "sha256": "6b52673063a51a9fa74c17e105c1b14560eceeceb3d91325044f136ac6e106e7"
+    },
+    {
+      "id": "20261005-100345",
+      "article": {
+        "id": "20261005-100345",
+        "path": "wiki/study/Applied/20261005-100345.md",
+        "filename": "20261005-100345.md",
+        "title": "MTBF と MTTR",
+        "displayTitle": "MTBF と MTTR",
+        "internalLabel": "MTBF と MTTR",
+        "type": "Applied",
+        "tags": [
+          "応用技術者試験"
+        ],
+        "aliases": [],
+        "created": "2026-10-05 10:03:45"
+      },
+      "source": "wiki/study/Applied/20261005-100345.md",
+      "destination": "docs/wiki/study/Applied/20261005-100345.md",
+      "sha256": "18525e882df3ba144e1e90f6b8149dfc1ff7ffa3dad3ca288e0d64820fff9d4f"
+    },
+    {
+      "id": "20261005-100422",
+      "article": {
+        "id": "20261005-100422",
+        "path": "wiki/study/Applied/20261005-100422.md",
+        "filename": "20261005-100422.md",
+        "title": "PMBOK：リスク対応",
+        "displayTitle": "PMBOK：リスク対応",
+        "internalLabel": "PMBOK：リスク対応",
+        "type": "Applied",
+        "tags": [
+          "応用技術者試験"
+        ],
+        "aliases": [],
+        "created": "2026-10-05 10:04:22"
+      },
+      "source": "wiki/study/Applied/20261005-100422.md",
+      "destination": "docs/wiki/study/Applied/20261005-100422.md",
+      "sha256": "9e88e002338ec3d3b409341d84b9ed2997e86ceb1dd034c8693a58cdf1687e7a"
+    },
+    {
+      "id": "20261005-100450",
+      "article": {
+        "id": "20261005-100450",
+        "path": "wiki/study/Applied/20261005-100450.md",
+        "filename": "20261005-100450.md",
+        "title": "SBOM・SIEM・脆弱性管理・CMDBの違い",
+        "displayTitle": "SBOM・SIEM・脆弱性管理・CMDBの違い",
+        "internalLabel": "SBOM・SIEM・脆弱性管理・CMDBの違い",
+        "type": "Applied",
+        "tags": [
+          "応用技術者試験"
+        ],
+        "aliases": [],
+        "created": "2026-10-05 10:04:50"
+      },
+      "source": "wiki/study/Applied/20261005-100450.md",
+      "destination": "docs/wiki/study/Applied/20261005-100450.md",
+      "sha256": "2364e9a2025e6f947556fbb5a20981ea184982d57daddb56b85f8bfbd014d273"
+    },
+    {
+      "id": "20261005-100526",
+      "article": {
+        "id": "20261005-100526",
+        "path": "wiki/study/Applied/20261005-100526.md",
+        "filename": "20261005-100526.md",
+        "title": "SOA・SLA・ERP・BPR",
+        "displayTitle": "SOA・SLA・ERP・BPR",
+        "internalLabel": "SOA・SLA・ERP・BPR",
+        "type": "Applied",
+        "tags": [
+          "応用技術者試験"
+        ],
+        "aliases": [],
+        "created": "2026-10-05 10:05:26"
+      },
+      "source": "wiki/study/Applied/20261005-100526.md",
+      "destination": "docs/wiki/study/Applied/20261005-100526.md",
+      "sha256": "f2b26ff3b7819829285478ec10aede2e09b5d8af8877064c103b6914e950cbdc"
+    },
+    {
+      "id": "20261005-100556",
+      "article": {
+        "id": "20261005-100556",
+        "path": "wiki/study/Applied/20261005-100556.md",
+        "filename": "20261005-100556.md",
+        "title": "SPF（Sender Policy Framework）",
+        "displayTitle": "SPF（Sender Policy Framework）",
+        "internalLabel": "SPF（Sender Policy Framework）",
+        "type": "Applied",
+        "tags": [
+          "応用技術者試験"
+        ],
+        "aliases": [],
+        "created": "2026-10-05 10:05:56"
+      },
+      "source": "wiki/study/Applied/20261005-100556.md",
+      "destination": "docs/wiki/study/Applied/20261005-100556.md",
+      "sha256": "1bedd5344230fb1effd55e6c12c221fcb11227d3bf3d921f6048d30b5534919f"
+    },
+    {
+      "id": "20261005-100628",
+      "article": {
+        "id": "20261005-100628",
+        "path": "wiki/study/Applied/20261005-100628.md",
+        "filename": "20261005-100628.md",
+        "title": "SQL追加論点【UNION・集合演算など】",
+        "displayTitle": "SQL追加論点【UNION・集合演算など】",
+        "internalLabel": "SQL追加論点【UNION・集合演算など】",
+        "type": "Applied",
+        "tags": [
+          "応用技術者試験"
+        ],
+        "aliases": [],
+        "created": "2026-10-05 10:06:28"
+      },
+      "source": "wiki/study/Applied/20261005-100628.md",
+      "destination": "docs/wiki/study/Applied/20261005-100628.md",
+      "sha256": "0720369bdf54f9cc0d52e3620640e1515417cf48d55060dd8a10d95412e6b2f7"
+    },
+    {
+      "id": "20261005-100754",
+      "article": {
+        "id": "20261005-100754",
+        "path": "wiki/study/Applied/20261005-100754.md",
+        "filename": "20261005-100754.md",
+        "title": "SQL：COALESCE",
+        "displayTitle": "SQL：COALESCE",
+        "internalLabel": "SQL：COALESCE",
+        "type": "Applied",
+        "tags": [],
+        "aliases": [],
+        "created": "2026-10-05 10:07:54"
+      },
+      "source": "wiki/study/Applied/20261005-100754.md",
+      "destination": "docs/wiki/study/Applied/20261005-100754.md",
+      "sha256": "0fa0cbf05363db89de91e51c258636bfc4053bfa34068ab83514636b3160a5e7"
     }
   ],
   "skipped": []

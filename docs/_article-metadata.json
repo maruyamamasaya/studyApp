@@ -933,5 +933,225 @@
     ],
     "aliases": [],
     "created": "2026-10-05 09:36:55"
+  },
+  {
+    "id": "20261005-095507",
+    "path": "wiki/study/Applied/20261005-095507.md",
+    "filename": "20261005-095507.md",
+    "title": "応用情報技術者試験（AP）と2027年度からの新試験制度まとめ",
+    "displayTitle": "応用情報技術者試験（AP）と2027年度からの新試験制度まとめ",
+    "internalLabel": "応用情報技術者試験（AP）と2027年度からの新試験制度まとめ",
+    "type": "Applied",
+    "tags": [
+      "応用技術者試験"
+    ],
+    "aliases": [],
+    "created": "2026-10-05 09:55:07"
+  },
+  {
+    "id": "20261005-095743",
+    "path": "wiki/study/Applied/20261005-095743.md",
+    "filename": "20261005-095743.md",
+    "title": "AI学習手法：試験対策まとめ",
+    "displayTitle": "AI学習手法：試験対策まとめ",
+    "internalLabel": "AI学習手法：試験対策まとめ",
+    "type": "Applied",
+    "tags": [
+      "応用技術者試験"
+    ],
+    "aliases": [],
+    "created": "2026-10-05 09:57:43"
+  },
+  {
+    "id": "20261005-095910",
+    "path": "wiki/study/Applied/20261005-095910.md",
+    "filename": "20261005-095910.md",
+    "title": "BNF",
+    "displayTitle": "BNF",
+    "internalLabel": "BNF",
+    "type": "Applied",
+    "tags": [
+      "応用技術者試験"
+    ],
+    "aliases": [],
+    "created": "2026-10-05 09:59:10"
+  },
+  {
+    "id": "20261005-095941",
+    "path": "wiki/study/Applied/20261005-095941.md",
+    "filename": "20261005-095941.md",
+    "title": "CAP定理",
+    "displayTitle": "CAP定理",
+    "internalLabel": "CAP定理",
+    "type": "Applied",
+    "tags": [
+      "応用技術者試験"
+    ],
+    "aliases": [],
+    "created": "2026-10-05 09:59:41"
+  },
+  {
+    "id": "20261005-100103",
+    "path": "wiki/study/Applied/20261005-100103.md",
+    "filename": "20261005-100103.md",
+    "title": "CPUの基本",
+    "displayTitle": "CPUの基本",
+    "internalLabel": "CPUの基本",
+    "type": "Applied",
+    "tags": [
+      "応用技術者試験"
+    ],
+    "aliases": [],
+    "created": "2026-10-05 10:01:03"
+  },
+  {
+    "id": "20261005-100146",
+    "path": "wiki/study/Applied/20261005-100146.md",
+    "filename": "20261005-100146.md",
+    "title": "Hadoop",
+    "displayTitle": "Hadoop",
+    "internalLabel": "Hadoop",
+    "type": "Applied",
+    "tags": [
+      "応用技術者試験"
+    ],
+    "aliases": [],
+    "created": "2026-10-05 10:01:46"
+  },
+  {
+    "id": "20261005-100210",
+    "path": "wiki/study/Applied/20261005-100210.md",
+    "filename": "20261005-100210.md",
+    "title": "IPパケットとイーサネットフレームの違い",
+    "displayTitle": "IPパケットとイーサネットフレームの違い",
+    "internalLabel": "IPパケットとイーサネットフレームの違い",
+    "type": "Applied",
+    "tags": [
+      "応用技術者試験"
+    ],
+    "aliases": [],
+    "created": "2026-10-05 10:02:10"
+  },
+  {
+    "id": "20261005-100236",
+    "path": "wiki/study/Applied/20261005-100236.md",
+    "filename": "20261005-100236.md",
+    "title": "IT投資効果の評価方法",
+    "displayTitle": "IT投資効果の評価方法",
+    "internalLabel": "IT投資効果の評価方法",
+    "type": "Applied",
+    "tags": [
+      "応用技術者試験"
+    ],
+    "aliases": [],
+    "created": "2026-10-05 10:02:36"
+  },
+  {
+    "id": "20261005-100311",
+    "path": "wiki/study/Applied/20261005-100311.md",
+    "filename": "20261005-100311.md",
+    "title": "JIS：アイコンの分かりやすさ",
+    "displayTitle": "JIS：アイコンの分かりやすさ",
+    "internalLabel": "JIS：アイコンの分かりやすさ",
+    "type": "",
+    "tags": [],
+    "aliases": [],
+    "created": "2026-10-05 10:03:11"
+  },
+  {
+    "id": "20261005-100345",
+    "path": "wiki/study/Applied/20261005-100345.md",
+    "filename": "20261005-100345.md",
+    "title": "MTBF と MTTR",
+    "displayTitle": "MTBF と MTTR",
+    "internalLabel": "MTBF と MTTR",
+    "type": "Applied",
+    "tags": [
+      "応用技術者試験"
+    ],
+    "aliases": [],
+    "created": "2026-10-05 10:03:45"
+  },
+  {
+    "id": "20261005-100422",
+    "path": "wiki/study/Applied/20261005-100422.md",
+    "filename": "20261005-100422.md",
+    "title": "PMBOK：リスク対応",
+    "displayTitle": "PMBOK：リスク対応",
+    "internalLabel": "PMBOK：リスク対応",
+    "type": "Applied",
+    "tags": [
+      "応用技術者試験"
+    ],
+    "aliases": [],
+    "created": "2026-10-05 10:04:22"
+  },
+  {
+    "id": "20261005-100450",
+    "path": "wiki/study/Applied/20261005-100450.md",
+    "filename": "20261005-100450.md",
+    "title": "SBOM・SIEM・脆弱性管理・CMDBの違い",
+    "displayTitle": "SBOM・SIEM・脆弱性管理・CMDBの違い",
+    "internalLabel": "SBOM・SIEM・脆弱性管理・CMDBの違い",
+    "type": "Applied",
+    "tags": [
+      "応用技術者試験"
+    ],
+    "aliases": [],
+    "created": "2026-10-05 10:04:50"
+  },
+  {
+    "id": "20261005-100526",
+    "path": "wiki/study/Applied/20261005-100526.md",
+    "filename": "20261005-100526.md",
+    "title": "SOA・SLA・ERP・BPR",
+    "displayTitle": "SOA・SLA・ERP・BPR",
+    "internalLabel": "SOA・SLA・ERP・BPR",
+    "type": "Applied",
+    "tags": [
+      "応用技術者試験"
+    ],
+    "aliases": [],
+    "created": "2026-10-05 10:05:26"
+  },
+  {
+    "id": "20261005-100556",
+    "path": "wiki/study/Applied/20261005-100556.md",
+    "filename": "20261005-100556.md",
+    "title": "SPF（Sender Policy Framework）",
+    "displayTitle": "SPF（Sender Policy Framework）",
+    "internalLabel": "SPF（Sender Policy Framework）",
+    "type": "Applied",
+    "tags": [
+      "応用技術者試験"
+    ],
+    "aliases": [],
+    "created": "2026-10-05 10:05:56"
+  },
+  {
+    "id": "20261005-100628",
+    "path": "wiki/study/Applied/20261005-100628.md",
+    "filename": "20261005-100628.md",
+    "title": "SQL追加論点【UNION・集合演算など】",
+    "displayTitle": "SQL追加論点【UNION・集合演算など】",
+    "internalLabel": "SQL追加論点【UNION・集合演算など】",
+    "type": "Applied",
+    "tags": [
+      "応用技術者試験"
+    ],
+    "aliases": [],
+    "created": "2026-10-05 10:06:28"
+  },
+  {
+    "id": "20261005-100754",
+    "path": "wiki/study/Applied/20261005-100754.md",
+    "filename": "20261005-100754.md",
+    "title": "SQL：COALESCE",
+    "displayTitle": "SQL：COALESCE",
+    "internalLabel": "SQL：COALESCE",
+    "type": "Applied",
+    "tags": [],
+    "aliases": [],
+    "created": "2026-10-05 10:07:54"
   }
 ]
