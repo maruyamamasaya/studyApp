@@ -10,6 +10,8 @@ SwiftUI、iOS 17以降を対象とする。記事はPagesの `app-articles.v1.js
 
 学習記録はApplication Supportの `StudyApp/records.v1.json`。保存はatomic書き込みで、Web記録とは独立する。壊れた保存ファイルを空データで上書きしない。復元は形式検証と確認後に全置換し、同一セッションを重複追加しない。SwiftDataやクラウド同期は導入していない。
 
+夜の音声検証は [MAC_AUDIO_VERIFICATION.md](MAC_AUDIO_VERIFICATION.md) の順に実施する。日中の静的確認結果、Mac用スクリプト、優先実機5ケースをまとめている。
+
 ## Macでの開始手順
 
 1. この作業を含むリポジトリをMacへコピーするか、commit/push後に取得する。現在の未commitファイルはcloneだけでは取得できない。

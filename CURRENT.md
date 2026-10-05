@@ -28,3 +28,5 @@ iOS版はWindowsで初期コードを実装済み。[IOS_APP_CONCEPT.md](IOS_APP
 事前生成音声の受け入れを追加: 「聴く」タブ、iCloud Drive等の制作物フォルダ同期、管理JSONのarticleIDとUUIDのtrackIDによる自動紐付けと音声差し替え、台本の表示、端末内コピー、再生位置・倍速・BGM・バックグラウンド/ロック画面操作。制作ツールはこれからVOICEVOX等を使って用意する方針。受け入れ形式は[ios/AUDIO_IMPORT.md](ios/AUDIO_IMPORT.md)。MacのXcodeビルド・型検査・23件のXCTest・実機確認は未実行。
 
 ラジオ構成: *.playlist.jsonの配列順で連続再生、標準3秒/0〜10秒のインターバル、BGM、前/次、最後の番組の途中再開を実装。仕様とMacでの確認は[ios/RADIO_PLAYBACK.md](ios/RADIO_PLAYBACK.md)。ユーザー依頼で音声機能一式をリモートへ反映する。
+
+2026-10-05: 音声コードの静的レビューと23 XCTestの本数確認を実施。明白なcompile/test riskは見つからず、アプリコードは変更なし。[夜の検証手順](ios/MAC_AUDIO_VERIFICATION.md)とMac実行スクリプトを追加。Xcode型検査・ビルド・23 XCTest・実機は引き続き未実行。
