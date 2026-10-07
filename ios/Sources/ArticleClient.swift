@@ -60,7 +60,12 @@ final class NoRedirect: NSObject, URLSessionTaskDelegate {
     }
 }
 
-final class ArticleClient {
+protocol ArticleProviding {
+    func catalog() async throws -> Catalog
+    func content(_ article: Article) async throws -> String
+}
+
+final class ArticleClient: ArticleProviding {
     static let baseURL = URL(string: "https://maruyamamasaya.github.io/studyApp/")!
     private let delegate = NoRedirect()
     private lazy var session: URLSession = {

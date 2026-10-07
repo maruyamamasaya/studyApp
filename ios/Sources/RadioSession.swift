@@ -7,9 +7,9 @@ struct PlaylistManifest: Codable, Equatable, Identifiable {
     let title: String
     let trackIDs: [UUID]
     let gapSeconds: Double
-    func validated() throws -> PlaylistManifest {
+    func validated(allowEmpty: Bool = false) throws -> PlaylistManifest {
         guard schemaVersion == 1, !title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
-              !trackIDs.isEmpty, Set(trackIDs).count == trackIDs.count,
+              (allowEmpty || !trackIDs.isEmpty), Set(trackIDs).count == trackIDs.count,
               gapSeconds.isFinite, (0...10).contains(gapSeconds) else { throw ReaderError.message("番組の管理JSONが不正です。") }
         return self
     }

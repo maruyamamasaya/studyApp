@@ -6,6 +6,21 @@ final class StudyAppTests: XCTestCase {
         Article(id: id, title: title, path: path, type: type, tags: ["RAG"], aliases: ["検索拡張生成"],
                 created: "2026-10-01 17:15:35", contentHash: String(repeating: "0", count: 64))
     }
+    func testPickupKeepsExistingRankingAfterPrecomputation() {
+        let samples = (0..<16).map { article(id: String(format: "20261001-%06d", $0)) }
+        for day in ["2026-10-06", "2026-10-07"] {
+            for shuffle in [0, 1, 7] {
+                let expected = samples.sorted {
+                    ArticleClient.hash("\(day)/\(shuffle)/\($0.id)") < ArticleClient.hash("\(day)/\(shuffle)/\($1.id)")
+                }.prefix(3).map(\.id)
+                XCTAssertEqual(ArticleDiscovery.picks(samples, day: day, shuffle: shuffle).map(\.id), expected)
+                XCTAssertEqual(ArticleDiscovery.picks(Array(samples.reversed()), day: day, shuffle: shuffle).map(\.id), expected)
+            }
+        }
+        XCTAssertTrue(ArticleDiscovery.picks([], day: "2026-10-06").isEmpty)
+        XCTAssertEqual(ArticleDiscovery.picks([samples[0]], day: "2026-10-06").map(\.id), [samples[0].id])
+    }
+
     func testHashMatchesPublishedAlgorithm() {
         XCTAssertEqual(ArticleClient.hash("abc"), "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad")
         XCTAssertEqual(ArticleClient.hash("日本語\r\n"), ArticleClient.hash("日本語\n"))
@@ -42,6 +57,21 @@ final class StudyAppTests: XCTestCase {
         for value in [1, false, NSNull(), ["Applied"]] as [Any] {
             invalid["type"] = value
             XCTAssertThrowsError(try JSONDecoder().decode(Article.self, from: JSONSerialization.data(withJSONObject: invalid)))
+        }
+    }
+    func testCatalogAllowsExtendedAndUnclassifiedArticleTypes() throws {
+        let a = article()
+        for type in ["development-log", "activity-log", "Applied", ""] {
+            let entry = Article(id: a.id, title: a.title, path: a.path, type: type,
+                tags: a.tags, aliases: a.aliases, created: a.created, contentHash: a.contentHash)
+            let data = try JSONEncoder().encode(Catalog(schemaVersion: 1,
+                revision: String(repeating: "0", count: 64), articles: [entry]))
+            let decoded = try JSONDecoder().decode(Catalog.self, from: data).validated()
+            XCTAssertEqual(decoded.articles.first?.type, type)
+            let unsafe = Article(id: a.id, title: a.title, path: "wiki/../secret.md", type: type,
+                tags: a.tags, aliases: a.aliases, created: a.created, contentHash: a.contentHash)
+            XCTAssertThrowsError(try Catalog(schemaVersion: 1,
+                revision: String(repeating: "0", count: 64), articles: [unsafe]).validated())
         }
     }
     func testFrontmatterWikiLinksAndCode() {

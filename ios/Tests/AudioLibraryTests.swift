@@ -21,6 +21,86 @@ final class AudioLibraryTests: XCTestCase {
     }
     private func directory() -> URL { FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString) }
 
+    func testPreparedImportPreservesChangesMadeWhilePreparing() throws {
+        let root = directory(); defer { try? FileManager.default.removeItem(at: root) }
+        let library = AudioLibrary(directory: root)
+        let track = manifest(script: nil)
+        let files = [ImportedAudioFile(name: "a.track.json", data: try JSONEncoder().encode(track)),
+                     ImportedAudioFile(name: "voice.wav", data: wav())]
+        try library.importTracks(files)
+        let batch = try AudioLibrary.prepareTracks(files)
+        try library.position(0.6, trackID: track.trackID)
+        try library.setListened(true, trackID: track.trackID)
+        let programID = try library.createProgram(title: "同期中の編集")
+        XCTAssertEqual(try library.importPrepared(batch), 0)
+        XCTAssertEqual(library.index.tracks.first?.positionSeconds, 0.6)
+        XCTAssertEqual(library.index.tracks.first?.isListened, true)
+        XCTAssertEqual(library.index.programs?.first?.id, programID)
+    }
+
+    func testProgramEditsSurviveRestartSyncAndPreservePlayback() throws {
+        let root = directory(); defer { try? FileManager.default.removeItem(at: root) }
+        let library = AudioLibrary(directory: root)
+        let a = manifest(script: nil), b = manifest(file: "b.wav", script: nil)
+        let original = PlaylistManifest(schemaVersion: 1, playlistID: UUID(), title: "制作番組",
+            trackIDs: [a.trackID, b.trackID], gapSeconds: 3)
+        let files = [
+            ImportedAudioFile(name: "a.track.json", data: try JSONEncoder().encode(a)),
+            ImportedAudioFile(name: "b.track.json", data: try JSONEncoder().encode(b)),
+            ImportedAudioFile(name: "voice.wav", data: wav()),
+            ImportedAudioFile(name: "b.wav", data: wav()),
+            ImportedAudioFile(name: "p.playlist.json", data: try JSONEncoder().encode(original))]
+        try library.importTracks(files)
+        try library.position(0.4, trackID: a.trackID)
+        try library.setListened(true, trackID: a.trackID)
+        var session = RadioSession(playlist: original)
+        session.finishedNarration(); session.remainingGap = 1.25
+        try library.saveRadio(session)
+        try library.setGap(7, programID: original.id)
+        let localID = try library.createProgram(title: " 個人番組 ")
+        let edited = PlaylistManifest(schemaVersion: 1, playlistID: original.id, title: "編集済み",
+            trackIDs: [b.trackID, a.trackID], gapSeconds: 7)
+        try library.updateProgram(edited)
+        try library.reorderPrograms([localID, original.id])
+        let restored = AudioLibrary(directory: root)
+        XCTAssertNil(restored.loadError)
+        XCTAssertEqual(try restored.importTracks(files), 0)
+        XCTAssertEqual(restored.index.programs?.map(\.id), [localID, original.id])
+        XCTAssertEqual(restored.index.programs?.last, edited)
+        XCTAssertEqual(restored.index.programs?.first?.title, "個人番組")
+        XCTAssertEqual(restored.index.radio, session)
+        XCTAssertEqual(restored.index.tracks.first?.positionSeconds, 0.4)
+        XCTAssertEqual(restored.index.tracks.first?.isListened, true)
+        // 全音声を外せるが、ファイル・状態・再生スナップショットを残す。
+        try restored.updateProgram(PlaylistManifest(schemaVersion: 1, playlistID: original.id,
+            title: edited.title, trackIDs: [], gapSeconds: 7))
+        try restored.deleteProgram(original.id)
+        let deleted = AudioLibrary(directory: root)
+        XCTAssertEqual(try deleted.importTracks(files), 0)
+        XCTAssertEqual(deleted.index.programs?.map(\.id), [localID])
+        XCTAssertEqual(deleted.index.radio, session)
+        for track in deleted.index.tracks { XCTAssertTrue(FileManager.default.fileExists(atPath: deleted.url(track.localFile).path)) }
+        // 保存済みスナップショットで従来の順番を進められる。
+        var continued = try XCTUnwrap(deleted.index.radio)
+        continued.next()
+        XCTAssertEqual(continued.trackID, b.trackID)
+        XCTAssertEqual(continued.playlist.gapSeconds, 3)
+    }
+
+    func testInvalidProgramEditDoesNotChangePersistedIndex() throws {
+        let root = directory(); defer { try? FileManager.default.removeItem(at: root) }
+        let library = AudioLibrary(directory: root)
+        let id = try library.createProgram(title: "空番組")
+        let before = try Data(contentsOf: library.url("index.v1.json"))
+        XCTAssertThrowsError(try library.createProgram(title: "  "))
+        XCTAssertThrowsError(try library.updateProgram(PlaylistManifest(schemaVersion: 1,
+            playlistID: id, title: "存在しない音声", trackIDs: [UUID()], gapSeconds: 3)))
+        XCTAssertThrowsError(try library.reorderPrograms([id, id]))
+        XCTAssertEqual(try Data(contentsOf: library.url("index.v1.json")), before)
+        XCTAssertNoThrow(try AudioLibrary(directory: root).index.validated())
+        XCTAssertThrowsError(try RadioSession(playlist: XCTUnwrap(library.index.programs?.first)).validated())
+    }
+
     func testManifestRejectsUnsafePaths() {
         for filename in ["../voice.wav", "/voice.wav", "sub/voice.wav", "sub\\voice.wav"] {
             XCTAssertThrowsError(try manifest(file: filename).validated())

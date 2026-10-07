@@ -78,3 +78,12 @@ test('HTTP検証は全本文を取得してhashを照合し、不一致・404・
   await assert.rejects(verifyAppCatalog('http://example.com/', { fetchImpl: serve() }), /HTTPS/u);
   await assert.rejects(verifyAppCatalog('https://user:pass@example.com/', { fetchImpl: serve() }), /HTTPS/u);
 });
+
+ test('記事種別は拡張値・未分類を保持し、文字列以外は拒否する', () => {
+  for (const type of ['development-log', 'activity-log', 'Applied', '']) {
+    const original = entry();
+    const catalog = buildAppCatalog([{ ...original, article: { ...original.article, type } }]);
+    assert.equal(catalog.articles[0].type, type);
+    assert.throws(() => validateAppCatalog({ ...catalog, articles: [{ ...catalog.articles[0], type: null }] }), /不正/u);
+  }
+});

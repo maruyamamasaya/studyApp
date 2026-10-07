@@ -40,6 +40,8 @@ struct AudioIndex: Codable {
     var tracks: [AudioTrack] = []
     var bgmFile: String?
     var programs: [PlaylistManifest]? = nil
+    var editedProgramIDs: [UUID]? = nil
+    var deletedProgramIDs: [UUID]? = nil
     var radio: RadioSession? = nil
     var gapOverrides: [String: Double]? = nil
     func listenedCount(in program: PlaylistManifest) -> Int {
@@ -56,7 +58,12 @@ struct AudioIndex: Codable {
         }
         let programs = self.programs ?? []
         guard Set(programs.map(\.id)).count == programs.count else { throw ReaderError.invalid }
-        for program in programs { _ = try program.validated() }
+        for program in programs { _ = try program.validated(allowEmpty: true) }
+        let edited = editedProgramIDs ?? []
+        let deleted = deletedProgramIDs ?? []
+        guard Set(edited).count == edited.count, Set(deleted).count == deleted.count,
+              Set(edited).isSubset(of: Set(programs.map(\.id))),
+              Set(deleted).isDisjoint(with: Set(programs.map(\.id))) else { throw ReaderError.invalid }
         if let radio { _ = try radio.validated() }
         guard (gapOverrides ?? [:]).allSatisfy({ UUID(uuidString: $0.key) != nil && $0.value.isFinite && (0...10).contains($0.value) }) else { throw ReaderError.invalid }
         return self
@@ -168,6 +175,14 @@ final class AudioLibrary {
     // 全管理JSONを検証してから、一度の一覧保存で追加・差し替えを確定する。
     @discardableResult func importTracks(_ files: [ImportedAudioFile]) throws -> Int {
         guard writable else { throw ReaderError.message(loadError ?? "音声一覧を保存できません。") }
+        return try importPrepared(Self.prepareTracks(files))
+    }
+    struct PreparedTracks {
+        fileprivate let tracks: [(TrackManifest, ImportedAudioFile, String?, String)]
+        fileprivate let programs: [PlaylistManifest]
+    }
+    // 保存状態を参照しない検証。同期の読取タスクで実行できる。
+    static func prepareTracks(_ files: [ImportedAudioFile]) throws -> PreparedTracks {
         guard Set(files.map(\.name)).count == files.count else { throw ReaderError.message("同じ名前のファイルが複数あります。") }
         let manifests = try files.filter { $0.name.lowercased().hasSuffix(".track.json") }
             .map { try JSONDecoder().decode(TrackManifest.self, from: $0.data).validated() }
@@ -175,17 +190,12 @@ final class AudioLibrary {
             .map { try JSONDecoder().decode(PlaylistManifest.self, from: $0.data).validated() }
         if manifests.isEmpty && programs.isEmpty {
             guard files.isEmpty else { throw ReaderError.message("管理JSONがありません。") }
-            return 0
+            return PreparedTracks(tracks: [], programs: [])
         }
         guard Set(manifests.map(\.trackID)).count == manifests.count else { throw ReaderError.message("フォルダ内に重複したtrackIDがあります。") }
         guard Set(programs.map(\.id)).count == programs.count else { throw ReaderError.message("番組IDが重複しています。") }
-        let available = Set(index.tracks.map(\.id) + manifests.map(\.trackID))
-        guard programs.allSatisfy({ Set($0.trackIDs).isSubset(of: available) }) else { throw ReaderError.message("番組に指定されたトラックがありません。") }
         var prepared: [(TrackManifest, ImportedAudioFile, String?, String)] = []
         for manifest in manifests {
-            if let old = index.tracks.first(where: { $0.id == manifest.trackID }), old.manifest.articleID != manifest.articleID {
-                throw ReaderError.message("既存trackIDの記事IDは変更できません。別記事の音声には新しいtrackIDを付けてください。")
-            }
             guard let audio = files.first(where: { $0.name == manifest.audioFile }),
                   Self.extensions.contains((audio.name as NSString).pathExtension.lowercased())
             else { throw ReaderError.message("指定された音声が見つかりません: \(manifest.audioFile)") }
@@ -199,6 +209,19 @@ final class AudioLibrary {
             }
             let hash = SHA256.hash(data: audio.data).map { String(format: "%02x", $0) }.joined()
             prepared.append((manifest, audio, script, hash))
+        }
+        return PreparedTracks(tracks: prepared, programs: programs)
+    }
+    @discardableResult func importPrepared(_ batch: PreparedTracks) throws -> Int {
+        guard writable else { throw ReaderError.message(loadError ?? "音声一覧を保存できません。") }
+        let prepared = batch.tracks
+        let programs = batch.programs
+        let available = Set(index.tracks.map(\.id) + prepared.map { $0.0.trackID })
+        guard programs.allSatisfy({ Set($0.trackIDs).isSubset(of: available) }) else { throw ReaderError.message("番組に指定されたトラックがありません。") }
+        for (manifest, _, _, _) in prepared {
+            if let old = index.tracks.first(where: { $0.id == manifest.trackID }), old.manifest.articleID != manifest.articleID {
+                throw ReaderError.message("既存trackIDの記事IDは変更できません。別記事の音声には新しいtrackIDを付けてください。")
+            }
         }
         var next = index
         var written: [String] = []
@@ -223,6 +246,8 @@ final class AudioLibrary {
                 changed += 1
             }
             for incoming in programs {
+                if (next.editedProgramIDs ?? []).contains(incoming.id) ||
+                    (next.deletedProgramIDs ?? []).contains(incoming.id) { continue }
                 let program = PlaylistManifest(schemaVersion: incoming.schemaVersion, playlistID: incoming.id,
                     title: incoming.title, trackIDs: incoming.trackIDs,
                     gapSeconds: next.gapOverrides?[incoming.id.uuidString] ?? incoming.gapSeconds)
@@ -239,6 +264,50 @@ final class AudioLibrary {
             for filename in written { try? FileManager.default.removeItem(at: url(filename)) }
             throw error
         }
+    }
+    // 個人編集は番組全体を端末側優先にする。再生スナップショットは変更しない。
+    @discardableResult func createProgram(title: String) throws -> UUID {
+        let id = UUID()
+        try updateProgram(PlaylistManifest(schemaVersion: 1, playlistID: id,
+            title: title, trackIDs: [], gapSeconds: 3), creating: true)
+        return id
+    }
+    func updateProgram(_ program: PlaylistManifest, creating: Bool = false) throws {
+        let title = program.title.trimmingCharacters(in: .whitespacesAndNewlines)
+        let value = PlaylistManifest(schemaVersion: program.schemaVersion, playlistID: program.id,
+            title: title, trackIDs: program.trackIDs, gapSeconds: program.gapSeconds)
+        _ = try value.validated(allowEmpty: true)
+        guard Set(value.trackIDs).isSubset(of: Set(index.tracks.map(\.id))) else { throw ReaderError.invalid }
+        var next = index
+        var list = next.programs ?? []
+        if let i = list.firstIndex(where: { $0.id == value.id }) { list[i] = value }
+        else {
+            guard creating, !(next.deletedProgramIDs ?? []).contains(value.id) else { throw ReaderError.invalid }
+            list.append(value)
+        }
+        next.programs = list
+        var edited = next.editedProgramIDs ?? []
+        if !edited.contains(value.id) { edited.append(value.id) }
+        next.editedProgramIDs = edited
+        try save(next)
+    }
+    func deleteProgram(_ id: UUID) throws {
+        var next = index
+        guard (next.programs ?? []).contains(where: { $0.id == id }) else { throw ReaderError.invalid }
+        next.programs?.removeAll { $0.id == id }
+        next.editedProgramIDs?.removeAll { $0 == id }
+        var deleted = next.deletedProgramIDs ?? []
+        if !deleted.contains(id) { deleted.append(id) }
+        next.deletedProgramIDs = deleted
+        next.gapOverrides?.removeValue(forKey: id.uuidString)
+        try save(next)
+    }
+    func reorderPrograms(_ ids: [UUID]) throws {
+        let programs = index.programs ?? []
+        guard ids.count == programs.count, Set(ids) == Set(programs.map(\.id)) else { throw ReaderError.invalid }
+        var next = index
+        next.programs = ids.compactMap { id in programs.first { $0.id == id } }
+        try save(next)
     }
     func importBGM(_ file: ImportedAudioFile) throws {
         let filename = try writeAudio(file, id: UUID())
@@ -314,8 +383,10 @@ final class AudioLibrary {
             let access = folder.startAccessingSecurityScopedResource()
             defer { if access { folder.stopAccessingSecurityScopedResource() } }
             let bookmark = try folder.bookmarkData(options: .minimalBookmark, includingResourceValuesForKeys: nil, relativeTo: nil)
-            let files = try await Task.detached { try AudioImport.readFolder(folder) }.value
-            let changed = try storage.importTracks(files)
+            let batch = try await Task.detached {
+                try AudioLibrary.prepareTracks(AudioImport.readFolder(folder))
+            }.value
+            let changed = try storage.importPrepared(batch)
             index = storage.index
             defaults.set(bookmark, forKey: bookmarkKey)
             folderName = folder.lastPathComponent
@@ -329,6 +400,10 @@ final class AudioLibrary {
             try storage.importBGM(files[0])
         } else { try storage.importTracks(files) }
         index = storage.index
+    }
+    func editPrograms(_ operation: (AudioLibrary) throws -> Void) {
+        do { try operation(storage); index = storage.index }
+        catch { self.error = error.localizedDescription }
     }
     func savePosition(_ seconds: Double, id: UUID) {
         do { try storage.position(seconds, trackID: id); index = storage.index }

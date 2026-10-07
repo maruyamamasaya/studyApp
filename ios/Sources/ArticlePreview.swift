@@ -27,21 +27,3 @@ enum ArticlePreview {
         return String(plain.prefix(140))
     }
 }
-
-@MainActor struct ArticleExcerpt: View {
-    let article: Article
-    var onGradient = false
-    var compact = false
-    @EnvironmentObject private var library: Library
-    private var key: String { Library.cacheKey(article) }
-    var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            if let text = library.excerpts[key], !text.isEmpty {
-                Text(text).font(compact ? .caption : .footnote).lineLimit(2).multilineTextAlignment(.leading)
-                    .foregroundStyle(onGradient ? Color.white.opacity(0.9) : Color.secondary)
-            } else if library.excerptFailures.contains(key) {
-                Text("冒頭を取得できません").font(.caption).foregroundStyle(onGradient ? Color.white.opacity(0.9) : Color.secondary)
-            }
-        }.task(id: key) { await library.loadExcerpt(article) }
-    }
-}

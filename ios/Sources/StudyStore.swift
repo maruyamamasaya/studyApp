@@ -75,6 +75,9 @@ struct StudyBackup: Codable {
         writable = true
         do { try persist(next); error = nil } catch { writable = previous; throw error }
     }
+    func merge(_ bytes: Data) throws {
+        try persist(StudyRecordMerge.combine(local: data, incoming: Self.decode(bytes)))
+    }
     func viewed(_ article: Article) {
         update { next in
             var record = next.progress[article.id] ?? ProgressRecord(title: article.title)
@@ -120,6 +123,15 @@ struct StudyBackup: Codable {
             next.collections = collections
         }
     }
+    func createCollection(_ name: String, adding articleID: String) {
+        let name = String(name.trimmingCharacters(in: .whitespacesAndNewlines).prefix(80))
+        guard !name.isEmpty else { return }
+        update { next in
+            var collections = next.collections ?? []
+            collections.append(ArticleCollection(id: UUID(), name: name, articleIDs: [articleID]))
+            next.collections = collections
+        }
+    }
     func renameCollection(_ id: UUID, name: String) {
         let name = String(name.trimmingCharacters(in: .whitespacesAndNewlines).prefix(80))
         guard !name.isEmpty else { return }
@@ -160,5 +172,41 @@ struct ArticleCollection: Codable, Identifiable {
         }
         started = nil
         if resume { start() }
+    }
+}
+
+enum StudyRecordMerge {
+    static func combine(local: StudyBackup, incoming: StudyBackup) throws -> StudyBackup {
+        _ = try local.validated(); _ = try incoming.validated()
+        var result = local
+        var sessions = Dictionary(uniqueKeysWithValues: local.sessions.map { ($0.id, $0) })
+        for session in incoming.sessions {
+            if let old = sessions[session.id] {
+                guard old.articleId == session.articleId, old.startedAt == session.startedAt,
+                      old.durationSeconds == session.durationSeconds else {
+                    throw ReaderError.message("同じ学習区間IDに異なる記録があります。統合を中止しました。")
+                }
+            } else { sessions[session.id] = session }
+        }
+        result.sessions = sessions.values.sorted { $0.startedAt == $1.startedAt ? $0.id.uuidString < $1.id.uuidString : $0.startedAt < $1.startedAt }
+        for (id, record) in incoming.progress {
+            if var old = result.progress[id] {
+                old.completed = old.completed || record.completed
+                if (record.lastViewedAt ?? .distantPast) > (old.lastViewedAt ?? .distantPast) {
+                    old.title = record.title; old.lastViewedAt = record.lastViewedAt
+                }
+                result.progress[id] = old
+            } else { result.progress[id] = record }
+        }
+        result.favorites = Array(Set((local.favorites ?? []) + (incoming.favorites ?? []))).sorted()
+        var collections = local.collections ?? []
+        for collection in incoming.collections ?? [] {
+            if let index = collections.firstIndex(where: { $0.id == collection.id }) {
+                let existing = Set(collections[index].articleIDs)
+                collections[index].articleIDs += collection.articleIDs.filter { !existing.contains($0) }
+            } else { collections.append(collection) }
+        }
+        result.collections = collections
+        return try result.validated()
     }
 }

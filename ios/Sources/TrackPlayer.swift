@@ -53,8 +53,11 @@ import MediaPlayer
         })
         pulse = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
             Task { @MainActor in
-                guard let self else { return }
-                if let narration = self.narration, self.radio?.phase != .interval { self.position = narration.currentTime }
+                guard let self, self.playing else { return }
+                if let narration = self.narration, self.radio?.phase != .interval {
+                    let position = narration.currentTime
+                    if self.position != position { self.position = position }
+                }
                 self.ticks += 1
                 if self.playing && self.ticks % 5 == 0 { self.savePosition() }
                 self.updateInfo()
@@ -67,6 +70,10 @@ import MediaPlayer
         loadTrack(selected, position: selected.positionSeconds)
     }
     func playProgram(_ program: PlaylistManifest, restart: Bool = false) {
+        guard !program.trackIDs.isEmpty ||
+            (!restart && library.index.radio?.playlist.id == program.id && library.index.radio?.phase != .completed) else {
+            error = "番組に音声を追加してください。"; return
+        }
         pause()
         let saved = library.index.radio
         if !restart, let saved, saved.playlist.id == program.id, saved.phase != .completed { radio = saved }
