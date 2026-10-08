@@ -115,3 +115,7 @@ Learnleafロードマップ段階1〜5（2026-10-06）: ユーザー指示で段
 最新main取込（2026-10-06）: 取得済みorigin/main（a8d523a）へ更新し、公開記事・取込記録の匿名化と自由なtype対応をローカルのLearnleafロードマップ版へ統合。実機導入は上記22:29の記録を参照。自由なtypeの記事表示・本文の実機手動確認は引き続き残る。
 
 リモート反映（2026-10-07）: ユーザー承認で統合済みLearnleaf変更をmainへcommit/pushする。前回のWeb24件・iOS51件成功を確認。公開記事の差分はなく、Pagesの自動deploy対象外。実機手動確認の残課題は継続。
+
+未解決（2026-10-08）: Vault同期チェックが `docs/wiki/anken/anken001/20261001-145031.md` の「同期先を直接変更しているため上書きしません」で停止。原因は未特定。10/6〜10/8の個人開発メモはVault保存済みだがStudy Appへ未同期。ユーザー指示で課題として記録し、修正・同期・公開は保留。詳細は[sessions/2026-10-08-vault-sync-issue.md](sessions/2026-10-08-vault-sync-issue.md)。
+
+統合学習機能の設計（2026-10-08）: SVG図解・プレゼンテーション・Office/PDF資料を既存Study Appへ統合する調査と10本の設計書を[design/integrated-learning](design/integrated-learning/README.md)へ追加。状態は提案、実装未着手。添付配信基盤と安定リソースID、ローカルOffice変換、Web/iOSの共通配信を推奨。公開/private境界、iOS viewer、変換環境と実機上限は実装前の判断事項。現行アーキテクチャ・依存・公開記事は変更しない。
