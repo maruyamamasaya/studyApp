@@ -7,6 +7,7 @@ enum VisualImportTypes {
 }
 @MainActor struct VisualLibraryView: View {
     var articleID: String?
+    var viewingOnly = false
     @EnvironmentObject private var model: VisualResourceModel
     @State private var query = ""
     @State private var kind = ""
@@ -16,9 +17,15 @@ enum VisualImportTypes {
     @State private var selection = Set<UUID>()
     @State private var exported: URL?
     @State private var removeID: UUID?
+    private var viewingKinds: [ResourceKind] { [.presentation, .pdf, .pptx, .docx] }
+    private var availableKinds: [ResourceKind] { viewingOnly ? viewingKinds : ResourceKind.allCases }
+    private var importTypes: [UTType] {
+        viewingOnly ? [UTType.pdf, UTType(filenameExtension: "docx"), UTType(filenameExtension: "pptx")].compactMap { $0 } : VisualImportTypes.all
+    }
     private var filtered: [VisualResource] {
         model.resources.filter {
             (articleID == nil || $0.articleIDs.contains(articleID!))
+                && (!viewingOnly || viewingKinds.contains($0.kind))
                 && (kind.isEmpty || $0.kind.rawValue == kind)
                 && (category.isEmpty || $0.category == category)
                 && (!favorites || $0.favorite)
@@ -28,10 +35,10 @@ enum VisualImportTypes {
     var body: some View {
         List {
             Section {
-                Text("取り込んだ資料はこの端末だけに保存します。記事・学習記録とは別のライブラリです。").font(.caption).foregroundStyle(.secondary)
+                Text(viewingOnly ? "プレゼンやPDF・Word・PowerPointを開けます。記事から作ったスライドもここに並びます。" : "SVG・画像は記事に使う素材として管理できます。取り込んだ資料はこの端末だけに保存します。").font(.caption).foregroundStyle(.secondary)
                 Picker("形式", selection: $kind) {
                     Text("すべて").tag("")
-                    ForEach(ResourceKind.allCases, id: \.rawValue) { Text($0.title).tag($0.rawValue) }
+                    ForEach(availableKinds, id: \.rawValue) { Text($0.title).tag($0.rawValue) }
                 }
                 Picker("カテゴリ", selection: $category) {
                     Text("すべて").tag("")
@@ -64,10 +71,12 @@ enum VisualImportTypes {
                     Button("削除", role: .destructive) { removeID = r.id }
                 }
             }
-            if filtered.isEmpty { Text("資料はありません。右上からファイルを登録できます。").foregroundStyle(.secondary) }
+            if filtered.isEmpty {
+                Text(viewingOnly ? "見る資料はありません。右上から資料を登録するか、記事詳細からスライドを作れます。" : "素材・資料はありません。右上からファイルを登録できます。").foregroundStyle(.secondary)
+            }
         }
         .searchable(text: $query, prompt: "ファイル名・タイトル・タグ")
-        .navigationTitle(articleID == nil ? "図解・資料" : "この記事の資料")
+        .navigationTitle(viewingOnly ? "見る" : (articleID == nil ? "図解・資料" : "この記事の資料"))
         .scrollContentBackground(.hidden).background { StudyBackdrop() }
         .toolbar {
             Button { importing = true } label: { Image(systemName: "plus") }.disabled(model.busy || !model.ready)
@@ -78,7 +87,7 @@ enum VisualImportTypes {
                 } }
             }
         }
-        .fileImporter(isPresented: $importing, allowedContentTypes: VisualImportTypes.all, allowsMultipleSelection: true) { result in
+        .fileImporter(isPresented: $importing, allowedContentTypes: importTypes, allowsMultipleSelection: true) { result in
             switch result {
             case .success(let urls): Task { await model.importFiles(urls, articleID: articleID) }
             case .failure(let error): model.error = error.localizedDescription
@@ -86,6 +95,10 @@ enum VisualImportTypes {
         }
         .dropDestination(for: URL.self) { urls, _ in
             guard !model.busy, model.ready else { return false }
+            if viewingOnly, !urls.allSatisfy({ url in
+                guard let kind = try? ResourceValidation.kind(for: url) else { return false }
+                return viewingKinds.contains(kind)
+            }) { model.error = "SVG・画像は設定の図解・資料ライブラリ、または記事から素材として登録してください。"; return false }
             Task { await model.importFiles(urls, articleID: articleID) }; return true
         }
         .confirmationDialog("資料をこの端末から削除しますか？スライドからの参照は未解決として残ります。", isPresented: Binding(get: { removeID != nil }, set: { if !$0 { removeID = nil } })) {

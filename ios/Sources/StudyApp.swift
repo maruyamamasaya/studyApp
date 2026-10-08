@@ -125,7 +125,7 @@ import UniformTypeIdentifiers
             TabView(selection: $search.tab) {
                 PlayerTabContent { ArticleList() }.tabItem { Label("記事", systemImage: "books.vertical") }.tag(0)
                 PlayerTabContent { NavigationStack { ListeningHome() } }.tabItem { Label("聴く", systemImage: "headphones") }.tag(1)
-                PlayerTabContent { SearchView() }.tabItem { Label("検索", systemImage: "magnifyingglass") }.tag(2)
+                PlayerTabContent { NavigationStack { VisualLibraryView(viewingOnly: true) } }.tabItem { Label("見る", systemImage: "play.rectangle") }.tag(2)
                 PlayerTabContent { NavigationStack { FolderBrowser() } }.tabItem { Label("フォルダ", systemImage: "folder") }.tag(3)
                 PlayerTabContent { SettingsView() }.tabItem { Label("設定", systemImage: "gearshape") }.tag(4)
             }

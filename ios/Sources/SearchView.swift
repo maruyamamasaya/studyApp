@@ -2,6 +2,7 @@ import SwiftUI
 
 @MainActor final class SearchNavigation: ObservableObject {
     @Published var tab = 0
+    @Published var showingSearch = false
     @Published var query = ""
     @Published var target = "すべて"
     @Published var tag = ""
@@ -41,7 +42,7 @@ import SwiftUI
     func open(tag: String = "", folder: String = "", favorites: Bool = false, collection: UUID? = nil) {
         reset()
         self.tag = tag; self.folder = folder; self.favorites = favorites; self.collection = collection
-        target = "記事"; tab = 2
+        target = "記事"; tab = 0; showingSearch = true
     }
     func reset() {
         query = ""; target = "すべて"; tag = ""; folder = ""; favorites = false
@@ -164,7 +165,7 @@ import SwiftUI
                 }.padding(20).frame(maxWidth: 760).frame(maxWidth: .infinity)
             }.background { StudyBackdrop() }
                 .navigationTitle("検索").navigationBarTitleDisplayMode(.inline)
-                .searchable(text: $search.query, prompt: "記事・音声・番組を検索")
+                .searchable(text: $search.query, prompt: "記事・音声・番組・資料を検索")
                 .toolbar {
                     Button("条件を保存", systemImage: "bookmark") { saveName = ""; showSaveSearch = true }
                     Button("リセット") { bodyTask?.cancel(); bodyQuery = ""; search.reset() }

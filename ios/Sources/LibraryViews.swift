@@ -44,12 +44,20 @@ private struct ArticlePickRequest: Equatable {
     @State private var shuffle = 0
     @State private var day = ArticleDiscovery.dayKey()
     @State private var showCollections = false
+    @State private var pendingCollectionSearch = false
     @State private var pickedArticles: [Article] = []
     var body: some View {
         let request = ArticlePickRequest(articles: ArticleDiscovery.pickupCandidates(library.articles, tag: pickupTag), day: day, shuffle: shuffle)
         return NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 24) {
+                    Button {
+                        search.reset(); search.target = "すべて"; search.showingSearch = true
+                    } label: {
+                        Label("記事・音声・資料を検索", systemImage: "magnifyingglass")
+                            .frame(maxWidth: .infinity, alignment: .leading).padding(12)
+                            .background { StudyTileSurface() }
+                    }.buttonStyle(.plain)
                     if library.offlineCatalog { Label("保存した記事一覧", systemImage: "wifi.slash").font(.caption).foregroundStyle(.secondary) }
                     if library.loading { ProgressView("記事を更新中").frame(maxWidth: .infinity) }
                     if let error = library.error {
@@ -82,7 +90,6 @@ private struct ArticlePickRequest: Equatable {
                         ArticleCarousel(articles: favorites)
                     }
                     HStack(spacing: 12) {
-                        Button { search.open() } label: { homeEntry("検索", icon: "magnifyingglass", subtitle: "記事・音声・番組") }
                         Button { showCollections = true } label: { homeEntry("コレクション", icon: "square.stack", subtitle: "自分の本棚") }
                     }.buttonStyle(.plain)
                     if library.articles.isEmpty && !library.loading && library.error == nil {
@@ -103,7 +110,20 @@ private struct ArticlePickRequest: Equatable {
                     let next = ArticleDiscovery.dayKey()
                     if next != day { day = next; shuffle = 0 }
                 }
-                .sheet(isPresented: $showCollections) { NavigationStack { CollectionsView() } }
+                .sheet(isPresented: $showCollections, onDismiss: {
+                    if pendingCollectionSearch { pendingCollectionSearch = false; search.showingSearch = true }
+                }) { NavigationStack { CollectionsView() } }
+                .onChange(of: search.showingSearch) { _, showing in
+                    if showing && showCollections {
+                        pendingCollectionSearch = true; search.showingSearch = false; showCollections = false
+                    }
+                }
+                .sheet(isPresented: $search.showingSearch) {
+                    SearchView()
+                        .safeAreaInset(edge: .top) {
+                            HStack { Spacer(); Button("閉じる") { search.showingSearch = false } }.padding(12)
+                        }
+                }
         }
     }
     private func homeEntry(_ title: String, icon: String, subtitle: String) -> some View {

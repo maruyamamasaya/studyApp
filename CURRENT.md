@@ -5,6 +5,7 @@
 iOS図解・資料・プレゼン（2026-10-08）: 端末内原本管理、静的SVG、PDFKit、Word Quick Look、PPTX原本+登録PDF、記事からの構造分割スライド・編集・関連付け・出力、検索/設定統合を追加。実装範囲と制限は[ios/VISUAL_RESOURCES.md](ios/VISUAL_RESOURCES.md)。ユーザー指定で今回のビルド・テスト・実機確認は別途。過去の検証結果は今回の変更を含まない。資料全体バックアップと端末間同期は未対応。
 
 - 現行方式はDocsify。Obsidian Vault `Document organization`の`wiki/`が記事の唯一の正本。
+- 現在のiOS下部タブは記事・聴く・見る・フォルダ・設定。「見る」はプレゼン/PDF/Word/PowerPoint、検索は記事ホーム内。SVG/画像は記事用素材として既存ライブラリに残す。今回の表示・操作確認は別途。
 - UIはスマホ中心の新しいreaderへ刷新。旧DocsifyテーマCSSを廃止し、900px以下ではフォルダパネル・検索/目次操作、PCでは左sidebarと中央本文を表示する。
 - `docs/`に55記事と一覧・索引を同期する。案件WikiのRAG学習記事50件を追加。FrontmatterのIDを維持し、title・aliasでWiki Linkを解決する。
 - 保存フォルダと記事種別は独立。`wiki/anken001/`内の`type: study`も原本どおり同期し、研修一覧に掲載する。
