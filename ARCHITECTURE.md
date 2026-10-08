@@ -1,6 +1,17 @@
 # アーキテクチャ
 
-更新: 2026-10-02
+更新: 2026-10-08
+
+## iOSの図解・資料・スライド
+
+Files → VisualResourceStore(actor) → Application Support/StudyApp/visual-resources（索引JSON、UUID/hash原本、派生PDF・サムネイル）。VisualResourceModelがUIに供給する。記事IDで既存一覧と関連付け、資料UUIDとスライドIDは独立する。公開記事・音声・StudyBackupと保存形式を共有しない。
+
+- VisualResources / OfficeValidation / SafeSVG: metadata・容量・ZIP/XML・静的SVG検証。
+- SVGViewer / DocumentViewer: JSを無効化したWKWebView、PDFKit、Quick Look。PPTXは利用者が別途作成したPDFを登録する。
+- VisualSlides / VisualExports: Markdown構造分割、草稿編集・更新比較、ネイティブプレゼン、SVG/PNG/PDF/ZIPのローカル出力。
+- VisualLibraryView / SearchView / StudyApp: 資料一覧・分類・記事/要素関連、既存検索と記事末尾・設定からの導線。
+
+記事内SVGの遠隔取得は既存Pages配信元に限定し、リダイレクトを拒否して受信量を制限する。個人資料のクラウド同期や公開manifestは追加しない。方式の判断は[ADR-018](decisions/ADR-018-ios-local-visual-resources.md)、操作・制限・未検証事項は[iOS手順書](ios/VISUAL_RESOURCES.md)。
 
 ```text
 Obsidian Vault / wiki

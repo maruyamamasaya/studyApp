@@ -1,6 +1,8 @@
 # 現在の状態
 
-更新: 2026-10-02
+更新: 2026-10-08
+
+iOS図解・資料・プレゼン（2026-10-08）: 端末内原本管理、静的SVG、PDFKit、Word Quick Look、PPTX原本+登録PDF、記事からの構造分割スライド・編集・関連付け・出力、検索/設定統合を追加。実装範囲と制限は[ios/VISUAL_RESOURCES.md](ios/VISUAL_RESOURCES.md)。ユーザー指定で今回のビルド・テスト・実機確認は別途。過去の検証結果は今回の変更を含まない。資料全体バックアップと端末間同期は未対応。
 
 - 現行方式はDocsify。Obsidian Vault `Document organization`の`wiki/`が記事の唯一の正本。
 - UIはスマホ中心の新しいreaderへ刷新。旧DocsifyテーマCSSを廃止し、900px以下ではフォルダパネル・検索/目次操作、PCでは左sidebarと中央本文を表示する。
