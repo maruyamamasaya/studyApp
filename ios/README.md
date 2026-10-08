@@ -50,6 +50,18 @@ xcodebuild -project StudyApp.xcodeproj -scheme StudyApp \
   -maximum-concurrent-test-simulator-destinations 1 test
 ```
 
+生成→依存解決→build-for-testing→test-without-buildingをまとめて実行する場合は、リポジトリルートから以下を使う。既存の利用可能なSimulatorを指定し、同じ端末で他のテストを実行していないことを確認する。
+
+```sh
+bash ios/scripts/verify-mac.sh SIMULATOR_ID
+# 実装中は対象を絞る（クラス/メソッドは実在する名前へ置換）
+bash ios/scripts/verify-mac.sh SIMULATOR_ID StudyAppTests/Class/testMethod
+```
+
+出力先は実行ごとに作る一時フォルダ。SHA・未commit状態・Xcode版・端末一覧・実行前後のXCTestDevices・プロセス情報・テストコマンド・各段階のログ・xcresultを保存し、失敗した段階で停止する。実行数は固定せず、対象の現在のテスト数と結果をxcresultで確認する。0件実行を成功と扱わない。出力先と結果をsessionへ記録し、必要なログは一時フォルダから保全する。
+
+実行後の記録はスクリプト終了時点の情報であり、子プロセス終了や複製の所有を保証しない。中断時を含め、以下の運用ルールに従って確認と清掃を行う。スクリプトは端末を削除しない。音声の実機確認は[AUDIO_IMPORT.md](AUDIO_IMPORT.md)と[RADIO_PLAYBACK.md](RADIO_PLAYBACK.md)を参照する。
+
 ### Simulator運用ルール
 
 Simulator上の単体・回帰・UIテストすべてに適用する。清掃は実行した開発エージェントが行う。自動清掃スクリプトは導入しない。
