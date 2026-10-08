@@ -111,6 +111,7 @@ import UniformTypeIdentifiers
     @StateObject private var library = Library()
     @StateObject private var store = StudyStore()
     @StateObject private var search = SearchNavigation()
+    @StateObject private var visualResources = VisualResourceModel()
     @StateObject private var audio: AudioLibraryModel
     @StateObject private var player: TrackPlayer
     @Environment(\.scenePhase) private var scenePhase
@@ -134,12 +135,17 @@ import UniformTypeIdentifiers
             .preferredColorScheme(design == .classic ? .light : (StudyAppearance(rawValue: selectedAppearance) ?? .system).colorScheme)
             .environmentObject(library).environmentObject(store).environmentObject(search)
             .environmentObject(audio).environmentObject(player)
+            .environmentObject(visualResources)
             .onChange(of: scenePhase) { _, phase in
                 if phase != .active { player.savePosition() }
                 else { Task { await audio.refresh() } }
             }
             .task { await library.reload() }
             .task { await audio.refresh() }
+            .task { await visualResources.reload() }
+            .alert("図解・資料", isPresented: Binding(get: { visualResources.error != nil }, set: { if !$0 { visualResources.error = nil } })) {
+                Button("閉じる") { visualResources.error = nil }
+            } message: { Text(visualResources.error ?? "") }
             .alert("音声", isPresented: Binding(get: { player.error != nil || audio.error != nil }, set: { if !$0 { player.error = nil; audio.error = nil } })) {
                 Button("閉じる") { player.error = nil; audio.error = nil }
             } message: { Text(player.error ?? audio.error ?? "") }
@@ -216,10 +222,12 @@ import UniformTypeIdentifiers
                 Divider()
                 if let markdown {
                     Markdown(markdown, baseURL: try? ArticleClient.url(for: current.path))
+                        .markdownImageProvider(VisualImageProvider(articleID: current.id))
                         .markdownTheme(design.reader)
                         .textSelection(.enabled)
                         .environment(\.openURL, OpenURLAction { url in open(url) })
                     relatedContent
+                    ArticleVisualResources(article: current, markdown: markdown)
                     VStack(spacing: 12) {
                         Button(completed ? "未読了に戻す" : "読了として記録") {
                             timer.flush(articleID: article.id, store: store, resume: false)
@@ -388,6 +396,7 @@ struct BackupDocument: FileDocument {
                     }
                     Section("記事の保存") {
                         NavigationLink { OfflineSettingsView() } label: { Label("オフライン記事", systemImage: "arrow.down.circle") }
+                        NavigationLink { VisualLibraryView() } label: { Label("図解・資料ライブラリ", systemImage: "doc.richtext") }
                     }
                     Section("学習記録") {
                         NavigationLink { HistoryView() } label: {

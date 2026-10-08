@@ -50,6 +50,7 @@ import SwiftUI
 }
 
 @MainActor struct SearchView: View {
+    @EnvironmentObject private var visualResources: VisualResourceModel
     @Environment(\.studyTheme) private var design
     @EnvironmentObject private var search: SearchNavigation
     @EnvironmentObject private var library: Library
@@ -76,6 +77,28 @@ import SwiftUI
     private var showArticles: Bool { search.target == "すべて" || search.target == "記事" }
     private var showTracks: Bool { search.target == "すべて" || search.target == "音声" }
     private var showPrograms: Bool { search.target == "すべて" || search.target == "番組" }
+    private var showResources: Bool { search.target == "すべて" || search.target == "資料" }
+    private var resourceResults: [VisualResource] {
+        visualResources.resources.filter { resource in
+            let linked = library.articles.filter { resource.articleIDs.contains($0.id) }
+            let text = ([resource.title, resource.originalName, resource.category] + resource.tags).joined(separator: " ")
+            guard keyword.isEmpty || text.localizedCaseInsensitiveContains(keyword) else { return false }
+            guard search.tag.isEmpty || resource.tags.contains(search.tag) || linked.contains(where: { $0.tags.contains(search.tag) }) else { return false }
+            guard search.folder.isEmpty || linked.contains(where: { $0.folder == search.folder || $0.folder.hasPrefix(search.folder + "/") }) else { return false }
+            guard !search.favorites || resource.favorite else { return false }
+            if let id = search.collection {
+                let ids = store.data.collections?.first(where: { $0.id == id })?.articleIDs ?? []
+                guard resource.articleIDs.contains(where: ids.contains) else { return false }
+            }
+            if search.state != "すべて" {
+                guard linked.contains(where: { (store.data.progress[$0.id]?.completed == true) == (search.state == "完了") }) else { return false }
+            }
+            if search.audioOnly {
+                guard audio.index.tracks.contains(where: { resource.articleIDs.contains($0.manifest.articleID) }) else { return false }
+            }
+            return true
+        }
+    }
     var body: some View {
         let result = results()
         let articles = result.articles, tracks = result.tracks, programs = result.programs
@@ -105,7 +128,7 @@ import SwiftUI
                             }
                         }
                     }
-                    let count = (showArticles ? articles.count : 0) + (showTracks ? tracks.count : 0) + (showPrograms ? programs.count : 0)
+                    let count = (showArticles ? articles.count : 0) + (showTracks ? tracks.count : 0) + (showPrograms ? programs.count : 0) + (showResources ? resourceResults.count : 0)
                     Text("\(count)件").font(.footnote).foregroundStyle(.secondary)
                     if showArticles && !articles.isEmpty {
                         Text("記事 · \(articles.count)").font(.subheadline.bold())
@@ -125,6 +148,14 @@ import SwiftUI
                             NavigationLink { ProgramDetailView(programID: program.id) } label: {
                                 searchRow(program.title, subtitle: "\(program.trackIDs.count)本", icon: "play.rectangle")
                             }.buttonStyle(.plain)
+                        }
+                    }
+                    if showResources {
+                        NavigationLink("図解・資料を登録・管理") { VisualLibraryView() }
+                        ForEach(resourceResults) { resource in
+                            NavigationLink { VisualResourceDetail(id: resource.id) } label: {
+                                searchRow(resource.title, subtitle: resource.kind.title, icon: "doc.richtext")
+                            }
                         }
                     }
                     if count == 0 && !library.loading {
@@ -152,7 +183,7 @@ import SwiftUI
     private var filters: some View {
         VStack(alignment: .leading, spacing: 12) {
             Picker("検索対象", selection: $search.target) {
-                ForEach(["すべて", "記事", "音声", "番組"], id: \.self) { Text($0) }
+                ForEach(["すべて", "記事", "音声", "番組", "資料"], id: \.self) { Text($0) }
             }.pickerStyle(.segmented)
             HStack {
                 Text("並び順")
